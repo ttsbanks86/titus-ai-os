@@ -1,0 +1,57 @@
+# Build artifacts
+node_modules/
+dist/
+build/
+*.spec
+*.toc
+*.pyz
+*.pkg
+*.pyc
+__pycache__/
+
+# Large files
+*.iso
+*.wav
+*.mp3
+*.mp4
+*.png
+*.jpg
+*.ico
+*.ico.png
+*.dll
+*.onnx
+*.bin
+*.exe
+*.pyd
+*.whl
+
+# Model files
+models/kokoro*
+models/voices*
+.cache/
+
+# Browser artifacts
+.playwright-mcp/
+.opencode/
+
+# Temp
+*.log
+*.old
+temp/
+TEMP/
+.env
+
+# Deprecated/old folders
+ABOUT ME/
+DEPLOY/
+HOTCHAIR-STAGING-REVIEW/
+N8N_WORKFLOWS/
+MODEL-AUTO-SWITCHER/
+AI_Agents/
+AI_Backups/
+BOOK-PROJECTS/
+BRAND-SYSTEM/
+hyperframes-workspace/
+nolo-professional-*
+Win10_*
+Win11_*
