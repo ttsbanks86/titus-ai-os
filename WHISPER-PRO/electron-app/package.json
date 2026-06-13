@@ -1,0 +1,12 @@
+{
+  "name": "whisper-my-idea-pro",
+  "version": "2.0.0",
+  "description": "Whisper My Idea Pro — Professional AI Transcription",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron-packager": "^17.1.2"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "folders": [
+    { "name": "🏠 Live Cowork", "path": "." },
+    { "name": "🎤 Whisper My Idea", "path": "ECHOKEYS" },
+    { "name": "🗣️ Voice My Idea", "path": "NOLA-VOICE" },
+    { "name": "🧠 PROMPT-MINE", "path": "PROMPT-MINE" },
+    { "name": "⚙️ Automation Hub", "path": "AUTOMATION-HUB" },
+    { "name": "📊 Job Intel", "path": "JOB-INTELLIGENCE.html" },
+    { "name": "🎬 Video Studio", "path": "video-editor" }
+  ],
+  "settings": {
+    "editor.fontSize": 14,
+    "editor.fontFamily": "'Cascadia Code', 'JetBrains Mono', Consolas, monospace",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.formatOnSave": true,
+    "editor.bracketPairColorization.enabled": true,
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.startupEditor": "none",
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "python.defaultInterpreterPath": "C:\\Python313\\python.exe",
+    "prettier.requireConfig": true,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/__pycache__": true,
+      "**/.git": true
+    }
+  }
+}

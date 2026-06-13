@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',-apple-system,sans-serif;background:rgba(10,12,16,0.92);border:1px solid rgba(255,255,255,0.06);border-radius:12px;height:100vh;overflow:hidden;user-select:none;-webkit-app-region:drag}
+.container{display:flex;flex-direction:column;height:100%;padding:10px 14px;gap:6px}
+.top{display:flex;align-items:center;gap:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:#ef4444;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.label{font-size:11px;color:#f0f2f5;font-weight:500}
+.mode-badge{font-size:9px;background:rgba(99,102,241,0.15);color:#8ab4f8;padding:2px 8px;border-radius:4px}
+.timer{font-size:11px;color:#6b7280;margin-left:auto;font-variant-numeric:tabular-nums;-webkit-app-region:no-drag}
+.stop-btn{width:20px;height:20px;border-radius:50%;background:#ef4444;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-app-region:no-drag}
+.stop-btn:hover{background:#dc2626}
+.stop-btn svg{width:8px;height:8px;fill:white}
+.waveform{display:flex;align-items:center;justify-content:center;gap:2px;flex:1}
+.wave-bar{width:3px;border-radius:2px;background:linear-gradient(180deg,#6366f1,#8ab4f8);min-height:3px;transition:height .08s}
+.hint{font-size:8px;color:#4a5568;text-align:center;-webkit-app-region:no-drag;margin-top:1px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="top">
+    <div class="dot"></div>
+    <span class="label">Recording</span>
+    <span class="mode-badge" id="modeBadge">Voice</span>
+    <span class="timer" id="timer">0:00</span>
+    <button class="stop-btn" onclick="stopRec()" title="Stop Recording"><svg viewBox="0 0 8 8"><rect width="8" height="8" rx="1"/></svg></button>
+  </div>
+  <div class="waveform" id="waveform">
+    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+  </div>
+  <div class="hint">Press hotkey or click ■ to stop</div>
+</div>
+<script>
+const { ipcRenderer } = require('electron');
+let mediaRec, stream, chunks=[], timerInterval, seconds=0, port=18927;
+
+ipcRenderer.on('start-recording', (e, mode, mic) => {
+  document.getElementById('modeBadge').textContent = mode;
+  seconds=0;
+  timerInterval = setInterval(() => {
+    seconds++; const m=Math.floor(seconds/60), s=seconds%60;
+    document.getElementById('timer').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+  }, 1000);
+  startCapture();
+});
+
+ipcRenderer.on('stop-recording', () => stopCapture());
+
+function startCapture() {
+  navigator.mediaDevices.getUserMedia({audio:{channelCount:1,sampleRate:16000}})
+    .then(s => {
+      stream = s;
+      mediaRec = new MediaRecorder(s, {mimeType:'audio/webm'});
+      chunks = [];
+      mediaRec.ondataavailable = e => chunks.push(e.data);
+      mediaRec.onstop = () => transcribe();
+      mediaRec.start();
+      animateWaveform();
+    })
+    .catch(() => { ipcRenderer.invoke('transcription-complete', 'Microphone access denied'); });
+}
+
+function stopCapture() {
+  if (mediaRec && mediaRec.state === 'recording') mediaRec.stop();
+  if (stream) stream.getTracks().forEach(t => t.stop());
+  clearInterval(timerInterval);
+}
+
+async function transcribe() {
+  const blob = new Blob(chunks, {mimeType:'audio/webm'});
+  try {
+    const r = await fetch(`http://127.0.0.1:${port}/transcribe-blob`, {method:'POST',body:blob});
+    const d = await r.json();
+    ipcRenderer.invoke('transcription-complete', d.text || 'No speech detected');
+  } catch(e) {
+    ipcRenderer.invoke('transcription-complete', 'Backend unavailable');
+  }
+}
+
+function stopRec() { stopCapture(); }
+
+let animFrame;
+function animateWaveform() {
+  document.querySelectorAll('.wave-bar').forEach(b => {
+    b.style.height = Math.floor(Math.random() * 24 + 3) + 'px';
+  });
+  animFrame = requestAnimationFrame(() => setTimeout(animateWaveform, 80));
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') stopCapture();
+});
+</script>
+</body>
+</html>

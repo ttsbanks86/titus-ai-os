@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BA Job Market Intelligence — Titus Banks</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:#080b14;color:#e4e8ee;min-height:100vh}
+.container{max-width:1200px;margin:0 auto;padding:24px 32px}
+
+/* Header */
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.header-left h1{font-size:22px;font-weight:700;letter-spacing:-0.3px;margin-bottom:2px}
+.header-left .sub{font-size:12px;color:#6b7280}
+.header-right{display:flex;gap:8px;align-items:center}
+.badge{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:0.3px}
+.badge.green{background:rgba(52,211,153,0.12);color:#34d399}
+.badge.amber{background:rgba(251,191,36,0.12);color:#fbbf24}
+.badge.blue{background:rgba(96,165,250,0.12);color:#60a5fa}
+.badge.purple{background:rgba(167,139,250,0.12);color:#a78bfa}
+.date{font-size:11px;color:#6b7280}
+
+/* Stats row */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.stat{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:16px}
+.stat .num{font-size:28px;font-weight:700;letter-spacing:-0.5px}
+.stat .lbl{font-size:11px;color:#6b7280;margin-top:4px}
+.stat .num.green{color:#34d399}
+.stat .num.blue{color:#60a5fa}
+.stat .num.amber{color:#fbbf24}
+.stat .num.purple{color:#a78bfa}
+
+/* Grid */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+
+/* Card */
+.card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:14px;padding:20px}
+.card h3{font-size:13px;font-weight:600;letter-spacing:-0.1px;margin-bottom:14px;color:#8a9bb5;text-transform:uppercase;font-size:11px;letter-spacing:0.5px}
+
+/* Salary chart */
+.salary-chart{display:flex;gap:16px}
+.salary-city{flex:1}
+.salary-city .city-name{font-size:11px;color:#6b7280;margin-bottom:8px;font-weight:500}
+.bars{display:flex;gap:4px;height:80px;align-items:flex-end}
+.bar{flex:1;border-radius:4px 4px 0 0;min-height:4px;position:relative;transition:.3s}
+.bar:hover{opacity:0.8}
+.bar.low{background:rgba(96,165,250,0.5);height:55%}
+.bar.median{background:#60a5fa;height:78%}
+.bar.high{background:rgba(96,165,250,0.3);height:100%}
+.bar-label{font-size:9px;color:#6b7280;text-align:center;margin-top:6px}
+.bar .val{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:9px;color:#e4e8ee;font-weight:600;white-space:nowrap}
+
+/* Skills */
+.skill-list{display:flex;flex-direction:column;gap:6px}
+.skill-row{display:flex;align-items:center;gap:10px}
+.skill-name{font-size:12px;min-width:140px;color:#c8ced6}
+.skill-bar-wrap{flex:1;height:6px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden}
+.skill-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.skill-demand{font-size:9px;color:#6b7280;min-width:40px;text-align:right}
+
+/* Gap list */
+.gap-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.gap-item:last-child{border-bottom:none}
+.gap-name{font-size:12px;color:#c8ced6}
+.gap-fix{font-size:10px;color:#6b7280;max-width:200px;text-align:right}
+
+/* Application table */
+.app-table{width:100%;border-collapse:collapse}
+.app-table th{font-size:10px;color:#6b7280;text-align:left;padding:8px 6px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.app-table td{font-size:11px;padding:10px 6px;border-bottom:1px solid rgba(255,255,255,0.02);color:#c8ced6}
+.app-table .company{font-weight:600;color:#e4e8ee}
+.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px}
+.status-dot.waiting{background:#fbbf24}
+.status-dot.applied{background:#60a5fa}
+.status-dot.offer{background:#34d399}
+
+/* SWOT */
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.swot-item{padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5}
+.swot-item.s{background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.1);color:#6ee7b7}
+.swot-item.w{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.1);color:#fcd34d}
+.swot-item.o{background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.1);color:#93c5fd}
+.swot-item.t{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.1);color:#fca5a5}
+.swot-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+
+/* Target titles */
+.title-card{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:6px}
+.title-card:last-child{margin-bottom:0}
+.title-name{font-size:13px;font-weight:600;color:#e4e8ee}
+.title-why{font-size:10px;color:#6b7280;max-width:250px;text-align:right}
+
+/* AI Insights */
+.ai-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(167,139,250,0.1);padding:3px 8px;border-radius:4px;font-size:9px;color:#a78bfa;margin-bottom:12px}
+.ai-msg{padding:12px;background:rgba(167,139,250,0.03);border:1px solid rgba(167,139,250,0.06);border-radius:8px;font-size:11px;line-height:1.6;color:#c8ced6}
+
+/* Footer */
+.footer{text-align:center;padding:24px 0 12px;font-size:10px;color:#4a5568;border-top:1px solid rgba(255,255,255,0.03);margin-top:16px}
+
+/* Responsive */
+@media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}.salary-chart{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <h1>BA Job Market Intelligence</h1>
+    <div class="sub">Titus Banks · Powered by local AI (qwen2.5:14b) · Live analysis</div>
+  </div>
+  <div class="header-right">
+    <span class="badge purple">AI-Generated</span>
+    <span class="date" id="dateDisplay"></span>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat"><div class="num blue" id="appsCount">4</div><div class="lbl">Applications Submitted</div></div>
+  <div class="stat"><div class="num amber" id="activeCount">1</div><div class="lbl">Active Conversations</div></div>
+  <div class="stat"><div class="num green" id="salaryRange">$80-122K</div><div class="lbl">Salary Range Targeted</div></div>
+  <div class="stat"><div class="num purple" id="skillCount">12</div><div class="lbl">BA Skills Demonstrated</div></div>
+</div>
+
+<!-- Two column -->
+<div class="grid-2">
+  <!-- Salary Benchmark -->
+  <div class="card">
+    <h3>Salary Benchmark</h3>
+    <div class="salary-chart">
+      <div class="salary-city">
+        <div class="city-name">Seattle, WA</div>
+        <div class="bars">
+          <div class="bar low" style="height:62%"><span class="val">$75K</span></div>
+          <div class="bar median" style="height:77%"><span class="val">$92K</span></div>
+          <div class="bar high" style="height:100%"><span class="val">$120K</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:8px;color:#4a5568;margin-top:2px">
+          <span>Low</span><span>Median</span><span>High</span>
+        </div>
+      </div>
+      <div class="salary-city">
+        <div class="city-name">Remote (National)</div>
+        <div class="bars">
+          <div class="bar low" style="height:57%"><span class="val">$68K</span></div>
+          <div class="bar median" style="height:71%"><span class="val">$85K</span></div>
+          <div class="bar high" style="height:92%"><span class="val">$110K</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:8px;color:#4a5568;margin-top:2px">
+          <span>Low</span><span>Median</span><span>High</span>
+        </div>
+      </div>
+    </div>
+    <div class="ai-msg" style="margin-top:12px">Your current applications span <strong>$80-122K</strong> — targeting the upper half of the BA market. The $40-45/hr InnovaIT role is below market median for remote.</div>
+  </div>
+
+  <!-- Skills in Demand -->
+  <div class="card">
+    <h3>Skills in Demand</h3>
+    <div class="skill-list" id="skillsContainer"></div>
+    <div class="ai-badge" style="margin-top:12px">◈ AI Analysis</div>
+  </div>
+</div>
+
+<!-- Applications + Targets -->
+<div class="grid-2">
+  <!-- Active Applications -->
+  <div class="card">
+    <h3>Active Applications</h3>
+    <table class="app-table">
+      <tr><th>Company</th><th>Role</th><th>Pay</th><th>Status</th></tr>
+      <tr><td class="company">Northridge Consulting</td><td>Business Analyst</td><td>$80-90/hr</td><td><span class="status-dot waiting"></span>Waiting</td></tr>
+      <tr><td class="company">Terminix</td><td>Sr Data Analyst</td><td>$94-122K</td><td><span class="status-dot applied"></span>Applied</td></tr>
+      <tr><td class="company">Upstream Rehab</td><td>Sr Business Analyst</td><td>$99-114K</td><td><span class="status-dot applied"></span>Applied</td></tr>
+      <tr><td class="company">InnovaIT Global</td><td>Business Analyst</td><td>$40-45/hr</td><td><span class="status-dot applied"></span>Applied</td></tr>
+    </table>
+  </div>
+
+  <!-- Target Titles -->
+  <div class="card">
+    <h3>Target Roles (AI-Recommended)</h3>
+    <div id="titlesContainer"></div>
+    <div class="ai-msg" style="margin-top:10px">Based on your AI systems background, Technical BA is your strongest fit — you've built production AI apps which most BAs can't claim.</div>
+  </div>
+</div>
+
+<!-- Bottom row -->
+<div class="grid-2">
+  <!-- Skill Gaps -->
+  <div class="card">
+    <h3>Skill Gaps</h3>
+    <div id="gapsContainer"></div>
+    <div class="ai-msg" style="margin-top:10px">📌 <strong>Priority:</strong> SQL and data analysis. These two unlock Data Analyst and Technical BA roles instantly.</div>
+  </div>
+
+  <!-- SWOT -->
+  <div class="card">
+    <h3>Personal SWOT Analysis</h3>
+    <div class="swot-grid" id="swotContainer"></div>
+  </div>
+</div>
+
+<!-- AI Insight Banner -->
+<div class="card" style="margin-top:16px">
+  <div class="ai-badge">◈ Local AI Intelligence · qwen2.5:14b</div>
+  <div class="ai-msg">
+    <strong>Market Verdict:</strong> The BA market in Seattle/remote is strong for candidates with technical depth. Your AI systems portfolio is a genuine differentiator — most BA candidates cannot demonstrate production AI applications. Lead with <strong>"Built autonomous AI systems that reduced manual processes"</strong> — this is your edge over candidates with traditional BA backgrounds. Prioritize SQL and data analysis upskilling to unlock the next tier of roles ($100K+).
+  </div>
+</div>
+
+<div class="footer">
+  BA Job Market Intelligence · Generated June 12, 2026 · Powered by Titus AI OS · github.com/ttsbanks86/ba-portfolio
+</div>
+</div>
+
+<script>
+const skills = [
+  {name:"Requirements Gathering",pct:92,demand:"High",color:"#34d399"},
+  {name:"AI System Development",pct:88,demand:"High",color:"#34d399"},
+  {name:"Cross-Functional Collab",pct:80,demand:"Medium",color:"#fbbf24"},
+  {name:"Pipeline Management",pct:75,demand:"Medium",color:"#fbbf24"},
+  {name:"Portfolio Management",pct:70,demand:"Medium",color:"#fbbf24"}
+];
+
+const gaps = [
+  {skill:"Data Analysis",importance:"High",fix:"SQL + Python data analysis course"},
+  {skill:"SQL Proficiency",importance:"Medium",fix:"Online SQL bootcamp, build a query portfolio"},
+  {skill:"Agile / Scrum",importance:"High",fix:"CSM certification (1-week, $200)"}
+];
+
+const titles = [
+  {title:"Technical Business Analyst",why:"Best fit — your AI systems background is a direct match"},
+  {title:"Data Analyst",why:"Complements your data pipeline experience"},
+  {title:"Project Coordinator",why:"Entry point into project management track"}
+];
+
+const swot = {
+  s:["WGU IT Management degree (Apr 2026)","Production AI systems portfolio","100% remote work experience"],
+  w:["No formal BA title in work history","Limited SQL/data analysis credentials"],
+  o:["AI-savvy BAs in high demand","Portfolio proves technical capability"],
+  t:["Competition from experienced BAs","Salary expectations vs entry-level roles"]
+};
+
+document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+const skillsContainer = document.getElementById('skillsContainer');
+skills.forEach(s => {
+  skillsContainer.innerHTML += `
+    <div class="skill-row">
+      <span class="skill-name">${s.name}</span>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:${s.pct}%;background:${s.color}"></div></div>
+      <span class="skill-demand" style="color:${s.color}">${s.demand}</span>
+    </div>`;
+});
+
+const gapsContainer = document.getElementById('gapsContainer');
+gaps.forEach(g => {
+  gapsContainer.innerHTML += `
+    <div class="gap-item">
+      <div><span class="gap-name">${g.skill}</span> <span class="badge ${g.importance === 'High' ? 'amber' : 'blue'}" style="margin-left:6px">${g.importance}</span></div>
+      <span class="gap-fix">${g.fix}</span>
+    </div>`;
+});
+
+const titlesContainer = document.getElementById('titlesContainer');
+titles.forEach(t => {
+  titlesContainer.innerHTML += `
+    <div class="title-card">
+      <span class="title-name">${t.title}</span>
+      <span class="title-why">${t.why}</span>
+    </div>`;
+});
+
+const swotContainer = document.getElementById('swotContainer');
+const swotLabels = {s:'Strengths',w:'Weaknesses',o:'Opportunities',t:'Threats'};
+const swotClasses = {s:'s',w:'w',o:'o',t:'t'};
+Object.entries(swot).forEach(([key,items]) => {
+  swotContainer.innerHTML += `<div class="swot-item ${swotClasses[key]}"><div class="swot-label">${swotLabels[key]}</div>${items.join('<br>')}</div>`;
+});
+</script>
+</body>
+</html>

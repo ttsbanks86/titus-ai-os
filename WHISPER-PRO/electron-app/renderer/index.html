@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whisper My Idea Pro</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-container">
+  <!-- Title Bar -->
+  <div class="title-bar">
+    <div class="title-left">
+      <div class="app-logo">W</div>
+      <span class="app-title">Whisper My Idea <span class="pro-badge">PRO</span></span>
+    </div>
+    <div class="title-center">
+      <span class="hotkey-hint"><kbd>Alt+Space</kbd> · Voice to Text</span>
+    </div>
+    <div class="title-controls">
+      <button class="ctrl-btn" onclick="electronAPI.minimize()">─</button>
+      <button class="ctrl-btn ctrl-close" onclick="electronAPI.quit()">✕</button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="nav-item active" data-page="home" onclick="navigate('home')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Home</span>
+      </div>
+      <div class="nav-item" data-page="modes" onclick="navigate('modes')">
+        <span class="nav-icon">🎯</span><span class="nav-label">Modes</span>
+      </div>
+      <div class="nav-item" data-page="vocabulary" onclick="navigate('vocabulary')">
+        <span class="nav-icon">📖</span><span class="nav-label">Vocabulary</span>
+      </div>
+      <div class="nav-item" data-page="history" onclick="navigate('history')">
+        <span class="nav-icon">📋</span><span class="nav-label">History</span>
+      </div>
+      <div class="nav-item" data-page="models" onclick="navigate('models')">
+        <span class="nav-icon">🧠</span><span class="nav-label">Models</span>
+      </div>
+      <div class="nav-item" data-page="settings" onclick="navigate('settings')">
+        <span class="nav-icon">⚙️</span><span class="nav-label">Settings</span>
+      </div>
+      <div class="sidebar-spacer"></div>
+      <div class="nav-item" data-page="about" onclick="navigate('about')">
+        <span class="nav-icon">ℹ️</span><span class="nav-label">About</span>
+      </div>
+    </nav>
+
+    <!-- Content Area -->
+    <main class="content" id="content">
+      <!-- Pages are loaded dynamically -->
+    </main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

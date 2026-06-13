@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOLA Voice Reader</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:transparent;color:#f0f2f5;height:100vh;display:flex;flex-direction:column;overflow:hidden;user-select:none}
+
+.title-bar{display:flex;align-items:center;padding:14px 20px;gap:10px;min-height:54px;-webkit-app-region:drag;background:rgba(10,12,16,0.75);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,0.04)}
+.title-bar>*{-webkit-app-region:no-drag}
+.app-icon{width:28px;height:28px;background:linear-gradient(135deg,#a78bfa,#7c3aed);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700}
+.app-info{display:flex;flex-direction:column;gap:1px}
+.app-name{font-size:13px;font-weight:700;letter-spacing:-0.2px}
+.app-version{font-size:9px;color:#6b7280;letter-spacing:0.3px}
+.window-controls{display:flex;gap:6px;margin-left:auto}
+.ctrl-btn{width:26px;height:26px;border-radius:6px;background:transparent;color:#6b7280;border:none;font-size:12px;cursor:pointer;transition:.12s}
+.ctrl-btn:hover{background:rgba(255,255,255,0.06);color:#f0f2f5}
+.ctrl-btn.close:hover{background:#ef4444;color:#fff}
+
+.status-bar{display:flex;align-items:center;padding:8px 20px;gap:10px;background:rgba(10,12,16,0.5);border-bottom:1px solid rgba(255,255,255,0.03)}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#4a5568;transition:.3s}
+.status-dot.active{background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,0.4);animation:pulse 1.5s infinite}
+.status-dot.speaking{background:#a78bfa;box-shadow:0 0 8px rgba(167,139,250,0.4)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.status-label{font-size:11px;color:#6b7280;font-weight:500;flex:1}
+.badge{font-size:8px;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,0.04);color:#6b7280}
+
+.content{flex:1;padding:16px 20px;display:flex;flex-direction:column;gap:10px;background:rgba(10,12,16,0.6);backdrop-filter:blur(8px)}
+
+/* Main toggle */
+.main-toggle{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:12px;cursor:pointer;transition:.2s}
+.main-toggle:hover{border-color:rgba(167,139,250,0.1)}
+.toggle-label{font-size:12px;font-weight:500;color:#c8ced6}
+.toggle-sub{font-size:9px;color:#6b7280;margin-top:2px}
+.switch{width:40px;height:22px;background:rgba(255,255,255,0.08);border-radius:11px;position:relative;transition:.2s;flex-shrink:0;margin-left:auto}
+.switch.on{background:rgba(167,139,250,0.5)}
+.switch .knob{width:18px;height:18px;background:#6b7280;border-radius:50%;position:absolute;top:2px;left:2px;transition:.2s}
+.switch.on .knob{background:#a78bfa;left:20px}
+
+/* Controls row */
+.controls-row{display:flex;gap:8px;align-items:flex-end}
+.control-group{display:flex;flex-direction:column;gap:3px;flex:1}
+.control-group label{font-size:8px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+select{background:rgba(0,0,0,0.3);color:#e4e8ee;border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:7px 10px;font-size:10px;font-family:inherit;cursor:pointer;outline:none;transition:.15s}
+select:hover{border-color:rgba(167,139,250,0.2)}
+select:focus{border-color:rgba(167,139,250,0.3);background:rgba(0,0,0,0.4)}
+select option{background:#1a1a2e;color:#e4e8ee}
+
+.speed-ctrl{display:flex;align-items:center;gap:6px}
+.speed-ctrl input[type="range"]{width:56px;height:4px;-webkit-appearance:none;background:rgba(255,255,255,0.08);border-radius:2px;outline:none}
+.speed-ctrl input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#a78bfa;cursor:pointer}
+.speed-val{font-size:11px;color:#a78bfa;font-weight:600;min-width:28px;text-align:center}
+
+/* Clipboard display */
+.clip-area{flex:1;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:14px;overflow-y:auto;min-height:60px;max-height:160px}
+.clip-text{font-size:13px;line-height:1.6;color:#d1d5db}
+.clip-text.empty{color:#4a5568;font-style:italic;font-size:12px}
+.clip-label{font-size:9px;color:#6b7280;margin-bottom:6px;display:flex;justify-content:space-between}
+
+/* Waveform */
+.waveform{height:36px;display:flex;align-items:center;justify-content:center;gap:2px;opacity:0;transition:.3s;background:rgba(167,139,250,0.02);border-radius:8px;border:1px solid rgba(167,139,250,0.03)}
+.waveform.active{opacity:1}
+.wave-bar{width:3px;border-radius:2px;background:linear-gradient(180deg,#a78bfa,#7c3aed);transition:height .1s;min-height:2px}
+
+/* Action buttons */
+.actions{display:flex;gap:6px}
+.primary-btn{flex:1;background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:.2s}
+.primary-btn:hover{box-shadow:0 4px 20px rgba(124,58,237,0.3)}
+.primary-btn.speaking{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 0 0 0 rgba(239,68,68,0.4);animation:pulse-ring 1.5s infinite}
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.4)}50%{box-shadow:0 0 0 10px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}}
+
+.sec-btn{background:rgba(255,255,255,0.04);color:#8a9bb5;border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:8px 12px;font-size:10px;font-family:inherit;cursor:pointer;transition:.15s;white-space:nowrap}
+.sec-btn:hover{background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.2);color:#a78bfa}
+
+/* History */
+.history{display:flex;gap:4px;flex-wrap:wrap;max-height:0;overflow:hidden;transition:.3s}
+.history.open{max-height:120px;overflow-y:auto}
+.hist-chip{padding:3px 8px;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);font-size:9px;color:#6b7280;cursor:pointer;transition:.12s;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hist-chip:hover{background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.15);color:#a78bfa}
+
+/* Progress */
+.progress{height:2px;background:rgba(255,255,255,0.03);border-radius:1px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#a78bfa,#7c3aed);transition:width .3s}
+
+.footer{display:flex;justify-content:space-between;padding:8px 20px 12px;font-size:9px;color:#4a5568;background:rgba(10,12,16,0.75);border-top:1px solid rgba(255,255,255,0.03)}
+.footer .hk{color:#6b7280}
+.footer .hk span{background:rgba(255,255,255,0.04);padding:2px 6px;border-radius:3px;font-size:8px}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="title-bar">
+    <div class="app-icon">R</div>
+    <div class="app-info"><span class="app-name">NOLA Voice Reader</span><span class="app-version">Clipboard Listener · Alt+Shift+R</span></div>
+    <div class="window-controls">
+        <button class="ctrl-btn" onclick="electronAPI.minimizeWindow()">＿</button>
+        <button class="ctrl-btn close" onclick="electronAPI.quitApp()">✕</button>
+    </div>
+</div>
+
+<div class="status-bar">
+    <div class="status-dot" id="statusDot"></div>
+    <span class="status-label" id="statusLabel">Initializing...</span>
+    <span class="badge" id="voiceBadge">Sarah</span>
+</div>
+
+<div class="content">
+    <!-- Main Toggle -->
+    <div class="main-toggle" onclick="toggleListening()">
+        <div style="display:flex;flex-direction:column">
+            <span class="toggle-label" id="toggleLabel">🔇 Clipboard Monitoring Off</span>
+            <span class="toggle-sub" id="toggleSub">Copy text and it will be read aloud automatically</span>
+        </div>
+        <div class="switch" id="toggleSwitch">
+            <div class="knob"></div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-row">
+        <div class="control-group">
+            <label>Voice</label>
+            <select id="voiceSelect"></select>
+        </div>
+        <div class="control-group" style="flex:0.8">
+            <label>Engine</label>
+            <select id="providerSelect">
+                <option value="kokoro">Kokoro</option>
+                <option value="supertonic">Supertonic</option>
+                <option value="edge">Edge TTS</option>
+            </select>
+        </div>
+        <div class="control-group" style="flex:0.6">
+            <label>Speed</label>
+            <div class="speed-ctrl">
+                <input type="range" id="speedRange" min="0.5" max="2.0" step="0.1" value="1.0">
+                <span class="speed-val" id="speedVal">1.0x</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clipboard Display -->
+    <div style="flex:1;display:flex;flex-direction:column">
+        <div class="clip-label">
+            <span id="clipLabel">📋 Clipboard</span>
+            <span id="clipChars">0 chars</span>
+        </div>
+        <div class="clip-area">
+            <div class="clip-text empty" id="clipText">Copy something or click Test Voice to begin...</div>
+        </div>
+    </div>
+
+    <!-- Waveform -->
+    <div class="waveform" id="waveform">
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+    <!-- Actions -->
+    <div class="actions">
+        <button class="primary-btn" id="playBtn" onclick="playCurrent()">▶  Play Last Copy</button>
+        <button class="sec-btn" onclick="testVoice()">🎤 Test Voice</button>
+        <button class="sec-btn" onclick="stopAudio()">⏹ Stop</button>
+        <button class="sec-btn" onclick="toggleHistory()">📋 History</button>
+    </div>
+
+    <!-- History -->
+    <div class="history" id="history"></div>
+</div>
+
+<div class="footer">
+    <span class="hk"><span>Alt+Shift+R</span> · Open Door AI Systems</span>
+    <span>v2.0 · Clipboard Reader</span>
+</div>
+
+<audio id="audioPlayer" hidden></audio>
+
+<script>
+const port = 18926;
+let isListening = false;
+let isSpeaking = false;
+let lastAudioPath = null;
+let historyOpen = false;
+let pollInterval = null;
+
+// Voice database
+const voiceMap = {
+    kokoro: ["af_sarah","af_alloy","af_bella","af_nova","af_sky","af_heart",
+             "am_adam","am_echo","am_eric","am_fenrir","am_liam","am_michael",
+             "am_onyx","am_puck","am_santa","jf_alpha","jf_gongbei","jf_nezumi",
+             "jm_kumo","pf_dora","pm_alex","pm_baba","pm_santa","zf_xiaobei"],
+    supertonic: ["F1","F2","F3","F4","F5","M1","M2","M3","M4","M5"],
+    edge: ["en-US-AriaNeural","en-US-JennyNeural","en-US-GuyNeural",
+           "en-US-EricNeural","en-US-DavisNeural","en-GB-SoniaNeural"]
+};
+
+// Populate voices
+function populateVoices() {
+    const p = document.getElementById('providerSelect').value;
+    const s = document.getElementById('voiceSelect');
+    s.innerHTML = '';
+    (voiceMap[p] || voiceMap.kokoro).forEach(v => {
+        const o = document.createElement('option');
+        o.value = v; o.textContent = v;
+        if (v === 'af_sarah') o.selected = true;
+        s.appendChild(o);
+    });
+}
+document.getElementById('providerSelect').addEventListener('change', populateVoices);
+populateVoices();
+
+// Speed
+document.getElementById('speedRange').addEventListener('input', function() {
+    document.getElementById('speedVal').textContent = this.value + 'x';
+    saveSettings();
+});
+
+// Status polling
+function startPolling() {
+    pollInterval = setInterval(pollStatus, 1000);
+}
+function stopPolling() { if (pollInterval) clearInterval(pollInterval); }
+
+async function pollStatus() {
+    try {
+        const r = await fetch(`http://127.0.0.1:${port}/status`);
+        const d = await r.json();
+        document.getElementById('voiceBadge').textContent = d.voice.replace('af_','').replace('am_','').replace('en-US-','').replace('Neural','');
+
+        if (d.clipboard) {
+            document.getElementById('clipText').textContent = d.clipboard;
+            document.getElementById('clipText').className = 'clip-text';
+            document.getElementById('clipChars').textContent = d.clipboard.length + ' chars';
+        }
+
+        if (d.listening !== isListening) {
+            isListening = d.listening;
+            updateToggleUI();
+        }
+
+        // Check if there's new clipboard text since our last poll
+        if (isListening && d.clipboard && d.clipboard.length > 3) {
+            document.getElementById('clipLabel').textContent = '📋 Clipboard (auto-read)';
+        }
+    } catch(e) {
+        document.getElementById('statusLabel').textContent = 'Connecting...';
+    }
+}
+
+function updateToggleUI() {
+    const dot = document.getElementById('statusDot');
+    const label = document.getElementById('statusLabel');
+    const toggleLabel = document.getElementById('toggleLabel');
+    const toggleSub = document.getElementById('toggleSub');
+    const sw = document.getElementById('toggleSwitch');
+
+    if (isListening) {
+        dot.className = 'status-dot active';
+        label.textContent = 'Listening for copies...';
+        toggleLabel.textContent = '🎤 Clipboard Monitoring Active';
+        toggleSub.textContent = 'Copy any text and it will be read aloud';
+        sw.className = 'switch on';
+    } else {
+        dot.className = 'status-dot';
+        label.textContent = 'Paused';
+        toggleLabel.textContent = '🔇 Clipboard Monitoring Off';
+        toggleSub.textContent = 'Copy text and it will be read aloud automatically';
+        sw.className = 'switch';
+    }
+}
+
+async function toggleListening() {
+    const newState = !isListening;
+    try {
+        await fetch(`http://127.0.0.1:${port}/toggle`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({listening: newState})
+        });
+        isListening = newState;
+        updateToggleUI();
+    } catch(e) {}
+}
+
+async function saveSettings() {
+    try {
+        await fetch(`http://127.0.0.1:${port}/settings`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                voice: document.getElementById('voiceSelect').value,
+                provider: document.getElementById('providerSelect').value,
+                speed: document.getElementById('speedRange').value
+            })
+        });
+    } catch(e) {}
+}
+
+document.getElementById('voiceSelect').addEventListener('change', saveSettings);
+document.getElementById('providerSelect').addEventListener('change', saveSettings);
+
+async function testVoice() {
+    const voice = document.getElementById('voiceSelect').value;
+    const provider = document.getElementById('providerSelect').value;
+    try {
+        const r = await fetch(`http://127.0.0.1:${port}/test`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({voice, provider})
+        });
+        const d = await r.json();
+        if (d.audioPath) playAudio(d.audioPath);
+    } catch(e) {}
+}
+
+async function playCurrent() {
+    const text = document.getElementById('clipText').textContent;
+    if (!text || text.includes('Copy something')) return;
+    const voice = document.getElementById('voiceSelect').value;
+    const provider = document.getElementById('providerSelect').value;
+    try {
+        const r = await fetch(`http://127.0.0.1:${port}/speak`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({text, voice, provider})
+        });
+        const d = await r.json();
+        if (d.audioPath) playAudio(d.audioPath);
+    } catch(e) {}
+}
+
+function playAudio(path) {
+    lastAudioPath = path;
+    const audio = document.getElementById('audioPlayer');
+    audio.src = 'http://127.0.0.1:' + port + '/audio?path=' + encodeURIComponent(path);
+    audio.playbackRate = parseFloat(document.getElementById('speedRange').value);
+    audio.play();
+    isSpeaking = true;
+    document.getElementById('statusDot').className = 'status-dot speaking';
+    document.getElementById('statusLabel').textContent = 'Speaking...';
+    document.getElementById('playBtn').textContent = '⏸  Playing';
+    document.getElementById('playBtn').className = 'primary-btn speaking';
+    document.getElementById('waveform').classList.add('active');
+    document.getElementById('progressFill').style.width = '100%';
+    animateWaveform();
+
+    audio.onended = function() {
+        isSpeaking = false;
+        document.getElementById('statusDot').className = isListening ? 'status-dot active' : 'status-dot';
+        document.getElementById('statusLabel').textContent = isListening ? 'Listening for copies...' : 'Paused';
+        document.getElementById('playBtn').textContent = '▶  Play Last Copy';
+        document.getElementById('playBtn').className = 'primary-btn';
+        document.getElementById('waveform').classList.remove('active');
+        document.getElementById('progressFill').style.width = '0%';
+        cancelAnimationFrame(animFrame);
+    };
+}
+
+function stopAudio() {
+    const audio = document.getElementById('audioPlayer');
+    audio.pause(); audio.currentTime = 0;
+    isSpeaking = false;
+    document.getElementById('statusDot').className = isListening ? 'status-dot active' : 'status-dot';
+    document.getElementById('statusLabel').textContent = isListening ? 'Listening for copies...' : 'Paused';
+    document.getElementById('playBtn').textContent = '▶  Play Last Copy';
+    document.getElementById('playBtn').className = 'primary-btn';
+    document.getElementById('waveform').classList.remove('active');
+    document.getElementById('progressFill').style.width = '0%';
+    if (animFrame) cancelAnimationFrame(animFrame);
+}
+
+let animFrame;
+function animateWaveform() {
+    if (!isSpeaking) return;
+    document.querySelectorAll('.wave-bar').forEach(bar => {
+        bar.style.height = Math.floor(Math.random() * 24 + 3) + 'px';
+    });
+    animFrame = requestAnimationFrame(() => setTimeout(animateWaveform, 100));
+}
+
+async function toggleHistory() {
+    historyOpen = !historyOpen;
+    document.getElementById('history').className = 'history' + (historyOpen ? ' open' : '');
+    if (!historyOpen) return;
+    try {
+        const r = await fetch(`http://127.0.0.1:${port}/history`);
+        const d = await r.json();
+        const h = document.getElementById('history');
+        h.innerHTML = '';
+        (d.history || []).slice().reverse().forEach(t => {
+            const chip = document.createElement('span');
+            chip.className = 'hist-chip';
+            chip.textContent = t.substring(0, 50);
+            chip.title = t;
+            chip.onclick = function() {
+                document.getElementById('clipText').textContent = t;
+                document.getElementById('clipText').className = 'clip-text';
+                document.getElementById('clipChars').textContent = t.length + ' chars';
+            };
+            h.appendChild(chip);
+        });
+    } catch(e) {}
+}
+
+// Init
+startPolling();
+updateToggleUI();
+</script>
+</body>
+</html>

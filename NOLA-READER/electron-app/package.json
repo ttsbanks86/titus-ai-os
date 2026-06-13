@@ -1,0 +1,9 @@
+{
+  "name": "nola-reader",
+  "version": "1.0.0",
+  "description": "NOLA Voice Reader — AI Text-to-Speech",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  }
+}

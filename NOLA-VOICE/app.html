@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOLA Voice</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:#0b0f1a;color:#f1f5f9;height:100vh;display:flex;flex-direction:column;overflow:hidden;-webkit-app-region:drag}
+.title-bar{display:flex;align-items:center;padding:12px 20px;gap:12px;min-height:52px;-webkit-app-region:drag}
+.title-bar>*{-webkit-app-region:no-drag}
+.logo{font-size:20px;font-weight:800;color:#c084fc;letter-spacing:0.5px}
+.logo span{font-weight:300;color:#6b7280}
+.badge{font-size:9px;color:#4a5568;background:#1a1e30;padding:3px 8px;border-radius:4px;letter-spacing:0.5px}
+.status-text{margin-left:auto;font-size:12px;color:#c084fc;font-weight:500}
+.close-btn{width:28px;height:28px;border-radius:8px;background:transparent;color:#4a5568;border:1px solid transparent;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.close-btn:hover{background:#ef4444;color:#fff}
+.rec-bar{height:3px;margin:0 20px;border-radius:2px;transition:.3s}
+.content{flex:1;padding:16px 20px;display:flex;flex-direction:column;gap:12px}
+.mode-row{display:flex;align-items:center;gap:10px}
+.mode-row label{font-size:12px;color:#6b7280;font-weight:500}
+select{background:#1a1e30;color:#c084fc;border:1px solid #2a2e40;border-radius:8px;padding:7px 12px;font-size:12px;font-family:inherit;outline:none;cursor:pointer;min-width:110px}
+select:hover{border-color:#3a3e50}
+textarea{flex:1;background:#131827;color:#f1f5f9;border:1px solid #2a2e40;border-radius:12px;padding:18px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.7;transition:.15s}
+textarea:focus{border-color:#c084fc;box-shadow:0 0 0 3px rgba(192,132,252,0.08)}
+.btn-rec{background:linear-gradient(135deg,#c084fc,#a78bfa);color:#0b0f1a;border:none;border-radius:10px;padding:12px 20px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:.15s}
+.btn-rec:hover{opacity:.92}
+.btn-rec.recording{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
+.btn-row{display:flex;gap:8px}
+.btn{background:#131827;color:#94a3b8;border:1px solid #2a2e40;border-radius:8px;padding:8px 16px;font-size:12px;font-family:inherit;cursor:pointer;transition:.15s}
+.btn:hover{background:#1a1e30;border-color:#3a3e50;color:#f1f5f9}
+.footer{display:flex;justify-content:space-between;padding:8px 20px 16px;font-size:10px;color:#4a5568}
+</style>
+</head>
+<body>
+<div class="title-bar">
+    <span class="logo">NOLA <span>Voice</span></span>
+    <span class="badge">Open Door AI</span>
+    <span class="status-text" id="status">Ready</span>
+    <button class="close-btn" onclick="window.close()">✕</button>
+</div>
+<div class="rec-bar" id="recBar" style="background:transparent"></div>
+<div class="content">
+    <div class="mode-row">
+        <label>Mode:</label>
+        <select id="mode">
+            <option value="Voice">🎤 Voice</option>
+            <option value="Message">💬 Message</option>
+            <option value="Email">✉️ Email</option>
+            <option value="Meeting">📋 Meeting</option>
+            <option value="Note">📝 Note</option>
+        </select>
+    </div>
+    <textarea id="output" placeholder="Press Ctrl+Shift+N or click record to start speaking..."></textarea>
+    <button class="btn-rec" id="recBtn" onmousedown="startRec()" onmouseup="stopRec()">🎤  Hold to Record</button>
+    <div class="btn-row">
+        <button class="btn" onclick="pasteText()">📋 Paste</button>
+        <button class="btn" onclick="copyText()">📄 Copy</button>
+        <button class="btn" onclick="document.getElementById('output').value=''">🗑 Clear</button>
+    </div>
+</div>
+<div class="footer">
+    <span>Ctrl+Shift+N · Open Door AI Systems</span>
+    <span>v1.0</span>
+</div>
+<script>
+let rec=false, mediaRec, chunks=[], stream;
+function startRec(){
+    if(rec) return; rec=true;
+    document.getElementById('recBtn').textContent='⏺  Recording...';
+    document.getElementById('recBtn').className='btn-rec recording';
+    document.getElementById('recBar').style.background='#ef4444';
+    document.getElementById('status').textContent='Recording'; document.getElementById('status').style.color='#ef4444';
+    navigator.mediaDevices.getUserMedia({audio:{channelCount:1,sampleRate:16000}}).then(s=>{
+        stream=s; mediaRec=new MediaRecorder(s,{mimeType:'audio/webm'});
+        mediaRec.ondataavailable=e=>chunks.push(e.data);
+        mediaRec.onstop=()=>{
+            document.getElementById('status').textContent='Transcribing'; document.getElementById('status').style.color='#f59e0b';
+            document.getElementById('recBar').style.background='#f59e0b';
+            const blob=new Blob(chunks,{type:'audio/webm'});
+            fetch('http://127.0.0.1:18925/transcribe',{method:'POST',body:blob})
+            .then(r=>r.json()).then(d=>{
+                document.getElementById('output').value=d.text||'No speech detected';
+                resetUI(); if(d.text) setTimeout(pasteText,300);
+            }).catch(e=>{document.getElementById('output').value='Error: '+e.message;resetUI()});
+            chunks=[];stream=null;
+        };
+        chunks=[];mediaRec.start();
+    }).catch(e=>{document.getElementById('output').value='Mic error: '+e.message;resetUI()});
+}
+function stopRec(){if(rec&&mediaRec&&mediaRec.state==='recording'){mediaRec.stop();rec=false;stream&&stream.getTracks().forEach(t=>t.stop());}}
+function resetUI(){
+    document.getElementById('recBtn').textContent='🎤  Hold to Record'; document.getElementById('recBtn').className='btn-rec';
+    document.getElementById('recBar').style.background='transparent';
+    document.getElementById('status').textContent='Ready'; document.getElementById('status').style.color='#c084fc';
+}
+function pasteText(){
+    const t=document.getElementById('output').value;
+    if(t){navigator.clipboard.writeText(t);resetUI();window.close()}
+}
+function copyText(){
+    const t=document.getElementById('output').value;
+    if(t){navigator.clipboard.writeText(t);document.getElementById('status').textContent='Copied!';document.getElementById('status').style.color='#c084fc'}
+}
+</script>
+</body>
+</html>

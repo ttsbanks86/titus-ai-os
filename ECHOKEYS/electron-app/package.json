@@ -1,0 +1,34 @@
+{
+  "name": "whisper-my-idea",
+  "version": "1.0.0",
+  "description": "Whisper My Idea — AI Voice to Text",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64",
+    "pack": "electron-builder --win --x64 --dir"
+  },
+  "build": {
+    "appId": "com.titusbanks.echokeys",
+    "productName": "EchoKeys Pro",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "../icons/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  },
+  "dependencies": {
+    "electron": "^35.7.5",
+    "electron-builder": "^25.0.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^17.1.2"
+  }
+}

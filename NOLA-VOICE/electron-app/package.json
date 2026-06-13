@@ -1,0 +1,12 @@
+{
+  "name": "nola-voice",
+  "version": "1.0.0",
+  "description": "Voice My Idea — AI Voice Assistant",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron-packager": "^17.1.2"
+  }
+}
