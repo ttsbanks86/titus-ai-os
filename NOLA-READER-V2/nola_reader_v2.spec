@@ -1,0 +1,101 @@
+# -*- mode: python ; coding: utf-8 -*-
+"""
+NOLA Reader v2 — PyInstaller Build Spec
+Produces a single portable EXE with no console window.
+"""
+import sys, os
+from pathlib import Path
+
+block_cipher = None
+
+a = Analysis(
+    ['nola_reader_v2.py'],
+    pathex=[],
+    binaries=[],
+    datas=[],
+    hiddenimports=[
+        'edge_tts',
+        'edge_tts.communicate',
+        'edge_tts.exceptions',
+        'edge_tts.voices_list',
+        'aiohttp',
+        'aiohttp.client',
+        'aiohttp.client_reqrep',
+        'aiohttp.connector',
+        'aiohttp.payload',
+        'aiohttp.streams',
+        'aiohttp.helpers',
+        'aiohttp.multipart',
+        'aiohttp.web_ws',
+        'aiohttp.http_parser',
+        'aiohttp.http_websocket',
+        'aiohttp.hdrs',
+        'aiohttp.resolver',
+        'aiohttp.abc',
+        'aiohttp.tracing',
+        'aiohttp.client_ws',
+        'aiohttp.formdata',
+        'aiohttp.cookiejar',
+        'multidict',
+        'yarl',
+        'frozenlist',
+        'aiosignal',
+        'async_timeout',
+        'attr',
+        'certifi',
+        'charset_normalizer',
+        'charset_normalizer.md__mypyc',
+        'idna',
+        'idna.uts46data',
+        'pyperclip',
+        'keyboard',
+        'PySide6',
+        'PySide6.QtCore',
+        'PySide6.QtGui',
+        'PySide6.QtWidgets',
+        'PySide6.QtMultimedia',
+        'PySide6.QtNetwork',
+    ],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[
+        'tkinter',
+        'test',
+        'unittest',
+        'PIL',
+        'matplotlib',
+        'numpy',
+        'scipy',
+        'torch',
+        'tensorflow',
+        'pandas',
+        'notebook',
+        'IPython',
+    ],
+    noarchive=False,
+)
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    [],
+    name='NOLA_Reader',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
+    console=False,          # No console window — TBPS compliant
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+    icon=None,
+)
