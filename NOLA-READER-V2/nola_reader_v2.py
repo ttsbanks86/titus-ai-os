@@ -323,28 +323,48 @@ class ClipboardMonitor(QThread):
     def __init__(self):
         super().__init__()
         self._running = True
-        self._last = ""
+        self._last_raw = ""      # Raw clipboard text from last emit
+        self._last_norm = ""     # Normalized text from last emit
         self._enabled = True
+        self._recheck_requested = False
 
     def set_enabled(self, enabled: bool):
         self._enabled = enabled
 
+    def request_recheck(self):
+        """Force the next poll to re-evaluate clipboard even if text matches."""
+        self._recheck_requested = True
+
+    @staticmethod
+    def _norm(text: str) -> str:
+        """Normalize clipboard text: strip whitespace, uniform line endings."""
+        if not text:
+            return ""
+        return text.strip().replace("\r\n", "\n").replace("\r", "\n")
+
     def run(self):
-        try:
-            self._last = pyperclip.paste() or ""
-        except:
-            self._last = ""
+        self._last_raw = ""
+        self._last_norm = ""
         while self._running:
-            time.sleep(0.4)
+            time.sleep(0.35)
             if not self._enabled:
                 continue
             try:
-                current = pyperclip.paste()
-                if current and current != self._last and current.strip():
-                    # Filter single-char noise
-                    if len(current.strip()) >= 3:
-                        self._last = current
-                        self.text_changed.emit(current)
+                raw = pyperclip.paste() or ""
+                norm = self._norm(raw)
+                if not norm or len(norm) < 3:
+                    continue
+
+                recheck = self._recheck_requested
+                self._recheck_requested = False
+
+                # Detect change by raw text (any format change = new copy)
+                # OR normalized text (meaningful change)
+                # OR recheck request (same text recopied)
+                if raw != self._last_raw or norm != self._last_norm or recheck:
+                    self._last_raw = raw
+                    self._last_norm = norm
+                    self.text_changed.emit(norm)
             except:
                 pass
 
@@ -808,6 +828,39 @@ class NOLAReader(QMainWindow):
         keyboard.add_hotkey(hotkey, self._hotkey_triggered, suppress=True)
         self._current_hotkey = hotkey
 
+        # Ctrl+C hook — detect copy events even when text doesn't change
+        try:
+            keyboard.add_hotkey('ctrl+c', self._on_ctrl_c, suppress=False)
+        except:
+            pass
+
+    def _on_ctrl_c(self):
+        """Fires when Ctrl+C is pressed anywhere. Schedules clipboard check."""
+        # Wait for clipboard to update, then check from main thread
+        QTimer.singleShot(300, self._check_clipboard_after_copy)
+
+    def _check_clipboard_after_copy(self):
+        """Read clipboard and trigger TTS if text is valid."""
+        try:
+            text = pyperclip.paste()
+            if text and len(text.strip()) >= 3:
+                norm = text.strip().replace("\r\n", "\n").replace("\r", "\n")
+                now = time.time()
+                # Dedup: skip if same text read within 2 seconds
+                if hasattr(self, '_last_read') and self._last_read:
+                    last_text, last_time = self._last_read
+                    if norm == last_text and (now - last_time) < 2.0:
+                        return
+                self._last_read = (norm, now)
+                self.text_display.setPlainText(norm[:2000])
+                self.char_count.setText(f"{len(norm)} chars")
+                if self.clip_monitor._enabled:
+                    self.status_label.setText("Copy detected — reading...")
+                    self.status_icon.setStyleSheet(f"color: {ACCENT}; font-size: 8px;")
+                    QTimer.singleShot(200, lambda: self._start_tts(norm))
+        except:
+            pass
+
     def _hotkey_triggered(self):
         self._show_window()
         # Read whatever is in clipboard
@@ -821,9 +874,17 @@ class NOLAReader(QMainWindow):
 
     # ── Clipboard ───────────────────────────────────────────────────────
     def _on_clipboard(self, text):
+        now = time.time()
+        # Dedup: skip if same text was read within last 2 seconds (prevents loops)
+        if hasattr(self, '_last_read') and self._last_read:
+            last_text, last_time = self._last_read
+            if text == last_text and (now - last_time) < 2.0:
+                return
+        self._last_read = (text, now)
+
         self.text_display.setPlainText(text[:2000])
         self.char_count.setText(f"{len(text)} chars")
-        if self.clip_monitor._enabled and len(text.strip()) >= 3:
+        if self.clip_monitor._enabled and len(text) >= 3:
             self.status_label.setText("New text copied — reading...")
             self.status_icon.setStyleSheet(f"color: {ACCENT}; font-size: 8px;")
             QTimer.singleShot(200, lambda: self._start_tts(text))
