@@ -1,0 +1,67 @@
+"""Whisper My Idea Pro v2 — Constants & Brand Colors"""
+from pathlib import Path
+
+# ─── Paths ──────────────────────────────────────────────────────────────────
+APP_DIR = Path(__file__).parent
+DATA_DIR = Path.home() / "AppData" / "Roaming" / "WhisperMyIdeaPro"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+SETTINGS_FILE = DATA_DIR / "settings.json"
+HISTORY_FILE = DATA_DIR / "history.json"
+VOCAB_FILE = DATA_DIR / "vocabulary.json"
+STATS_FILE = DATA_DIR / "stats.json"
+
+# ─── Brand Colors (TBPS Dark) ──────────────────────────────────────────────
+BG          = "#080b12"
+BG2         = "#0d111a"
+BG3         = "#131823"
+SURFACE     = "#181e2c"
+SURFACE2    = "#1f2638"
+BORDER      = "#2a3147"
+BORDER2     = "#3b4460"
+ACCENT      = "#8b5cf6"
+ACCENT2     = "#a78bfa"
+ACCENT3     = "#7c3aed"
+TEXT        = "#f0f2f5"
+TEXT2       = "#94a3b8"
+TEXT3       = "#64748b"
+GREEN       = "#22c55e"
+AMBER       = "#f59e0b"
+RED         = "#ef4444"
+GLOW_ACCENT = "rgba(139,92,246,0.12)"
+
+# ─── Defaults ───────────────────────────────────────────────────────────────
+DEFAULT_SETTINGS = {
+    "hotkey": "alt+space",
+    "model": "tiny",
+    "mode": "Voice",
+    "auto_paste": True,
+    "save_history": True,
+    "launch_at_startup": False,
+    "language": "en",
+    "speaker": "",
+    "microphone": "",
+}
+
+# ─── Available Models ───────────────────────────────────────────────────────
+AVAILABLE_MODELS = [
+    {"id": "tiny",   "name": "Tiny",   "desc": "Fastest, ~1GB RAM",   "size": "75 MB"},
+    {"id": "base",   "name": "Base",   "desc": "Balanced speed/accuracy", "size": "150 MB"},
+    {"id": "small",  "name": "Small",  "desc": "Good accuracy",       "size": "500 MB"},
+    {"id": "medium", "name": "Medium", "desc": "High accuracy",       "size": "1.5 GB"},
+]
+
+# ─── Available Modes ───────────────────────────────────────────────────────
+AVAILABLE_MODES = [
+    {"id": "Voice",    "icon": "🎤", "label": "Voice",    "desc": "General transcription"},
+    {"id": "Message",  "icon": "💬", "label": "Message",  "desc": "Clean message format"},
+    {"id": "Email",    "icon": "✉️", "label": "Email",    "desc": "Formatted for email"},
+    {"id": "Meeting",  "icon": "📋", "label": "Meeting",  "desc": "Meeting notes format"},
+    {"id": "Bullets",  "icon": "📑", "label": "Bullets",  "desc": "Bullet point list"},
+]
+
+# ─── Common Hotkeys ───────────────────────────────────────────────────────
+COMMON_HOTKEYS = [
+    "alt+space", "ctrl+shift+space", "ctrl+space", "alt+q", "alt+`", "alt+x",
+    "ctrl+alt+space", "ctrl+shift+r", "alt+shift+r", "win+shift+r", "ctrl+shift+q",
+]
