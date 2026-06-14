@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-NOLA Reader v2 — Professional Text-to-Speech Reader
+NOLA Reader v2 ΓÇö Professional Text-to-Speech Reader
 Open Door AI Systems | Industry Standard Quality
-Edge TTS Neural Voices · High-Contrast Dark UI · Configurable Hotkey
+Edge TTS Neural Voices ┬╖ High-Contrast Dark UI ┬╖ Configurable Hotkey
 """
 import sys, os, json, tempfile, time, threading, asyncio, ctypes, re
 from pathlib import Path
 
-# ── Qt ──────────────────────────────────────────────────────────────────
+# ΓöÇΓöÇ Qt ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QPushButton, QTextEdit, QLabel, QSlider, QComboBox, QFrame,
@@ -23,19 +23,19 @@ from PySide6.QtCore import (
 )
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QMediaDevices, QAudioDevice
 
-# ── Third-party ────────────────────────────────────────────────────────
+# ΓöÇΓöÇ Third-party ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 import pyperclip
 import keyboard
 
-# ── Edge TTS ────────────────────────────────────────────────────────────
+# ΓöÇΓöÇ Edge TTS ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 import edge_tts
 
-# ── System ──────────────────────────────────────────────────────────────
+# ΓöÇΓöÇ System ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 ctypes.windll.kernel32.SetThreadExecutionState(0x80000000 | 0x00000001)
 
-# ═══════════════════════════════════════════════════════════════════════
-# NOLA BRAND COLORS — high-contrast dark palette, every element visible
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+# NOLA BRAND COLORS ΓÇö high-contrast dark palette, every element visible
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 BG          = "#080b12"     # Deep background
 BG2         = "#0d111a"     # Card/secondary background
 BG3         = "#131823"     # Input/control background
@@ -46,7 +46,7 @@ BORDER2     = "#3b4460"     # Stronger border
 ACCENT      = "#8b5cf6"     # Purple accent
 ACCENT2     = "#a78bfa"     # Hover accent
 ACCENT3     = "#7c3aed"     # Darker accent
-TEXT        = "#f0f2f5"     # Primary text — high contrast
+TEXT        = "#f0f2f5"     # Primary text ΓÇö high contrast
 TEXT2       = "#94a3b8"     # Secondary text
 TEXT3       = "#64748b"     # Muted text
 GREEN       = "#22c55e"     # Active/listening
@@ -54,7 +54,7 @@ AMBER       = "#f59e0b"     # Paused
 RED         = "#ef4444"     # Error
 GLOW_ACCENT = "rgba(139,92,246,0.12)"
 
-# ── Stylesheet ──────────────────────────────────────────────────────────
+# ΓöÇΓöÇ Stylesheet ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 BASE_STYLE = f"""
 QWidget {{ font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif; color: {TEXT}; }}
 QMainWindow {{ background: {BG}; }}
@@ -175,9 +175,9 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
 }}
 """
 
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 #  SETTINGS MANAGER
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 CONFIG_DIR = Path(os.environ.get("APPDATA", Path.home())) / "NOLA"
 CONFIG_PATH = CONFIG_DIR / "settings.json"
 
@@ -222,9 +222,9 @@ class Settings:
         self.save()
 
 
-# ═══════════════════════════════════════════════════════════════════════
-#  EDGE TTS ENGINE  (async → thread wrapper)
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+#  EDGE TTS ENGINE  (async ΓåÆ thread wrapper)
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 def get_edge_voices() -> list[dict]:
     """Fetch available voices from edge-tts (cached per session)."""
     if not hasattr(get_edge_voices, "_cache"):
@@ -314,9 +314,9 @@ class TTSWorker(QThread):
                 self.error.emit(f"TTS error: {err}"[:120])
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 #  CLIPBOARD MONITOR
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 class ClipboardMonitor(QThread):
     text_changed = Signal(str)
 
@@ -372,9 +372,9 @@ class ClipboardMonitor(QThread):
         self._running = False
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 #  HOTKEY SETTINGS DIALOG
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 class HotkeyDialog(QDialog):
     def __init__(self, current_hotkey: str, parent=None):
         super().__init__(parent)
@@ -461,9 +461,9 @@ class HotkeyDialog(QDialog):
         return self._new_hotkey
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 #  MAIN APPLICATION
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 class NOLAReader(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -472,7 +472,7 @@ class NOLAReader(QMainWindow):
         self.current_audio_path = None
         self.is_speaking = False
 
-        # ── Audio playback ──
+        # ΓöÇΓöÇ Audio playback ΓöÇΓöÇ
         self.player = QMediaPlayer()
         self.audio_output = QAudioOutput()
         self.player.setAudioOutput(self.audio_output)
@@ -481,7 +481,7 @@ class NOLAReader(QMainWindow):
         self.player.mediaStatusChanged.connect(self._on_media_status)
         self.audio_output.setVolume(self.settings.get("volume", 0.8))
 
-        # ── Window ──
+        # ΓöÇΓöÇ Window ΓöÇΓöÇ
         self.setWindowTitle("NOLA Reader")
         self.setFixedSize(520, 560)
         self.setWindowFlags(
@@ -495,13 +495,13 @@ class NOLAReader(QMainWindow):
         self.setup_tray()
         self.setup_hotkey()
 
-        # ── Clipboard ──
+        # ΓöÇΓöÇ Clipboard ΓöÇΓöÇ
         self.clip_monitor = ClipboardMonitor()
         self.clip_monitor.text_changed.connect(self._on_clipboard)
         self.clip_monitor.set_enabled(self.settings.get("clipboard_enabled", True))
         self.clip_monitor.start()
 
-        # ── Restore window position ──
+        # ΓöÇΓöÇ Restore window position ΓöÇΓöÇ
         wx = self.settings.get("window_x")
         wy = self.settings.get("window_y")
         if wx is not None and wy is not None:
@@ -512,7 +512,7 @@ class NOLAReader(QMainWindow):
                 geo = screen.availableGeometry()
                 self.move(geo.width() - 560, geo.height() - 620)
 
-    # ── UI Setup ────────────────────────────────────────────────────────
+    # ΓöÇΓöÇ UI Setup ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     def setup_ui(self):
         central = QWidget()
         self.setCentralWidget(central)
@@ -520,7 +520,7 @@ class NOLAReader(QMainWindow):
         layout.setContentsMargins(12, 0, 12, 12)
         layout.setSpacing(8)
 
-        # ─── Title bar (draggable) ───
+        # ΓöÇΓöÇΓöÇ Title bar (draggable) ΓöÇΓöÇΓöÇ
         title_bar = QFrame()
         title_bar.setFixedHeight(40)
         title_bar.setCursor(QCursor(Qt.OpenHandCursor))
@@ -542,12 +542,12 @@ class NOLAReader(QMainWindow):
         tb_layout.addStretch()
 
         # Window control buttons (visible, high-contrast)
-        self.status_dot = QLabel("●")
+        self.status_dot = QLabel("ΓùÅ")
         self.status_dot.setStyleSheet(f"color: {GREEN}; font-size: 14px;")
         self.status_dot.setToolTip("Clipboard monitoring active")
         tb_layout.addWidget(self.status_dot)
 
-        min_btn = QPushButton("—")
+        min_btn = QPushButton("ΓÇö")
         min_btn.setFixedSize(28, 28)
         min_btn.setStyleSheet(f"""
             QPushButton {{
@@ -559,7 +559,7 @@ class NOLAReader(QMainWindow):
         min_btn.clicked.connect(self.hide)
         tb_layout.addWidget(min_btn)
 
-        close_btn = QPushButton("✕")
+        close_btn = QPushButton("Γ£ò")
         close_btn.setFixedSize(28, 28)
         close_btn.setStyleSheet(f"""
             QPushButton {{
@@ -573,12 +573,12 @@ class NOLAReader(QMainWindow):
 
         layout.addWidget(title_bar)
 
-        # ─── Status Bar ───
+        # ΓöÇΓöÇΓöÇ Status Bar ΓöÇΓöÇΓöÇ
         self.status_frame = QFrame()
         self.status_frame.setObjectName("statusBar")
         sb = QHBoxLayout(self.status_frame)
         sb.setContentsMargins(12, 6, 12, 6)
-        self.status_icon = QLabel("●")
+        self.status_icon = QLabel("ΓùÅ")
         self.status_icon.setStyleSheet(f"color: {GREEN}; font-size: 8px;")
         self.status_label = QLabel("Listening for clipboard")
         self.status_label.setObjectName("status")
@@ -591,7 +591,7 @@ class NOLAReader(QMainWindow):
         sb.addWidget(self.char_count)
         layout.addWidget(self.status_frame)
 
-        # ─── Voice + Speed Controls ───
+        # ΓöÇΓöÇΓöÇ Voice + Speed Controls ΓöÇΓöÇΓöÇ
         ctrl_card = QFrame()
         ctrl_card.setObjectName("controlCard")
         ctrl_layout = QHBoxLayout(ctrl_card)
@@ -630,67 +630,68 @@ class NOLAReader(QMainWindow):
         sc.addLayout(sr)
         ctrl_layout.addLayout(sc)
 
-        # Speaker output
-        spk = QVBoxLayout()
-        spk.setSpacing(4)
-        spl = QLabel("Speaker")
-        spl.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
-        self.speaker_combo = QComboBox()
-        self._populate_speakers()
-        self.speaker_combo.currentIndexChanged.connect(self._on_speaker_changed)
-        spk.addWidget(spl)
-        spk.addWidget(self.speaker_combo)
-        ctrl_layout.addLayout(spk)
+        # Speaker output (disabled)
+#         spk = QVBoxLayout()
+#         spk.setSpacing(4)
+#         spl = QLabel("Speaker")
+#         spl.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
+#         self.speaker_combo = QComboBox()
+#         self._populate_speakers()
+#         self.speaker_combo.currentIndexChanged.connect(self._on_speaker_changed)
+#         spk.addWidget(spl)
+#         spk.addWidget(self.speaker_combo)
+#         ctrl_layout.addLayout(spk)
 
         layout.addWidget(ctrl_card)
 
-        # ─── Mic Selection (for future voice input) ───
-        mic_row = QFrame()
-        mic_row.setObjectName("controlCard")
-        mic_row.setFixedHeight(36)
-        mic_layout = QHBoxLayout(mic_row)
-        mic_layout.setContentsMargins(12, 0, 12, 0)
-        mic_label = QLabel("🎤 Mic")
-        mic_label.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
-        mic_layout.addWidget(mic_label)
-        self.mic_combo = QComboBox()
-        self._populate_microphones()
-        self.mic_combo.currentIndexChanged.connect(self._on_mic_changed)
-        mic_layout.addWidget(self.mic_combo, 1)
-        layout.addWidget(mic_row)
+#         # ΓöÇΓöÇΓöÇ Mic Selection (for future voice input) ΓöÇΓöÇΓöÇ
+#         mic_row = QFrame()
+#         mic_row.setObjectName("controlCard")
+#         mic_row.setFixedHeight(36)
+#         mic_layout = QHBoxLayout(mic_row)
+#         mic_layout.setContentsMargins(12, 0, 12, 0)
+#         mic_label = QLabel("≡ƒÄñ Mic")
+#         mic_label.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
+#         mic_layout.addWidget(mic_label)
+#         self.mic_combo = QComboBox()
+#         self._populate_microphones()
+#         self.mic_combo.currentIndexChanged.connect(self._on_mic_changed)
+#         mic_layout.addWidget(self.mic_combo, 1)
+#         layout.addWidget(mic_row)
 
-        # ─── Text Display ───
+
+        # ΓöÇΓöÇΓöÇ Text Display ΓöÇΓöÇΓöÇ
         self.text_display = QTextEdit()
         self.text_display.setObjectName("display")
         self.text_display.setReadOnly(True)
         self.text_display.setMinimumHeight(100)
-        self.text_display.setPlaceholderText("Copy text anywhere — will be read aloud...")
+        self.text_display.setPlaceholderText("Copy text anywhere ΓÇö will be read aloud...")
         layout.addWidget(self.text_display)
 
-        # ─── Action Buttons (high contrast, all visible) ───
+        # ΓöÇΓöÇΓöÇ Action Buttons (high contrast, all visible) ΓöÇΓöÇΓöÇ
         btn_row = QHBoxLayout()
         btn_row.setSpacing(6)
 
-        self.clip_btn = QPushButton("📋 Toggle Clipboard")
+        self.clip_btn = QPushButton("≡ƒôï Toggle Clipboard")
         self.clip_btn.setObjectName("ghost")
         self.clip_btn.setToolTip("Enable/disable clipboard auto-read")
         self.clip_btn.clicked.connect(self._toggle_clipboard)
         btn_row.addWidget(self.clip_btn)
 
-        self.speak_btn = QPushButton("▶  Read")
+        self.speak_btn = QPushButton("Γû╢  Read")
         self.speak_btn.setObjectName("primary")
         self.speak_btn.setToolTip("Read the current text aloud")
         self.speak_btn.clicked.connect(self._read_aloud)
         btn_row.addWidget(self.speak_btn)
 
-        self.stop_btn = QPushButton("■  Stop")
+        self.stop_btn = QPushButton("Γûá  Stop")
         self.stop_btn.setObjectName("danger")
         self.stop_btn.setToolTip("Stop current reading")
         self.stop_btn.clicked.connect(self._stop_reading)
         self.stop_btn.setEnabled(False)
         btn_row.addWidget(self.stop_btn)
 
-        self.hotkey_btn = QPushButton("⌨ Hotkey")
+        self.hotkey_btn = QPushButton("Γî¿ Hotkey")
         self.hotkey_btn.setObjectName("ghost")
         self.hotkey_btn.setToolTip("Change the global hotkey")
         self.hotkey_btn.clicked.connect(self._change_hotkey)
@@ -698,16 +699,16 @@ class NOLAReader(QMainWindow):
 
         layout.addLayout(btn_row)
 
-        # ─── File + Utility row ───
+        # ΓöÇΓöÇΓöÇ File + Utility row ΓöÇΓöÇΓöÇ
         util_row = QHBoxLayout()
         util_row.setSpacing(6)
 
-        self.file_btn = QPushButton("📂 Open File")
+        self.file_btn = QPushButton("≡ƒôé Open File")
         self.file_btn.setObjectName("ghost")
         self.file_btn.clicked.connect(self._open_file)
         util_row.addWidget(self.file_btn)
 
-        self.clear_btn = QPushButton("✕ Clear")
+        self.clear_btn = QPushButton("Γ£ò Clear")
         self.clear_btn.setObjectName("ghost")
         self.clear_btn.clicked.connect(self._clear_text)
         util_row.addWidget(self.clear_btn)
@@ -742,7 +743,7 @@ class NOLAReader(QMainWindow):
         selected = 0
         for i, dev in enumerate(devices):
             desc = dev.description()
-            label = f"🔊 {desc}" if dev.isDefault() else f"  {desc}"
+            label = f"≡ƒöè {desc}" if dev.isDefault() else f"  {desc}"
             self.speaker_combo.addItem(label, dev.id())
             if dev.id() == saved:
                 selected = i
@@ -777,7 +778,7 @@ class NOLAReader(QMainWindow):
         selected = 0
         for i, dev in enumerate(devices):
             desc = dev.description()
-            label = f"🎙 {desc}" if dev.isDefault() else f"   {desc}"
+            label = f"≡ƒÄÖ {desc}" if dev.isDefault() else f"   {desc}"
             self.mic_combo.addItem(label, dev.id())
             if dev.id() == saved:
                 selected = i
@@ -789,7 +790,7 @@ class NOLAReader(QMainWindow):
         if 0 <= idx < len(devices):
             self.settings.set("microphone", devices[idx].id())
 
-    # ── Tray ────────────────────────────────────────────────────────────
+    # ΓöÇΓöÇ Tray ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     def setup_tray(self):
         px = QPixmap(32, 32)
         px.fill(Qt.transparent)
@@ -818,7 +819,7 @@ class NOLAReader(QMainWindow):
         )
         self.tray.show()
 
-    # ── Hotkey ──────────────────────────────────────────────────────────
+    # ΓöÇΓöÇ Hotkey ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     def setup_hotkey(self):
         hotkey = self.settings.get("hotkey", "alt+shift+r")
         try:
@@ -828,7 +829,7 @@ class NOLAReader(QMainWindow):
         keyboard.add_hotkey(hotkey, self._hotkey_triggered, suppress=True)
         self._current_hotkey = hotkey
 
-        # Ctrl+C hook — detect copy events even when text doesn't change
+        # Ctrl+C hook ΓÇö detect copy events even when text doesn't change
         try:
             keyboard.add_hotkey('ctrl+c', self._on_ctrl_c, suppress=False)
         except:
@@ -855,7 +856,7 @@ class NOLAReader(QMainWindow):
                 self.text_display.setPlainText(norm[:2000])
                 self.char_count.setText(f"{len(norm)} chars")
                 if self.clip_monitor._enabled:
-                    self.status_label.setText("Copy detected — reading...")
+                    self.status_label.setText("Copy detected ΓÇö reading...")
                     self.status_icon.setStyleSheet(f"color: {ACCENT}; font-size: 8px;")
                     QTimer.singleShot(200, lambda: self._start_tts(norm))
         except:
@@ -872,7 +873,7 @@ class NOLAReader(QMainWindow):
         except:
             pass
 
-    # ── Clipboard ───────────────────────────────────────────────────────
+    # ΓöÇΓöÇ Clipboard ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     def _on_clipboard(self, text):
         now = time.time()
         # Dedup: skip if same text was read within last 2 seconds (prevents loops)
@@ -885,7 +886,7 @@ class NOLAReader(QMainWindow):
         self.text_display.setPlainText(text[:2000])
         self.char_count.setText(f"{len(text)} chars")
         if self.clip_monitor._enabled and len(text) >= 3:
-            self.status_label.setText("New text copied — reading...")
+            self.status_label.setText("New text copied ΓÇö reading...")
             self.status_icon.setStyleSheet(f"color: {ACCENT}; font-size: 8px;")
             QTimer.singleShot(200, lambda: self._start_tts(text))
 
@@ -894,7 +895,7 @@ class NOLAReader(QMainWindow):
         self.clip_monitor.set_enabled(enabled)
         self.settings.set("clipboard_enabled", enabled)
         if enabled:
-            self.clip_btn.setText("📋 Toggle Clipboard")
+            self.clip_btn.setText("≡ƒôï Toggle Clipboard")
             self.clip_btn.setStyleSheet(f"""
                 QPushButton {{ background: transparent; border: 1px solid {BORDER2}; color: {TEXT2}; border-radius: 8px; padding: 8px 18px; font-size: 12px; }}
                 QPushButton:hover {{ border-color: {ACCENT}; color: {ACCENT2}; }}
@@ -903,7 +904,7 @@ class NOLAReader(QMainWindow):
             self.status_label.setText("Listening for clipboard")
             self.status_icon.setStyleSheet(f"color: {GREEN}; font-size: 8px;")
         else:
-            self.clip_btn.setText("📋 Clipboard Off")
+            self.clip_btn.setText("≡ƒôï Clipboard Off")
             self.clip_btn.setStyleSheet(f"""
                 QPushButton {{ background: transparent; border: 1px solid {AMBER}; border-radius: 8px; padding: 8px 18px; font-size: 12px; color: {AMBER}; }}
                 QPushButton:hover {{ border-color: {ACCENT}; color: {ACCENT2}; }}
@@ -912,7 +913,7 @@ class NOLAReader(QMainWindow):
             self.status_label.setText("Clipboard paused")
             self.status_icon.setStyleSheet(f"color: {AMBER}; font-size: 8px;")
 
-    # ── TTS ─────────────────────────────────────────────────────────────
+    # ΓöÇΓöÇ TTS ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     def _start_tts(self, text: str):
         if not text or len(text.strip()) < 3:
             return
@@ -992,7 +993,7 @@ class NOLAReader(QMainWindow):
     def _on_duration(self, dur):
         pass
 
-    # ── Event handlers ──────────────────────────────────────────────────
+    # ΓöÇΓöÇ Event handlers ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     def _on_voice_changed(self, idx):
         voice = self.voice_combo.currentData()
         if voice:
@@ -1043,7 +1044,7 @@ class NOLAReader(QMainWindow):
                 if hint:
                     hint.setText(f"Hotkey: {new_hotkey.upper()}")
 
-    # ── Drag ────────────────────────────────────────────────────────────
+    # ΓöÇΓöÇ Drag ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     def _drag_start(self, event):
         if event.button() == Qt.LeftButton:
             self._drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
@@ -1077,9 +1078,9 @@ class NOLAReader(QMainWindow):
         super().keyPressEvent(event)
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 #  ENTRY
-# ═══════════════════════════════════════════════════════════════════════
+# ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 def main():
     app = QApplication(sys.argv)
     app.setQuitOnLastWindowClosed(False)
