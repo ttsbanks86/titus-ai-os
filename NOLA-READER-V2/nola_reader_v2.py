@@ -21,7 +21,7 @@ from PySide6.QtGui import (
 from PySide6.QtCore import (
     Qt, QThread, Signal, QUrl, QTimer, QSettings, QRect, QPoint
 )
-from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
+from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QMediaDevices, QAudioDevice
 
 # ── Third-party ────────────────────────────────────────────────────────
 import pyperclip
@@ -189,6 +189,8 @@ DEFAULT_SETTINGS = {
     "window_y": None,
     "clipboard_enabled": True,
     "volume": 0.8,
+    "speaker": "",
+    "microphone": "",
 }
 
 class Settings:
@@ -234,7 +236,7 @@ def get_edge_voices() -> list[dict]:
             # Filter to English + most useful
             english = [
                 v for v in voices
-                if v["Name"].startswith("en-")
+                if v["ShortName"].startswith("en-")
             ]
             # Sort: US first, then GB, then others
             def sort_key(v):
@@ -249,15 +251,16 @@ def get_edge_voices() -> list[dict]:
         except Exception as e:
             print(f"[NOLA] Voice list error: {e}")
             get_edge_voices._cache = [
-                {"Name": "en-US-AriaNeural", "Gender": "Female", "Locale": "en-US"},
-                {"Name": "en-US-GuyNeural", "Gender": "Male", "Locale": "en-US"},
-                {"Name": "en-GB-SoniaNeural", "Gender": "Female", "Locale": "en-GB"},
+                {"ShortName": "en-US-AriaNeural", "Gender": "Female", "Locale": "en-US"},
+                {"ShortName": "en-US-GuyNeural", "Gender": "Male", "Locale": "en-US"},
+                {"ShortName": "en-GB-SoniaNeural", "Gender": "Female", "Locale": "en-GB"},
             ]
     return get_edge_voices._cache
 
 
 def voice_display_name(v: dict) -> str:
-    short = v["Name"].replace("Neural", "").replace("Multilingual", "")
+    raw = v.get("ShortName", v.get("Name", ""))
+    short = raw.replace("Neural", "").replace("Multilingual", "")
     # Insert space before caps
     short = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", short)
     gender = "[F] " if v.get("Gender", "").lower() == "female" else "[M] "
@@ -607,7 +610,34 @@ class NOLAReader(QMainWindow):
         sc.addLayout(sr)
         ctrl_layout.addLayout(sc)
 
+        # Speaker output
+        spk = QVBoxLayout()
+        spk.setSpacing(4)
+        spl = QLabel("Speaker")
+        spl.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
+        self.speaker_combo = QComboBox()
+        self._populate_speakers()
+        self.speaker_combo.currentIndexChanged.connect(self._on_speaker_changed)
+        spk.addWidget(spl)
+        spk.addWidget(self.speaker_combo)
+        ctrl_layout.addLayout(spk)
+
         layout.addWidget(ctrl_card)
+
+        # ─── Mic Selection (for future voice input) ───
+        mic_row = QFrame()
+        mic_row.setObjectName("controlCard")
+        mic_row.setFixedHeight(36)
+        mic_layout = QHBoxLayout(mic_row)
+        mic_layout.setContentsMargins(12, 0, 12, 0)
+        mic_label = QLabel("🎤 Mic")
+        mic_label.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
+        mic_layout.addWidget(mic_label)
+        self.mic_combo = QComboBox()
+        self._populate_microphones()
+        self.mic_combo.currentIndexChanged.connect(self._on_mic_changed)
+        mic_layout.addWidget(self.mic_combo, 1)
+        layout.addWidget(mic_row)
 
         # ─── Text Display ───
         self.text_display = QTextEdit()
@@ -677,12 +707,67 @@ class NOLAReader(QMainWindow):
         saved_voice = self.settings.get("voice", "en-US-AriaNeural")
         selected_idx = 0
         for i, v in enumerate(voices):
-            name = v["Name"]
+            short_name = v.get("ShortName", v.get("Name", ""))
             display = voice_display_name(v)
-            self.voice_combo.addItem(display, name)
-            if name == saved_voice:
+            self.voice_combo.addItem(display, short_name)
+            if short_name == saved_voice:
                 selected_idx = i
         self.voice_combo.setCurrentIndex(selected_idx)
+
+    def _populate_speakers(self):
+        """Populate audio output device list."""
+        self.speaker_combo.clear()
+        devices = QMediaDevices.audioOutputs()
+        saved = self.settings.get("speaker", "")
+        selected = 0
+        for i, dev in enumerate(devices):
+            desc = dev.description()
+            label = f"🔊 {desc}" if dev.isDefault() else f"  {desc}"
+            self.speaker_combo.addItem(label, dev.id())
+            if dev.id() == saved:
+                selected = i
+        if not devices:
+            self.speaker_combo.addItem("Default speaker", "")
+        self.speaker_combo.setCurrentIndex(selected)
+        # Apply saved speaker
+        self._apply_speaker(selected)
+
+    def _apply_speaker(self, idx=None):
+        """Apply the selected audio output to QAudioOutput."""
+        devices = QMediaDevices.audioOutputs()
+        if not devices:
+            return
+        if idx is None:
+            idx = self.speaker_combo.currentIndex()
+        if 0 <= idx < len(devices):
+            self.audio_output.setDevice(devices[idx])
+
+    def _on_speaker_changed(self, idx):
+        devices = QMediaDevices.audioOutputs()
+        if 0 <= idx < len(devices):
+            dev = devices[idx]
+            self.audio_output.setDevice(dev)
+            self.settings.set("speaker", dev.id())
+
+    def _populate_microphones(self):
+        """Populate audio input (mic) device list."""
+        self.mic_combo.clear()
+        devices = QMediaDevices.audioInputs()
+        saved = self.settings.get("microphone", "")
+        selected = 0
+        for i, dev in enumerate(devices):
+            desc = dev.description()
+            label = f"🎙 {desc}" if dev.isDefault() else f"   {desc}"
+            self.mic_combo.addItem(label, dev.id())
+            if dev.id() == saved:
+                selected = i
+        if not devices:
+            self.mic_combo.addItem("Default microphone", "")
+
+    def _on_mic_changed(self, idx):
+        devices = QMediaDevices.audioInputs()
+        if 0 <= idx < len(devices):
+            self.settings.set("microphone", devices[idx].id())
 
     # ── Tray ────────────────────────────────────────────────────────────
     def setup_tray(self):
