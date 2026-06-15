@@ -222,6 +222,21 @@ class Settings:
         self.save()
 
 
+class ClickOnlyComboBox(QComboBox):
+    """Combo box that ignores mouse-wheel changes.
+
+    Voice selection should only change when the user intentionally opens the
+    dropdown and clicks/keys a choice. This prevents accidental voice changes
+    while scrolling over the app.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setFocusPolicy(Qt.StrongFocus)
+
+    def wheelEvent(self, event):
+        event.ignore()
+
+
 # ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
 #  EDGE TTS ENGINE  (async ΓåÆ thread wrapper)
 # ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
@@ -542,12 +557,12 @@ class NOLAReader(QMainWindow):
         tb_layout.addStretch()
 
         # Window control buttons (visible, high-contrast)
-        self.status_dot = QLabel("ΓùÅ")
+        self.status_dot = QLabel("●")
         self.status_dot.setStyleSheet(f"color: {GREEN}; font-size: 14px;")
         self.status_dot.setToolTip("Clipboard monitoring active")
         tb_layout.addWidget(self.status_dot)
 
-        min_btn = QPushButton("ΓÇö")
+        min_btn = QPushButton("-")
         min_btn.setFixedSize(28, 28)
         min_btn.setStyleSheet(f"""
             QPushButton {{
@@ -559,7 +574,7 @@ class NOLAReader(QMainWindow):
         min_btn.clicked.connect(self.hide)
         tb_layout.addWidget(min_btn)
 
-        close_btn = QPushButton("Γ£ò")
+        close_btn = QPushButton("X")
         close_btn.setFixedSize(28, 28)
         close_btn.setStyleSheet(f"""
             QPushButton {{
@@ -578,7 +593,7 @@ class NOLAReader(QMainWindow):
         self.status_frame.setObjectName("statusBar")
         sb = QHBoxLayout(self.status_frame)
         sb.setContentsMargins(12, 6, 12, 6)
-        self.status_icon = QLabel("ΓùÅ")
+        self.status_icon = QLabel("●")
         self.status_icon.setStyleSheet(f"color: {GREEN}; font-size: 8px;")
         self.status_label = QLabel("Listening for clipboard")
         self.status_label.setObjectName("status")
@@ -603,7 +618,7 @@ class NOLAReader(QMainWindow):
         vc.setSpacing(4)
         vl = QLabel("Voice")
         vl.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
-        self.voice_combo = QComboBox()
+        self.voice_combo = ClickOnlyComboBox()
         self._populate_voices()
         self.voice_combo.currentIndexChanged.connect(self._on_voice_changed)
         vc.addWidget(vl)
@@ -635,7 +650,7 @@ class NOLAReader(QMainWindow):
 #         spk.setSpacing(4)
 #         spl = QLabel("Speaker")
 #         spl.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
-#         self.speaker_combo = QComboBox()
+#         self.speaker_combo = ClickOnlyComboBox()
 #         self._populate_speakers()
 #         self.speaker_combo.currentIndexChanged.connect(self._on_speaker_changed)
 #         spk.addWidget(spl)
@@ -650,10 +665,10 @@ class NOLAReader(QMainWindow):
 #         mic_row.setFixedHeight(36)
 #         mic_layout = QHBoxLayout(mic_row)
 #         mic_layout.setContentsMargins(12, 0, 12, 0)
-#         mic_label = QLabel("≡ƒÄñ Mic")
+#         mic_label = QLabel("Mic")
 #         mic_label.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
 #         mic_layout.addWidget(mic_label)
-#         self.mic_combo = QComboBox()
+#         self.mic_combo = ClickOnlyComboBox()
 #         self._populate_microphones()
 #         self.mic_combo.currentIndexChanged.connect(self._on_mic_changed)
 #         mic_layout.addWidget(self.mic_combo, 1)
@@ -665,33 +680,33 @@ class NOLAReader(QMainWindow):
         self.text_display.setObjectName("display")
         self.text_display.setReadOnly(True)
         self.text_display.setMinimumHeight(100)
-        self.text_display.setPlaceholderText("Copy text anywhere ΓÇö will be read aloud...")
+        self.text_display.setPlaceholderText("Copy text anywhere - it will be read aloud...")
         layout.addWidget(self.text_display)
 
         # ΓöÇΓöÇΓöÇ Action Buttons (high contrast, all visible) ΓöÇΓöÇΓöÇ
         btn_row = QHBoxLayout()
         btn_row.setSpacing(6)
 
-        self.clip_btn = QPushButton("≡ƒôï Toggle Clipboard")
+        self.clip_btn = QPushButton("Toggle Clipboard")
         self.clip_btn.setObjectName("ghost")
         self.clip_btn.setToolTip("Enable/disable clipboard auto-read")
         self.clip_btn.clicked.connect(self._toggle_clipboard)
         btn_row.addWidget(self.clip_btn)
 
-        self.speak_btn = QPushButton("Γû╢  Read")
+        self.speak_btn = QPushButton("Read")
         self.speak_btn.setObjectName("primary")
         self.speak_btn.setToolTip("Read the current text aloud")
         self.speak_btn.clicked.connect(self._read_aloud)
         btn_row.addWidget(self.speak_btn)
 
-        self.stop_btn = QPushButton("Γûá  Stop")
+        self.stop_btn = QPushButton("Stop")
         self.stop_btn.setObjectName("danger")
         self.stop_btn.setToolTip("Stop current reading")
         self.stop_btn.clicked.connect(self._stop_reading)
         self.stop_btn.setEnabled(False)
         btn_row.addWidget(self.stop_btn)
 
-        self.hotkey_btn = QPushButton("Γî¿ Hotkey")
+        self.hotkey_btn = QPushButton("Hotkey")
         self.hotkey_btn.setObjectName("ghost")
         self.hotkey_btn.setToolTip("Change the global hotkey")
         self.hotkey_btn.clicked.connect(self._change_hotkey)
@@ -703,12 +718,12 @@ class NOLAReader(QMainWindow):
         util_row = QHBoxLayout()
         util_row.setSpacing(6)
 
-        self.file_btn = QPushButton("≡ƒôé Open File")
+        self.file_btn = QPushButton("Open File")
         self.file_btn.setObjectName("ghost")
         self.file_btn.clicked.connect(self._open_file)
         util_row.addWidget(self.file_btn)
 
-        self.clear_btn = QPushButton("Γ£ò Clear")
+        self.clear_btn = QPushButton("Clear")
         self.clear_btn.setObjectName("ghost")
         self.clear_btn.clicked.connect(self._clear_text)
         util_row.addWidget(self.clear_btn)
@@ -743,7 +758,7 @@ class NOLAReader(QMainWindow):
         selected = 0
         for i, dev in enumerate(devices):
             desc = dev.description()
-            label = f"≡ƒöè {desc}" if dev.isDefault() else f"  {desc}"
+            label = f"Default - {desc}" if dev.isDefault() else f"  {desc}"
             self.speaker_combo.addItem(label, dev.id())
             if dev.id() == saved:
                 selected = i
@@ -778,7 +793,7 @@ class NOLAReader(QMainWindow):
         selected = 0
         for i, dev in enumerate(devices):
             desc = dev.description()
-            label = f"≡ƒÄÖ {desc}" if dev.isDefault() else f"   {desc}"
+            label = f"Default - {desc}" if dev.isDefault() else f"   {desc}"
             self.mic_combo.addItem(label, dev.id())
             if dev.id() == saved:
                 selected = i
@@ -856,7 +871,7 @@ class NOLAReader(QMainWindow):
                 self.text_display.setPlainText(norm[:2000])
                 self.char_count.setText(f"{len(norm)} chars")
                 if self.clip_monitor._enabled:
-                    self.status_label.setText("Copy detected ΓÇö reading...")
+                    self.status_label.setText("Copy detected - reading...")
                     self.status_icon.setStyleSheet(f"color: {ACCENT}; font-size: 8px;")
                     QTimer.singleShot(200, lambda: self._start_tts(norm))
         except:
@@ -886,7 +901,7 @@ class NOLAReader(QMainWindow):
         self.text_display.setPlainText(text[:2000])
         self.char_count.setText(f"{len(text)} chars")
         if self.clip_monitor._enabled and len(text) >= 3:
-            self.status_label.setText("New text copied ΓÇö reading...")
+            self.status_label.setText("New text copied - reading...")
             self.status_icon.setStyleSheet(f"color: {ACCENT}; font-size: 8px;")
             QTimer.singleShot(200, lambda: self._start_tts(text))
 
@@ -895,7 +910,7 @@ class NOLAReader(QMainWindow):
         self.clip_monitor.set_enabled(enabled)
         self.settings.set("clipboard_enabled", enabled)
         if enabled:
-            self.clip_btn.setText("≡ƒôï Toggle Clipboard")
+            self.clip_btn.setText("Toggle Clipboard")
             self.clip_btn.setStyleSheet(f"""
                 QPushButton {{ background: transparent; border: 1px solid {BORDER2}; color: {TEXT2}; border-radius: 8px; padding: 8px 18px; font-size: 12px; }}
                 QPushButton:hover {{ border-color: {ACCENT}; color: {ACCENT2}; }}
@@ -904,7 +919,7 @@ class NOLAReader(QMainWindow):
             self.status_label.setText("Listening for clipboard")
             self.status_icon.setStyleSheet(f"color: {GREEN}; font-size: 8px;")
         else:
-            self.clip_btn.setText("≡ƒôï Clipboard Off")
+            self.clip_btn.setText("Clipboard Off")
             self.clip_btn.setStyleSheet(f"""
                 QPushButton {{ background: transparent; border: 1px solid {AMBER}; border-radius: 8px; padding: 8px 18px; font-size: 12px; color: {AMBER}; }}
                 QPushButton:hover {{ border-color: {ACCENT}; color: {ACCENT2}; }}
