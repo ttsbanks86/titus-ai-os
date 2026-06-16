@@ -45,6 +45,7 @@ WORKSPACE_ROOT = os.path.abspath(os.path.join(ROOT, ".."))
 GATEWAY_SCRIPT = os.path.join(WORKSPACE_ROOT, "run_gateway.py")
 DOCFLOW_EXE = os.path.join(WORKSPACE_ROOT, "DOCFLOW", "dist", "DocFlow", "DocFlow.exe")
 AI_OS_BRAIN_URL = os.getenv("AI_OS_BRAIN_URL", "http://127.0.0.1:8765")
+AI_TUTOR_SCRIPT = os.path.join(WORKSPACE_ROOT, "FLOATING-AI-TUTOR", "src", "main.py")
 TELEGRAM_BOT_URL = os.getenv("TELEGRAM_BOT_URL", "https://t.me/Bankshez_bot")
 
 
@@ -274,6 +275,7 @@ class CommandCenter(QMainWindow):
             ("Open Telegram Bot", self.open_telegram_bot, ""),
             ("Open DocFlow", self.open_docflow, ""),
             ("Open AI OS Brain", self.open_ai_os_brain, "primary"),
+            ("Open AI Tutor", self.open_ai_tutor, "primary"),
             ("Open Pipeline CRM", self.open_crm, ""),
             ("Open API", self.open_api, ""),
         ]
@@ -432,6 +434,16 @@ class CommandCenter(QMainWindow):
 
     def open_ai_os_brain(self):
         QDesktopServices.openUrl(QUrl(AI_OS_BRAIN_URL))
+
+    def open_ai_tutor(self):
+        if os.path.exists(AI_TUTOR_SCRIPT):
+            try:
+                subprocess.Popen([sys.executable, AI_TUTOR_SCRIPT], cwd=os.path.dirname(AI_TUTOR_SCRIPT))
+                return
+            except Exception as exc:
+                QMessageBox.warning(self, "AI Tutor launch failed", str(exc))
+                return
+        QMessageBox.information(self, "AI Tutor", f"AI Tutor script not found at:\n{AI_TUTOR_SCRIPT}\n\nRun it manually from the FLOATING-AI-TUTOR folder.")
 
     def open_api(self):
         QDesktopServices.openUrl(QUrl(API))

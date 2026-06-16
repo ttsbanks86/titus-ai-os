@@ -1,19 +1,19 @@
-# Floating AI Tutor — Phase 1
+# Floating AI Tutor — Complete System
 
-## What It Is
+An always-on-top desktop AI tutor that teaches anything visible on your screen.
 
-A lightweight, always-on-top floating window that sits above any application on your desktop. This is Phase 1 of a multi-phase AI tutor that will eventually explain, teach, and answer questions about anything visible on your screen.
+## All 8 Phases — Complete
 
-## Phase 1 Features
-
-- **Always on top** — stays visible over VS Code, browsers, PDFs, spreadsheets, terminals, and any other app
-- **Movable** — click and drag the title bar to reposition
-- **Resizable** — drag from any edge or corner to resize
-- **Collapse / Expand** — minimize to title bar only, or expand to full chat
-- **Chat interface** — type questions and see responses
-- **Action buttons** — Mic, Capture, Explain, Teach (placeholders for future phases)
-- **Chat history** — persists between sessions in `~/.floating-ai-tutor/chat_history.json`
-- **Global hotkey** — press `Ctrl+Shift+T` to show or hide the window from anywhere
+| Phase | Feature | Status |
+|-------|---------|--------|
+| 1 | Floating overlay window (always-on-top, movable, resizable, hotkey) | ✅ |
+| 2 | Screen capture (region selection, full screen, OCR text extraction) | ✅ |
+| 3 | Explain mode (AI-powered explanations of screen content) | ✅ |
+| 4 | Ask Anything (voice input, text-to-speech, conversation context) | ✅ |
+| 5 | Teach mode (structured lessons, quizzes, progress tracking) | ✅ |
+| 6 | Memory system (save/resume sessions, learning history) | ✅ |
+| 7 | Model router (local Ollama → DeepSeek → Claude/GPT by complexity) | ✅ |
+| 8 | Agent actions (study notes, flashcards, guides, practice exams) | ✅ |
 
 ## How to Run
 
@@ -24,32 +24,54 @@ pip install -r requirements.txt
 python src\main.py
 ```
 
-### From EXE
-```
-C:\Users\tbank\Desktop\Live Cowork\FLOATING-AI-TUTOR\dist\AI Tutor.exe
-```
+### From Command Center
+Click **Open AI Tutor** in the Command Center desktop app.
 
-### From shortcut
-Double-click `launch.bat`
+### Global hotkey
+Press **Ctrl+Shift+T** to show/hide the tutor from anywhere.
 
-## Controls
+## Quick Start
 
-| Control | Action |
+1. **Capture**: Click 💡 Explain → drag to select screen region
+2. **Learn**: Click 📚 Teach → type `start` → `next` → `quiz`
+3. **Ask**: Type or speak (🎤 Mic) follow-up questions
+4. **Create**: Type `notes`, `flashcards`, `guide`, or `exam`
+5. **Save**: Type `save` to preserve your session
+6. **Resume**: Type `load` to continue later
+
+## Commands
+
+| Command | Action |
 |---------|--------|
-| Drag title bar | Move window |
-| Drag edges/corners | Resize window |
-| `─` button | Collapse to title bar |
-| `⊞` button | Expand from collapsed |
-| `✕` button | Close |
-| `Ctrl+Shift+T` | Global hotkey: show/hide |
-| Enter in input | Send message |
+| `start` | Begin current lesson step |
+| `next` | Complete step and advance |
+| `quiz` | Take a quiz on current step |
+| `resume` | Continue from last incomplete step |
+| `progress` | Show learning progress |
+| `save` | Save current session |
+| `load` | Resume last saved session |
+| `notes` | Generate study notes |
+| `flashcards` | Create flashcard deck |
+| `guide` | Build study guide |
+| `exam` | Generate practice exam |
+| `materials` | List all study files |
 
 ## File Structure
 
 ```
 FLOATING-AI-TUTOR/
 ├── src/
-│   └── main.py          # Phase 1: Floating overlay + chat
+│   ├── main.py          # Main window + all integrations
+│   ├── capture.py       # Region selection overlay
+│   ├── ocr.py           # Text extraction (pytesseract + Windows)
+│   ├── tutor.py         # AI explanation engine
+│   ├── voice.py         # Speech recognition
+│   ├── tts.py           # Text-to-speech
+│   ├── context.py       # Conversation context manager
+│   ├── teach.py         # Lesson plans + quizzes
+│   ├── memory.py        # Session save/resume
+│   ├── router.py        # Model routing by complexity
+│   └── actions.py       # Notes, flashcards, guides, exams
 ├── dist/
 │   └── AI Tutor.exe     # Built executable
 ├── AI Tutor.spec        # PyInstaller build spec
@@ -60,28 +82,35 @@ FLOATING-AI-TUTOR/
 
 ## Data Storage
 
-Chat history persists at:
+All data persists at:
 ```
-%USERPROFILE%\.floating-ai-tutor\chat_history.json
+%USERPROFILE%\.floating-ai-tutor\
+├── chat_history.json
+├── conversation_context.json
+├── tutor_config.json
+├── router_config.json
+├── learning_progress.json
+├── lessons/
+├── sessions/
+├── notes/
+├── flashcards/
+├── study_guides/
+└── quizzes/
 ```
 
-## Next Phases
+## AI Models
 
-| Phase | Feature | Status |
-|-------|---------|--------|
-| 1 | Floating overlay window | ✅ Complete |
-| 2 | Screen understanding (capture + OCR) | Planned |
-| 3 | Explain mode | Planned |
-| 4 | Ask Anything (voice + text Q&A) | Planned |
-| 5 | Teach mode (structured lessons) | Planned |
-| 6 | Memory system (session resume) | Planned |
-| 7 | Model routing (local → cloud) | Planned |
-| 8 | Agent actions (notes, flashcards, quizzes) | Planned |
+- **Local**: Ollama (llama3.2) — free, always available
+- **Mid**: DeepSeek — cheap, for code/technical explanations
+- **High**: Claude/GPT — for complex reasoning (requires API key)
+
+Configure in `~/.floating-ai-tutor/router_config.json`
 
 ## Tech Stack
 
-- **Python 3.13**
-- **PySide6** — Qt6 bindings for the floating window
-- **pynput** — (reserved for future keyboard/mouse capture)
-- **pyperclip** — (reserved for future clipboard integration)
-- **Windows RegisterHotKey** — native global hotkey (no extra dependency)
+- Python 3.13 + PySide6 (Qt6)
+- pytesseract + Pillow (OCR)
+- speech_recognition (voice input)
+- Windows SAPI5 (text-to-speech)
+- Ollama (local AI)
+- PyInstaller (EXE packaging)
