@@ -87,18 +87,18 @@ new_projects = '''<section id="projects">
         <div class="project-tech"><span>Electron</span><span>Python</span><span>faster-whisper</span><span>UX Automation</span></div>
       </div>
       <div class="project-card business">
-        <div class="project-meta">Business/Product Collaboration</div>
-        <div class="project-icon">🍹</div>
-        <div class="project-name">Nollarita</div>
-        <div class="project-desc">Business-facing product collaboration presented as a smart case study: clarifying the offer, organizing workflow assets, shaping launch-ready messaging, and turning scattered operational work into a structured system story.</div>
-        <div class="project-tech"><span>Product Strategy</span><span>Brand Systems</span><span>Workflow Design</span></div>
+        <div class="project-meta">Local Voice Utility</div>
+        <div class="project-icon">🗣️</div>
+        <div class="project-name">NOLA Voice Reader</div>
+        <div class="project-desc">Clipboard-monitoring TTS reader that watches copied text and reads it aloud through a clean local desktop workflow. Presented as practical accessibility, productivity, and local-first AI tooling.</div>
+        <div class="project-tech"><span>PySide6</span><span>Windows TTS</span><span>Local Utility</span></div>
       </div>
       <div class="project-card business">
         <div class="project-meta">Pipeline &amp; Systems Operations</div>
-        <div class="project-icon">🌑</div>
-        <div class="project-name">Darkflow Pipeline Serium</div>
-        <div class="project-desc">Pipeline orchestration concept for tracking work, handoffs, automation steps, and operating rhythm across business systems. Framed around visibility, repeatable process, and reducing operational drift.</div>
-        <div class="project-tech"><span>Pipeline Ops</span><span>Automation</span><span>Process Mapping</span></div>
+        <div class="project-icon">📊</div>
+        <div class="project-name">DocFlow + Pipeline CRM</div>
+        <div class="project-desc">Document workflow and pipeline operations tooling for tracking work, handoffs, automation steps, and business rhythm. Framed around visibility, repeatable process, and reducing operational drift.</div>
+        <div class="project-tech"><span>DocFlow</span><span>Pipeline CRM</span><span>Process Mapping</span></div>
       </div>
       <div class="project-card">
         <div class="project-meta">Document Workflow App</div>

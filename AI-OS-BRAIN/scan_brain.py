@@ -131,8 +131,8 @@ WORKFLOWS = [
 PORTFOLIO_ITEMS = [
     ("portfolio:ai-os-brain", "AI OS Brain", "Visual map of agents, skills, projects, workflows, memory, and risks."),
     ("portfolio:whisper-my-idea-pro", "Whisper My Idea Pro", "AI productization workflow for turning spoken/raw ideas into structured execution assets."),
-    ("portfolio:nollarita", "Nollarita", "Business/product collaboration work presented as a polished system case study."),
-    ("portfolio:darkflow-pipeline-serium", "Darkflow Pipeline Serium", "Pipeline/system orchestration project, framed around automation and operational visibility."),
+    ("portfolio:nola-voice-reader", "NOLA Voice Reader", "Clipboard-aware local TTS reader for turning copied text into spoken audio."),
+    ("portfolio:docflow-pipeline-crm", "DocFlow + Pipeline CRM", "Document workflow and pipeline operations tooling framed around visibility, handoffs, and repeatable process."),
     ("portfolio:command-center", "Command Center", "Desktop operations cockpit for local apps, bots, APIs, and learning workflows."),
 ]
 

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-06-16T11:55:07",
+  "generated_at": "2026-06-16T12:14:43",
   "root": "C:\\Users\\tbank\\Desktop\\Live Cowork",
   "summary": {
-    "nodes": 425,
-    "edges": 556,
+    "nodes": 426,
+    "edges": 557,
     "by_type": {
       "runtime": 4,
       "agent": 92,
-      "skill": 243,
+      "skill": 244,
       "duplicate": 58,
       "risk": 2,
       "memory": 5,
@@ -18,7 +18,7 @@
       "file": 1
     },
     "by_runtime": {
-      "opencode": 103,
+      "opencode": 104,
       "claude": 198,
       "goose": 21,
       "workspace": 17,
@@ -28,7 +28,7 @@
       "portfolio": 5
     },
     "by_risk": {
-      "low": 289,
+      "low": 290,
       "high": 74,
       "medium": 62
     }
@@ -1773,25 +1773,25 @@
       "color": "#22d3ee"
     },
     {
-      "id": "portfolio:darkflow-pipeline-serium",
-      "label": "Darkflow Pipeline Serium",
+      "id": "portfolio:docflow-pipeline-crm",
+      "label": "DocFlow + Pipeline CRM",
       "type": "portfolio",
       "runtime": "portfolio",
       "path": "",
       "status": "active",
       "risk": "low",
-      "description": "Pipeline/system orchestration project, framed around automation and operational visibility.",
+      "description": "Document workflow and pipeline operations tooling framed around visibility, handoffs, and repeatable process.",
       "color": "#22d3ee"
     },
     {
-      "id": "portfolio:nollarita",
-      "label": "Nollarita",
+      "id": "portfolio:nola-voice-reader",
+      "label": "NOLA Voice Reader",
       "type": "portfolio",
       "runtime": "portfolio",
       "path": "",
       "status": "active",
       "risk": "low",
-      "description": "Business/product collaboration work presented as a polished system case study.",
+      "description": "Clipboard-aware local TTS reader for turning copied text into spoken audio.",
       "color": "#22d3ee"
     },
     {
@@ -4226,6 +4226,17 @@
       "color": "#38bdf8"
     },
     {
+      "id": "skill:opencode:speech-context-corrector",
+      "label": "speech-context-corrector",
+      "type": "skill",
+      "runtime": "opencode",
+      "path": "C:\\Users\\tbank\\.config\\opencode\\skills\\speech-context-corrector",
+      "status": "active",
+      "risk": "low",
+      "description": "Speech Context Corrector",
+      "color": "#38bdf8"
+    },
+    {
       "id": "skill:opencode:system-cleanup",
       "label": "system-cleanup",
       "type": "skill",
@@ -5710,6 +5721,12 @@
     {
       "source": "runtime:opencode",
       "target": "skill:opencode:skill-store",
+      "type": "contains",
+      "label": "contains"
+    },
+    {
+      "source": "runtime:opencode",
+      "target": "skill:opencode:speech-context-corrector",
       "type": "contains",
       "label": "contains"
     },
@@ -7893,18 +7910,6 @@
     },
     {
       "source": "project:portfolio",
-      "target": "portfolio:nollarita",
-      "type": "connected_to",
-      "label": "connected"
-    },
-    {
-      "source": "project:portfolio",
-      "target": "portfolio:darkflow-pipeline-serium",
-      "type": "connected_to",
-      "label": "connected"
-    },
-    {
-      "source": "project:portfolio",
       "target": "portfolio:command-center",
       "type": "connected_to",
       "label": "connected"
@@ -8019,13 +8024,13 @@
     },
     {
       "source": "project:portfolio",
-      "target": "portfolio:nollarita",
+      "target": "portfolio:nola-voice-reader",
       "type": "showcases",
       "label": "showcases"
     },
     {
       "source": "project:portfolio",
-      "target": "portfolio:darkflow-pipeline-serium",
+      "target": "portfolio:docflow-pipeline-crm",
       "type": "showcases",
       "label": "showcases"
     },
