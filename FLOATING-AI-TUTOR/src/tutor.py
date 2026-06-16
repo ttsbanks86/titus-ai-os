@@ -98,10 +98,20 @@ def explain_with_fallback(text: str, question: str = "") -> str:
 
 
 def explain(text: str, question: str = "", context: str = "") -> str:
-    """Generate explanation — tries Ollama first, falls back gracefully."""
+    """Generate explanation — tries smart router first, falls back gracefully."""
     if not text or not text.strip():
         return "I couldn't extract any text from the selected area. Try selecting a region with more visible text, or check that OCR is working."
 
+    # Try smart router (Phase 7)
+    try:
+        from router import smart_explain
+        result = smart_explain(text, question, context=context)
+        if result and "I couldn't reach any AI model" not in result:
+            return result
+    except ImportError:
+        pass
+
+    # Fall back to direct Ollama
     result = explain_with_ollama(text, question, context=context)
     if result:
         return result

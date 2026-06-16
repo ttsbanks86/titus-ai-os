@@ -695,6 +695,26 @@ class FloatingWindow(QMainWindow):
             self._load_session()
             return True
 
+        if cmd == "notes":
+            self._generate_notes()
+            return True
+
+        if cmd == "flashcards":
+            self._generate_flashcards()
+            return True
+
+        if cmd == "guide":
+            self._generate_study_guide()
+            return True
+
+        if cmd == "exam":
+            self._generate_exam()
+            return True
+
+        if cmd == "materials":
+            self._list_materials()
+            return True
+
         return False
 
     def _start_lesson_step(self):
@@ -826,6 +846,56 @@ class FloatingWindow(QMainWindow):
                 self.conversation.add_message(msg["role"], msg["content"])
             if data.get("last_captured_text"):
                 self.conversation.set_captured_text(data["last_captured_text"])
+
+    # -- Agent Actions (Phase 8) -------------------------------------------
+    def _generate_notes(self):
+        """Generate study notes from captured content."""
+        if not self.conversation.last_captured_text:
+            self._add_bubble("tutor", "📝 Capture something on screen first (💡 Explain), then type 'notes'.")
+            return
+        from actions import generate_study_notes
+        topic = self.conversation.current_topic or "general"
+        path = generate_study_notes(topic, self.conversation.last_captured_text)
+        self._add_bubble("tutor", f"📝 Study notes saved!\n\n📁 {path}\n\nOpen the file to review your notes.")
+
+    def _generate_flashcards(self):
+        """Generate flashcards from captured content."""
+        if not self.conversation.last_captured_text:
+            self._add_bubble("tutor", "🃏 Capture something on screen first (💡 Explain), then type 'flashcards'.")
+            return
+        from actions import generate_flashcards
+        topic = self.conversation.current_topic or "general"
+        path = generate_flashcards(topic)
+        self._add_bubble("tutor", f"🃏 Flashcards saved!\n\n📁 {path}\n\nReview them regularly for better retention.")
+
+    def _generate_study_guide(self):
+        """Generate a study guide from captured content."""
+        if not self.conversation.last_captured_text:
+            self._add_bubble("tutor", "📖 Capture something on screen first (💡 Explain), then type 'guide'.")
+            return
+        from actions import generate_study_guide
+        topic = self.conversation.current_topic or "general"
+        path = generate_study_guide(topic, self.conversation.last_captured_text)
+        self._add_bubble("tutor", f"📖 Study guide saved!\n\n📁 {path}\n\nFollow the guide to master {topic}.")
+
+    def _generate_exam(self):
+        """Generate a practice exam."""
+        from actions import generate_practice_quiz
+        topic = self.conversation.current_topic or "general"
+        path = generate_practice_quiz(topic, 5)
+        self._add_bubble("tutor", f"📋 Practice exam saved!\n\n📁 {path}\n\nTest yourself to check your understanding.")
+
+    def _list_materials(self):
+        """List all generated study materials."""
+        from actions import list_generated_files
+        files = list_generated_files()
+        if not files:
+            self._add_bubble("tutor", "📂 No study materials yet. Type 'notes', 'flashcards', 'guide', or 'exam' to create some!")
+            return
+        text = "📂 **Your Study Materials**\n\n"
+        for f in files[:10]:
+            text += f"• [{f['category']}] {f['name']} ({f['created'][:10]})\n"
+        self._add_bubble("tutor", text)
 
     # -- Drag / Resize ------------------------------------------------------
     def _get_resize_edge(self, pos):
