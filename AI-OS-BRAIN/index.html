@@ -79,26 +79,31 @@
     .actions button { white-space: nowrap; }
     .view-note { color: var(--muted); font-size: 12px; margin-top: 8px; line-height: 1.45; }
     #cy { width: 100%; height: 100%; }
-    #mindmap { display: none; height: 100%; overflow: auto; padding: 24px; }
-    .mind-root { max-width: 520px; margin: 0 auto 22px; text-align: center; padding: 18px; border: 1px solid rgba(56,189,248,.35); border-radius: 22px; background: linear-gradient(135deg, rgba(56,189,248,.18), rgba(167,139,250,.12)); box-shadow: var(--shadow); }
-    .mind-root h2 { margin: 0 0 6px; font-size: 22px; }
-    .mind-root p { margin: 0; color: var(--muted); font-size: 13px; }
-    .mind-grid { display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 16px; align-items: start; }
-    .mind-branch { border: 1px solid var(--line); border-radius: 18px; background: rgba(15,23,42,.82); padding: 14px; box-shadow: 0 14px 42px rgba(0,0,0,.18); }
-    .mind-branch h3 { margin: 0 0 10px; display: flex; align-items: center; gap: 9px; font-size: 15px; }
-    .mind-count { margin-left: auto; color: var(--muted); font-size: 11px; font-weight: 500; }
-    .mind-list { display: grid; gap: 7px; }
-    .mind-node { border: 1px solid rgba(148,163,184,.18); background: rgba(2,6,23,.46); border-radius: 12px; padding: 9px 10px; cursor: pointer; display: grid; gap: 3px; }
-    .mind-node:hover { border-color: rgba(56,189,248,.7); background: rgba(56,189,248,.08); }
-    .mind-node strong { font-size: 13px; }
-    .mind-node span { color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .mind-node.high { border-color: rgba(251,113,133,.45); }
-    .mind-empty { color: var(--muted); font-size: 13px; padding: 8px; }
+    #mindmap { display: none; height: 100%; overflow: auto; padding: 28px 32px; }
+    .mind-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .mind-back { background: none; border: 1px solid var(--line); color: var(--text); border-radius: 12px; padding: 8px 14px; cursor: pointer; font: inherit; font-size: 13px; display: none; }
+    .mind-back.visible { display: inline-flex; align-items: center; gap: 6px; }
+    .mind-back:hover { background: rgba(56,189,248,.1); border-color: rgba(56,189,248,.5); }
+    .mind-breadcrumb { color: var(--muted); font-size: 13px; }
+    .mind-breadcrumb span { color: var(--text); font-weight: 600; }
+    .mind-root { max-width: 640px; margin: 0 auto 28px; text-align: center; padding: 24px; border: 1px solid rgba(56,189,248,.25); border-radius: 24px; background: linear-gradient(145deg, rgba(56,189,248,.12), rgba(167,139,250,.08)); box-shadow: 0 24px 64px rgba(0,0,0,.25); }
+    .mind-root h2 { margin: 0 0 8px; font-size: 24px; font-weight: 800; letter-spacing: -0.4px; }
+    .mind-root p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .mind-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; align-items: start; }
+    .mind-branch { border: 1px solid var(--line); border-radius: 20px; background: rgba(15,23,42,.75); padding: 18px; box-shadow: 0 12px 36px rgba(0,0,0,.15); transition: transform .15s, border-color .15s; cursor: pointer; }
+    .mind-branch:hover { transform: translateY(-2px); border-color: rgba(56,189,248,.45); box-shadow: 0 16px 48px rgba(0,0,0,.22); }
+    .mind-branch h3 { margin: 0 0 12px; display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
+    .mind-count { margin-left: auto; color: var(--muted); font-size: 12px; font-weight: 600; background: rgba(255,255,255,.06); padding: 3px 8px; border-radius: 99px; }
+    .mind-desc { color: var(--muted); font-size: 12px; line-height: 1.45; margin-bottom: 12px; }
+    .mind-preview { display: grid; gap: 6px; }
+    .mind-preview-item { font-size: 12px; color: #cbd5e1; padding: 6px 8px; background: rgba(2,6,23,.4); border-radius: 8px; border-left: 2px solid rgba(56,189,248,.35); }
+    .mind-more { font-size: 11px; color: var(--accent-light); margin-top: 6px; font-weight: 600; }
+    .mind-empty { color: var(--muted); font-size: 13px; padding: 12px; text-align: center; background: rgba(2,6,23,.3); border-radius: 12px; }
     .graph-mode #cy { display: block; }
     .graph-mode #mindmap { display: none; }
     .mind-mode #cy { display: none; }
     .mind-mode #mindmap { display: block; }
-    @media (max-width: 1200px) { .mind-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1000px) { .mind-grid { grid-template-columns: 1fr; } }
     .legend { display: grid; gap: 8px; }
     .legend-row { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13px; }
     .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
@@ -189,7 +194,12 @@
         </div>
       </div>
       <div id="cy" role="application" aria-label="AI OS system graph"></div>
-      <div id="mindmap" aria-label="AI OS mind map"></div>
+      <div id="mindmap" aria-label="AI OS mind map">
+        <div class="mind-header">
+          <button class="mind-back" id="mindBack" aria-label="Go back">← Back</button>
+          <div class="mind-breadcrumb" id="mindBreadcrumb">AI OS Brain</div>
+        </div>
+      </div>
     </main>
 
     <section class="inspector">
@@ -208,7 +218,7 @@
   </div>
 
   <script>
-    const state = { graph: null, cy: null, view: 'all', runtime: 'all', query: '', layout: 'mind', filterTimer: null };
+    const state = { graph: null, cy: null, view: 'all', runtime: 'all', query: '', layout: 'mind', filterTimer: null, mindPath: [] };
     const graphUrl = './brain-data/graph.json';
 
     const byId = id => document.getElementById(id);
@@ -394,42 +404,85 @@
       });
     }
 
+    const BRANCHES = [
+      { id: 'opencode', label: 'OpenCode', icon: '🔵', desc: 'Primary execution runtime: CEO, engineers, QA, research, and automation agents.', filter: n => n.runtime === 'opencode' },
+      { id: 'claude', label: 'Claude / Cloud', icon: '🟣', desc: 'Specialist research, review, guardrail, and deep-skill runtime.', filter: n => n.runtime === 'claude' },
+      { id: 'goose', label: 'Goose / .agents', icon: '🟢', desc: 'Reusable personal workflow skill layer.', filter: n => n.runtime === 'goose' },
+      { id: 'workspace', label: 'Workspace Skills', icon: '🟠', desc: 'Project-specific HyperFrames, media, and adapter workflows.', filter: n => n.runtime === 'workspace' },
+      { id: 'projects', label: 'Projects & Workflows', icon: '⚙️', desc: 'Active projects, apps, and automation chains.', filter: n => ['project', 'workflow'].includes(n.type) || n.runtime === 'project' },
+      { id: 'memory', label: 'Memory & Troubleshooting', icon: '🧠', desc: 'Governance docs, lessons, Obsidian vault, and side-brain notes.', filter: n => ['memory', 'troubleshooting', 'file'].includes(n.type) || n.runtime === 'memory' },
+      { id: 'portfolio', label: 'Portfolio', icon: '💼', desc: 'Public-facing project showcases and case studies.', filter: n => n.type === 'portfolio' || n.runtime === 'portfolio' },
+      { id: 'risk', label: 'Risk / Approval Gates', icon: '🚦', desc: 'High-risk actions, token safety, and approval-gated skills.', filter: n => n.risk === 'high' || n.type === 'risk' || n.runtime === 'risk' },
+    ];
+
     function renderMindMap() {
       const host = byId('mindmap');
       if (!host || !state.graph) return;
       const nodes = visibleMindNodes();
-      const branches = [
-        ['OpenCode', 'opencode', '🔵'],
-        ['Claude / Cloud', 'claude', '🟣'],
-        ['Goose', 'goose', '🟢'],
-        ['Workspace', 'workspace', '🟠'],
-        ['Projects & Workflows', 'project', '⚙️'],
-        ['Memory & Troubleshooting', 'memory', '🧠'],
-        ['Portfolio', 'portfolio', '💼'],
-        ['Risk / Approval Gates', 'risk', '🚦'],
-      ];
-      const branchHtml = branches.map(([title, key, icon]) => {
-        let items = nodes.filter(n => {
-          if (key === 'project') return ['project', 'workflow'].includes(n.type) || n.runtime === 'project';
-          if (key === 'memory') return ['memory', 'troubleshooting', 'file'].includes(n.type) || n.runtime === 'memory';
-          if (key === 'risk') return n.risk === 'high' || n.type === 'risk' || n.runtime === 'risk';
-          if (key === 'portfolio') return n.type === 'portfolio' || n.runtime === 'portfolio';
-          return n.runtime === key;
+      const backBtn = byId('mindBack');
+      const breadcrumb = byId('mindBreadcrumb');
+      const isRoot = state.mindPath.length === 0;
+
+      backBtn.classList.toggle('visible', !isRoot);
+      breadcrumb.innerHTML = isRoot ? 'AI OS Brain' : `AI OS Brain / <span>${state.mindPath.map(p => p.label).join(' / ')}</span>`;
+
+      let html = '';
+      if (isRoot) {
+        html = `
+          <div class="mind-root">
+            <h2>🧠 Titus AI OS Brain</h2>
+            <p>Start here: click a branch to drill down into agents, skills, projects, memory, and risk gates. Use filters to simplify.</p>
+          </div>`;
+      }
+
+      if (isRoot) {
+        html += `<div class="mind-grid">`;
+        BRANCHES.forEach(branch => {
+          const items = nodes.filter(branch.filter).sort((a, b) => a.label.localeCompare(b.label));
+          const preview = items.slice(0, 4).map(n => `<div class="mind-preview-item">${n.label}</div>`).join('');
+          const more = items.length > 4 ? `<div class="mind-more">+${items.length - 4} more</div>` : '';
+          html += `
+            <section class="mind-branch" data-branch-id="${branch.id}">
+              <h3>${branch.icon} ${branch.label}<span class="mind-count">${items.length}</span></h3>
+              <div class="mind-desc">${branch.desc}</div>
+              <div class="mind-preview">${preview}${more}</div>
+            </section>`;
         });
-        items = items.sort((a, b) => (a.type + a.label).localeCompare(b.type + b.label)).slice(0, 34);
-        const list = items.length ? items.map(n => `
-          <button class="mind-node ${n.risk === 'high' ? 'high' : ''}" data-node-id="${n.id}">
-            <strong>${n.label}</strong>
-            <span>${n.type}${n.risk === 'high' ? ' · approval-gated' : ''}</span>
-          </button>`).join('') : '<div class="mind-empty">No matching nodes in this view.</div>';
-        return `<section class="mind-branch"><h3>${icon} ${title}<span class="mind-count">${items.length}</span></h3><div class="mind-list">${list}</div></section>`;
-      }).join('');
-      host.innerHTML = `
-        <div class="mind-root">
-          <h2>🧠 Titus AI OS Brain</h2>
-          <p>Start here: runtimes branch into agents, skills, projects, memory, portfolio, and risk gates. Use filters to simplify.</p>
-        </div>
-        <div class="mind-grid">${branchHtml}</div>`;
+        html += `</div>`;
+      } else {
+        const parent = state.mindPath[state.mindPath.length - 1];
+        const items = nodes.filter(parent.filter).sort((a, b) => a.label.localeCompare(b.label));
+        if (!items.length) {
+          html = `<div class="mind-empty">No matching nodes in this view.</div>`;
+        } else {
+          html = `<div class="mind-grid">`;
+          items.forEach(n => {
+            html += `
+              <button class="mind-branch" data-node-id="${n.id}" style="text-align:left;">
+                <h3>${n.type === 'runtime' ? '🌐' : n.type === 'project' ? '📁' : n.type === 'skill' ? '🔧' : n.type === 'agent' ? '🤖' : '📄'} ${n.label}<span class="mind-count">${n.type}</span></h3>
+                <div class="mind-desc">${n.description || 'No description.'}</div>
+                <div class="mind-more">Click to inspect →</div>
+              </button>`;
+          });
+          html += `</div>`;
+        }
+      }
+
+      // Clear previous content but keep the header
+      const header = host.querySelector('.mind-header');
+      host.innerHTML = '';
+      if (header) host.appendChild(header);
+
+      host.insertAdjacentHTML('beforeend', html);
+      host.querySelectorAll('[data-branch-id]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const branch = BRANCHES.find(b => b.id === btn.dataset.branchId);
+          if (branch) {
+            state.mindPath.push(branch);
+            renderMindMap();
+          }
+        });
+      });
       host.querySelectorAll('[data-node-id]').forEach(btn => {
         btn.addEventListener('click', () => selectById(btn.dataset.nodeId));
       });
@@ -442,7 +495,7 @@
       main.classList.toggle('graph-mode', mode !== 'mind');
       byId('mindBtn').classList.toggle('active', mode === 'mind');
       byId('forceBtn').classList.toggle('active', mode !== 'mind');
-      if (mode === 'mind') renderMindMap(); else runLayout(true);
+      if (mode === 'mind') { state.mindPath = []; renderMindMap(); } else runLayout(true);
     }
 
     function wireControls() {
@@ -462,6 +515,10 @@
         state.query = e.target.value;
         clearTimeout(state.filterTimer);
         state.filterTimer = setTimeout(applyFilters, 180);
+      });
+      byId('mindBack').addEventListener('click', () => {
+        state.mindPath.pop();
+        renderMindMap();
       });
       byId('mindBtn').addEventListener('click', () => setMode('mind'));
       byId('forceBtn').addEventListener('click', () => setMode('force'));
