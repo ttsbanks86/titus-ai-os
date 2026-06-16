@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-06-16T12:14:43",
+  "generated_at": "2026-06-16T12:46:51",
   "root": "C:\\Users\\tbank\\Desktop\\Live Cowork",
   "summary": {
-    "nodes": 426,
-    "edges": 557,
+    "nodes": 429,
+    "edges": 562,
     "by_type": {
       "runtime": 4,
       "agent": 92,
-      "skill": 244,
-      "duplicate": 58,
+      "skill": 245,
+      "duplicate": 59,
       "risk": 2,
       "memory": 5,
       "troubleshooting": 5,
-      "project": 6,
+      "project": 7,
       "workflow": 4,
       "portfolio": 5,
       "file": 1
@@ -21,16 +21,16 @@
       "opencode": 104,
       "claude": 198,
       "goose": 21,
-      "workspace": 17,
-      "risk": 60,
+      "workspace": 18,
+      "risk": 61,
       "memory": 11,
-      "project": 10,
+      "project": 11,
       "portfolio": 5
     },
     "by_risk": {
-      "low": 290,
-      "high": 74,
-      "medium": 62
+      "low": 291,
+      "high": 75,
+      "medium": 63
     }
   },
   "nodes": [
@@ -1531,6 +1531,17 @@
       "color": "#f59e0b"
     },
     {
+      "id": "duplicate:speech-context-corrector",
+      "label": "Duplicate: speech-context-corrector",
+      "type": "duplicate",
+      "runtime": "risk",
+      "path": "",
+      "status": "review",
+      "risk": "medium",
+      "description": "Same skill name appears in multiple runtimes; compare before archiving.",
+      "color": "#f59e0b"
+    },
+    {
       "id": "duplicate:system-cleanup",
       "label": "Duplicate: system-cleanup",
       "type": "duplicate",
@@ -1836,6 +1847,17 @@
       "status": "active",
       "risk": "high",
       "description": "Local desktop document workflow app; recent recursion crash fixed and EXE rebuilt.",
+      "color": "#e5e7eb"
+    },
+    {
+      "id": "project:floating-ai-tutor",
+      "label": "Floating AI Tutor",
+      "type": "project",
+      "runtime": "project",
+      "path": "C:\\Users\\tbank\\Desktop\\Live Cowork\\FLOATING-AI-TUTOR",
+      "status": "active",
+      "risk": "high",
+      "description": "Always-on-top desktop AI tutor that teaches anything visible on screen. Phase 1 complete: floating overlay with hotkey, chat, collapse, and resize.",
       "color": "#e5e7eb"
     },
     {
@@ -4567,6 +4589,17 @@
       "color": "#fb923c"
     },
     {
+      "id": "skill:workspace:speech-context-corrector",
+      "label": "speech-context-corrector",
+      "type": "skill",
+      "runtime": "workspace",
+      "path": "C:\\Users\\tbank\\Desktop\\Live Cowork\\.agents\\skills\\speech-context-corrector",
+      "status": "active",
+      "risk": "low",
+      "description": "Speech Context Corrector",
+      "color": "#fb923c"
+    },
+    {
       "id": "skill:workspace:tailwind",
       "label": "tailwind",
       "type": "skill",
@@ -7016,6 +7049,12 @@
     },
     {
       "source": "runtime:workspace",
+      "target": "skill:workspace:speech-context-corrector",
+      "type": "contains",
+      "label": "contains"
+    },
+    {
+      "source": "runtime:workspace",
       "target": "skill:workspace:tailwind",
       "type": "contains",
       "label": "contains"
@@ -7591,6 +7630,18 @@
       "label": "duplicate"
     },
     {
+      "source": "duplicate:speech-context-corrector",
+      "target": "skill:opencode:speech-context-corrector",
+      "type": "duplicates",
+      "label": "duplicate"
+    },
+    {
+      "source": "duplicate:speech-context-corrector",
+      "target": "skill:workspace:speech-context-corrector",
+      "type": "duplicates",
+      "label": "duplicate"
+    },
+    {
       "source": "duplicate:system-cleanup",
       "target": "skill:opencode:system-cleanup",
       "type": "duplicates",
@@ -7899,6 +7950,18 @@
     {
       "source": "project:ai-os-brain",
       "target": "runtime:workspace",
+      "type": "connected_to",
+      "label": "connected"
+    },
+    {
+      "source": "project:floating-ai-tutor",
+      "target": "workflow:desktop-app-build",
+      "type": "connected_to",
+      "label": "connected"
+    },
+    {
+      "source": "project:floating-ai-tutor",
+      "target": "skill:opencode:local-ai",
       "type": "connected_to",
       "label": "connected"
     },

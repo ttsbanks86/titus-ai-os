@@ -1,0 +1,556 @@
+#!/usr/bin/env python3
+"""Floating AI Tutor — Phase 1: Floating Overlay Window.
+
+A lightweight, always-on-top floating window that sits above any application.
+Provides chat input, microphone button, screenshot selection, collapse/expand,
+and chat history panel. Controlled by a global hotkey (default: Ctrl+Shift+T).
+"""
+import ctypes
+import json
+import os
+import sys
+from datetime import datetime
+from pathlib import Path
+
+from PySide6.QtCore import (
+    Qt, QTimer, QPropertyAnimation, QEasingCurve, Property, Signal, QObject,
+)
+from PySide6.QtGui import (
+    QAction, QColor, QFont, QFontDatabase, QIcon, QPainter, QPainterPath,
+    QKeySequence, QPalette, QShortcut,
+)
+from PySide6.QtWidgets import (
+    QApplication, QFrame, QHBoxLayout, QLabel, QLineEdit,
+    QMainWindow, QPushButton, QScrollArea, QTextEdit, QVBoxLayout, QWidget,
+    QSizePolicy,
+)
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+APP_NAME = "Floating AI Tutor"
+APP_VERSION = "0.1.0"
+DATA_DIR = Path(os.path.expanduser("~")) / ".floating-ai-tutor"
+HISTORY_FILE = DATA_DIR / "chat_history.json"
+DEFAULT_HOTKEY_MOD = 0x0002 | 0x0004  # Ctrl + Shift
+DEFAULT_HOTKEY_VK = 0x54  # T
+
+# ---------------------------------------------------------------------------
+# Windows global hotkey via RegisterHotKey
+# ---------------------------------------------------------------------------
+class GlobalHotkey(QObject):
+    """Register a system-wide hotkey using Windows RegisterHotKey."""
+
+    activated = Signal()
+
+    def __init__(self, mod=DEFAULT_HOTKEY_MOD, vk=DEFAULT_HOTKEY_VK):
+        super().__init__()
+        self.mod = mod
+        self.vk = vk
+        self._hotkey_id = 0x9F01  # unique ID for this hotkey
+
+    def register(self, hwnd):
+        """Register the hotkey for the given window handle."""
+        if sys.platform != "win32":
+            return
+        self._hwnd = int(hwnd)
+        ctypes.windll.user32.RegisterHotKey(self._hwnd, self._hotkey_id, self.mod, self.vk)
+
+    def unregister(self):
+        if sys.platform != "win32" or not hasattr(self, "_hwnd"):
+            return
+        ctypes.windll.user32.UnregisterHotKey(self._hwnd, self._hotkey_id)
+
+    def nativeEvent(self, event_type, message):
+        if sys.platform == "win32" and event_type == "windows_generic_MSG":
+            msg = ctypes.wintypes.MSG.from_address(message.__int__())
+            if msg.message == 0x0312:  # WM_HOTKEY
+                if msg.wParam == self._hotkey_id:
+                    self.activated.emit()
+                    return True, 0
+        return False, 0
+
+# ---------------------------------------------------------------------------
+# Chat history manager
+# ---------------------------------------------------------------------------
+class ChatHistory:
+    def __init__(self, path=HISTORY_FILE):
+        self.path = Path(path)
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.sessions = []
+        self._load()
+
+    def _load(self):
+        if self.path.exists():
+            try:
+                self.sessions = json.loads(self.path.read_text(encoding="utf-8"))
+            except Exception:
+                self.sessions = []
+
+    def save(self):
+        self.path.write_text(json.dumps(self.sessions, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    def add_message(self, role, content):
+        entry = {
+            "timestamp": datetime.now().isoformat(),
+            "role": role,
+            "content": content,
+        }
+        self.sessions.append(entry)
+        self.save()
+
+    def clear(self):
+        self.sessions = []
+        self.save()
+
+    def get_recent(self, limit=50):
+        return self.sessions[-limit:]
+
+# ---------------------------------------------------------------------------
+# Floating overlay window
+# ---------------------------------------------------------------------------
+RESIZE_MARGIN = 8
+
+class FloatingWindow(QMainWindow):
+    """Phase 1 floating overlay window."""
+
+    def __init__(self):
+        super().__init__()
+        self._collapsed = False
+        self._dragging = False
+        self._drag_pos = None
+        self._resizing = False
+        self._resize_edge = None
+        self._resize_start_pos = None
+        self._resize_start_rect = None
+        self.history = ChatHistory()
+        self._setup_ui()
+        self._load_history_ui()
+        self._apply_style()
+
+    # -- UI setup -----------------------------------------------------------
+    def _setup_ui(self):
+        self.setWindowFlags(
+            Qt.FramelessWindowHint
+            | Qt.WindowStaysOnTopHint
+            | Qt.Tool
+        )
+        self.setAttribute(Qt.WA_TranslucentBackground)
+        self.setMinimumSize(340, 260)
+        self.resize(420, 520)
+        self.move(200, 120)
+        self.setWindowTitle(APP_NAME)
+
+        central = QWidget()
+        self.setCentralWidget(central)
+        root = QVBoxLayout(central)
+        root.setContentsMargins(0, 0, 0, 0)
+        root.setSpacing(0)
+
+        # Title bar
+        root.addWidget(self._build_titlebar())
+
+        # Content area
+        self.content_frame = QFrame()
+        self.content_frame.setObjectName("contentFrame")
+        content_layout = QVBoxLayout(self.content_frame)
+        content_layout.setContentsMargins(12, 10, 12, 10)
+        content_layout.setSpacing(8)
+
+        # Chat display
+        self.chat_scroll = QScrollArea()
+        self.chat_scroll.setWidgetResizable(True)
+        self.chat_scroll.setObjectName("chatScroll")
+        self.chat_area = QWidget()
+        self.chat_layout = QVBoxLayout(self.chat_area)
+        self.chat_layout.setContentsMargins(4, 4, 4, 4)
+        self.chat_layout.setSpacing(6)
+        self.chat_layout.addStretch()
+        self.chat_scroll.setWidget(self.chat_area)
+        content_layout.addWidget(self.chat_scroll)
+
+        # Action bar (mic, screenshot, history)
+        content_layout.addWidget(self._build_actionbar())
+
+        # Input bar
+        content_layout.addWidget(self._build_inputbar())
+
+        root.addWidget(self.content_frame)
+
+        # Welcome message
+        self._add_bubble("tutor", "Hi! I'm your AI tutor. Drag me anywhere, resize from the edges, or press Ctrl+Shift+T to toggle. Select something on screen and ask me to explain it.")
+
+    def _build_titlebar(self):
+        bar = QFrame()
+        bar.setObjectName("titlebar")
+        bar.setFixedHeight(36)
+        layout = QHBoxLayout(bar)
+        layout.setContentsMargins(12, 0, 8, 0)
+        layout.setSpacing(6)
+
+        # App label
+        self.title_label = QLabel("🧠 AI Tutor")
+        self.title_label.setObjectName("titleLabel")
+        self.title_label.setFont(QFont("Segoe UI", 11, QFont.Bold))
+        layout.addWidget(self.title_label)
+
+        layout.addStretch()
+
+        # History button
+        self.btn_history = QPushButton("📋")
+        self.btn_history.setObjectName("toolBtn")
+        self.btn_history.setFixedSize(28, 28)
+        self.btn_history.setToolTip("Chat History")
+        self.btn_history.clicked.connect(self._toggle_history)
+        layout.addWidget(self.btn_history)
+
+        # Collapse button
+        self.btn_collapse = QPushButton("─")
+        self.btn_collapse.setObjectName("toolBtn")
+        self.btn_collapse.setFixedSize(28, 28)
+        self.btn_collapse.setToolTip("Collapse")
+        self.btn_collapse.clicked.connect(self._toggle_collapse)
+        layout.addWidget(self.btn_collapse)
+
+        # Close button
+        self.btn_close = QPushButton("✕")
+        self.btn_close.setObjectName("closeBtn")
+        self.btn_close.setFixedSize(28, 28)
+        self.btn_close.setToolTip("Close")
+        self.btn_close.clicked.connect(self.close)
+        layout.addWidget(self.btn_close)
+
+        return bar
+
+    def _build_actionbar(self):
+        bar = QFrame()
+        bar.setObjectName("actionbar")
+        layout = QHBoxLayout(bar)
+        layout.setContentsMargins(0, 4, 0, 4)
+        layout.setSpacing(6)
+
+        self.btn_mic = QPushButton("🎤 Mic")
+        self.btn_mic.setObjectName("actionBtn")
+        self.btn_mic.setToolTip("Voice input (Phase 4)")
+        self.btn_mic.clicked.connect(self._on_mic)
+        layout.addWidget(self.btn_mic)
+
+        self.btn_screenshot = QPushButton("📸 Capture")
+        self.btn_screenshot.setObjectName("actionBtn")
+        self.btn_screenshot.setToolTip("Capture screen region (Phase 2)")
+        self.btn_screenshot.clicked.connect(self._on_screenshot)
+        layout.addWidget(self.btn_screenshot)
+
+        self.btn_explain = QPushButton("💡 Explain")
+        self.btn_explain.setObjectName("actionBtn primary")
+        self.btn_explain.setToolTip("Explain what's on screen (Phase 3)")
+        self.btn_explain.clicked.connect(self._on_explain)
+        layout.addWidget(self.btn_explain)
+
+        self.btn_teach = QPushButton("📚 Teach")
+        self.btn_teach.setObjectName("actionBtn")
+        self.btn_teach.setToolTip("Start a lesson (Phase 5)")
+        self.btn_teach.clicked.connect(self._on_teach)
+        layout.addWidget(self.btn_teach)
+
+        layout.addStretch()
+        return bar
+
+    def _build_inputbar(self):
+        bar = QFrame()
+        bar.setObjectName("inputbar")
+        layout = QHBoxLayout(bar)
+        layout.setContentsMargins(0, 4, 0, 0)
+        layout.setSpacing(6)
+
+        self.input = QLineEdit()
+        self.input.setObjectName("chatInput")
+        self.input.setPlaceholderText("Ask anything about what you see…")
+        self.input.returnPressed.connect(self._send_message)
+        layout.addWidget(self.input)
+
+        self.btn_send = QPushButton("Send")
+        self.btn_send.setObjectName("sendBtn")
+        self.btn_send.setFixedWidth(56)
+        self.btn_send.clicked.connect(self._send_message)
+        layout.addWidget(self.btn_send)
+
+        return bar
+
+    # -- Styling ------------------------------------------------------------
+    def _apply_style(self):
+        self.setStyleSheet("""
+            QMainWindow { background: transparent; }
+            QWidget { font-family: 'Segoe UI', 'Inter', Arial, sans-serif; font-size: 13px; color: #e5e7eb; }
+            #titlebar {
+                background: qlineargradient(x1:0,y1:0,x2:1,y2:0, stop:0 #1e1b4b, stop:0.5 #312e81, stop:1 #1e1b4b);
+                border-radius: 16px 16px 0 0;
+                border: 1px solid rgba(99,102,241,0.3);
+                border-bottom: none;
+            }
+            #titleLabel { color: #e0e7ff; }
+            #toolBtn {
+                background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 8px; color: #c7d2fe; font-size: 14px;
+            }
+            #toolBtn:hover { background: rgba(99,102,241,0.25); border-color: rgba(99,102,241,0.5); color: #fff; }
+            #closeBtn {
+                background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);
+                border-radius: 8px; color: #fca5a5; font-size: 13px; font-weight: 600;
+            }
+            #closeBtn:hover { background: rgba(239,68,68,0.35); color: #fff; }
+            #contentFrame {
+                background: rgba(15,15,35,0.92);
+                border: 1px solid rgba(99,102,241,0.25);
+                border-top: none;
+                border-radius: 0 0 16px 16px;
+            }
+            #chatScroll {
+                background: transparent; border: none;
+            }
+            #chatScroll > QWidget { background: transparent; }
+            #actionbar { background: transparent; }
+            #actionBtn {
+                background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 10px; color: #c7d2fe; padding: 6px 10px; font-size: 12px; font-weight: 500;
+            }
+            #actionBtn:hover { background: rgba(99,102,241,0.2); border-color: rgba(99,102,241,0.45); }
+            #actionBtn.primary {
+                background: rgba(99,102,241,0.25); border-color: rgba(99,102,241,0.5);
+                color: #e0e7ff; font-weight: 600;
+            }
+            #inputbar { background: transparent; }
+            #chatInput {
+                background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+                border-radius: 12px; padding: 10px 14px; color: #e5e7eb; font-size: 13px;
+            }
+            #chatInput:focus { border-color: rgba(99,102,241,0.6); background: rgba(255,255,255,0.08); }
+            #chatInput::placeholder { color: #6b7280; }
+            #sendBtn {
+                background: #4f46e5; border: 1px solid #6366f1; border-radius: 12px;
+                color: #fff; font-weight: 600; font-size: 13px;
+            }
+            #sendBtn:hover { background: #6366f1; }
+        """)
+
+    # -- Chat bubbles -------------------------------------------------------
+    def _add_bubble(self, role, text):
+        bubble = QFrame()
+        bubble.setObjectName("bubble")
+        is_user = role == "user"
+        bubble.setProperty("role", role)
+        bubble.setStyleSheet(f"""
+            #bubble {{
+                background: {'rgba(99,102,241,0.2)' if is_user else 'rgba(255,255,255,0.06)'};
+                border: 1px solid {'rgba(99,102,241,0.3)' if is_user else 'rgba(255,255,255,0.1)'};
+                border-radius: 14px; padding: 10px 12px;
+            }}
+            QLabel {{ color: #e5e7eb; font-size: 13px; line-height: 1.5; }}
+        """)
+        layout = QVBoxLayout(bubble)
+        layout.setContentsMargins(8, 6, 8, 6)
+        layout.setSpacing(2)
+
+        label = QLabel(text)
+        label.setWordWrap(True)
+        label.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        layout.addWidget(label)
+
+        # Insert before stretch
+        self.chat_layout.insertWidget(self.chat_layout.count() - 1, bubble)
+
+        # Scroll to bottom
+        QTimer.singleShot(50, lambda: self.chat_scroll.verticalScrollBar().setValue(
+            self.chat_scroll.verticalScrollBar().maximum()
+        ))
+
+    def _load_history_ui(self):
+        for msg in self.history.get_recent(30):
+            self._add_bubble(msg["role"], msg["content"])
+
+    # -- Actions ------------------------------------------------------------
+    def _send_message(self):
+        text = self.input.text().strip()
+        if not text:
+            return
+        self.input.clear()
+        self._add_bubble("user", text)
+        self.history.add_message("user", text)
+        # Placeholder response until Phase 3
+        self._add_bubble("tutor", "I received your question. In Phase 3, I'll analyze your screen and provide a detailed explanation here.")
+        self.history.add_message("tutor", "I received your question. In Phase 3, I'll analyze your screen and provide a detailed explanation here.")
+
+    def _toggle_collapse(self):
+        self._collapsed = not self._collapsed
+        if self._collapsed:
+            self.content_frame.hide()
+            self.btn_collapse.setText("⊞")
+            self.btn_collapse.setToolTip("Expand")
+            self.setMinimumHeight(36)
+            self.resize(self.width(), 36)
+        else:
+            self.content_frame.show()
+            self.btn_collapse.setText("─")
+            self.btn_collapse.setToolTip("Collapse")
+            self.setMinimumHeight(260)
+            self.resize(self.width(), 520)
+
+    def _toggle_history(self):
+        # Simple: show/hide last 10 messages as a quick peek
+        recent = self.history.get_recent(10)
+        if not recent:
+            self._add_bubble("tutor", "No chat history yet. Start asking questions!")
+            return
+        self._add_bubble("tutor", f"📋 Showing {len(recent)} recent messages. Full history panel coming in Phase 1 refinement.")
+        for msg in recent[-5:]:
+            prefix = "You" if msg["role"] == "user" else "Tutor"
+            self._add_bubble("tutor", f"{prefix}: {msg['content'][:120]}")
+
+    def _on_mic(self):
+        self._add_bubble("tutor", "🎤 Microphone input will be available in Phase 4 (Ask Anything mode).")
+
+    def _on_screenshot(self):
+        self._add_bubble("tutor", "📸 Screen capture will be available in Phase 2 (Screen Understanding).")
+
+    def _on_explain(self):
+        self._add_bubble("tutor", "💡 Explain mode will be available in Phase 3. Select content on screen and I'll break it down for you.")
+
+    def _on_teach(self):
+        self._add_bubble("tutor", "📚 Teach mode will be available in Phase 5. I'll create structured lessons and track your progress.")
+
+    # -- Drag / Resize ------------------------------------------------------
+    def _get_resize_edge(self, pos):
+        """Determine which resize edge/corner the cursor is near."""
+        r = self.rect()
+        x, y = pos.x(), pos.y()
+        left = x < RESIZE_MARGIN
+        right = x > r.width() - RESIZE_MARGIN
+        top = y < RESIZE_MARGIN
+        bottom = y > r.height() - RESIZE_MARGIN
+
+        if top and left: return "top-left"
+        if top and right: return "top-right"
+        if bottom and left: return "bottom-left"
+        if bottom and right: return "bottom-right"
+        if top: return "top"
+        if bottom: return "bottom"
+        if left: return "left"
+        if right: return "right"
+        return None
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            edge = self._get_resize_edge(event.pos())
+            if edge:
+                self._resizing = True
+                self._resize_edge = edge
+                self._resize_start_pos = event.globalPosition().toPoint()
+                self._resize_start_rect = self.geometry()
+                self.setCursor(self._resize_cursor(edge))
+            else:
+                self._dragging = True
+                self._drag_pos = event.globalPosition().toPoint() - self.pos()
+        super().mousePressEvent(event)
+
+    def mouseMoveEvent(self, event):
+        if self._resizing and self._resize_start_rect:
+            delta = event.globalPosition().toPoint() - self._resize_start_pos
+            r = self._resize_start_rect
+            edge = self._resize_edge
+            if "right" in edge:
+                r.setRight(r.right() + delta.x())
+            if "left" in edge:
+                r.setLeft(r.left() + delta.x())
+            if "bottom" in edge:
+                r.setBottom(r.bottom() + delta.y())
+            if "top" in edge:
+                r.setTop(r.top() + delta.y())
+            self.setGeometry(r)
+        elif self._dragging:
+            self.move(event.globalPosition().toPoint() - self._drag_pos)
+        else:
+            edge = self._get_resize_edge(event.pos())
+            self.setCursor(self._resize_cursor(edge) if edge else Qt.ArrowCursor)
+        super().mouseMoveEvent(event)
+
+    def mouseReleaseEvent(self, event):
+        self._dragging = False
+        self._resizing = False
+        self._resize_edge = None
+        self.setCursor(Qt.ArrowCursor)
+        super().mouseReleaseEvent(event)
+
+    def _resize_cursor(self, edge):
+        cursors = {
+            "top-left": Qt.SizeFDiagCursor,
+            "top-right": Qt.SizeBDiagCursor,
+            "bottom-left": Qt.SizeBDiagCursor,
+            "bottom-right": Qt.SizeFDiagCursor,
+            "top": Qt.SizeVerCursor,
+            "bottom": Qt.SizeVerCursor,
+            "left": Qt.SizeHorCursor,
+            "right": Qt.SizeHorCursor,
+        }
+        return cursors.get(edge, Qt.ArrowCursor)
+
+    # -- Global hotkey via native event -------------------------------------
+    def nativeEvent(self, event_type, message):
+        if hasattr(self, "_hotkey"):
+            handled, result = self._hotkey.nativeEvent(event_type, message)
+            if handled:
+                self._on_hotkey()
+                return True, result
+        return super().nativeEvent(event_type, message)
+
+    def _on_hotkey(self):
+        """Toggle window visibility on Ctrl+Shift+T."""
+        if self.isVisible():
+            self.hide()
+        else:
+            self.show()
+            self.activateWindow()
+            self.raise_()
+            self.input.setFocus()
+
+    # -- Setup hotkey after show --------------------------------------------
+    def showEvent(self, event):
+        super().showEvent(event)
+        if not hasattr(self, "_hotkey"):
+            self._hotkey = GlobalHotkey()
+            hwnd = self.winId()
+            self._hotkey.register(hwnd)
+
+    def closeEvent(self, event):
+        if hasattr(self, "_hotkey"):
+            self._hotkey.unregister()
+        self.history.save()
+        super().closeEvent(event)
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
+def main():
+    app = QApplication(sys.argv)
+    app.setApplicationName(APP_NAME)
+    app.setApplicationVersion(APP_VERSION)
+    app.setStyle("Fusion")
+
+    # Dark palette
+    palette = QPalette()
+    palette.setColor(QPalette.Window, QColor(15, 15, 35))
+    palette.setColor(QPalette.WindowText, QColor(229, 231, 235))
+    palette.setColor(QPalette.Base, QColor(30, 30, 50))
+    palette.setColor(QPalette.AlternateBase, QColor(25, 25, 45))
+    palette.setColor(QPalette.ToolTipBase, QColor(229, 231, 235))
+    palette.setColor(QPalette.ToolTipText, QColor(15, 15, 35))
+    palette.setColor(QPalette.Text, QColor(229, 231, 235))
+    palette.setColor(QPalette.Button, QColor(30, 30, 50))
+    palette.setColor(QPalette.ButtonText, QColor(229, 231, 235))
+    app.setPalette(palette)
+
+    window = FloatingWindow()
+    window.show()
+    sys.exit(app.exec())
+
+if __name__ == "__main__":
+    main()

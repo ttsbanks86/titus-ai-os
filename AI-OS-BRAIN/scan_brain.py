@@ -93,6 +93,13 @@ PROJECTS = [
         "links": ["memory:platform-separation", "memory:lessons", "runtime:opencode", "runtime:claude", "runtime:goose", "runtime:workspace"],
     },
     {
+        "id": "project:floating-ai-tutor",
+        "label": "Floating AI Tutor",
+        "path": str(LIVE_COWORK / "FLOATING-AI-TUTOR"),
+        "description": "Always-on-top desktop AI tutor that teaches anything visible on screen. Phase 1 complete: floating overlay with hotkey, chat, collapse, and resize.",
+        "links": ["workflow:desktop-app-build", "skill:opencode:local-ai"],
+    },
+    {
         "id": "project:portfolio",
         "label": "Portfolio",
         "path": str(LIVE_COWORK),
