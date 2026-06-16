@@ -1,0 +1,59 @@
+name,type,runtime,path,status,risk,keep_action,notes,last_reviewed
+ceo,agent,opencode,C:\Users\tbank\.config\opencode\agent\ceo.md,active,medium,keep,Primary orchestrator/front door,2026-06-16
+engineer,agent,opencode,C:\Users\tbank\.config\opencode\agent\engineer.md,active,medium,keep,Code implementation delegate,2026-06-16
+qa,agent,opencode,C:\Users\tbank\.config\opencode\agent\qa.md,active,medium,keep,Verification and review delegate,2026-06-16
+research,agent,opencode,C:\Users\tbank\.config\opencode\agent\research.md,active,medium,keep,Web/market/info research delegate,2026-06-16
+browser,agent,opencode,C:\Users\tbank\.config\opencode\agent\browser.md,active,high,keep-approval-gated,Web automation and scraping,2026-06-16
+automation,agent,opencode,C:\Users\tbank\.config\opencode\agent\automation.md,active,high,keep-approval-gated,PowerShell/system automation,2026-06-16
+file-ops,agent,opencode,C:\Users\tbank\.config\opencode\agent\file-ops.md,active,high,keep-approval-gated,File movement/organization,2026-06-16
+github-ops,agent,opencode,C:\Users\tbank\.config\opencode\agent\github-ops.md,active,high,keep-approval-gated,Git/GitHub operations,2026-06-16
+gmail-ops,agent,opencode,C:\Users\tbank\.config\opencode\agent\gmail-ops.md,active,high,keep-approval-gated,Email operations,2026-06-16
+workflow-orchestrator,agent,opencode,C:\Users\tbank\.config\opencode\agent\workflow-orchestrator.md,active,high,keep-approval-gated,Automation chain design/execution,2026-06-16
+project-manager,agent,opencode,C:\Users\tbank\.config\opencode\agent\project-manager.md,active,low,keep,Planning and task tracking,2026-06-16
+reasoning,agent,opencode,C:\Users\tbank\.config\opencode\agent\reasoning.md,active,low,keep,Complex analysis,2026-06-16
+documentation,agent,opencode,C:\Users\tbank\.config\opencode\agent\documentation.md,active,low,keep,Docs/README/user guides,2026-06-16
+linkedin-jobs,agent,opencode,C:\Users\tbank\.config\opencode\agent\linkedin-jobs.md,active,high,keep-approval-gated,LinkedIn/job automation,2026-06-16
+exec-suite,agent-group,opencode,C:\Users\tbank\.config\opencode\agent,active,medium,keep,Executive agents CEO/COO/CFO/CTO/CMO/CDO/Faith/Product/Content,2026-06-16
+learning-extractor,skill,opencode,C:\Users\tbank\.config\opencode\skills\learning-extractor,active,low,keep,Core intake for links/videos/repos,2026-06-16
+project-radar,skill,opencode,C:\Users\tbank\.config\opencode\skills\project-radar,active,low,keep,Project status and next actions,2026-06-16
+memory-optimization,skill,opencode,C:\Users\tbank\.config\opencode\skills\memory-optimization,active,low,keep,Persistent memory workflow,2026-06-16
+business-ops-experts,skill,opencode,C:\Users\tbank\.config\opencode\skills\business-ops-experts,active,medium,keep,Small business departments,2026-06-16
+mcp-builder,skill,opencode,C:\Users\tbank\.config\opencode\skills\mcp-builder,active,medium,keep,MCP servers/connectors,2026-06-16
+personal-ai-operator,skill,opencode,C:\Users\tbank\.config\opencode\skills\personal-ai-operator,active,high,keep-approval-gated,Local desktop assistant/control,2026-06-16
+windows-automation,skill,opencode,C:\Users\tbank\.config\opencode\skills\windows-automation,active,high,keep-approval-gated,PowerShell/system commands,2026-06-16
+browser-automation,skill,opencode,C:\Users\tbank\.config\opencode\skills\browser-automation,active,high,keep-approval-gated,Browser workflows,2026-06-16
+file-organization,skill,opencode,C:\Users\tbank\.config\opencode\skills\file-organization,active,high,keep-approval-gated,File movement/cleanup,2026-06-16
+gmail-automation,skill,opencode,C:\Users\tbank\.config\opencode\skills\gmail-automation,active,high,keep-approval-gated,Gmail labels/filters/summaries,2026-06-16
+security-review,skill,opencode,C:\Users\tbank\.config\opencode\skills\security-review,active,high,keep,Security audits and secret safety,2026-06-16
+verification-loop,skill,opencode,C:\Users\tbank\.config\opencode\skills\verification-loop,active,medium,keep,Quality gate before completion,2026-06-16
+workflow-orchestration,skill,opencode,C:\Users\tbank\.config\opencode\skills\workflow-orchestration,active,high,keep-approval-gated,Trigger/AI/execute/notify workflows,2026-06-16
+openfang-workflows,skill,opencode,C:\Users\tbank\.config\opencode\skills\openfang-workflows,active,high,keep-approval-gated,24/7 autonomous workflows,2026-06-16
+marketing-skills,skill,opencode,C:\Users\tbank\.config\opencode\skills\marketing-skills,active,medium,keep,Marketing work router,2026-06-16
+career-ops,skill,opencode,C:\Users\tbank\.config\opencode\skills\career-ops,active,medium,keep,Career/jobs workflows,2026-06-16
+local-ai,skill,opencode,C:\Users\tbank\.config\opencode\skills\local-ai,active,medium,keep,Local model routing,2026-06-16
+web-artifacts-builder,skill,opencode,C:\Users\tbank\.config\opencode\skills\web-artifacts-builder,active,medium,keep,Quick web apps/dashboards,2026-06-16
+cloud-provider-skills,skill-group,opencode,C:\Users\tbank\.config\opencode\skills,reference,medium,review,Cloud/provider skills remain but should not load unless needed,2026-06-16
+sales-skills,skill-group,opencode,C:\Users\tbank\.config\opencode\skills,reference,medium,review,Sales skill cluster should be consolidated later,2026-06-16
+claude-specialist-agents,agent-group,claude,C:\Users\tbank\.claude\agents,reference,medium,keep-in-claude,69 specialist review/build/research agents; do not mirror into OpenCode,2026-06-16
+claude-research-skills,skill-group,claude,C:\Users\tbank\.claude\skills,reference,low,keep-in-claude,Feynman/deep research/literature/review skills,2026-06-16
+claude-guardrail-skills,skill-group,claude,C:\Users\tbank\.claude\skills,active,low,keep,scope-guard no-gold-plating grounded-progress regrounding-summary context-budget,2026-06-16
+obsidian-mind,skill,claude,C:\Users\tbank\.claude\skills\obsidian-mind,active,low,keep,Local durable side-brain workflow,2026-06-16
+markdown-memory,skill,claude,C:\Users\tbank\.claude\skills\markdown-memory,active,low,keep,File-based lessons memory,2026-06-16
+graphify,skill,claude,C:\Users\tbank\.claude\skills\graphify,active,medium,keep,Knowledge graph/codebase analysis,2026-06-16
+book-access-workflow,skill,goose,C:\Users\tbank\.agents\skills\book-access-workflow,active,low,keep,Portable book workflow,2026-06-16
+book-launch,skill,goose,C:\Users\tbank\.agents\skills\book-launch,active,low,keep,Bonolo book launch workflow,2026-06-16
+titus-banks-brand,skill,goose,C:\Users\tbank\.agents\skills\titus-banks-brand,active,low,keep,Personal brand system,2026-06-16
+identity-credit,skill,goose,C:\Users\tbank\.agents\skills\identity-credit,active,high,keep-approval-gated,Identity/credit workflow,2026-06-16
+review-lead-recovery,skill,goose,C:\Users\tbank\.agents\skills\review-lead-recovery,active,medium,keep,Local business review/lead system,2026-06-16
+goose-duplicated-file-skills,skill-group,goose,C:\Users\tbank\.agents\skills,duplicate,medium,compare-before-archive,Several file-only skills duplicate OpenCode equivalents,2026-06-16
+hyperframes,skill,workspace,C:\Users\tbank\Desktop\Live Cowork\.agents\skills\hyperframes,active,medium,keep-workspace,HTML video composition workflow,2026-06-16
+hyperframes-cli,skill,workspace,C:\Users\tbank\Desktop\Live Cowork\.agents\skills\hyperframes-cli,active,medium,keep-workspace,HyperFrames CLI workflow,2026-06-16
+hyperframes-media,skill,workspace,C:\Users\tbank\Desktop\Live Cowork\.agents\skills\hyperframes-media,active,medium,keep-workspace,TTS/transcribe/background removal,2026-06-16
+website-to-hyperframes,skill,workspace,C:\Users\tbank\Desktop\Live Cowork\.agents\skills\website-to-hyperframes,active,medium,keep-workspace,Website-to-video workflow,2026-06-16
+animation-adapter-skills,skill-group,workspace,C:\Users\tbank\Desktop\Live Cowork\.agents\skills,active,medium,keep-workspace,animejs/css/gsap/lottie/three/typegpu/waapi/tailwind adapters,2026-06-16
+fable5-skills,skill-group,workspace,C:\Users\tbank\Desktop\Live Cowork\fable5-skills\skills,reference,low,review,Fable 5 behavior guardrails should be mapped not duplicated,2026-06-16
+skill-store-index,file,workspace,C:\Users\tbank\Desktop\Live Cowork\skill-store\SKILL-INDEX.md,stale,low,regenerate,Index appears stale and must be rebuilt from actual folders,2026-06-16
+antigravity-partial-clone,repo,workspace,C:\Users\tbank\Desktop\Live Cowork\LEARNING-CAPTURES\facebook-reels-2026-06-16\repositories,archive-candidate,low,ask-before-delete,Failed deep clone due to Windows path length; good clone exists on Desktop,2026-06-16
+ag-skills,repo,desktop,C:\Users\tbank\Desktop\ag-skills,reference,low,review-for-adoption,Successful Antigravity Awesome Skills clone,2026-06-16
+spec-kit,repo,workspace,C:\Users\tbank\Desktop\Live Cowork\LEARNING-CAPTURES\facebook-reels-2026-06-16\repositories\spec-kit,reference,low,review-for-adoption,Cloned learning source,2026-06-16
+agentfield,repo,workspace,C:\Users\tbank\Desktop\Live Cowork\LEARNING-CAPTURES\facebook-reels-2026-06-16\repositories\agentfield,reference,low,review-for-adoption,Cloned learning source,2026-06-16

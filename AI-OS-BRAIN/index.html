@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Titus AI OS Brain</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E🧠%3C/text%3E%3C/svg%3E" />
+  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <style>
+    :root {
+      --bg: #050816;
+      --panel: rgba(15, 23, 42, 0.92);
+      --panel-2: rgba(30, 41, 59, 0.88);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --line: rgba(148, 163, 184, 0.24);
+      --accent: #38bdf8;
+      --danger: #fb7185;
+      --good: #34d399;
+      --warn: #facc15;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(56, 189, 248, .18), transparent 32%),
+        radial-gradient(circle at 80% 20%, rgba(167, 139, 250, .16), transparent 30%),
+        radial-gradient(circle at 45% 95%, rgba(52, 211, 153, .12), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .app { display: grid; grid-template-columns: 280px minmax(0, 1fr) 360px; height: 100vh; }
+    aside, .inspector {
+      background: var(--panel);
+      border-color: var(--line);
+      backdrop-filter: blur(18px);
+      overflow: auto;
+    }
+    aside { border-right: 1px solid var(--line); padding: 20px; }
+    .inspector { border-left: 1px solid var(--line); padding: 20px; }
+    .brand { display: flex; gap: 12px; align-items: center; margin-bottom: 22px; }
+    .logo {
+      width: 42px; height: 42px; border-radius: 16px;
+      background: linear-gradient(135deg, #38bdf8, #a78bfa 55%, #facc15);
+      box-shadow: 0 0 40px rgba(56,189,248,.26);
+    }
+    h1 { font-size: 17px; margin: 0; line-height: 1.1; }
+    .subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+    .stat { background: var(--panel-2); border: 1px solid var(--line); border-radius: 16px; padding: 12px; }
+    .stat strong { display: block; font-size: 24px; }
+    .stat span { color: var(--muted); font-size: 11px; }
+    .section-title { color: #cbd5e1; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; margin: 18px 0 10px; }
+    button, .chip {
+      border: 1px solid var(--line); background: rgba(15,23,42,.75); color: var(--text);
+      border-radius: 12px; padding: 9px 11px; cursor: pointer; font: inherit;
+    }
+    button:hover, .chip:hover { border-color: rgba(56,189,248,.8); background: rgba(56,189,248,.1); }
+    button.active, .chip.active { background: rgba(56,189,248,.18); border-color: rgba(56,189,248,.9); color: white; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .search { width: 100%; margin: 10px 0 8px; }
+    input {
+      width: 100%; border: 1px solid var(--line); background: rgba(2,6,23,.8); color: var(--text);
+      border-radius: 14px; padding: 12px 13px; outline: none;
+    }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,.13); }
+    main { min-width: 0; display: grid; grid-template-rows: auto 1fr; }
+    .topbar {
+      display: flex; justify-content: space-between; gap: 12px; align-items: center;
+      padding: 16px 20px; border-bottom: 1px solid var(--line); background: rgba(2,6,23,.58); backdrop-filter: blur(18px);
+    }
+    .topbar .title { font-weight: 700; }
+    .topbar .meta { color: var(--muted); font-size: 12px; margin-top: 3px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    #cy { width: 100%; height: 100%; }
+    .legend { display: grid; gap: 8px; }
+    .legend-row { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .detail-title { font-size: 22px; margin: 0 0 6px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .badge { font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; color: #dbeafe; background: rgba(37,99,235,.16); }
+    .badge.high { color: #fecdd3; background: rgba(244,63,94,.16); }
+    .badge.medium { color: #fef3c7; background: rgba(245,158,11,.15); }
+    .path, pre {
+      display: block; white-space: pre-wrap; word-break: break-word; background: rgba(2,6,23,.7);
+      border: 1px solid var(--line); border-radius: 14px; padding: 12px; color: #cbd5e1; font-size: 12px;
+    }
+    .connections { display: grid; gap: 7px; margin-top: 10px; }
+    .connection { padding: 9px; border-radius: 12px; border: 1px solid var(--line); color: #cbd5e1; background: rgba(15,23,42,.62); font-size: 13px; }
+    .empty { color: var(--muted); line-height: 1.6; }
+    .footer-note { color: var(--muted); font-size: 12px; margin-top: 16px; line-height: 1.5; }
+    @media (max-width: 1000px) {
+      body { overflow: auto; }
+      .app { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+      aside, .inspector { border: 0; border-bottom: 1px solid var(--line); }
+      main { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Titus AI OS Brain</h1>
+          <div class="subtitle">Visual system map</div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong id="nodeCount">—</strong><span>nodes</span></div>
+        <div class="stat"><strong id="edgeCount">—</strong><span>connections</span></div>
+        <div class="stat"><strong id="riskCount">—</strong><span>high risk</span></div>
+        <div class="stat"><strong id="runtimeCount">—</strong><span>runtimes</span></div>
+      </div>
+      <div class="section-title">Find anything</div>
+      <input class="search" id="search" placeholder="Search agents, skills, projects, memory…" />
+      <div class="section-title">Views</div>
+      <div class="filters" id="viewFilters">
+        <button class="active" data-view="all">All</button>
+        <button data-view="agent">Agents</button>
+        <button data-view="skill">Skills</button>
+        <button data-view="project">Projects</button>
+        <button data-view="workflow">Workflows</button>
+        <button data-view="memory">Memory</button>
+        <button data-view="risk">Risks</button>
+        <button data-view="portfolio">Portfolio</button>
+      </div>
+      <div class="section-title">Runtime filters</div>
+      <div class="filters" id="runtimeFilters">
+        <button class="active" data-runtime="all">All</button>
+        <button data-runtime="opencode">OpenCode</button>
+        <button data-runtime="claude">Claude</button>
+        <button data-runtime="goose">Goose</button>
+        <button data-runtime="workspace">Workspace</button>
+        <button data-runtime="memory">Memory</button>
+      </div>
+      <div class="section-title">Legend</div>
+      <div class="legend">
+        <div class="legend-row"><span class="dot" style="background:#38bdf8"></span> OpenCode</div>
+        <div class="legend-row"><span class="dot" style="background:#a78bfa"></span> Claude / Cloud</div>
+        <div class="legend-row"><span class="dot" style="background:#34d399"></span> Goose</div>
+        <div class="legend-row"><span class="dot" style="background:#fb923c"></span> Workspace</div>
+        <div class="legend-row"><span class="dot" style="background:#facc15"></span> Memory</div>
+        <div class="legend-row"><span class="dot" style="background:#fb7185"></span> Risk / approval gate</div>
+      </div>
+      <p class="footer-note">This viewer is read-only. It maps the system so you can see what exists, where it lives, and how it connects.</p>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div>
+          <div class="title">System Map</div>
+          <div class="meta" id="generatedAt">Loading graph…</div>
+        </div>
+        <div class="actions">
+          <button id="fitBtn">Fit Map</button>
+          <button id="riskBtn">Show Risk</button>
+          <button id="exportBtn">Download JSON</button>
+        </div>
+      </div>
+      <div id="cy" role="application" aria-label="AI OS system graph"></div>
+    </main>
+
+    <section class="inspector">
+      <h2 class="detail-title" id="detailTitle">Select a node</h2>
+      <p class="empty" id="detailText">Click any node to inspect the agent, skill, project, workflow, memory note, portfolio item, or risk gate.</p>
+      <div id="detailBody" hidden>
+        <div class="badge-row" id="badges"></div>
+        <div class="section-title">Description</div>
+        <p id="description" class="empty"></p>
+        <div class="section-title">Path</div>
+        <code class="path" id="path"></code>
+        <div class="section-title">Connections</div>
+        <div class="connections" id="connections"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const state = { graph: null, cy: null, view: 'all', runtime: 'all', query: '' };
+    const graphUrl = './brain-data/graph.json';
+
+    const byId = id => document.getElementById(id);
+    const typeLabel = node => node.type || 'node';
+
+    function toElements(graph) {
+      const nodes = graph.nodes.map(n => ({ data: { ...n } }));
+      const edges = graph.edges.map((e, i) => ({ data: { id: `edge:${i}`, ...e } }));
+      return [...nodes, ...edges];
+    }
+
+    function initCy(graph) {
+      state.cy = cytoscape({
+        container: byId('cy'),
+        elements: toElements(graph),
+        minZoom: 0.16,
+        maxZoom: 2.2,
+        style: [
+          { selector: 'node', style: {
+            'background-color': 'data(color)',
+            'label': 'data(label)',
+            'color': '#e5e7eb',
+            'font-size': 10,
+            'font-weight': 600,
+            'text-outline-color': '#020617',
+            'text-outline-width': 3,
+            'text-wrap': 'wrap',
+            'text-max-width': 110,
+            'width': ele => ele.data('type') === 'runtime' ? 56 : ele.data('risk') === 'high' ? 38 : 28,
+            'height': ele => ele.data('type') === 'runtime' ? 56 : ele.data('risk') === 'high' ? 38 : 28,
+            'border-width': ele => ele.data('risk') === 'high' ? 3 : 1,
+            'border-color': ele => ele.data('risk') === 'high' ? '#fecdd3' : 'rgba(255,255,255,.28)'
+          }},
+          { selector: 'node[type = "runtime"]', style: { 'shape': 'round-rectangle', 'font-size': 12, 'width': 76, 'height': 44 } },
+          { selector: 'node[type = "project"]', style: { 'shape': 'round-rectangle', 'background-color': '#e5e7eb', 'color': '#f8fafc' } },
+          { selector: 'node[type = "workflow"]', style: { 'shape': 'diamond' } },
+          { selector: 'node[type = "risk"]', style: { 'shape': 'hexagon', 'background-color': '#fb7185' } },
+          { selector: 'node[type = "portfolio"]', style: { 'shape': 'star', 'background-color': '#22d3ee' } },
+          { selector: 'edge', style: {
+            'width': 1.2,
+            'line-color': 'rgba(148,163,184,.34)',
+            'target-arrow-color': 'rgba(148,163,184,.34)',
+            'target-arrow-shape': 'triangle',
+            'curve-style': 'bezier',
+            'label': 'data(label)',
+            'font-size': 7,
+            'color': '#94a3b8',
+            'text-background-color': '#020617',
+            'text-background-opacity': .75,
+            'text-background-padding': 2
+          }},
+          { selector: '.hidden', style: { display: 'none' } },
+          { selector: '.faded', style: { opacity: .12 } },
+          { selector: '.highlight', style: { 'border-width': 5, 'border-color': '#fff', 'opacity': 1 } },
+          { selector: 'edge.highlight', style: { 'line-color': '#38bdf8', 'target-arrow-color': '#38bdf8', 'width': 2.6, 'opacity': 1 } }
+        ],
+        layout: { name: 'cose', animate: false, fit: true, padding: 42, nodeRepulsion: 9000, idealEdgeLength: 100, edgeElasticity: 0.12, nestingFactor: 1.2, gravity: 0.2, numIter: 1200 }
+      });
+
+      state.cy.on('tap', 'node', evt => selectNode(evt.target));
+      state.cy.on('tap', evt => { if (evt.target === state.cy) clearHighlight(); });
+    }
+
+    function applyFilters() {
+      const cy = state.cy;
+      if (!cy) return;
+      const q = state.query.trim().toLowerCase();
+      cy.elements().removeClass('hidden');
+      cy.nodes().forEach(node => {
+        const data = node.data();
+        const viewOk = state.view === 'all' || data.type === state.view || (state.view === 'risk' && data.risk === 'high');
+        const runtimeOk = state.runtime === 'all' || data.runtime === state.runtime;
+        const text = `${data.label || ''} ${data.description || ''} ${data.path || ''} ${data.type || ''} ${data.runtime || ''}`.toLowerCase();
+        const queryOk = !q || text.includes(q);
+        if (!(viewOk && runtimeOk && queryOk)) node.addClass('hidden');
+      });
+      cy.edges().forEach(edge => {
+        if (edge.source().hasClass('hidden') || edge.target().hasClass('hidden')) edge.addClass('hidden');
+      });
+      cy.layout({ name: 'cose', animate: false, fit: true, padding: 42, numIter: 600 }).run();
+    }
+
+    function selectNode(node) {
+      clearHighlight(false);
+      const neighborhood = node.closedNeighborhood();
+      state.cy.elements().addClass('faded');
+      neighborhood.removeClass('faded').addClass('highlight');
+      node.addClass('highlight');
+      const d = node.data();
+      byId('detailTitle').textContent = d.label || d.id;
+      byId('detailText').hidden = true;
+      byId('detailBody').hidden = false;
+      byId('badges').innerHTML = '';
+      for (const [label, cls] of [[d.type, ''], [d.runtime, ''], [d.status, ''], [d.risk, d.risk]]) {
+        if (!label) continue;
+        const span = document.createElement('span');
+        span.className = `badge ${cls || ''}`;
+        span.textContent = label;
+        byId('badges').appendChild(span);
+      }
+      byId('description').textContent = d.description || 'No description captured yet.';
+      byId('path').textContent = d.path || 'No filesystem path.';
+      const con = byId('connections');
+      con.innerHTML = '';
+      const edges = node.connectedEdges().filter(e => !e.hasClass('hidden'));
+      if (!edges.length) {
+        con.innerHTML = '<p class="empty">No visible connections.</p>';
+      } else {
+        edges.slice(0, 40).forEach(edge => {
+          const other = edge.source().id() === node.id() ? edge.target() : edge.source();
+          const div = document.createElement('div');
+          div.className = 'connection';
+          div.textContent = `${edge.data('label') || edge.data('type') || 'connected'} → ${other.data('label')}`;
+          con.appendChild(div);
+        });
+      }
+    }
+
+    function clearHighlight(resetDetail = true) {
+      if (!state.cy) return;
+      state.cy.elements().removeClass('faded highlight');
+      if (resetDetail) {
+        byId('detailTitle').textContent = 'Select a node';
+        byId('detailText').hidden = false;
+        byId('detailBody').hidden = true;
+      }
+    }
+
+    function setActive(container, attr, value) {
+      [...container.querySelectorAll('button')].forEach(b => b.classList.toggle('active', b.dataset[attr] === value));
+    }
+
+    function wireControls() {
+      byId('viewFilters').addEventListener('click', e => {
+        if (!e.target.matches('button')) return;
+        state.view = e.target.dataset.view;
+        setActive(byId('viewFilters'), 'view', state.view);
+        applyFilters();
+      });
+      byId('runtimeFilters').addEventListener('click', e => {
+        if (!e.target.matches('button')) return;
+        state.runtime = e.target.dataset.runtime;
+        setActive(byId('runtimeFilters'), 'runtime', state.runtime);
+        applyFilters();
+      });
+      byId('search').addEventListener('input', e => { state.query = e.target.value; applyFilters(); });
+      byId('fitBtn').addEventListener('click', () => state.cy.fit(undefined, 42));
+      byId('riskBtn').addEventListener('click', () => {
+        state.view = 'risk'; setActive(byId('viewFilters'), 'view', 'risk'); applyFilters();
+      });
+      byId('exportBtn').addEventListener('click', () => {
+        const blob = new Blob([JSON.stringify(state.graph, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'ai-os-brain-graph.json';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+    }
+
+    async function boot() {
+      try {
+        const res = await fetch(graphUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Could not load ${graphUrl}: ${res.status}`);
+        const graph = await res.json();
+        state.graph = graph;
+        byId('nodeCount').textContent = graph.summary.nodes;
+        byId('edgeCount').textContent = graph.summary.edges;
+        byId('riskCount').textContent = graph.summary.by_risk.high || 0;
+        byId('runtimeCount').textContent = Object.keys(graph.summary.by_runtime || {}).length;
+        byId('generatedAt').textContent = `Generated ${graph.generated_at} · ${graph.root}`;
+        initCy(graph);
+        wireControls();
+      } catch (err) {
+        byId('generatedAt').textContent = 'Graph failed to load';
+        byId('cy').innerHTML = `<pre style="margin:24px;color:#fecdd3">${err.message}\nRun: python scan_brain.py</pre>`;
+      }
+    }
+    boot();
+  </script>
+</body>
+</html>
