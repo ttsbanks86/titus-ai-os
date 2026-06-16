@@ -6,6 +6,7 @@ Provides chat input, microphone button, screenshot selection, collapse/expand,
 and chat history panel. Controlled by a global hotkey (default: Ctrl+Shift+T).
 """
 import ctypes
+import ctypes.wintypes
 import json
 import os
 import sys
@@ -14,6 +15,7 @@ from pathlib import Path
 
 from PySide6.QtCore import (
     Qt, QTimer, QPropertyAnimation, QEasingCurve, Property, Signal, QObject,
+    QThread,
 )
 from PySide6.QtGui import (
     QAction, QColor, QFont, QFontDatabase, QIcon, QPainter, QPainterPath,
@@ -22,7 +24,7 @@ from PySide6.QtGui import (
 from PySide6.QtWidgets import (
     QApplication, QFrame, QHBoxLayout, QLabel, QLineEdit,
     QMainWindow, QPushButton, QScrollArea, QTextEdit, QVBoxLayout, QWidget,
-    QSizePolicy,
+    QSizePolicy, QMessageBox,
 )
 
 # ---------------------------------------------------------------------------
@@ -105,6 +107,46 @@ class ChatHistory:
 
     def get_recent(self, limit=50):
         return self.sessions[-limit:]
+
+# ---------------------------------------------------------------------------
+# Background worker for OCR + AI explanation
+# ---------------------------------------------------------------------------
+class ExplainWorker(QObject):
+    """Runs OCR + AI explanation on a background thread."""
+
+    finished = Signal(str)  # explanation text
+    error = Signal(str)     # error message
+
+    def __init__(self, pixmap, question=""):
+        super().__init__()
+        self._pixmap = pixmap
+        self._question = question
+
+    def run(self):
+        try:
+            from ocr import extract_text, get_ocr_status
+            from tutor import explain, check_ollama
+
+            status = get_ocr_status()
+            ollama = check_ollama()
+
+            # OCR
+            text = extract_text(self._pixmap)
+            if not text:
+                self.finished.emit(
+                    "I couldn't extract any text from the selected area. "
+                    "Try selecting a region with more visible text.\n\n"
+                    f"OCR engines available: pytesseract={status['pytesseract']}, "
+                    f"easyocr={status['easyocr']}, windows={status['windows']}"
+                )
+                return
+
+            # AI explanation
+            result = explain(text, self._question)
+            self.finished.emit(result)
+        except Exception as exc:
+            self.error.emit(str(exc))
+
 
 # ---------------------------------------------------------------------------
 # Floating overlay window
@@ -410,10 +452,75 @@ class FloatingWindow(QMainWindow):
         self._add_bubble("tutor", "🎤 Microphone input will be available in Phase 4 (Ask Anything mode).")
 
     def _on_screenshot(self):
-        self._add_bubble("tutor", "📸 Screen capture will be available in Phase 2 (Screen Understanding).")
+        """Capture a screen region and show extracted text."""
+        self.hide()
+        QTimer.singleShot(200, self._do_capture)
+
+    def _do_capture(self):
+        from capture import capture_region
+        pixmap = capture_region()
+        self.show()
+        self.activateWindow()
+        self.raise_()
+        if pixmap is None:
+            self._add_bubble("tutor", "📸 Capture cancelled.")
+            return
+        # Save and show preview
+        from ocr import extract_text, get_ocr_status
+        text = extract_text(pixmap)
+        status = get_ocr_status()
+        if text:
+            preview = text[:300] + ("…" if len(text) > 300 else "")
+            self._add_bubble("tutor", f"📸 Captured {len(text)} characters:\n\n```\n{preview}\n```")
+            self.history.add_message("tutor", f"📸 Captured {len(text)} characters: {preview}")
+        else:
+            engines = ", ".join(k for k, v in status.items() if v)
+            self._add_bubble("tutor", f"📸 Image captured but no text found. Available OCR: {engines or 'none'}")
 
     def _on_explain(self):
-        self._add_bubble("tutor", "💡 Explain mode will be available in Phase 3. Select content on screen and I'll break it down for you.")
+        """Capture screen region, run OCR, and generate AI explanation."""
+        self.hide()
+        QTimer.singleShot(200, self._do_explain)
+
+    def _do_explain(self):
+        from capture import capture_region
+        pixmap = capture_region()
+        self.show()
+        self.activateWindow()
+        self.raise_()
+        if pixmap is None:
+            self._add_bubble("tutor", "💡 Explain cancelled.")
+            return
+
+        # Show processing
+        self._add_bubble("tutor", "💡 Analyzing screen content…")
+        self.btn_explain.setText("⏳ Working…")
+        self.btn_explain.setEnabled(False)
+
+        # Start background worker
+        self._thread = QThread()
+        self._worker = ExplainWorker(pixmap)
+        self._worker.moveToThread(self._thread)
+        self._thread.started.connect(self._worker.run)
+        self._worker.finished.connect(self._on_explain_done)
+        self._worker.error.connect(self._on_explain_error)
+        self._worker.finished.connect(self._thread.quit)
+        self._worker.error.connect(self._thread.quit)
+        self._thread.finished.connect(self._thread.deleteLater)
+        self._thread.start()
+
+    def _on_explain_done(self, explanation):
+        self.btn_explain.setText("💡 Explain")
+        self.btn_explain.setEnabled(True)
+        self._add_bubble("user", "[Screen capture]")
+        self._add_bubble("tutor", explanation)
+        self.history.add_message("user", "[Screen capture]")
+        self.history.add_message("tutor", explanation)
+
+    def _on_explain_error(self, error_msg):
+        self.btn_explain.setText("💡 Explain")
+        self.btn_explain.setEnabled(True)
+        self._add_bubble("tutor", f"❌ Error: {error_msg}")
 
     def _on_teach(self):
         self._add_bubble("tutor", "📚 Teach mode will be available in Phase 5. I'll create structured lessons and track your progress.")
