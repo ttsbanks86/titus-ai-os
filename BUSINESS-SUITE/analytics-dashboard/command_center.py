@@ -44,6 +44,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 WORKSPACE_ROOT = os.path.abspath(os.path.join(ROOT, ".."))
 GATEWAY_SCRIPT = os.path.join(WORKSPACE_ROOT, "run_gateway.py")
 DOCFLOW_EXE = os.path.join(WORKSPACE_ROOT, "DOCFLOW", "dist", "DocFlow", "DocFlow.exe")
+AI_OS_BRAIN_URL = os.getenv("AI_OS_BRAIN_URL", "http://127.0.0.1:8765")
 TELEGRAM_BOT_URL = os.getenv("TELEGRAM_BOT_URL", "https://t.me/Bankshez_bot")
 
 
@@ -272,6 +273,7 @@ class CommandCenter(QMainWindow):
             ("Stop Gateway", self.stop_gateway, ""),
             ("Open Telegram Bot", self.open_telegram_bot, ""),
             ("Open DocFlow", self.open_docflow, ""),
+            ("Open AI OS Brain", self.open_ai_os_brain, "primary"),
             ("Open Pipeline CRM", self.open_crm, ""),
             ("Open API", self.open_api, ""),
         ]
@@ -427,6 +429,9 @@ class CommandCenter(QMainWindow):
                 QMessageBox.warning(self, "CRM launch failed", str(exc))
                 return
         QMessageBox.information(self, "Pipeline CRM", "CRM launcher not found. Open the Pipeline CRM shortcut manually.")
+
+    def open_ai_os_brain(self):
+        QDesktopServices.openUrl(QUrl(AI_OS_BRAIN_URL))
 
     def open_api(self):
         QDesktopServices.openUrl(QUrl(API))
