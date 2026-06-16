@@ -645,34 +645,58 @@ class NOLAReader(QMainWindow):
         sc.addLayout(sr)
         ctrl_layout.addLayout(sc)
 
-        # Speaker output (disabled)
-#         spk = QVBoxLayout()
-#         spk.setSpacing(4)
-#         spl = QLabel("Speaker")
-#         spl.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
-#         self.speaker_combo = ClickOnlyComboBox()
-#         self._populate_speakers()
-#         self.speaker_combo.currentIndexChanged.connect(self._on_speaker_changed)
-#         spk.addWidget(spl)
-#         spk.addWidget(self.speaker_combo)
-#         ctrl_layout.addLayout(spk)
+        # Speaker output
+        spk = QVBoxLayout()
+        spk.setSpacing(4)
+        spl = QLabel("Speaker")
+        spl.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
+        self.speaker_combo = ClickOnlyComboBox()
+        self.speaker_combo.setFixedHeight(28)
+        self.speaker_combo.setStyleSheet(f"""
+            QComboBox {{
+                background: {BG3}; color: {TEXT}; border: 1px solid {BORDER};
+                border-radius: 6px; padding: 2px 8px; font-size: 11px;
+            }}
+            QComboBox:hover {{ border-color: {ACCENT}; }}
+            QComboBox QAbstractItemView {{
+                background: {BG2}; color: {TEXT}; border: 1px solid {BORDER2};
+                selection-background-color: {ACCENT}; outline: none;
+            }}
+        """)
+        self._populate_speakers()
+        self.speaker_combo.currentIndexChanged.connect(self._on_speaker_changed)
+        spk.addWidget(spl)
+        spk.addWidget(self.speaker_combo)
+        ctrl_layout.addLayout(spk)
 
         layout.addWidget(ctrl_card)
 
-#         # ΓöÇΓöÇΓöÇ Mic Selection (for future voice input) ΓöÇΓöÇΓöÇ
-#         mic_row = QFrame()
-#         mic_row.setObjectName("controlCard")
-#         mic_row.setFixedHeight(36)
-#         mic_layout = QHBoxLayout(mic_row)
-#         mic_layout.setContentsMargins(12, 0, 12, 0)
-#         mic_label = QLabel("Mic")
-#         mic_label.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
-#         mic_layout.addWidget(mic_label)
-#         self.mic_combo = ClickOnlyComboBox()
-#         self._populate_microphones()
-#         self.mic_combo.currentIndexChanged.connect(self._on_mic_changed)
-#         mic_layout.addWidget(self.mic_combo, 1)
-#         layout.addWidget(mic_row)
+        # Mic Selection
+        mic_row = QFrame()
+        mic_row.setObjectName("controlCard")
+        mic_row.setFixedHeight(36)
+        mic_layout = QHBoxLayout(mic_row)
+        mic_layout.setContentsMargins(12, 0, 12, 0)
+        mic_label = QLabel("Mic")
+        mic_label.setStyleSheet(f"color: {TEXT3}; font-size: 10px; font-weight: 500; letter-spacing: 1px;")
+        mic_layout.addWidget(mic_label)
+        self.mic_combo = ClickOnlyComboBox()
+        self.mic_combo.setFixedHeight(28)
+        self.mic_combo.setStyleSheet(f"""
+            QComboBox {{
+                background: {BG3}; color: {TEXT}; border: 1px solid {BORDER};
+                border-radius: 6px; padding: 2px 8px; font-size: 11px;
+            }}
+            QComboBox:hover {{ border-color: {ACCENT}; }}
+            QComboBox QAbstractItemView {{
+                background: {BG2}; color: {TEXT}; border: 1px solid {BORDER2};
+                selection-background-color: {ACCENT}; outline: none;
+            }}
+        """)
+        self._populate_microphones()
+        self.mic_combo.currentIndexChanged.connect(self._on_mic_changed)
+        mic_layout.addWidget(self.mic_combo, 1)
+        layout.addWidget(mic_row)
 
 
         # ΓöÇΓöÇΓöÇ Text Display ΓöÇΓöÇΓöÇ
@@ -751,37 +775,47 @@ class NOLAReader(QMainWindow):
         self.voice_combo.setCurrentIndex(selected_idx)
 
     def _populate_speakers(self):
-        """Populate audio output device list."""
+        """Populate audio output device list with System Default option."""
         self.speaker_combo.clear()
+        # Always add System Default as first option
+        self.speaker_combo.addItem("🔊 System Default", "__system_default__")
         devices = QMediaDevices.audioOutputs()
-        saved = self.settings.get("speaker", "")
+        saved = self.settings.get("speaker", "__system_default__")
         selected = 0
         for i, dev in enumerate(devices):
             desc = dev.description()
-            label = f"Default - {desc}" if dev.isDefault() else f"  {desc}"
+            label = f"  {desc}"
             self.speaker_combo.addItem(label, dev.id())
             if dev.id() == saved:
-                selected = i
-        if not devices:
-            self.speaker_combo.addItem("Default speaker", "")
+                selected = i + 1  # offset for System Default
         self.speaker_combo.setCurrentIndex(selected)
-        # Apply saved speaker
         self._apply_speaker(selected)
 
     def _apply_speaker(self, idx=None):
         """Apply the selected audio output to QAudioOutput."""
-        devices = QMediaDevices.audioOutputs()
-        if not devices:
-            return
         if idx is None:
             idx = self.speaker_combo.currentIndex()
-        if 0 <= idx < len(devices):
-            self.audio_output.setDevice(devices[idx])
+        if idx == 0:
+            # System Default — use default device
+            default_dev = QMediaDevices.defaultAudioOutput()
+            self.audio_output.setDevice(default_dev)
+            return
+        devices = QMediaDevices.audioOutputs()
+        dev_idx = idx - 1  # offset for System Default
+        if 0 <= dev_idx < len(devices):
+            self.audio_output.setDevice(devices[dev_idx])
 
     def _on_speaker_changed(self, idx):
+        if idx == 0:
+            # System Default
+            default_dev = QMediaDevices.defaultAudioOutput()
+            self.audio_output.setDevice(default_dev)
+            self.settings.set("speaker", "__system_default__")
+            return
         devices = QMediaDevices.audioOutputs()
-        if 0 <= idx < len(devices):
-            dev = devices[idx]
+        dev_idx = idx - 1
+        if 0 <= dev_idx < len(devices):
+            dev = devices[dev_idx]
             self.audio_output.setDevice(dev)
             self.settings.set("speaker", dev.id())
 
