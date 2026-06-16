@@ -169,6 +169,10 @@ class FloatingWindow(QMainWindow):
         self.history = ChatHistory()
         from context import ConversationContext
         self.conversation = ConversationContext()
+        from memory import SessionMemory
+        self.session_memory = SessionMemory()
+        self._lesson = None
+        self._lesson_step = 0
         self._setup_ui()
         self._load_history_ui()
         self._apply_style()
@@ -423,6 +427,10 @@ class FloatingWindow(QMainWindow):
         self.history.add_message("user", text)
         self.conversation.add_message("user", text)
 
+        # Check for teach mode commands
+        if self._handle_teach_command(text):
+            return
+
         # Check if we have captured context for follow-up
         if self.conversation.last_captured_text:
             # Send as follow-up question with context
@@ -442,7 +450,7 @@ class FloatingWindow(QMainWindow):
             self._thread.finished.connect(self._thread.deleteLater)
             self._thread.start()
         else:
-            # Placeholder response until Phase 3
+            # Placeholder response
             self._add_bubble("tutor", "I received your question. Click 💡 Explain to capture something on screen first, then ask follow-up questions.")
             self.history.add_message("tutor", "I received your question. Click 💡 Explain to capture something on screen first, then ask follow-up questions.")
             self.conversation.add_message("tutor", "I received your question. Click 💡 Explain to capture something on screen first, then ask follow-up questions.")
@@ -618,7 +626,206 @@ class FloatingWindow(QMainWindow):
         self._add_bubble("tutor", f"❌ Error: {error_msg}")
 
     def _on_teach(self):
-        self._add_bubble("tutor", "📚 Teach mode will be available in Phase 5. I'll create structured lessons and track your progress.")
+        """Start or continue a structured lesson."""
+        from teach import detect_topic, create_lesson_plan, get_saved_lessons, get_lesson_summary
+
+        # Check for saved lessons
+        saved = get_saved_lessons()
+        if saved:
+            latest = saved[0]
+            summary = get_lesson_summary(latest)
+            self._add_bubble("tutor", f"📚 Found saved lesson:\n\n{summary}\n\nType 'resume' to continue, or capture new content to start a fresh lesson.")
+            self._lesson = latest
+            return
+
+        # Check if we have captured content to detect topic
+        if self.conversation.last_captured_text:
+            topic = detect_topic(self.conversation.last_captured_text)
+            self._lesson = create_lesson_plan(topic, "beginner")
+            self._lesson_step = 0
+            self._show_lesson_intro()
+        else:
+            self._add_bubble("tutor", "📚 To start a lesson, first click 💡 Explain to capture something on screen (code, spreadsheet, diagram, etc.), then click 📚 Teach again.")
+
+    def _show_lesson_intro(self):
+        """Show the lesson introduction."""
+        if not self._lesson:
+            return
+        steps = self._lesson["steps"]
+        total = len(steps)
+        step_list = "\n".join(f"{s['number']}. {s['title']}" for s in steps)
+        self._add_bubble("tutor",
+            f"📚 **{self._lesson['title']}** — Beginner Level\n\n"
+            f"{total} steps:\n{step_list}\n\n"
+            f"Type 'start' to begin step 1, or 'quiz' to test your knowledge."
+        )
+        self.conversation.set_topic(self._lesson["title"])
+        from teach import save_lesson
+        save_lesson(self._lesson)
+
+    def _handle_teach_command(self, text: str):
+        """Handle teach mode commands."""
+        cmd = text.lower().strip()
+
+        if cmd == "start" and self._lesson:
+            self._start_lesson_step()
+            return True
+
+        if cmd == "next" and self._lesson:
+            self._advance_lesson()
+            return True
+
+        if cmd == "quiz" and self._lesson:
+            self._run_quiz()
+            return True
+
+        if cmd == "resume" and self._lesson:
+            self._resume_lesson()
+            return True
+
+        if cmd == "progress":
+            self._show_progress()
+            return True
+
+        if cmd == "save":
+            self._save_session()
+            return True
+
+        if cmd == "load":
+            self._load_session()
+            return True
+
+        return False
+
+    def _start_lesson_step(self):
+        """Start the current lesson step."""
+        if not self._lesson:
+            return
+        steps = self._lesson["steps"]
+        if self._lesson_step >= len(steps):
+            self._add_bubble("tutor", "🎉 You've completed all steps! Type 'quiz' for a final review, or 'save' to save your progress.")
+            return
+
+        step = steps[self._lesson_step]
+        step["status"] = "in_progress"
+        self._add_bubble("tutor",
+            f"📖 **Step {step['number']}: {step['title']}**\n\n"
+            f"Let's learn about {step['title']}. I'll explain the key concepts.\n\n"
+            f"When you're ready, type 'quiz' to test your understanding, or 'next' to move on."
+        )
+
+        # Auto-explain if we have captured content
+        if self.conversation.last_captured_text:
+            self._add_bubble("tutor", f"💡 I see you have captured content. Let me explain {step['title']} based on what's on your screen…")
+            self.btn_explain.setText("⏳ Working…")
+            self.btn_explain.setEnabled(False)
+
+            self._thread = QThread()
+            context = self.conversation.get_context_for_prompt()
+            question = f"Teach me about {step['title']}. Explain the key concepts step by step with examples."
+            self._worker = ExplainWorker(None, question, context=context)
+            self._worker.moveToThread(self._thread)
+            self._thread.started.connect(self._worker.run)
+            self._worker.finished.connect(self._on_explain_done)
+            self._worker.error.connect(self._on_explain_error)
+            self._worker.finished.connect(self._thread.quit)
+            self._worker.error.connect(self._thread.quit)
+            self._thread.finished.connect(self._thread.deleteLater)
+            self._thread.start()
+
+    def _advance_lesson(self):
+        """Mark current step complete and move to next."""
+        if not self._lesson:
+            return
+        steps = self._lesson["steps"]
+        if self._lesson_step < len(steps):
+            steps[self._lesson_step]["status"] = "completed"
+            self._add_bubble("tutor", f"✅ Step {steps[self._lesson_step]['number']} completed!")
+        self._lesson_step += 1
+        from teach import save_lesson
+        save_lesson(self._lesson)
+        self._start_lesson_step()
+
+    def _run_quiz(self):
+        """Run a quiz for the current step."""
+        if not self._lesson:
+            return
+        from teach import generate_quiz
+        steps = self._lesson["steps"]
+        if self._lesson_step >= len(steps):
+            self._add_bubble("tutor", "🎉 All steps complete! Great work.")
+            return
+
+        step = steps[self._lesson_step]
+        quiz = generate_quiz(self._lesson["topic"], step["title"])
+
+        quiz_text = f"📝 **Quiz: {step['title']}**\n\n"
+        for i, q in enumerate(quiz):
+            quiz_text += f"{i+1}. {q['q']}\n"
+            if q.get("choices"):
+                quiz_text += f"   A) {q['choices'][0]}  B) {q['choices'][1]}  C) {q['choices'][2]}  D) {q['choices'][3]}\n"
+            quiz_text += f"   Answer: ||{q['a']}||\n\n"
+
+        self._add_bubble("tutor", quiz_text)
+        step["quiz_score"] = "attempted"
+        from teach import save_lesson
+        save_lesson(self._lesson)
+
+    def _resume_lesson(self):
+        """Resume from the first incomplete step."""
+        if not self._lesson:
+            return
+        steps = self._lesson["steps"]
+        for i, step in enumerate(steps):
+            if step["status"] != "completed":
+                self._lesson_step = i
+                self._add_bubble("tutor", f"📚 Resuming at Step {i+1}: {step['title']}")
+                self._start_lesson_step()
+                return
+        self._add_bubble("tutor", "🎉 All steps completed! Type 'quiz' for review.")
+
+    def _show_progress(self):
+        """Show learning progress."""
+        from teach import load_progress, get_saved_lessons, get_lesson_summary
+        saved = get_saved_lessons()
+        if not saved:
+            self._add_bubble("tutor", "📊 No saved lessons yet. Start a lesson with 📚 Teach!")
+            return
+
+        progress_text = "📊 **Your Learning Progress**\n\n"
+        for lesson in saved[:5]:
+            progress_text += get_lesson_summary(lesson) + "\n\n"
+        self._add_bubble("tutor", progress_text)
+
+    def _save_session(self):
+        """Save the current session."""
+        from teach import load_progress
+        progress = load_progress()
+        session_id = self.session_memory.save_current_state(
+            self.conversation, progress, self.conversation.last_captured_text
+        )
+        self._add_bubble("tutor", f"💾 Session saved! ID: {session_id}\n\nType 'load' later to resume where you left off.")
+
+    def _load_session(self):
+        """Load the most recent session."""
+        sessions = self.session_memory.list_sessions()
+        if not sessions:
+            self._add_bubble("tutor", "📂 No saved sessions found. Start learning and type 'save' to create one!")
+            return
+
+        latest = sessions[0]
+        data = self.session_memory.resume_session(latest["id"])
+        if data:
+            self._add_bubble("tutor",
+                f"📂 Resumed session: **{latest['name']}**\n"
+                f"Saved: {latest['created_at'][:16]}\n\n"
+                f"Your previous conversation and progress have been restored."
+            )
+            # Restore conversation
+            for msg in data.get("conversation", []):
+                self.conversation.add_message(msg["role"], msg["content"])
+            if data.get("last_captured_text"):
+                self.conversation.set_captured_text(data["last_captured_text"])
 
     # -- Drag / Resize ------------------------------------------------------
     def _get_resize_edge(self, pos):
