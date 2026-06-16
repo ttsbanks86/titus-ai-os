@@ -69,7 +69,7 @@ PROJECTS = [
         "label": "DocFlow",
         "path": str(LIVE_COWORK / "DOCFLOW"),
         "description": "Local desktop document workflow app; recent recursion crash fixed and EXE rebuilt.",
-        "links": ["memory:troubleshooting:DocFlow-Recursion", "workflow:desktop-app-build"],
+        "links": ["memory:troubleshooting:docflow-recursion", "workflow:desktop-app-build"],
     },
     {
         "id": "project:hermes-gateway",
@@ -354,7 +354,7 @@ def main() -> None:
             "by_risk": dict(risk_counts),
         },
         "nodes": [asdict(node) for node in sorted(nodes.values(), key=lambda n: (n.type, n.runtime, n.label.lower()))],
-        "edges": [asdict(edge) for edge in edges],
+        "edges": [asdict(edge) for edge in edges if edge.source in nodes and edge.target in nodes],
     }
 
     GRAPH_PATH.write_text(json.dumps(graph, indent=2, ensure_ascii=False), encoding="utf-8")

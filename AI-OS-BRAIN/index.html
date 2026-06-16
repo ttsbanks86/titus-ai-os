@@ -76,7 +76,29 @@
     .topbar .title { font-weight: 700; }
     .topbar .meta { color: var(--muted); font-size: 12px; margin-top: 3px; }
     .actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .actions button { white-space: nowrap; }
+    .view-note { color: var(--muted); font-size: 12px; margin-top: 8px; line-height: 1.45; }
     #cy { width: 100%; height: 100%; }
+    #mindmap { display: none; height: 100%; overflow: auto; padding: 24px; }
+    .mind-root { max-width: 520px; margin: 0 auto 22px; text-align: center; padding: 18px; border: 1px solid rgba(56,189,248,.35); border-radius: 22px; background: linear-gradient(135deg, rgba(56,189,248,.18), rgba(167,139,250,.12)); box-shadow: var(--shadow); }
+    .mind-root h2 { margin: 0 0 6px; font-size: 22px; }
+    .mind-root p { margin: 0; color: var(--muted); font-size: 13px; }
+    .mind-grid { display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 16px; align-items: start; }
+    .mind-branch { border: 1px solid var(--line); border-radius: 18px; background: rgba(15,23,42,.82); padding: 14px; box-shadow: 0 14px 42px rgba(0,0,0,.18); }
+    .mind-branch h3 { margin: 0 0 10px; display: flex; align-items: center; gap: 9px; font-size: 15px; }
+    .mind-count { margin-left: auto; color: var(--muted); font-size: 11px; font-weight: 500; }
+    .mind-list { display: grid; gap: 7px; }
+    .mind-node { border: 1px solid rgba(148,163,184,.18); background: rgba(2,6,23,.46); border-radius: 12px; padding: 9px 10px; cursor: pointer; display: grid; gap: 3px; }
+    .mind-node:hover { border-color: rgba(56,189,248,.7); background: rgba(56,189,248,.08); }
+    .mind-node strong { font-size: 13px; }
+    .mind-node span { color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mind-node.high { border-color: rgba(251,113,133,.45); }
+    .mind-empty { color: var(--muted); font-size: 13px; padding: 8px; }
+    .graph-mode #cy { display: block; }
+    .graph-mode #mindmap { display: none; }
+    .mind-mode #cy { display: none; }
+    .mind-mode #mindmap { display: block; }
+    @media (max-width: 1200px) { .mind-grid { grid-template-columns: 1fr; } }
     .legend { display: grid; gap: 8px; }
     .legend-row { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13px; }
     .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
@@ -120,6 +142,7 @@
       <div class="section-title">Find anything</div>
       <input class="search" id="search" placeholder="Search agents, skills, projects, memory…" />
       <div class="section-title">Views</div>
+      <div class="view-note">Use Mind Map for a clearer top-down structure. Force Map is better for exploring every connection.</div>
       <div class="filters" id="viewFilters">
         <button class="active" data-view="all">All</button>
         <button data-view="agent">Agents</button>
@@ -158,12 +181,15 @@
           <div class="meta" id="generatedAt">Loading graph…</div>
         </div>
         <div class="actions">
+          <button id="mindBtn" class="active">Mind Map</button>
+          <button id="forceBtn">Force Map</button>
           <button id="fitBtn">Fit Map</button>
           <button id="riskBtn">Show Risk</button>
           <button id="exportBtn">Download JSON</button>
         </div>
       </div>
       <div id="cy" role="application" aria-label="AI OS system graph"></div>
+      <div id="mindmap" aria-label="AI OS mind map"></div>
     </main>
 
     <section class="inspector">
@@ -182,7 +208,7 @@
   </div>
 
   <script>
-    const state = { graph: null, cy: null, view: 'all', runtime: 'all', query: '' };
+    const state = { graph: null, cy: null, view: 'all', runtime: 'all', query: '', layout: 'mind', filterTimer: null };
     const graphUrl = './brain-data/graph.json';
 
     const byId = id => document.getElementById(id);
@@ -194,11 +220,41 @@
       return [...nodes, ...edges];
     }
 
+    function layoutOptions(fit = true) {
+      if (state.layout === 'mind') {
+        return {
+          name: 'breadthfirst',
+          directed: true,
+          roots: state.cy ? state.cy.$id('project:ai-os-brain') : undefined,
+          spacingFactor: 1.18,
+          padding: 48,
+          fit,
+          animate: false
+        };
+      }
+      return {
+        name: 'cose',
+        animate: false,
+        fit,
+        padding: 42,
+        nodeRepulsion: 6500,
+        idealEdgeLength: 92,
+        edgeElasticity: 0.1,
+        gravity: 0.22,
+        numIter: 450
+      };
+    }
+
+    function runLayout(fit = true) {
+      if (!state.cy) return;
+      state.cy.layout(layoutOptions(fit)).run();
+    }
+
     function initCy(graph) {
       state.cy = cytoscape({
         container: byId('cy'),
         elements: toElements(graph),
-        minZoom: 0.16,
+        minZoom: 0.12,
         maxZoom: 2.2,
         style: [
           { selector: 'node', style: {
@@ -239,7 +295,7 @@
           { selector: '.highlight', style: { 'border-width': 5, 'border-color': '#fff', 'opacity': 1 } },
           { selector: 'edge.highlight', style: { 'line-color': '#38bdf8', 'target-arrow-color': '#38bdf8', 'width': 2.6, 'opacity': 1 } }
         ],
-        layout: { name: 'cose', animate: false, fit: true, padding: 42, nodeRepulsion: 9000, idealEdgeLength: 100, edgeElasticity: 0.12, nestingFactor: 1.2, gravity: 0.2, numIter: 1200 }
+        layout: layoutOptions(true)
       });
 
       state.cy.on('tap', 'node', evt => selectNode(evt.target));
@@ -250,22 +306,33 @@
       const cy = state.cy;
       if (!cy) return;
       const q = state.query.trim().toLowerCase();
-      cy.elements().removeClass('hidden');
-      cy.nodes().forEach(node => {
-        const data = node.data();
-        const viewOk = state.view === 'all' || data.type === state.view || (state.view === 'risk' && data.risk === 'high');
-        const runtimeOk = state.runtime === 'all' || data.runtime === state.runtime;
-        const text = `${data.label || ''} ${data.description || ''} ${data.path || ''} ${data.type || ''} ${data.runtime || ''}`.toLowerCase();
-        const queryOk = !q || text.includes(q);
-        if (!(viewOk && runtimeOk && queryOk)) node.addClass('hidden');
+      renderMindMap();
+      cy.batch(() => {
+        cy.elements().removeClass('hidden');
+        cy.nodes().forEach(node => {
+          const data = node.data();
+          const viewOk = state.view === 'all' || data.type === state.view || (state.view === 'risk' && data.risk === 'high');
+          const runtimeOk = state.runtime === 'all' || data.runtime === state.runtime;
+          const text = `${data.label || ''} ${data.description || ''} ${data.path || ''} ${data.type || ''} ${data.runtime || ''}`.toLowerCase();
+          const queryOk = !q || text.includes(q);
+          if (!(viewOk && runtimeOk && queryOk)) node.addClass('hidden');
+        });
+        cy.edges().forEach(edge => {
+          if (edge.source().hasClass('hidden') || edge.target().hasClass('hidden')) edge.addClass('hidden');
+        });
       });
-      cy.edges().forEach(edge => {
-        if (edge.source().hasClass('hidden') || edge.target().hasClass('hidden')) edge.addClass('hidden');
-      });
-      cy.layout({ name: 'cose', animate: false, fit: true, padding: 42, numIter: 600 }).run();
+      runLayout(true);
+    }
+
+    function selectById(id) {
+      const node = state.cy?.$id(id);
+      if (node && node.length) selectNode(node);
     }
 
     function selectNode(node) {
+      if (state.layout === 'mind') {
+        // Keep the mind map visible while still filling the inspector.
+      }
       clearHighlight(false);
       const neighborhood = node.closedNeighborhood();
       state.cy.elements().addClass('faded');
@@ -315,6 +382,69 @@
       [...container.querySelectorAll('button')].forEach(b => b.classList.toggle('active', b.dataset[attr] === value));
     }
 
+    function visibleMindNodes() {
+      if (!state.graph) return [];
+      const q = state.query.trim().toLowerCase();
+      return state.graph.nodes.filter(n => {
+        const viewOk = state.view === 'all' || n.type === state.view || (state.view === 'risk' && n.risk === 'high');
+        const runtimeOk = state.runtime === 'all' || n.runtime === state.runtime;
+        const text = `${n.label || ''} ${n.description || ''} ${n.path || ''} ${n.type || ''} ${n.runtime || ''}`.toLowerCase();
+        const queryOk = !q || text.includes(q);
+        return viewOk && runtimeOk && queryOk;
+      });
+    }
+
+    function renderMindMap() {
+      const host = byId('mindmap');
+      if (!host || !state.graph) return;
+      const nodes = visibleMindNodes();
+      const branches = [
+        ['OpenCode', 'opencode', '🔵'],
+        ['Claude / Cloud', 'claude', '🟣'],
+        ['Goose', 'goose', '🟢'],
+        ['Workspace', 'workspace', '🟠'],
+        ['Projects & Workflows', 'project', '⚙️'],
+        ['Memory & Troubleshooting', 'memory', '🧠'],
+        ['Portfolio', 'portfolio', '💼'],
+        ['Risk / Approval Gates', 'risk', '🚦'],
+      ];
+      const branchHtml = branches.map(([title, key, icon]) => {
+        let items = nodes.filter(n => {
+          if (key === 'project') return ['project', 'workflow'].includes(n.type) || n.runtime === 'project';
+          if (key === 'memory') return ['memory', 'troubleshooting', 'file'].includes(n.type) || n.runtime === 'memory';
+          if (key === 'risk') return n.risk === 'high' || n.type === 'risk' || n.runtime === 'risk';
+          if (key === 'portfolio') return n.type === 'portfolio' || n.runtime === 'portfolio';
+          return n.runtime === key;
+        });
+        items = items.sort((a, b) => (a.type + a.label).localeCompare(b.type + b.label)).slice(0, 34);
+        const list = items.length ? items.map(n => `
+          <button class="mind-node ${n.risk === 'high' ? 'high' : ''}" data-node-id="${n.id}">
+            <strong>${n.label}</strong>
+            <span>${n.type}${n.risk === 'high' ? ' · approval-gated' : ''}</span>
+          </button>`).join('') : '<div class="mind-empty">No matching nodes in this view.</div>';
+        return `<section class="mind-branch"><h3>${icon} ${title}<span class="mind-count">${items.length}</span></h3><div class="mind-list">${list}</div></section>`;
+      }).join('');
+      host.innerHTML = `
+        <div class="mind-root">
+          <h2>🧠 Titus AI OS Brain</h2>
+          <p>Start here: runtimes branch into agents, skills, projects, memory, portfolio, and risk gates. Use filters to simplify.</p>
+        </div>
+        <div class="mind-grid">${branchHtml}</div>`;
+      host.querySelectorAll('[data-node-id]').forEach(btn => {
+        btn.addEventListener('click', () => selectById(btn.dataset.nodeId));
+      });
+    }
+
+    function setMode(mode) {
+      state.layout = mode;
+      const main = document.querySelector('main');
+      main.classList.toggle('mind-mode', mode === 'mind');
+      main.classList.toggle('graph-mode', mode !== 'mind');
+      byId('mindBtn').classList.toggle('active', mode === 'mind');
+      byId('forceBtn').classList.toggle('active', mode !== 'mind');
+      if (mode === 'mind') renderMindMap(); else runLayout(true);
+    }
+
     function wireControls() {
       byId('viewFilters').addEventListener('click', e => {
         if (!e.target.matches('button')) return;
@@ -328,7 +458,13 @@
         setActive(byId('runtimeFilters'), 'runtime', state.runtime);
         applyFilters();
       });
-      byId('search').addEventListener('input', e => { state.query = e.target.value; applyFilters(); });
+      byId('search').addEventListener('input', e => {
+        state.query = e.target.value;
+        clearTimeout(state.filterTimer);
+        state.filterTimer = setTimeout(applyFilters, 180);
+      });
+      byId('mindBtn').addEventListener('click', () => setMode('mind'));
+      byId('forceBtn').addEventListener('click', () => setMode('force'));
       byId('fitBtn').addEventListener('click', () => state.cy.fit(undefined, 42));
       byId('riskBtn').addEventListener('click', () => {
         state.view = 'risk'; setActive(byId('viewFilters'), 'view', 'risk'); applyFilters();
@@ -356,6 +492,7 @@
         byId('generatedAt').textContent = `Generated ${graph.generated_at} · ${graph.root}`;
         initCy(graph);
         wireControls();
+        setMode('mind');
       } catch (err) {
         byId('generatedAt').textContent = 'Graph failed to load';
         byId('cy').innerHTML = `<pre style="margin:24px;color:#fecdd3">${err.message}\nRun: python scan_brain.py</pre>`;

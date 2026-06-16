@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T09:31:54",
+  "generated_at": "2026-06-16T11:55:07",
   "root": "C:\\Users\\tbank\\Desktop\\Live Cowork",
   "summary": {
     "nodes": 425,
@@ -7821,19 +7821,13 @@
     },
     {
       "source": "project:docflow",
-      "target": "memory:troubleshooting:DocFlow-Recursion",
+      "target": "memory:troubleshooting:docflow-recursion",
       "type": "connected_to",
       "label": "connected"
     },
     {
       "source": "project:docflow",
       "target": "workflow:desktop-app-build",
-      "type": "connected_to",
-      "label": "connected"
-    },
-    {
-      "source": "project:hermes-gateway",
-      "target": "memory:troubleshooting:Bot-Setup-Mismatch",
       "type": "connected_to",
       "label": "connected"
     },
