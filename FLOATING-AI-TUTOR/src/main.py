@@ -275,30 +275,34 @@ class FloatingWindow(QMainWindow):
         bar = QFrame()
         bar.setObjectName("actionbar")
         layout = QHBoxLayout(bar)
-        layout.setContentsMargins(0, 4, 0, 4)
-        layout.setSpacing(6)
+        layout.setContentsMargins(0, 6, 0, 6)
+        layout.setSpacing(8)
 
-        self.btn_mic = QPushButton("🎤 Mic")
-        self.btn_mic.setObjectName("actionBtn")
-        self.btn_mic.setToolTip("Voice input (Phase 4)")
+        self.btn_mic = QPushButton("🎤")
+        self.btn_mic.setObjectName("actionBtn micBtn")
+        self.btn_mic.setToolTip("Voice input — click to speak")
+        self.btn_mic.setFixedSize(44, 44)
         self.btn_mic.clicked.connect(self._on_mic)
         layout.addWidget(self.btn_mic)
 
-        self.btn_screenshot = QPushButton("📸 Capture")
-        self.btn_screenshot.setObjectName("actionBtn")
-        self.btn_screenshot.setToolTip("Capture screen region (Phase 2)")
+        self.btn_screenshot = QPushButton("📸")
+        self.btn_screenshot.setObjectName("actionBtn captureBtn")
+        self.btn_screenshot.setToolTip("Capture screen region")
+        self.btn_screenshot.setFixedSize(44, 44)
         self.btn_screenshot.clicked.connect(self._on_screenshot)
         layout.addWidget(self.btn_screenshot)
 
-        self.btn_explain = QPushButton("💡 Explain")
-        self.btn_explain.setObjectName("actionBtn primary")
-        self.btn_explain.setToolTip("Explain what's on screen (Phase 3)")
+        self.btn_explain = QPushButton("💡")
+        self.btn_explain.setObjectName("actionBtn explainBtn")
+        self.btn_explain.setToolTip("Explain what's on screen")
+        self.btn_explain.setFixedSize(44, 44)
         self.btn_explain.clicked.connect(self._on_explain)
         layout.addWidget(self.btn_explain)
 
-        self.btn_teach = QPushButton("📚 Teach")
-        self.btn_teach.setObjectName("actionBtn")
-        self.btn_teach.setToolTip("Start a lesson (Phase 5)")
+        self.btn_teach = QPushButton("📚")
+        self.btn_teach.setObjectName("actionBtn teachBtn")
+        self.btn_teach.setToolTip("Start a structured lesson")
+        self.btn_teach.setFixedSize(44, 44)
         self.btn_teach.clicked.connect(self._on_teach)
         layout.addWidget(self.btn_teach)
 
@@ -331,55 +335,165 @@ class FloatingWindow(QMainWindow):
         self.setStyleSheet("""
             QMainWindow { background: transparent; }
             QWidget { font-family: 'Segoe UI', 'Inter', Arial, sans-serif; font-size: 13px; color: #e5e7eb; }
+
+            /* Title bar — glass gradient */
             #titlebar {
-                background: qlineargradient(x1:0,y1:0,x2:1,y2:0, stop:0 #1e1b4b, stop:0.5 #312e81, stop:1 #1e1b4b);
-                border-radius: 16px 16px 0 0;
-                border: 1px solid rgba(99,102,241,0.3);
+                background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+                    stop:0 rgba(30,27,75,0.95), stop:0.3 rgba(49,46,129,0.95),
+                    stop:0.7 rgba(79,70,229,0.9), stop:1 rgba(30,27,75,0.95));
+                border-radius: 18px 18px 0 0;
+                border: 1px solid rgba(99,102,241,0.35);
                 border-bottom: none;
             }
-            #titleLabel { color: #e0e7ff; }
+            #titleLabel { color: #e0e7ff; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; }
+
+            /* Tool buttons — glass circles */
             #toolBtn {
-                background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-                border-radius: 8px; color: #c7d2fe; font-size: 14px;
+                background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+                border-radius: 10px; color: #c7d2fe; font-size: 14px;
             }
-            #toolBtn:hover { background: rgba(99,102,241,0.25); border-color: rgba(99,102,241,0.5); color: #fff; }
+            #toolBtn:hover { background: rgba(99,102,241,0.3); border-color: rgba(99,102,241,0.6); color: #fff; }
             #closeBtn {
-                background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);
-                border-radius: 8px; color: #fca5a5; font-size: 13px; font-weight: 600;
+                background: rgba(239,68,68,0.18); border: 1px solid rgba(239,68,68,0.35);
+                border-radius: 10px; color: #fca5a5; font-size: 13px; font-weight: 600;
             }
-            #closeBtn:hover { background: rgba(239,68,68,0.35); color: #fff; }
+            #closeBtn:hover { background: rgba(239,68,68,0.4); color: #fff; }
+
+            /* Content frame — glass card */
             #contentFrame {
-                background: rgba(15,15,35,0.92);
-                border: 1px solid rgba(99,102,241,0.25);
+                background: rgba(10,10,30,0.94);
+                border: 1px solid rgba(99,102,241,0.2);
                 border-top: none;
-                border-radius: 0 0 16px 16px;
+                border-radius: 0 0 18px 18px;
             }
-            #chatScroll {
-                background: transparent; border: none;
-            }
+            #chatScroll { background: transparent; border: none; }
             #chatScroll > QWidget { background: transparent; }
-            #actionbar { background: transparent; }
+
+            /* Action bar */
+            #actionbar { background: transparent; padding: 2px 0; }
+
+            /* Action buttons — modern icon circles with glow */
             #actionBtn {
-                background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-                border-radius: 10px; color: #c7d2fe; padding: 6px 10px; font-size: 12px; font-weight: 500;
+                background: rgba(255,255,255,0.06);
+                border: 1.5px solid rgba(255,255,255,0.1);
+                border-radius: 14px;
+                color: #c7d2fe;
+                font-size: 18px;
+                font-weight: 600;
             }
-            #actionBtn:hover { background: rgba(99,102,241,0.2); border-color: rgba(99,102,241,0.45); }
-            #actionBtn.primary {
-                background: rgba(99,102,241,0.25); border-color: rgba(99,102,241,0.5);
-                color: #e0e7ff; font-weight: 600;
+            #actionBtn:hover {
+                background: rgba(99,102,241,0.22);
+                border-color: rgba(99,102,241,0.55);
+                color: #fff;
             }
+            #actionBtn:pressed {
+                background: rgba(99,102,241,0.35);
+                border-color: rgba(129,140,248,0.7);
+            }
+
+            /* Mic button — warm accent */
+            #micBtn {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(236,72,153,0.18), stop:1 rgba(219,39,119,0.08));
+                border-color: rgba(236,72,153,0.35);
+                color: #f9a8d4;
+            }
+            #micBtn:hover {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(236,72,153,0.35), stop:1 rgba(219,39,119,0.18));
+                border-color: rgba(236,72,153,0.65);
+                color: #fff;
+            }
+            #micBtn[listening="true"] {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(236,72,153,0.5), stop:1 rgba(219,39,119,0.3));
+                border-color: rgba(236,72,153,0.8);
+                color: #fff;
+            }
+
+            /* Capture button — cyan accent */
+            #captureBtn {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(6,182,212,0.18), stop:1 rgba(14,165,233,0.08));
+                border-color: rgba(6,182,212,0.35);
+                color: #67e8f9;
+            }
+            #captureBtn:hover {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(6,182,212,0.35), stop:1 rgba(14,165,233,0.18));
+                border-color: rgba(6,182,212,0.65);
+                color: #fff;
+            }
+
+            /* Explain button — indigo glow (primary action) */
+            #explainBtn {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(99,102,241,0.3), stop:1 rgba(79,70,229,0.15));
+                border-color: rgba(99,102,241,0.5);
+                color: #c7d2fe;
+                font-size: 20px;
+            }
+            #explainBtn:hover {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(99,102,241,0.5), stop:1 rgba(79,70,229,0.3));
+                border-color: rgba(129,140,248,0.75);
+                color: #fff;
+            }
+            #explainBtn[working="true"] {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(99,102,241,0.55), stop:1 rgba(79,70,229,0.35));
+                border-color: rgba(129,140,248,0.9);
+                color: #fff;
+            }
+
+            /* Teach button — emerald accent */
+            #teachBtn {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(16,185,129,0.18), stop:1 rgba(5,150,105,0.08));
+                border-color: rgba(16,185,129,0.35);
+                color: #6ee7b7;
+            }
+            #teachBtn:hover {
+                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                    stop:0 rgba(16,185,129,0.35), stop:1 rgba(5,150,105,0.18));
+                border-color: rgba(16,185,129,0.65);
+                color: #fff;
+            }
+
+            /* Input bar */
             #inputbar { background: transparent; }
             #chatInput {
-                background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-                border-radius: 12px; padding: 10px 14px; color: #e5e7eb; font-size: 13px;
+                background: rgba(255,255,255,0.05);
+                border: 1.5px solid rgba(255,255,255,0.1);
+                border-radius: 14px;
+                padding: 10px 14px;
+                color: #e5e7eb;
+                font-size: 13px;
             }
-            #chatInput:focus { border-color: rgba(99,102,241,0.6); background: rgba(255,255,255,0.08); }
+            #chatInput:focus {
+                border-color: rgba(99,102,241,0.55);
+                background: rgba(255,255,255,0.08);
+            }
             #chatInput::placeholder { color: #6b7280; }
+
+            /* Send button — gradient pill */
             #sendBtn {
-                background: #4f46e5; border: 1px solid #6366f1; border-radius: 12px;
-                color: #fff; font-weight: 600; font-size: 13px;
+                background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+                    stop:0 #4f46e5, stop:1 #6366f1);
+                border: none;
+                border-radius: 14px;
+                color: #fff;
+                font-weight: 700;
+                font-size: 13px;
             }
-            #sendBtn:hover { background: #6366f1; }
+            #sendBtn:hover {
+                background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+                    stop:0 #6366f1, stop:1 #818cf8);
+            }
+            #sendBtn:pressed {
+                background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+                    stop:0 #4338ca, stop:1 #4f46e5);
+            }
         """)
 
     # -- Chat bubbles -------------------------------------------------------
@@ -483,7 +597,9 @@ class FloatingWindow(QMainWindow):
 
     def _on_mic(self):
         """Listen for voice input and add to chat."""
-        self.btn_mic.setText("🎤 Listening…")
+        self.btn_mic.setProperty("listening", True)
+        self.btn_mic.style().unpolish(self.btn_mic)
+        self.btn_mic.style().polish(self.btn_mic)
         self.btn_mic.setEnabled(False)
 
         def _listen():
@@ -505,18 +621,19 @@ class FloatingWindow(QMainWindow):
 
     def _on_voice_input(self, text):
         """Handle voice input result."""
-        self.btn_mic.setText("🎤 Mic")
+        self.btn_mic.setProperty("listening", False)
+        self.btn_mic.style().unpolish(self.btn_mic)
+        self.btn_mic.style().polish(self.btn_mic)
         self.btn_mic.setEnabled(True)
         if text:
             self._add_bubble("user", f"🎤 {text}")
             self.input.setText(text)
             self.history.add_message("user", text)
             self.conversation.add_message("user", text)
-            # Auto-send if there's captured context
             if self.conversation.last_captured_text:
                 self._send_voice_question(text)
             else:
-                self._add_bubble("tutor", "I heard you! Type a question or click 💡 Explain to capture something on screen first.")
+                self._add_bubble("tutor", "I heard you! Type a question or click 💡 to capture something on screen first.")
         else:
             self._add_bubble("tutor", "🎤 Couldn't hear anything. Try again or type your question.")
 
@@ -583,7 +700,9 @@ class FloatingWindow(QMainWindow):
 
         # Show processing
         self._add_bubble("tutor", "💡 Analyzing screen content…")
-        self.btn_explain.setText("⏳ Working…")
+        self.btn_explain.setProperty("working", True)
+        self.btn_explain.style().unpolish(self.btn_explain)
+        self.btn_explain.style().polish(self.btn_explain)
         self.btn_explain.setEnabled(False)
 
         # Get conversation context for follow-up awareness
@@ -602,7 +721,9 @@ class FloatingWindow(QMainWindow):
         self._thread.start()
 
     def _on_explain_done(self, explanation):
-        self.btn_explain.setText("💡 Explain")
+        self.btn_explain.setProperty("working", False)
+        self.btn_explain.style().unpolish(self.btn_explain)
+        self.btn_explain.style().polish(self.btn_explain)
         self.btn_explain.setEnabled(True)
         self._add_bubble("user", "[Screen capture]")
         self._add_bubble("tutor", explanation)
@@ -621,7 +742,9 @@ class FloatingWindow(QMainWindow):
             pass
 
     def _on_explain_error(self, error_msg):
-        self.btn_explain.setText("💡 Explain")
+        self.btn_explain.setProperty("working", False)
+        self.btn_explain.style().unpolish(self.btn_explain)
+        self.btn_explain.style().polish(self.btn_explain)
         self.btn_explain.setEnabled(True)
         self._add_bubble("tutor", f"❌ Error: {error_msg}")
 
