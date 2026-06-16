@@ -117,10 +117,11 @@ class ExplainWorker(QObject):
     finished = Signal(str)  # explanation text
     error = Signal(str)     # error message
 
-    def __init__(self, pixmap, question=""):
+    def __init__(self, pixmap, question="", context=""):
         super().__init__()
         self._pixmap = pixmap
         self._question = question
+        self._context = context
 
     def run(self):
         try:
@@ -141,8 +142,8 @@ class ExplainWorker(QObject):
                 )
                 return
 
-            # AI explanation
-            result = explain(text, self._question)
+            # AI explanation with context
+            result = explain(text, self._question, context=self._context)
             self.finished.emit(result)
         except Exception as exc:
             self.error.emit(str(exc))
@@ -166,6 +167,8 @@ class FloatingWindow(QMainWindow):
         self._resize_start_pos = None
         self._resize_start_rect = None
         self.history = ChatHistory()
+        from context import ConversationContext
+        self.conversation = ConversationContext()
         self._setup_ui()
         self._load_history_ui()
         self._apply_style()
@@ -418,9 +421,31 @@ class FloatingWindow(QMainWindow):
         self.input.clear()
         self._add_bubble("user", text)
         self.history.add_message("user", text)
-        # Placeholder response until Phase 3
-        self._add_bubble("tutor", "I received your question. In Phase 3, I'll analyze your screen and provide a detailed explanation here.")
-        self.history.add_message("tutor", "I received your question. In Phase 3, I'll analyze your screen and provide a detailed explanation here.")
+        self.conversation.add_message("user", text)
+
+        # Check if we have captured context for follow-up
+        if self.conversation.last_captured_text:
+            # Send as follow-up question with context
+            self._add_bubble("tutor", "💡 Thinking about your question…")
+            self.btn_explain.setText("⏳ Working…")
+            self.btn_explain.setEnabled(False)
+
+            self._thread = QThread()
+            context = self.conversation.get_context_for_prompt()
+            self._worker = ExplainWorker(None, text, context=context)
+            self._worker.moveToThread(self._thread)
+            self._thread.started.connect(self._worker.run)
+            self._worker.finished.connect(self._on_explain_done)
+            self._worker.error.connect(self._on_explain_error)
+            self._worker.finished.connect(self._thread.quit)
+            self._worker.error.connect(self._thread.quit)
+            self._thread.finished.connect(self._thread.deleteLater)
+            self._thread.start()
+        else:
+            # Placeholder response until Phase 3
+            self._add_bubble("tutor", "I received your question. Click 💡 Explain to capture something on screen first, then ask follow-up questions.")
+            self.history.add_message("tutor", "I received your question. Click 💡 Explain to capture something on screen first, then ask follow-up questions.")
+            self.conversation.add_message("tutor", "I received your question. Click 💡 Explain to capture something on screen first, then ask follow-up questions.")
 
     def _toggle_collapse(self):
         self._collapsed = not self._collapsed
@@ -449,7 +474,60 @@ class FloatingWindow(QMainWindow):
             self._add_bubble("tutor", f"{prefix}: {msg['content'][:120]}")
 
     def _on_mic(self):
-        self._add_bubble("tutor", "🎤 Microphone input will be available in Phase 4 (Ask Anything mode).")
+        """Listen for voice input and add to chat."""
+        self.btn_mic.setText("🎤 Listening…")
+        self.btn_mic.setEnabled(False)
+
+        def _listen():
+            from voice import listen_once
+            text = listen_once(timeout_sec=10)
+            return text
+
+        self._mic_thread = QThread()
+        self._mic_worker = type('MicWorker', (QObject,), {
+            'finished': Signal(str),
+            'run': lambda self: self.finished.emit(_listen())
+        })()
+        self._mic_worker.moveToThread(self._mic_thread)
+        self._mic_thread.started.connect(self._mic_worker.run)
+        self._mic_worker.finished.connect(self._on_voice_input)
+        self._mic_worker.finished.connect(self._mic_thread.quit)
+        self._mic_thread.finished.connect(self._mic_thread.deleteLater)
+        self._mic_thread.start()
+
+    def _on_voice_input(self, text):
+        """Handle voice input result."""
+        self.btn_mic.setText("🎤 Mic")
+        self.btn_mic.setEnabled(True)
+        if text:
+            self._add_bubble("user", f"🎤 {text}")
+            self.input.setText(text)
+            self.history.add_message("user", text)
+            self.conversation.add_message("user", text)
+            # Auto-send if there's captured context
+            if self.conversation.last_captured_text:
+                self._send_voice_question(text)
+            else:
+                self._add_bubble("tutor", "I heard you! Type a question or click 💡 Explain to capture something on screen first.")
+        else:
+            self._add_bubble("tutor", "🎤 Couldn't hear anything. Try again or type your question.")
+
+    def _send_voice_question(self, question):
+        """Send a voice question with existing captured context."""
+        self._add_bubble("tutor", "💡 Thinking about your question…")
+        self.btn_explain.setText("⏳ Working…")
+        self.btn_explain.setEnabled(False)
+
+        self._thread = QThread()
+        self._worker = ExplainWorker(None, question, self.conversation.get_context_for_prompt())
+        self._worker.moveToThread(self._thread)
+        self._thread.started.connect(self._worker.run)
+        self._worker.finished.connect(self._on_explain_done)
+        self._worker.error.connect(self._on_explain_error)
+        self._worker.finished.connect(self._thread.quit)
+        self._worker.error.connect(self._thread.quit)
+        self._thread.finished.connect(self._thread.deleteLater)
+        self._thread.start()
 
     def _on_screenshot(self):
         """Capture a screen region and show extracted text."""
@@ -470,9 +548,12 @@ class FloatingWindow(QMainWindow):
         text = extract_text(pixmap)
         status = get_ocr_status()
         if text:
+            # Save to conversation context
+            self.conversation.set_captured_text(text)
             preview = text[:300] + ("…" if len(text) > 300 else "")
             self._add_bubble("tutor", f"📸 Captured {len(text)} characters:\n\n```\n{preview}\n```")
             self.history.add_message("tutor", f"📸 Captured {len(text)} characters: {preview}")
+            self.conversation.add_message("tutor", f"Captured {len(text)} characters from screen.")
         else:
             engines = ", ".join(k for k, v in status.items() if v)
             self._add_bubble("tutor", f"📸 Image captured but no text found. Available OCR: {engines or 'none'}")
@@ -497,9 +578,12 @@ class FloatingWindow(QMainWindow):
         self.btn_explain.setText("⏳ Working…")
         self.btn_explain.setEnabled(False)
 
+        # Get conversation context for follow-up awareness
+        context = self.conversation.get_context_for_prompt()
+
         # Start background worker
         self._thread = QThread()
-        self._worker = ExplainWorker(pixmap)
+        self._worker = ExplainWorker(pixmap, context=context)
         self._worker.moveToThread(self._thread)
         self._thread.started.connect(self._worker.run)
         self._worker.finished.connect(self._on_explain_done)
@@ -516,6 +600,17 @@ class FloatingWindow(QMainWindow):
         self._add_bubble("tutor", explanation)
         self.history.add_message("user", "[Screen capture]")
         self.history.add_message("tutor", explanation)
+        self.conversation.add_message("user", "[Screen capture]")
+        self.conversation.add_message("tutor", explanation)
+
+        # Read explanation aloud (TTS)
+        try:
+            from tts import speak
+            # Clean markdown for speech
+            clean = explanation.replace("**", "").replace("*", "").replace("#", "").replace("`", "")
+            speak(clean[:500])  # Speak first 500 chars to avoid long waits
+        except Exception:
+            pass
 
     def _on_explain_error(self, error_msg):
         self.btn_explain.setText("💡 Explain")

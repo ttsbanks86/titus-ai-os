@@ -42,16 +42,18 @@ def save_config(cfg: dict):
     CONFIG_FILE.write_text(json.dumps(cfg, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def explain_with_ollama(text: str, question: str = "", config: dict | None = None) -> Optional[str]:
+def explain_with_ollama(text: str, question: str = "", config: dict | None = None, context: str = "") -> Optional[str]:
     """Generate explanation using local Ollama model."""
     cfg = config or load_config()
     url = f"{cfg['base_url']}/api/generate"
 
     prompt = text.strip()
+    if context:
+        prompt = f"Previous conversation:\n{context}\n\n" + prompt
     if question:
-        prompt = f"Screen content:\n{text}\n\nUser question: {question}\n\nExplain this clearly."
+        prompt = f"{prompt}\n\nUser question: {question}\n\nExplain this clearly."
     else:
-        prompt = f"Screen content:\n{text}\n\nExplain what this is and how it works. Break it down step by step."
+        prompt = f"{prompt}\n\nExplain what this is and how it works. Break it down step by step."
 
     payload = {
         "model": cfg["model"],
@@ -95,12 +97,12 @@ def explain_with_fallback(text: str, question: str = "") -> str:
     return response
 
 
-def explain(text: str, question: str = "") -> str:
+def explain(text: str, question: str = "", context: str = "") -> str:
     """Generate explanation — tries Ollama first, falls back gracefully."""
     if not text or not text.strip():
         return "I couldn't extract any text from the selected area. Try selecting a region with more visible text, or check that OCR is working."
 
-    result = explain_with_ollama(text, question)
+    result = explain_with_ollama(text, question, context=context)
     if result:
         return result
 
