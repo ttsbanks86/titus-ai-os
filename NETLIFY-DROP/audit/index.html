@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Faith and Operations Gap Audit - Titus Banks</title>
+<meta name="description" content="A 15-question self-assessment for founders, ministry leaders, and growing teams. Find the gap between what is and what should be.">
+<meta name="author" content="Titus Banks">
+<style>
+  @page {
+    size: Letter;
+    margin: 0.75in 0.75in 1in 0.75in;
+    @bottom-center {
+      content: "The Faith and Operations Gap Audit | Titus Banks | Page " counter(page) " of " counter(pages);
+      font-family: 'Inter', sans-serif;
+      font-size: 9pt;
+      color: #5A6B7B;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #0E1116;
+    line-height: 1.55;
+    background: #FAF6EC;
+  }
+  .page {
+    background: #FFFFFF;
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0.5in auto;
+    padding: 0.75in 0.75in 1in 0.75in;
+    box-shadow: 0 2px 12px rgba(15, 39, 66, 0.08);
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .brand-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #5A6B7B;
+    border-bottom: 1px solid #D4A14A;
+    padding-bottom: 0.4em;
+    margin-bottom: 2em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h1.cover-title {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 44pt;
+    font-weight: 700;
+    color: #0F2742;
+    line-height: 1.1;
+    margin-top: 1.4in;
+  }
+  h1.cover-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    font-weight: 400;
+    color: #5A6B7B;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.3em;
+  }
+  .cover-tagline {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-style: italic;
+    font-size: 16pt;
+    color: #D4A14A;
+    margin-top: 1.2em;
+  }
+  .cover-byline {
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+    color: #0E1116;
+    margin-top: 3em;
+    border-top: 2px solid #0F2742;
+    padding-top: 1em;
+    max-width: 4in;
+  }
+  .cover-byline strong { color: #0F2742; }
+  .cover-version {
+    position: absolute;
+    bottom: 0.75in;
+    left: 0.75in;
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    color: #5A6B7B;
+    letter-spacing: 0.1em;
+  }
+  .cover-rule {
+    position: absolute;
+    top: 1in;
+    left: 0.75in;
+    width: 1.5in;
+    height: 4px;
+    background: #D4A14A;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 26pt;
+    color: #0F2742;
+    margin-bottom: 0.2em;
+  }
+  h2.section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #D4A14A;
+    margin-bottom: 0.6em;
+  }
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14pt;
+    color: #0F2742;
+    margin-top: 1.6em;
+    margin-bottom: 0.4em;
+    border-bottom: 1px solid #E8C98A;
+    padding-bottom: 0.2em;
+  }
+  p { margin-bottom: 0.9em; font-size: 11pt; }
+  p.lead {
+    font-size: 12pt;
+    color: #0E1116;
+    margin-bottom: 1.2em;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+  }
+  th {
+    background: #0F2742;
+    color: #FFFFFF;
+    text-align: left;
+    padding: 0.6em 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  td {
+    padding: 0.6em 0.8em;
+    border-bottom: 1px solid #E8C98A;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #F5F1E8; }
+
+  .question {
+    margin: 1.2em 0 1.2em 0;
+    padding: 0.9em 1em;
+    background: #F5F1E8;
+    border-left: 4px solid #D4A14A;
+  }
+  .question .qcode {
+    font-family: 'Inter', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #D4A14A;
+    text-transform: uppercase;
+  }
+  .question .qtext {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-style: italic;
+    font-size: 12pt;
+    color: #0F2742;
+    margin: 0.3em 0 0.6em 0;
+  }
+  .question .qscore {
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+    color: #5A6B7B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .score-line {
+    border-bottom: 1px solid #5A6B7B;
+    width: 1.5in;
+    height: 1.2em;
+    display: inline-block;
+  }
+  .column-total {
+    margin-top: 1.2em;
+    padding: 0.8em 1em;
+    background: #0F2742;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .scoring-box {
+    background: #F5F1E8;
+    padding: 1.2em;
+    margin: 1em 0;
+    border: 1px solid #E8C98A;
+  }
+  .scoring-box h3 { margin-top: 0; border-bottom: 1px solid #D4A14A; }
+  .scoring-tier {
+    display: flex;
+    align-items: baseline;
+    margin: 0.8em 0;
+    padding-bottom: 0.6em;
+    border-bottom: 1px dotted #D4A14A;
+  }
+  .scoring-tier .range {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #D4A14A;
+    width: 1.5in;
+    font-size: 11pt;
+  }
+  .scoring-tier .label {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-weight: 700;
+    color: #0F2742;
+    width: 1.4in;
+    font-size: 12pt;
+  }
+  .scoring-tier .desc {
+    flex: 1;
+    font-size: 10.5pt;
+    color: #0E1116;
+  }
+
+  .cta-box {
+    background: #0F2742;
+    color: #FFFFFF;
+    padding: 1.4em 1.4em;
+    margin: 1.2em 0;
+  }
+  .cta-box h3 {
+    color: #D4A14A;
+    border-bottom: 1px solid #D4A14A;
+    margin-top: 0;
+  }
+  .cta-box p, .cta-box li { color: #FFFFFF; }
+  .cta-box ol, .cta-box ul { margin-left: 1.4em; margin-bottom: 0.8em; }
+  .cta-box li { margin-bottom: 0.4em; font-size: 10.5pt; }
+
+  .about-block {
+    display: flex;
+    gap: 1.2em;
+    margin-top: 1.2em;
+  }
+  .about-photo {
+    width: 1.6in;
+    height: 1.6in;
+    background: #0F2742;
+    color: #D4A14A;
+    font-family: 'Playfair Display', serif;
+    font-size: 48pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .about-text { flex: 1; }
+  .about-text p { font-size: 10.5pt; }
+  .about-text .role {
+    font-family: 'Inter', sans-serif;
+    font-size: 9pt;
+    color: #5A6B7B;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.6em;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0.4in;
+    left: 0.75in;
+    right: 0.75in;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    color: #5A6B7B;
+    letter-spacing: 0.05em;
+  }
+  .footer .gold { color: #D4A14A; font-weight: 600; }
+
+  .copyright {
+    margin-top: 1.4em;
+    padding-top: 0.8em;
+    border-top: 1px solid #E8C98A;
+    font-family: 'Inter', sans-serif;
+    font-size: 8.5pt;
+    font-style: italic;
+    color: #5A6B7B;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page">
+  <div class="cover-rule"></div>
+  <div class="brand-header">
+    <span>Titus Banks</span>
+    <span>Faith-rooted wisdom</span>
+  </div>
+  <h1 class="cover-title">The Faith &amp; Operations Gap Audit</h1>
+  <h1 class="cover-subtitle">A 15-Question Self-Assessment</h1>
+  <p class="cover-tagline">Find the gap between what is and what should be.</p>
+  <div class="cover-byline">
+    <strong>By Titus Banks</strong><br>
+    Business Analyst. Operations leader. Pastor. Father of five.
+  </div>
+  <div class="cover-version">Version 1.0 &middot; June 2026</div>
+</div>
+
+<!-- PAGE 2: HOW TO USE -->
+<div class="page">
+  <div class="brand-header">
+    <span>Titus Banks</span>
+    <span>How to Use This Audit</span>
+  </div>
+  <div class="section-tag">Introduction</div>
+  <h2>How to Use This Audit</h2>
+  <p class="lead">Most professionals ask: <em>"What should I be doing?"</em> Most faith leaders ask: <em>"What is God asking of me right now?"</em></p>
+  <p>This audit asks a different question: <strong>Where is the gap between what is and what should be?</strong></p>
+  <p>You will answer 15 questions across three columns: <strong>Operations</strong>, <strong>Stewardship</strong>, and <strong>Vision</strong>.</p>
+
+  <table>
+    <tr><th>Column</th><th>What it measures</th></tr>
+    <tr><td><strong>Operations</strong></td><td>The business and systems side. The numbers, the process, the cash flow, the people, the gaps you can name.</td></tr>
+    <tr><td><strong>Stewardship</strong></td><td>The faith side. How you are using the time, money, energy, and influence God placed in your hands right now.</td></tr>
+    <tr><td><strong>Vision</strong></td><td>The gap between where you are and where you are called to be. This is where faith and operations meet.</td></tr>
+  </table>
+
+  <h3>Scoring</h3>
+  <p>Each question is scored 0 to 4.</p>
+  <table>
+    <tr><th>Score</th><th>Meaning</th></tr>
+    <tr><td>0</td><td>Not started, no clarity</td></tr>
+    <tr><td>1</td><td>Aware, no plan</td></tr>
+    <tr><td>2</td><td>Inconsistent, partial</td></tr>
+    <tr><td>3</td><td>Consistent, with gaps</td></tr>
+    <tr><td>4</td><td>Disciplined, multiplying</td></tr>
+  </table>
+
+  <h3>Time and Setting</h3>
+  <p>12 to 18 minutes. Quiet space. No phone. A cup of coffee or tea. Pen and paper or this printed copy.</p>
+  <p>Add the five scores in each column. Then read the interpretation on page 4.</p>
+
+  <div class="footer">The Faith and Operations Gap Audit &middot; <span class="gold">Titus Banks</span></div>
+</div>
+
+<!-- PAGE 3: OPERATIONS -->
+<div class="page">
+  <div class="brand-header">
+    <span>Titus Banks</span>
+    <span>Column 1 of 3 &middot; Operations</span>
+  </div>
+  <div class="section-tag">Column 1 of 3</div>
+  <h2>Operations</h2>
+  <p class="lead">The visible, countable, financial, and process questions. The questions a Business Analyst would ask your business.</p>
+
+  <div class="question">
+    <div class="qcode">O1. Cash Flow Clarity</div>
+    <div class="qtext">Can you state, without looking at a spreadsheet, what your business earned, spent, and kept in the last 30 days?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">O2. Documented Process</div>
+    <div class="qtext">If you were unable to work for 30 days, could someone else run the core work using your written process?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">O3. Decision Cadence</div>
+    <div class="qtext">Do you have a recurring weekly time to review operations, finances, and key decisions, or are you reacting to whatever is loudest?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">O4. Key Numbers Known</div>
+    <div class="qtext">Do you know your top three metrics by name: the number that tells you if the business is healthy, the number that tells you if growth is real, and the number that tells you if the team is healthy?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">O5. Time vs Priority</div>
+    <div class="qtext">In the last 14 days, what percentage of your work time was spent on the top 20% of revenue-driving or mission-driving activities? Honest answer.</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="column-total">Column Total: _______ / 20</div>
+
+  <div class="footer">The Faith and Operations Gap Audit &middot; <span class="gold">Titus Banks</span></div>
+</div>
+
+<!-- PAGE 4: STEWARDSHIP -->
+<div class="page">
+  <div class="brand-header">
+    <span>Titus Banks</span>
+    <span>Column 2 of 3 &middot; Stewardship</span>
+  </div>
+  <div class="section-tag">Column 2 of 3</div>
+  <h2>Stewardship</h2>
+  <p class="lead">The soul questions. Not private, not performative. The questions a faithful steward should be able to sit with.</p>
+
+  <div class="question">
+    <div class="qcode">S1. Time Inventory</div>
+    <div class="qtext">In the last 7 days, did your calendar reflect what you say you value? Or did the calendar win by default?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">S2. Money and Generosity</div>
+    <div class="qtext">Is there a written plan for how your money flows through giving, saving, and spending, or is it a series of reactions?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">S3. Relationships and Tending</div>
+    <div class="qtext">Name three relationships (spouse, child, friend, mentor, partner) that you have actively invested in during the last 30 days. When did you last reach out?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">S4. Sabbath and Rest</div>
+    <div class="qtext">Have you kept a real day of rest in the last 14 days? Not "I was too busy to do anything." A real, protected, unhurried day.</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">S5. Prayer and Listening</div>
+    <div class="qtext">In the last 7 days, has God said anything specific to you? Can you name it? Or has the noise of work drowned it out?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="column-total">Column Total: _______ / 20</div>
+
+  <div class="footer">The Faith and Operations Gap Audit &middot; <span class="gold">Titus Banks</span></div>
+</div>
+
+<!-- PAGE 5: VISION -->
+<div class="page">
+  <div class="brand-header">
+    <span>Titus Banks</span>
+    <span>Column 3 of 3 &middot; Vision</span>
+  </div>
+  <div class="section-tag">Column 3 of 3</div>
+  <h2>Vision</h2>
+  <p class="lead">The questions that bridge the two columns above. They reveal the gap between today's work and tomorrow's calling.</p>
+
+  <div class="question">
+    <div class="qcode">V1. The One Sentence</div>
+    <div class="qtext">Can you state, in one sentence, what you are building and who it serves? If a stranger asked at a dinner party, could you answer without rambling?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">V2. The 12-Month Picture</div>
+    <div class="qtext">If God gave you 12 months of perfect favor, what would be different about your business, family, and personal walk on this day next year?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">V3. The Honest Obstacle</div>
+    <div class="qtext">What is the single biggest gap between where you are and where you say you want to be? Not the surface answer. The real one.</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">V4. The Cost You Have Not Paid</div>
+    <div class="qtext">Every vision has a price. What is the cost you have not yet been willing to pay: the time, the comfort, the relationship, the money, the pride?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="question">
+    <div class="qcode">V5. The Faith Step</div>
+    <div class="qtext">If you knew God would not let you fail, what would you do in the next 90 days that you are not doing now?</div>
+    <div class="qscore">Score: <span class="score-line"></span></div>
+  </div>
+
+  <div class="column-total">Column Total: _______ / 20</div>
+
+  <div class="footer">The Faith and Operations Gap Audit &middot; <span class="gold">Titus Banks</span></div>
+</div>
+
+<!-- PAGE 6: SCORING AND INTERPRETATION -->
+<div class="page">
+  <div class="brand-header">
+    <span>Titus Banks</span>
+    <span>Scoring and Interpretation</span>
+  </div>
+  <div class="section-tag">Step 4</div>
+  <h2>Scoring and Interpretation</h2>
+  <p class="lead">Add your three column totals. Read what your score means. Then act on it.</p>
+
+  <table>
+    <tr><th>Column</th><th>Score</th></tr>
+    <tr><td>Operations</td><td>_______ / 20</td></tr>
+    <tr><td>Stewardship</td><td>_______ / 20</td></tr>
+    <tr><td>Vision</td><td>_______ / 20</td></tr>
+    <tr style="background:#0F2742;color:#FFFFFF;"><td><strong>Total</strong></td><td><strong>_______ / 60</strong></td></tr>
+  </table>
+
+  <div class="scoring-box">
+    <h3>What your score means</h3>
+
+    <div class="scoring-tier">
+      <div class="range">45 to 60</div>
+      <div class="label">Multiplying</div>
+      <div class="desc">You have clarity, discipline, and alignment. The next step is not to do more. The next step is to lead and invest in others. Consider mentoring one person this quarter.</div>
+    </div>
+
+    <div class="scoring-tier">
+      <div class="range">30 to 44</div>
+      <div class="label">Growing, with blind spots</div>
+      <div class="desc">You are moving. One of the three columns is consistently below the others, and that is the gap to close first. Read the column with the lowest score twice.</div>
+    </div>
+
+    <div class="scoring-tier">
+      <div class="range">15 to 29</div>
+      <div class="label">Founder Stage</div>
+      <div class="desc">You are doing too much of the work yourself, and the foundation is not yet built. The risk is not failure. The risk is staying busy and calling it obedience. A 90-day plan with one outside advisor will change the trajectory.</div>
+    </div>
+
+    <div class="scoring-tier">
+      <div class="range">Below 15</div>
+      <div class="label">Reset</div>
+      <div class="desc">This is a season to slow down, write, and pray before adding anything new. The gap is not tactical. The gap is direction. Consider a 2-week sabbatical before the next decision.</div>
+    </div>
+  </div>
+
+  <h3>The Three Gaps</h3>
+  <table>
+    <tr><th>If your lowest column is...</th><th>The gap is...</th></tr>
+    <tr><td><strong>Operations</strong></td><td>You are working in the business, not on the business. You need a Business Analyst to map and document the core process.</td></tr>
+    <tr><td><strong>Stewardship</strong></td><td>You are building at the cost of your soul, your family, or your walk with God. The business is not the problem. The lack of boundaries is.</td></tr>
+    <tr><td><strong>Vision</strong></td><td>You are doing a lot of good work, but it is not pointed anywhere. You need a 90-day vision reset, not a new strategy.</td></tr>
+  </table>
+
+  <div class="footer">The Faith and Operations Gap Audit &middot; <span class="gold">Titus Banks</span></div>
+</div>
+
+<!-- PAGE 7: NEXT STEPS + CTA -->
+<div class="page">
+  <div class="brand-header">
+    <span>Titus Banks</span>
+    <span>Next Steps</span>
+  </div>
+  <div class="section-tag">Step 5</div>
+  <h2>Next Steps</h2>
+  <p class="lead">You have two paths from here. Path 1 is the solo path. Path 2 is the call.</p>
+
+  <h3>Path 1: Do It Alone</h3>
+  <ol style="margin-left: 1.4em; margin-bottom: 1.4em; font-size: 11pt; line-height: 1.7;">
+    <li>Identify the lowest column.</li>
+    <li>Pick one question from that column with a score of 0, 1, or 2.</li>
+    <li>Write a 30-day plan to move it to a 3.</li>
+    <li>Block the time on your calendar this week.</li>
+    <li>Re-take the audit in 30 days.</li>
+  </ol>
+
+  <div class="cta-box">
+    <h3>Path 2: Get Outside Eyes</h3>
+    <p>A 30-minute Gap Audit Review call with Titus Banks will:</p>
+    <ul>
+      <li>Walk through your three scores with you</li>
+      <li>Identify the single highest-leverage gap</li>
+      <li>Give you a 90-day action plan you can execute Monday morning</li>
+      <li>Cost nothing. The audit is the cost. The call is the gift.</li>
+    </ul>
+    <p style="margin-top: 1.2em; font-family: 'Playfair Display', serif; font-size: 13pt; font-style: italic; color: #D4A14A;"><strong>Book a call at: [your Calendly link here]</strong></p>
+  </div>
+
+  <p style="margin-top: 1.4em; font-size: 10.5pt; color: #5A6B7B; font-style: italic;">The audit is the cost. The call is the gift. The 90-day plan is the work.</p>
+
+  <div class="footer">The Faith and Operations Gap Audit &middot; <span class="gold">Titus Banks</span></div>
+</div>
+
+<!-- PAGE 8: ABOUT -->
+<div class="page">
+  <div class="brand-header">
+    <span>Titus Banks</span>
+    <span>About</span>
+  </div>
+  <div class="section-tag">About the Author</div>
+  <h2>About Titus Banks</h2>
+
+  <div class="about-block">
+    <div class="about-photo">TB</div>
+    <div class="about-text">
+      <div class="role">Business Analyst &middot; Operations Leader &middot; Pastor</div>
+      <p><strong>Titus Banks</strong> works with founders, ministry leaders, and growing teams who can see what is and what should be, but cannot close the gap alone.</p>
+      <p>His work sits at the intersection of three callings:</p>
+      <p><strong>Business Analysis.</strong> Finding the gap between what people say is happening and what is actually happening.</p>
+      <p><strong>Operations.</strong> Building the systems, process, and rhythms that make growth sustainable.</p>
+      <p><strong>Faith.</strong> Holding it all under the truth that work is stewardship, and stewardship is worship.</p>
+      <p>He holds a BS in IT Management from WGU, is a father of five, and lives in Seattle with his wife Bonolo.</p>
+    </div>
+  </div>
+
+  <h3>Connect</h3>
+  <table>
+    <tr><th style="width: 1.5in;">Channel</th><th>Link</th></tr>
+    <tr><td>Linkpod</td><td>[link]</td></tr>
+    <tr><td>LinkedIn</td><td>[link]</td></tr>
+    <tr><td>Email</td><td>[link]</td></tr>
+  </table>
+
+  <div class="copyright">
+    Copyright &copy; 2026 Titus Banks. You are welcome to print, share, and reproduce this audit for personal or ministry use, with attribution. For commercial redistribution, please contact Titus Banks directly.
+  </div>
+
+  <div class="footer">The Faith and Operations Gap Audit &middot; <span class="gold">Titus Banks</span></div>
+</div>
+
+</body>
+</html>

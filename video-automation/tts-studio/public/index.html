@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TTS Studio</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0a0a10;
+  color: #e8e8f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+/* ── Title bar drag region ── */
+.titlebar {
+  -webkit-app-region: drag;
+  height: 36px;
+  background: #13131c;
+  border-bottom: 1px solid #1e1e2a;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.titlebar-icon { font-size: 14px; }
+.titlebar-title { font-size: 13px; font-weight: 600; color: #7070a0; }
+.titlebar-right {
+  margin-left: auto;
+  -webkit-app-region: no-drag;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pin-btn {
+  background: none; border: 1px solid #2a2a3e;
+  border-radius: 6px; color: #44445a; font-size: 11px;
+  padding: 3px 9px; cursor: pointer; font-weight: 600;
+  transition: all 0.15s; letter-spacing: 0.2px;
+}
+.pin-btn:hover { border-color: #7c3aed; color: #a78bfa; }
+.pin-btn.active { border-color: #7c3aed; color: #a78bfa; background: #1a1230; }
+
+/* ── Scrollable body ── */
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px 40px;
+}
+
+/* ── Header ── */
+.header {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.header-left { display: flex; align-items: center; gap: 12px; }
+.mic-icon {
+  width: 42px; height: 42px;
+  background: linear-gradient(135deg, #7c3aed, #4338ca);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 18px rgba(124,58,237,0.4);
+}
+.header h1 { font-size: 19px; font-weight: 700; letter-spacing: -0.3px; color: #fff; }
+.header p { font-size: 11px; color: #44445a; margin-top: 2px; }
+
+.engine-pills { display: flex; gap: 5px; }
+.engine-pill {
+  padding: 3px 9px; border-radius: 20px; font-size: 10px; font-weight: 700;
+  border: 1px solid #22222e; color: #44445a; letter-spacing: 0.3px;
+}
+.engine-pill.kokoro  { border-color: #3d2a6e; color: #a78bfa; background: #1a1230; }
+.engine-pill.super   { border-color: #1a3550; color: #60a5fa; background: #0d1e30; }
+.engine-pill.edge    { border-color: #1a3530; color: #34d399; background: #0d2520; }
+
+/* ── Fields ── */
+.field-label {
+  display: block; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: #44445a; margin-bottom: 7px;
+}
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+
+select, input[type="text"] {
+  width: 100%;
+  background: #0d0d14;
+  border: 1px solid #1e1e2a;
+  color: #e8e8f0;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  user-select: text;
+}
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' fill='none'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%2344445a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+}
+select:focus, input[type="text"]:focus {
+  outline: none; border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+}
+input::placeholder { color: #2a2a3e; }
+
+/* ── Textarea ── */
+.textarea-wrap { position: relative; margin-bottom: 10px; }
+textarea {
+  width: 100%;
+  background: #0d0d14;
+  border: 1px solid #1e1e2a;
+  color: #e8e8f0;
+  padding: 13px 42px 13px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.65;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  user-select: text;
+}
+textarea:focus {
+  outline: none; border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+}
+textarea::placeholder { color: #252535; }
+.clear-btn {
+  position: absolute; top: 9px; right: 9px;
+  background: #1a1a28; border: 1px solid #1e1e2a;
+  color: #33334a; border-radius: 7px;
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 13px;
+  transition: background 0.15s, color 0.15s;
+}
+.clear-btn:hover { background: #22223a; color: #e8e8f0; }
+
+/* ── Stats row ── */
+.stats-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 0 2px;
+}
+.stats { display: flex; gap: 14px; }
+.stat { font-size: 11px; color: #33334a; }
+.stat span { color: #6060a0; font-weight: 700; }
+
+/* ── GENERATION TIME ESTIMATOR ── */
+.time-estimator {
+  background: #0d0d14;
+  border: 1px solid #1e1e2a;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.est-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: #1a1230;
+  border: 1px solid #3d2a6e;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.est-content { flex: 1; min-width: 0; }
+.est-label { font-size: 10px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: #44445a; margin-bottom: 5px; }
+.est-values { display: flex; gap: 20px; align-items: baseline; }
+.est-main { font-size: 22px; font-weight: 700; color: #a78bfa; letter-spacing: -0.5px; }
+.est-main span { font-size: 13px; font-weight: 500; color: #6060a0; margin-left: 2px; }
+.est-details { display: flex; flex-direction: column; gap: 2px; }
+.est-detail { font-size: 11px; color: #44445a; }
+.est-detail b { color: #7070a0; font-weight: 600; }
+.est-bar-wrap { margin-top: 8px; }
+.est-bar-track { height: 3px; background: #1e1e2a; border-radius: 3px; overflow: hidden; }
+.est-bar-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #a78bfa); border-radius: 3px; width: 0%; transition: width 0.3s ease; }
+.est-complexity { font-size: 10px; color: #33334a; margin-top: 4px; }
+
+/* ── Generate button ── */
+.btn-generate {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #7c3aed, #4338ca);
+  border: none; border-radius: 12px;
+  color: #fff; font-size: 14px; font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+  letter-spacing: 0.2px;
+}
+.btn-generate:hover:not(:disabled) {
+  opacity: 0.92; box-shadow: 0 6px 28px rgba(124,58,237,0.5);
+}
+.btn-generate:active:not(:disabled) { transform: scale(0.99); }
+.btn-generate:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+/* ── Progress bar (generation) ── */
+.gen-progress-wrap { display: none; margin-top: 12px; }
+.gen-progress-wrap.visible { display: block; }
+.gen-progress-track {
+  height: 4px; background: #1e1e2a; border-radius: 4px; overflow: hidden;
+}
+.gen-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.gen-progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 10px; color: #44445a; margin-top: 5px;
+}
+
+/* ── Status ── */
+.status-bar {
+  margin-top: 12px; padding: 11px 14px;
+  border-radius: 10px; font-size: 12px; font-weight: 500;
+  display: none; align-items: center; gap: 9px;
+}
+.status-bar.loading  { display: flex; background: #111118; border: 1px solid #1e1e2a; color: #7070a0; }
+.status-bar.success  { display: flex; background: #0a1f14; border: 1px solid #1a4028; color: #4ade80; }
+.status-bar.error    { display: flex; background: #1a0a0a; border: 1px solid #3a1515; color: #f87171; }
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid #2a2a3e; border-top-color: #7c3aed;
+  border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Audio player ── */
+.player-wrap {
+  margin-top: 14px; display: none;
+  background: #0d0d14; border: 1px solid #1e1e2a;
+  border-radius: 12px; padding: 14px 16px;
+}
+.player-wrap.visible { display: block; }
+.player-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.play-pause {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: linear-gradient(135deg, #7c3aed, #4338ca);
+  border: none; border-radius: 50%; color: #fff;
+  font-size: 13px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.15s;
+}
+.play-pause:hover { opacity: 0.85; }
+.player-info { flex: 1; min-width: 0; }
+.player-filename { font-size: 12px; font-weight: 600; color: #c0c0e0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player-time { font-size: 10px; color: #44445a; margin-top: 2px; }
+.dl-btn-player {
+  flex-shrink: 0; padding: 6px 13px;
+  background: #1a1a28; border: 1px solid #2a2a3e;
+  border-radius: 8px; color: #a0a0c0; font-size: 11px; font-weight: 700;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.dl-btn-player:hover { background: #22223a; color: #fff; }
+.progress-track {
+  width: 100%; height: 4px; background: #1e1e2e;
+  border-radius: 4px; cursor: pointer; position: relative;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  border-radius: 4px; width: 0%; transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ── Divider ── */
+.divider { border: none; border-top: 1px solid #1a1a24; margin: 22px 0; }
+
+/* ── History ── */
+.section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+  text-transform: uppercase; color: #2a2a3a; margin-bottom: 10px;
+}
+#history { display: flex; flex-direction: column; gap: 7px; }
+.history-item {
+  background: #0d0d14; border: 1px solid #1a1a24;
+  border-radius: 10px; overflow: hidden;
+}
+.history-row {
+  display: flex; align-items: center; gap: 9px;
+  padding: 9px 12px;
+}
+.history-row:hover { background: #111118; }
+.h-play {
+  width: 26px; height: 26px; flex-shrink: 0;
+  background: #1a1a28; border: 1px solid #2a2a3e;
+  border-radius: 50%; color: #55558a; font-size: 9px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.h-play:hover, .h-play.playing { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+.h-meta { flex: 1; min-width: 0; }
+.h-text { font-size: 12px; color: #7070a0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.h-sub { font-size: 10px; color: #2a2a3a; margin-top: 2px; }
+.h-dl {
+  flex-shrink: 0; padding: 4px 10px;
+  background: #13131c; border: 1px solid #1a1a24;
+  border-radius: 6px; color: #44445a; font-size: 10px; font-weight: 700;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.h-dl:hover { background: #1e1e2e; color: #a0a0c0; }
+.mini-player { display: none; padding: 7px 12px 10px; border-top: 1px solid #1a1a24; }
+.mini-player.open { display: block; }
+.mini-progress { width: 100%; height: 3px; background: #1e1e2e; border-radius: 3px; cursor: pointer; }
+.mini-fill { height: 100%; background: #7c3aed; border-radius: 3px; width: 0%; transition: width 0.1s linear; }
+.mini-time { font-size: 10px; color: #2a2a3a; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- Custom title bar -->
+<div class="titlebar">
+  <span class="titlebar-icon">🎙</span>
+  <span class="titlebar-title">TTS Studio</span>
+  <div class="titlebar-right">
+    <button class="pin-btn" id="pinBtn" onclick="togglePin()">📌 Always on Top</button>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="mic-icon">🎙</div>
+      <div>
+        <h1>TTS Studio</h1>
+        <p>Local neural voice synthesis</p>
+      </div>
+    </div>
+    <div class="engine-pills">
+      <span class="engine-pill kokoro">Kokoro</span>
+      <span class="engine-pill super">Supertonic</span>
+      <span class="engine-pill edge">Edge</span>
+    </div>
+  </div>
+
+  <!-- Engine + Voice -->
+  <div class="row2">
+    <div>
+      <span class="field-label">Engine</span>
+      <select id="provider" onchange="onProviderChange()">
+        <option value="kokoro">Kokoro — Most Realistic</option>
+        <option value="supertonic">Supertonic — 10 Voices</option>
+        <option value="edge">Edge Neural — Online</option>
+      </select>
+    </div>
+    <div>
+      <span class="field-label">Voice</span>
+      <select id="voice" onchange="savePrefs()"></select>
+    </div>
+  </div>
+
+  <!-- Filename -->
+  <div style="margin-bottom:14px">
+    <span class="field-label">Output Filename</span>
+    <input type="text" id="filename" placeholder="my-voiceover (no extension needed)"/>
+  </div>
+
+  <!-- Textarea -->
+  <span class="field-label">Script</span>
+  <div class="textarea-wrap">
+    <textarea id="text" placeholder="Type or paste your script here..." oninput="onTextInput()"></textarea>
+    <button class="clear-btn" onclick="clearText()" title="Clear">✕</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stats">
+      <div class="stat"><span id="wordCount">0</span> words</div>
+      <div class="stat"><span id="charCount">0</span> chars</div>
+    </div>
+  </div>
+
+  <!-- GENERATION TIME ESTIMATOR -->
+  <div class="time-estimator">
+    <div class="est-icon">⏱</div>
+    <div class="est-content">
+      <div class="est-label">Estimated Generation Time</div>
+      <div class="est-values">
+        <div class="est-main" id="estGenTime">0s<span>to generate</span></div>
+        <div class="est-details">
+          <div class="est-detail">Audio length: <b id="estAudioLen">0s</b></div>
+          <div class="est-detail">Engine speed: <b id="estSpeed">—</b></div>
+        </div>
+      </div>
+      <div class="est-bar-wrap">
+        <div class="est-bar-track"><div class="est-bar-fill" id="estBarFill"></div></div>
+        <div class="est-complexity" id="estComplexity">Enter your script above to see estimates</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generate -->
+  <button class="btn-generate" id="generateBtn" onclick="generate()">
+    <span id="btnLabel">▶ Generate &amp; Save</span>
+  </button>
+
+  <!-- Generation progress -->
+  <div class="gen-progress-wrap" id="genProgressWrap">
+    <div class="gen-progress-track">
+      <div class="gen-progress-fill" id="genProgressFill"></div>
+    </div>
+    <div class="gen-progress-label">
+      <span id="genProgressStatus">Starting…</span>
+      <span id="genProgressPct">0%</span>
+    </div>
+  </div>
+
+  <!-- Status -->
+  <div class="status-bar" id="statusBar">
+    <div class="spinner" id="spinner" style="display:none"></div>
+    <span id="statusMsg"></span>
+  </div>
+
+  <!-- Audio preview player -->
+  <div class="player-wrap" id="playerWrap">
+    <div class="player-top">
+      <button class="play-pause" id="playPauseBtn" onclick="toggleMainPlay()">▶</button>
+      <div class="player-info">
+        <div class="player-filename" id="playerFilename">—</div>
+        <div class="player-time" id="playerTimeDisplay">0:00 / 0:00</div>
+      </div>
+      <a class="dl-btn-player" id="dlBtnMain" href="#" onclick="saveFromPlayer(event)">↓ Save</a>
+    </div>
+    <div class="progress-track" id="progressTrack" onclick="seekMain(event)">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- History -->
+  <hr class="divider" id="historyDivider" style="display:none"/>
+  <div class="section-label" id="historyTitle" style="display:none">Recent Exports</div>
+  <div id="history"></div>
+
+</div><!-- .body -->
+
+<audio id="mainAudio"></audio>
+
+<script>
+// ── Engine speed estimates (seconds of processing per word) ──
+// Based on typical performance on mid-range hardware
+const ENGINE_SPEEDS = {
+  kokoro:     { label: "~1.5x realtime", secPerWord: 0.25 },
+  supertonic: { label: "~2x realtime",   secPerWord: 0.18 },
+  edge:       { label: "~4x realtime (online)", secPerWord: 0.08 }
+};
+
+const VOICE_LABELS = {
+  af_sarah:"Sarah (F)", af_alloy:"Alloy (F)", af_bella:"Bella (F)",
+  af_nova:"Nova (F)", af_sky:"Sky (F)", am_adam:"Adam (M)",
+  am_echo:"Echo (M)", am_michael:"Michael (M)", am_liam:"Liam (M)",
+  bf_emma:"Emma (F·UK)", bf_isabella:"Isabella (F·UK)",
+  bm_george:"George (M·UK)", bm_lewis:"Lewis (M·UK)",
+  F1:"F1",F2:"F2",F3:"F3",F4:"F4",F5:"F5",
+  M1:"M1",M2:"M2",M3:"M3",M4:"M4",M5:"M5"
+};
+
+const voiceData = {};
+let pinned = false;
+let currentBlob = null;
+let currentFilename = "";
+
+// ── Load voices ──────────────────────────────────────────────
+async function loadVoices() {
+  const res = await fetch("/voices");
+  const data = await res.json();
+  Object.assign(voiceData, data);
+  loadPrefs();
+  updateVoiceList();
+  updateEstimator();
+}
+
+function updateVoiceList() {
+  const provider = document.getElementById("provider").value;
+  const sel = document.getElementById("voice");
+  const saved = localStorage.getItem("tts_voice_" + provider);
+  sel.innerHTML = "";
+  (voiceData[provider] || []).forEach(v => {
+    const opt = document.createElement("option");
+    opt.value = v;
+    opt.textContent = VOICE_LABELS[v] || v;
+    if (v === saved) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function onProviderChange() { updateVoiceList(); savePrefs(); updateEstimator(); }
+function savePrefs() {
+  const p = document.getElementById("provider").value;
+  localStorage.setItem("tts_provider", p);
+  localStorage.setItem("tts_voice_" + p, document.getElementById("voice").value);
+}
+function loadPrefs() {
+  const p = localStorage.getItem("tts_provider");
+  if (p) document.getElementById("provider").value = p;
+}
+
+// ── Text input + stats ───────────────────────────────────────
+function onTextInput() {
+  const t = document.getElementById("text").value;
+  const words = t.trim() === "" ? 0 : t.trim().split(/\s+/).length;
+  document.getElementById("wordCount").textContent = words;
+  document.getElementById("charCount").textContent = t.length;
+  updateEstimator();
+}
+
+function clearText() {
+  document.getElementById("text").value = "";
+  onTextInput();
+}
+
+// ── GENERATION TIME ESTIMATOR ────────────────────────────────
+function updateEstimator() {
+  const provider = document.getElementById("provider").value;
+  const t = document.getElementById("text").value.trim();
+  const words = t === "" ? 0 : t.split(/\s+/).length;
+  const eng = ENGINE_SPEEDS[provider] || ENGINE_SPEEDS.kokoro;
+
+  // Audio output length at ~140wpm narration pace
+  const audioSecs = Math.round((words / 140) * 60);
+  const audioLabel = fmtDuration(audioSecs);
+
+  // Generation time estimate
+  const genSecs = Math.round(words * eng.secPerWord);
+
+  // Complexity bar: cap at 3 min for full bar
+  const barPct = Math.min(100, (genSecs / 180) * 100);
+
+  // Complexity label
+  let complexity = "";
+  if (words === 0)         complexity = "Enter your script above to see estimates";
+  else if (genSecs < 10)  complexity = "Very short — generates in seconds";
+  else if (genSecs < 30)  complexity = "Short script — quick generation";
+  else if (genSecs < 60)  complexity = "Medium script — about a minute";
+  else if (genSecs < 120) complexity = "Long script — give it a moment";
+  else                    complexity = "Very long script — may take several minutes";
+
+  document.getElementById("estGenTime").innerHTML =
+    `${fmtDuration(genSecs)}<span> to generate</span>`;
+  document.getElementById("estAudioLen").textContent = audioLabel;
+  document.getElementById("estSpeed").textContent = eng.label;
+  document.getElementById("estBarFill").style.width = barPct + "%";
+  document.getElementById("estComplexity").textContent = complexity;
+}
+
+function fmtDuration(secs) {
+  if (secs < 1) return "< 1s";
+  if (secs < 60) return secs + "s";
+  const m = Math.floor(secs / 60), s = secs % 60;
+  return s > 0 ? `${m}m ${s}s` : `${m}m`;
+}
+
+// ── Generation progress animation ───────────────────────────
+let progressInterval = null;
+
+function startProgress(estimatedSecs) {
+  const wrap = document.getElementById("genProgressWrap");
+  const fill = document.getElementById("genProgressFill");
+  const status = document.getElementById("genProgressStatus");
+  const pct = document.getElementById("genProgressPct");
+  wrap.classList.add("visible");
+  fill.style.width = "0%";
+
+  const stages = [
+    { pct: 15, label: "Loading model…" },
+    { pct: 40, label: "Synthesizing audio…" },
+    { pct: 75, label: "Processing waveform…" },
+    { pct: 90, label: "Converting to MP3…" },
+    { pct: 95, label: "Almost done…" }
+  ];
+
+  let elapsed = 0;
+  const interval = Math.max(200, (estimatedSecs * 1000) / 50);
+
+  progressInterval = setInterval(() => {
+    elapsed += interval;
+    const rawPct = Math.min(95, (elapsed / (estimatedSecs * 1000)) * 95);
+    fill.style.width = rawPct + "%";
+    pct.textContent = Math.round(rawPct) + "%";
+    const stage = stages.reverse().find(s => rawPct >= s.pct);
+    stages.reverse();
+    if (stage) status.textContent = stage.label;
+  }, interval);
+}
+
+function finishProgress() {
+  clearInterval(progressInterval);
+  const fill = document.getElementById("genProgressFill");
+  const pct = document.getElementById("genProgressPct");
+  const status = document.getElementById("genProgressStatus");
+  fill.style.width = "100%";
+  pct.textContent = "100%";
+  status.textContent = "Done!";
+  setTimeout(() => {
+    document.getElementById("genProgressWrap").classList.remove("visible");
+    fill.style.width = "0%";
+  }, 1500);
+}
+
+// ── Status bar ───────────────────────────────────────────────
+function setStatus(type, msg, showSpinner) {
+  const bar = document.getElementById("statusBar");
+  bar.className = "status-bar " + type;
+  document.getElementById("statusMsg").textContent = msg;
+  document.getElementById("spinner").style.display = showSpinner ? "block" : "none";
+}
+
+// ── Always on top ────────────────────────────────────────────
+async function togglePin() {
+  pinned = !pinned;
+  const btn = document.getElementById("pinBtn");
+  btn.classList.toggle("active", pinned);
+  btn.textContent = pinned ? "📌 Pinned on Top" : "📌 Always on Top";
+  if (window.electronAPI) await window.electronAPI.setAlwaysOnTop(pinned);
+}
+
+// ── Main audio player ────────────────────────────────────────
+const mainAudio = document.getElementById("mainAudio");
+let mainPlaying = false;
+
+mainAudio.addEventListener("timeupdate", () => {
+  if (!mainAudio.duration) return;
+  const pct = (mainAudio.currentTime / mainAudio.duration) * 100;
+  document.getElementById("progressFill").style.width = pct + "%";
+  document.getElementById("playerTimeDisplay").textContent =
+    fmtTime(mainAudio.currentTime) + " / " + fmtTime(mainAudio.duration);
+});
+mainAudio.addEventListener("ended", () => {
+  mainPlaying = false;
+  document.getElementById("playPauseBtn").textContent = "▶";
+  document.getElementById("progressFill").style.width = "0%";
+});
+
+function toggleMainPlay() {
+  if (mainPlaying) {
+    mainAudio.pause(); mainPlaying = false;
+    document.getElementById("playPauseBtn").textContent = "▶";
+  } else {
+    mainAudio.play(); mainPlaying = true;
+    document.getElementById("playPauseBtn").textContent = "⏸";
+  }
+}
+
+function seekMain(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  mainAudio.currentTime = ((e.clientX - rect.left) / rect.width) * mainAudio.duration;
+}
+
+function fmtTime(s) {
+  if (!s || isNaN(s)) return "0:00";
+  return Math.floor(s/60) + ":" + String(Math.floor(s%60)).padStart(2,"0");
+}
+
+function loadMainPlayer(url, filename) {
+  mainAudio.pause();
+  mainAudio.src = url;
+  mainAudio.load();
+  mainPlaying = false;
+  currentFilename = filename;
+  document.getElementById("playPauseBtn").textContent = "▶";
+  document.getElementById("progressFill").style.width = "0%";
+  document.getElementById("playerFilename").textContent = filename;
+  document.getElementById("playerTimeDisplay").textContent = "0:00 / 0:00";
+  document.getElementById("playerWrap").classList.add("visible");
+  mainAudio.play().then(() => {
+    mainPlaying = true;
+    document.getElementById("playPauseBtn").textContent = "⏸";
+  }).catch(() => {});
+}
+
+async function saveFromPlayer(e) {
+  e.preventDefault();
+  if (!currentBlob) return;
+  if (window.electronAPI) {
+    const buf = await currentBlob.arrayBuffer();
+    await window.electronAPI.saveFile({
+      buffer: Array.from(new Uint8Array(buf)),
+      filename: currentFilename
+    });
+  }
+}
+
+// ── Generate ─────────────────────────────────────────────────
+async function generate() {
+  const text = document.getElementById("text").value.trim();
+  const voice = document.getElementById("voice").value;
+  const provider = document.getElementById("provider").value;
+  const rawName = document.getElementById("filename").value.trim();
+  const btn = document.getElementById("generateBtn");
+
+  if (!text) { setStatus("error", "Enter some text first."); return; }
+
+  const words = text.split(/\s+/).length;
+  const eng = ENGINE_SPEEDS[provider] || ENGINE_SPEEDS.kokoro;
+  const estimatedSecs = Math.max(5, Math.round(words * eng.secPerWord));
+
+  savePrefs();
+  btn.disabled = true;
+  document.getElementById("btnLabel").textContent = "Generating…";
+  setStatus("loading", `Running ${provider} / ${voice} — estimated ${fmtDuration(estimatedSecs)}`, true);
+  document.getElementById("playerWrap").classList.remove("visible");
+  startProgress(estimatedSecs);
+
+  try {
+    const res = await fetch("/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, voice, provider })
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || "Unknown error");
+    }
+
+    const blob = await res.blob();
+    currentBlob = blob;
+    const contentDisp = res.headers.get("Content-Disposition") || "";
+    const match = contentDisp.match(/filename="(.+)"/);
+    const serverFile = match ? match[1] : "tts-output.mp3";
+    const ext = serverFile.endsWith(".wav") ? ".wav" : ".mp3";
+    const finalName = (rawName || "tts-studio") + ext;
+    currentFilename = finalName;
+
+    finishProgress();
+
+    // Electron: use native save dialog
+    if (window.electronAPI) {
+      const buf = await blob.arrayBuffer();
+      const result = await window.electronAPI.saveFile({
+        buffer: Array.from(new Uint8Array(buf)),
+        filename: finalName
+      });
+      if (result.cancelled) {
+        setStatus("success", "Ready to play — click Save above to export");
+      } else {
+        setStatus("success", `Saved to: ${result.filePath}`);
+      }
+    } else {
+      // Browser fallback
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = finalName;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setStatus("success", `Downloaded: ${finalName}`);
+    }
+
+    const url = URL.createObjectURL(blob);
+    loadMainPlayer(url, finalName);
+    addToHistory(text, url, finalName, voice, provider);
+
+  } catch (err) {
+    clearInterval(progressInterval);
+    document.getElementById("genProgressWrap").classList.remove("visible");
+    setStatus("error", "Error: " + err.message);
+  } finally {
+    btn.disabled = false;
+    document.getElementById("btnLabel").textContent = "▶ Generate & Save";
+  }
+}
+
+// ── History ──────────────────────────────────────────────────
+const historyAudios = {};
+
+function addToHistory(text, url, filename, voice, provider) {
+  document.getElementById("historyDivider").style.display = "block";
+  document.getElementById("historyTitle").style.display = "block";
+
+  const id = "h" + Date.now();
+  const preview = text.length > 52 ? text.substring(0,52) + "…" : text;
+
+  const div = document.createElement("div");
+  div.className = "history-item";
+  div.id = id;
+  div.innerHTML = `
+    <div class="history-row">
+      <button class="h-play" id="btn_${id}" onclick="toggleHistoryPlay('${id}','${url}')">▶</button>
+      <div class="h-meta">
+        <div class="h-text">${preview}</div>
+        <div class="h-sub">${provider} / ${VOICE_LABELS[voice]||voice} &bull; ${filename}</div>
+      </div>
+      <a class="h-dl" href="${url}" download="${filename}">↓</a>
+    </div>
+    <div class="mini-player" id="mini_${id}">
+      <div class="mini-progress" onclick="seekHistory(event,'${id}')">
+        <div class="mini-fill" id="fill_${id}"></div>
+      </div>
+      <div class="mini-time" id="time_${id}">0:00 / 0:00</div>
+    </div>`;
+
+  const history = document.getElementById("history");
+  history.insertBefore(div, history.firstChild);
+  while (history.children.length > 6) history.removeChild(history.lastChild);
+
+  const audio = new Audio(url);
+  audio.addEventListener("timeupdate", () => {
+    if (!audio.duration) return;
+    document.getElementById("fill_"+id).style.width =
+      ((audio.currentTime/audio.duration)*100)+"%";
+    document.getElementById("time_"+id).textContent =
+      fmtTime(audio.currentTime)+" / "+fmtTime(audio.duration);
+  });
+  audio.addEventListener("ended", () => {
+    document.getElementById("btn_"+id).textContent = "▶";
+    document.getElementById("btn_"+id).classList.remove("playing");
+  });
+  historyAudios[id] = { audio, playing: false };
+}
+
+function toggleHistoryPlay(id) {
+  const entry = historyAudios[id];
+  if (!entry) return;
+  const btn = document.getElementById("btn_"+id);
+  const mini = document.getElementById("mini_"+id);
+  if (entry.playing) {
+    entry.audio.pause(); entry.playing = false;
+    btn.textContent = "▶"; btn.classList.remove("playing");
+    mini.classList.remove("open");
+  } else {
+    Object.entries(historyAudios).forEach(([k,v]) => {
+      if (k!==id && v.playing) {
+        v.audio.pause(); v.playing = false;
+        document.getElementById("btn_"+k).textContent = "▶";
+        document.getElementById("btn_"+k).classList.remove("playing");
+        document.getElementById("mini_"+k).classList.remove("open");
+      }
+    });
+    entry.audio.play(); entry.playing = true;
+    btn.textContent = "⏸"; btn.classList.add("playing");
+    mini.classList.add("open");
+  }
+}
+
+function seekHistory(e, id) {
+  const entry = historyAudios[id];
+  if (!entry || !entry.audio.duration) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  entry.audio.currentTime = ((e.clientX-rect.left)/rect.width)*entry.audio.duration;
+}
+
+// ── Init ─────────────────────────────────────────────────────
+document.getElementById("voice").addEventListener("change", savePrefs);
+loadVoices();
+</script>
+</body>
+</html>

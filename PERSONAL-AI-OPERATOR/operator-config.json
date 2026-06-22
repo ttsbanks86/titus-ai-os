@@ -1,0 +1,56 @@
+{
+  "name": "Titus Personal AI Operator",
+  "version": "0.2.0",
+  "mode": "safe-mvp",
+  "identity": {
+    "name": "Personal AI Operator",
+    "creator": "Titus Banks",
+    "purpose": "Execute tasks autonomously for the Titus Banks AI OS",
+    "domain": "BA job search, AI systems, content production, business automation"
+  },
+  "loop": {
+    "protocol": "ANALYZE → PLAN → EXECUTE → OBSERVE → ITERATE",
+    "maxIterations": 3,
+    "observeOnComplete": true
+  },
+  "behavior": {
+    "antiList": true,
+    "constructiveRefusal": true,
+    "identityAwareness": true,
+    "formatResponse": "natural prose, minimal formatting"
+  },
+  "paths": {
+    "modelRouter": "C:\\Users\\tbank\\Desktop\\Live Cowork\\MODEL-ROUTER-MVP\\test-router.ps1",
+    "workspace": "C:\\Users\\tbank\\Desktop\\Live Cowork",
+    "logs": "C:\\Users\\tbank\\Desktop\\Live Cowork\\PERSONAL-AI-OPERATOR\\logs",
+    "promptMine": "C:\\Users\\tbank\\Desktop\\Live Cowork\\PROMPT-MINE"
+  },
+  "routes": {
+    "default": "cheap",
+    "coding": "coding",
+    "private": "private",
+    "deepseek": "deepseek"
+  },
+  "capabilities": {
+    "localModels": true,
+    "desktopControl": true,
+    "browserLaunch": true,
+    "graphify": true,
+    "businessOps": true,
+    "voice": false,
+    "avatar": false,
+    "externalMessaging": false,
+    "agentLoop": true,
+    "promptMining": true
+  },
+  "approvalRequired": [
+    "send_email",
+    "send_whatsapp",
+    "post_social",
+    "delete_files",
+    "spend_money",
+    "connect_account",
+    "dangerous_permissions",
+    "install_heavy_apps"
+  ]
+}

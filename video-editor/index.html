@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      body { font-family: "Inter", sans-serif; }
+      .clip { position: absolute; }
+      .scene-content {
+        display: flex; flex-direction: column; justify-content: center;
+        width: 100%; height: 100%; padding: 120px 160px; gap: 24px; box-sizing: border-box;
+      }
+
+      /* Background Presets */
+      .bg-midnight { background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 50%, #0f1f3a 100%); }
+      .bg-tech { background: linear-gradient(135deg, #0d1117 0%, #161b22 40%, #1f2937 100%); }
+      .bg-ocean { background: linear-gradient(135deg, #0c2340 0%, #1a4a6e 50%, #0d3b5c 100%); }
+
+      /* Animated Overlays */
+      .particle-grid {
+        position: absolute; inset: 0;
+        background-image:
+          radial-gradient(circle at 20% 50%, rgba(138, 180, 248, 0.08) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(138, 180, 248, 0.05) 0%, transparent 50%),
+          radial-gradient(circle at 50% 80%, rgba(138, 180, 248, 0.06) 0%, transparent 50%);
+      }
+      .grid-lines {
+        position: absolute; inset: 0;
+        background-image:
+          repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(138, 180, 248, 0.04) 59px, rgba(138, 180, 248, 0.04) 60px),
+          repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(138, 180, 248, 0.04) 59px, rgba(138, 180, 248, 0.04) 60px);
+      }
+      .glow-orb { position: absolute; border-radius: 50%; filter: blur(80px); }
+      .scan-line { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(138, 180, 248, 0.3), transparent); }
+
+      /* Text */
+      .caption {
+        position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+        text-align: center; font-size: 40px; font-weight: 600; color: #ffffff;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.8); padding: 14px 36px;
+        background: rgba(0,0,0,0.35); border-radius: 12px; max-width: 1600px;
+        line-height: 1.4; white-space: nowrap;
+      }
+      .caption em { color: #8ab4f8; font-style: normal; }
+      .title-lg { font-size: 72px; font-weight: 800; color: #ffffff; letter-spacing: -1px; }
+      .title-md { font-size: 36px; color: #8ab4f8; font-weight: 300; letter-spacing: 3px; margin-top: 12px; }
+      .title-sm { font-size: 22px; color: #8ab4f8; font-weight: 400; letter-spacing: 4px; }
+      .accent-bar { width: 80px; height: 4px; background: #8ab4f8; border-radius: 2px; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-main" id="root" data-composition-id="main" data-start="0" data-duration="22" data-width="1920" data-height="1080">
+
+      <!-- Background Scene 1: Intro -->
+      <div data-hf-id="hf-5mia" id="bg1" class="clip" data-start="0" data-duration="4" data-track-index="1" style="position:absolute;inset:0;">
+        <div data-hf-id="hf-t64n" class="bg-midnight" style="position:absolute;inset:0;"></div>
+        <div data-hf-id="hf-okiz" class="particle-grid"></div>
+        <div data-hf-id="hf-kcs6" class="grid-lines"></div>
+        <div data-hf-id="hf-mn6n" class="glow-orb" style="width:400px;height:400px;top:-100px;right:-100px;background:rgba(138,180,248,0.12);"></div>
+        <div data-hf-id="hf-pjmt" id="scan" class="scan-line" style="top:30%;"></div>
+      </div>
+
+      <!-- Background Scene 2: Captions -->
+      <div data-hf-id="hf-o698" id="bg2" class="clip" data-start="4" data-duration="18" data-track-index="1" style="position:absolute;inset:0;">
+        <div data-hf-id="hf-tmjj" class="bg-tech" style="position:absolute;inset:0;"></div>
+        <div data-hf-id="hf-4mob" class="particle-grid"></div>
+        <div data-hf-id="hf-i2sc" class="glow-orb" style="width:350px;height:350px;top:50%;left:-100px;transform:translateY(-50%);background:rgba(138,180,248,0.1);"></div>
+      </div>
+
+      <!-- Audio -->
+      <audio data-hf-id="hf-vl6d" id="narration" src="narration.wav" data-start="0" data-duration="21.4" data-track-index="2" data-volume="1"></audio>
+
+      <!-- Title card -->
+      <div data-hf-id="hf-pvpc" id="title" class="clip" data-start="0" data-duration="4" data-track-index="3" style="top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <div data-hf-id="hf-1ez0" id="t-pre" class="title-sm" style="margin-bottom:8px;">PROMPT-MINE</div>
+        <div data-hf-id="hf-ge59" class="title-lg">The BA Advantage</div>
+        <div data-hf-id="hf-a8gn" class="title-md">WITH AI SYSTEMS EXPERTISE</div>
+        <div data-hf-id="hf-4xvc" class="accent-bar" style="margin: 20px auto 0;"></div>
+      </div>
+
+      <!-- Captions -->
+      <div data-hf-id="hf-7bsa" id="cap0" class="clip caption" data-start="0" data-duration="3.5" data-track-index="4" style="opacity:0;">You have the skills of a business analyst,</div>
+      <div data-hf-id="hf-j1gm" id="cap0b" class="clip caption" data-start="1.7" data-duration="2.2" data-track-index="4" style="opacity:0;">but today's job market demands more.</div>
+      <div data-hf-id="hf-tz8z" id="cap1" class="clip caption" data-start="3.9" data-duration="1.5" data-track-index="4" style="opacity:0;">Companies aren't just looking for someone</div>
+      <div data-hf-id="hf-wzbr" id="cap2" class="clip caption" data-start="5.4" data-duration="1.6" data-track-index="4" style="opacity:0;">who can write requirements.</div>
+      <div data-hf-id="hf-vnwe" id="cap3" class="clip caption" data-start="7.0" data-duration="2.5" data-track-index="4" style="opacity:0;">They want someone who understands how <em data-hf-id="hf-8ni3">AI systems</em> think,</div>
+      <div data-hf-id="hf-96bj" id="cap4" class="clip caption" data-start="9.5" data-duration="1.8" data-track-index="4" style="opacity:0;">how data flows through an organization,</div>
+      <div data-hf-id="hf-wzt2" id="cap5" class="clip caption" data-start="11.3" data-duration="2.5" data-track-index="4" style="opacity:0;">and how automation transforms workflows.</div>
+      <div data-hf-id="hf-u8k5" id="cap6" class="clip caption" data-start="13.8" data-duration="2.9" data-track-index="4" style="opacity:0;">That is the edge that <em data-hf-id="hf-pla7">Titus Banks</em> brings to every project.</div>
+      <div data-hf-id="hf-y4av" id="cap7" class="clip caption" data-start="16.7" data-duration="2.3" data-track-index="4" style="opacity:0;">A unique blend of traditional BA expertise</div>
+      <div data-hf-id="hf-1o87" id="cap8" class="clip caption" data-start="19.0" data-duration="2.4" data-track-index="4" style="opacity:0;">and hands-on <em data-hf-id="hf-x9tp">AI systems experience</em>.</div>
+
+      <!-- End card -->
+      <div data-hf-id="hf-4iq3" id="endcard" class="clip" data-start="21.4" data-duration="1" data-track-index="3" style="top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; opacity:0;">
+        <div data-hf-id="hf-uplm" class="title-lg">Titus Banks</div>
+        <div data-hf-id="hf-9a1h" class="title-md">Business Analyst • AI Systems Builder</div>
+        <div data-hf-id="hf-o40g" class="accent-bar" style="margin: 20px auto 0;"></div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Title in/out with rich background
+      tl.from("#t-pre", { opacity: 0, y: 15, duration: 0.3, ease: "power2.out" }, 0.2);
+      tl.from("#title", { opacity: 0, y: 25, duration: 0.5, ease: "power3.out" }, 0.2);
+      tl.from("#scan", { top: "100%", duration: 2, ease: "power1.inOut" }, 0);
+      tl.to("#title", { opacity: 0, y: -15, duration: 0.3, ease: "power2.in" }, 3.5);
+
+      // Caption 0 split
+      tl.to("#cap0", { opacity: 1, duration: 0.2 }, 0.3);
+      tl.to("#cap0", { opacity: 0, duration: 0.15 }, 1.5);
+      tl.to("#cap0b", { opacity: 1, duration: 0.2 }, 1.9);
+      tl.to("#cap0b", { opacity: 0, duration: 0.15 }, 3.7);
+
+      // Rest of captions
+      tl.to("#cap1", { opacity: 1, duration: 0.2 }, 4.1);
+      tl.to("#cap1", { opacity: 0, duration: 0.15 }, 5.2);
+      tl.to("#cap2", { opacity: 1, duration: 0.2 }, 5.6);
+      tl.to("#cap2", { opacity: 0, duration: 0.15 }, 6.8);
+
+      tl.to("#cap3", { opacity: 1, duration: 0.2 }, 7.2);
+      tl.to("#cap3", { opacity: 0, duration: 0.15 }, 9.3);
+      tl.to("#cap4", { opacity: 1, duration: 0.2 }, 9.7);
+      tl.to("#cap4", { opacity: 0, duration: 0.15 }, 11.1);
+      tl.to("#cap5", { opacity: 1, duration: 0.2 }, 11.5);
+      tl.to("#cap5", { opacity: 0, duration: 0.15 }, 13.6);
+
+      tl.to("#cap6", { opacity: 1, duration: 0.2 }, 14.0);
+      tl.to("#cap6", { opacity: 0, duration: 0.15 }, 16.5);
+      tl.to("#cap7", { opacity: 1, duration: 0.2 }, 16.9);
+      tl.to("#cap7", { opacity: 0, duration: 0.15 }, 18.8);
+      tl.to("#cap8", { opacity: 1, duration: 0.2 }, 19.2);
+      tl.to("#cap8", { opacity: 0, duration: 0.15 }, 21.2);
+
+      // End card with ocean background
+      tl.from("#endcard", { opacity: 0, y: 20, duration: 0.5, ease: "power3.out" }, 21.6);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+DealName,Company,Value,Stage,CloseDate,Probability,Owner,Notes
+Enterprise License,Acme Corp,120000,Negotiation,2026-07-15,60%,Titus,"Legal review in progress"
+Team Plan,Beta Inc,24000,Proposal,2026-06-30,40%,Titus,"Demo completed, proposal sent 6/5"
+Starter Plan,Gamma Co,8000,Discovery,2026-07-31,20%,Titus,"Needs assessment scheduled 6/10"

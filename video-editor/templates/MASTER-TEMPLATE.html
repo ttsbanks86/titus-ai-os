@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+    body { font-family: "Inter", sans-serif; }
+
+    /* ===== BACKGROUND PRESETS ===== */
+    .bg-gradient-midnight {
+      background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 50%, #0f1f3a 100%);
+    }
+    .bg-gradient-tech {
+      background: linear-gradient(135deg, #0d1117 0%, #161b22 40%, #1f2937 100%);
+    }
+    .bg-gradient-ocean {
+      background: linear-gradient(135deg, #0c2340 0%, #1a4a6e 50%, #0d3b5c 100%);
+    }
+    .bg-gradient-warm {
+      background: linear-gradient(135deg, #1a0f0a 0%, #3a2a1a 50%, #2a1f15 100%);
+    }
+    .bg-gradient-forest {
+      background: linear-gradient(135deg, #0a1a0f 0%, #1a3a2a 50%, #0f2a1f 100%);
+    }
+
+    /* ===== ANIMATED OVERLAYS ===== */
+    .particle-grid {
+      position: absolute; inset: 0; 
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(138, 180, 248, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(138, 180, 248, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(138, 180, 248, 0.06) 0%, transparent 50%);
+    }
+    .grid-lines {
+      position: absolute; inset: 0;
+      background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(138, 180, 248, 0.05) 59px, rgba(138, 180, 248, 0.05) 60px),
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(138, 180, 248, 0.05) 59px, rgba(138, 180, 248, 0.05) 60px);
+    }
+    .glow-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px);
+    }
+    .scan-line {
+      position: absolute; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(138, 180, 248, 0.3), transparent);
+    }
+
+    /* ===== TEXT STYLES ===== */
+    .clip { position: absolute; }
+    .scene-content {
+      display: flex; flex-direction: column; justify-content: center;
+      width: 100%; height: 100%; padding: 120px 160px; gap: 24px; box-sizing: border-box;
+    }
+    .title-hero { font-size: 96px; font-weight: 800; color: #ffffff; letter-spacing: -2px; line-height: 1.1; }
+    .title-lg { font-size: 72px; font-weight: 800; color: #ffffff; letter-spacing: -1px; line-height: 1.15; }
+    .title-md { font-size: 42px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .title-sm { font-size: 32px; font-weight: 400; color: #8ab4f8; letter-spacing: 2px; }
+    .body-text { font-size: 48px; font-weight: 500; color: #e0e8f0; line-height: 1.4; max-width: 1400px; }
+    .body-text em { color: #8ab4f8; font-style: normal; }
+    .accent-bar { width: 80px; height: 4px; background: #8ab4f8; border-radius: 2px; }
+    .accent-dot { width: 12px; height: 12px; background: #8ab4f8; border-radius: 50%; }
+
+    /* Captions */
+    .caption {
+      position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+      text-align: center; font-size: 40px; font-weight: 600; color: #ffffff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8); padding: 14px 36px;
+      background: rgba(0,0,0,0.35); border-radius: 12px; max-width: 1600px;
+      line-height: 1.4; white-space: nowrap;
+    }
+    .caption em { color: #8ab4f8; font-style: normal; }
+
+    /* Lower thirds */
+    .lower-third {
+      position: absolute; bottom: 120px; left: 120px;
+      padding: 20px 32px; background: rgba(10,22,40,0.85); border-left: 4px solid #8ab4f8;
+      border-radius: 0 8px 8px 0; max-width: 800px;
+    }
+    .lower-third .name { font-size: 36px; font-weight: 700; color: #ffffff; }
+    .lower-third .role { font-size: 22px; color: #8ab4f8; margin-top: 4px; }
+
+    /* Stat card */
+    .stat-card {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .stat-number { font-size: 120px; font-weight: 800; color: #8ab4f8; line-height: 1; }
+    .stat-label { font-size: 28px; color: #c0d0e0; letter-spacing: 2px; }
+  </style>
+</head>
+<body>
+  <!-- ============================================================ -->
+  <!-- TEMPLATE: Intro Card with Animated Background                  -->
+  <!-- Usage: Swap text in .title-hero, .title-sm, .accent-bar       -->
+  <!-- data-duration="4" — adjust as needed                          -->
+  <!-- ============================================================ -->
+  <div data-hf-id="tpl-intro" class="clip" data-composition-id="intro-card" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+    <!-- Background -->
+    <div class="bg-gradient-midnight" style="position:absolute;inset:0;"></div>
+    <div class="particle-grid"></div>
+    <div class="grid-lines"></div>
+    <div class="glow-orb" style="width:400px;height:400px;top:-100px;right:-100px;background:rgba(138,180,248,0.12);"></div>
+    <div class="glow-orb" style="width:300px;height:300px;bottom:-80px;left:-80px;background:rgba(138,180,248,0.08);"></div>
+    <div id="scanline-tpl" class="scan-line" style="top:30%;"></div>
+
+    <!-- Content -->
+    <div class="scene-content" style="align-items:center;text-align:center;">
+      <div id="tpl-subtitle" class="title-sm" style="margin-bottom:8px;">PROMPT-MINE</div>
+      <div id="tpl-title" class="title-hero">Template Title Here</div>
+      <div id="tpl-accent" class="accent-bar" style="margin-top:16px;"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function() {
+        const tl = gsap.timeline({ paused: true });
+        tl.from("#tpl-subtitle", { opacity: 0, y: 20, duration: 0.4, ease: "power2.out" }, 0.2);
+        tl.from("#tpl-title", { opacity: 0, y: 30, duration: 0.6, ease: "power3.out" }, 0.4);
+        tl.from("#tpl-accent", { scaleX: 0, duration: 0.5, ease: "power2.out" }, 0.8);
+        tl.to("#tpl-subtitle,#tpl-title,#tpl-accent", { opacity: 0, y: -20, duration: 0.4, ease: "power2.in" }, 3.3);
+        window.__timelines["intro-card"] = tl;
+      })();
+    </script>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TEMPLATE: Caption Sequence with Animated Background            -->
+  <!-- Usage: Replace text in each .caption div                      -->
+  <!-- data-duration = audio.length + 1                              -->
+  <!-- ============================================================ -->
+  <div data-hf-id="tpl-captions" class="clip" data-composition-id="caption-seq" data-start="4" data-duration="20" data-width="1920" data-height="1080">
+    <div class="bg-gradient-tech" style="position:absolute;inset:0;"></div>
+    <div class="particle-grid"></div>
+    <div class="glow-orb" style="width:350px;height:350px;top:50%;left:-100px;transform:translateY(-50%);background:rgba(138,180,248,0.1);"></div>
+
+    <!-- Replace these with your synced captions -->
+    <div id="tc0" class="clip caption" data-start="0" data-duration="3" data-track-index="1" style="opacity:0;">Line one of your caption here.</div>
+    <div id="tc1" class="clip caption" data-start="3" data-duration="3" data-track-index="1" style="opacity:0;">Line two of your caption here.</div>
+    <div id="tc2" class="clip caption" data-start="6" data-duration="3" data-track-index="1" style="opacity:0;">Line three of your caption here.</div>
+    <div id="tc3" class="clip caption" data-start="9" data-duration="3" data-track-index="1" style="opacity:0;">Line four of your caption here.</div>
+    <div id="tc4" class="clip caption" data-start="12" data-duration="3" data-track-index="1" style="opacity:0;">Line five of your caption here.</div>
+    <div id="tc5" class="clip caption" data-start="15" data-duration="3" data-track-index="1" style="opacity:0;">Line six of your caption here.</div>
+    <div id="tc6" class="clip caption" data-start="18" data-duration="2" data-track-index="1" style="opacity:0;">Final line wraps it up.</div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function() {
+        const tl = gsap.timeline({ paused: true });
+        const caps = ["tc0","tc1","tc2","tc3","tc4","tc5","tc6"];
+        caps.forEach((id, i) => {
+          const start = i * 3;
+          tl.to("#"+id, { opacity: 1, duration: 0.2 }, start + 0.2);
+          tl.to("#"+id, { opacity: 0, duration: 0.15 }, start + 2.6);
+        });
+        window.__timelines["caption-seq"] = tl;
+      })();
+    </script>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TEMPLATE: Stat Highlight                                       -->
+  <!-- Swap numbers and labels                                       -->
+  <!-- ============================================================ -->
+  <div data-hf-id="tpl-stats" class="clip" data-composition-id="stat-highlight" data-start="24" data-duration="5" data-width="1920" data-height="1080">
+    <div class="bg-gradient-ocean" style="position:absolute;inset:0;"></div>
+    <div class="grid-lines"></div>
+    <div class="glow-orb" style="width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(138,180,248,0.08);"></div>
+    
+    <div class="scene-content" style="align-items:center;text-align:center;">
+      <div class="stat-card">
+        <div id="stat-num" class="stat-number">94%</div>
+        <div id="stat-label" class="stat-label">OF EMPLOYERS PRIORITIZE THIS SKILL</div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function() {
+        const tl = gsap.timeline({ paused: true });
+        tl.from("#stat-num", { opacity: 0, scale: 0.5, duration: 0.6, ease: "back.out(1.7)" }, 0.3);
+        tl.from("#stat-label", { opacity: 0, y: 20, duration: 0.4, ease: "power2.out" }, 0.8);
+        tl.to("#stat-num,#stat-label", { opacity: 0, duration: 0.4 }, 4.3);
+        window.__timelines["stat-highlight"] = tl;
+      })();
+    </script>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TEMPLATE: End Card                                             -->
+  <!-- Swap name and tagline                                         -->
+  <!-- ============================================================ -->
+  <div data-hf-id="tpl-end" class="clip" data-composition-id="end-card" data-start="29" data-duration="4" data-width="1920" data-height="1080">
+    <div class="bg-gradient-midnight" style="position:absolute;inset:0;"></div>
+    <div class="particle-grid"></div>
+
+    <div class="scene-content" style="align-items:center;text-align:center;">
+      <div id="end-name" class="title-lg">Titus Banks</div>
+      <div id="end-tagline" class="title-sm" style="margin-top:12px;">Business Analyst &bull; AI Systems Builder</div>
+      <div id="end-accent" class="accent-bar" style="margin-top:24px;"></div>
+      <div id="end-url" style="font-size:22px;color:#5a7a9a;margin-top:40px;letter-spacing:1px;">ttsbanks86.github.io/ba-portfolio</div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function() {
+        const tl = gsap.timeline({ paused: true });
+        tl.from("#end-name", { opacity: 0, y: 25, duration: 0.5, ease: "power3.out" }, 0.3);
+        tl.from("#end-tagline", { opacity: 0, y: 15, duration: 0.4, ease: "power2.out" }, 0.6);
+        tl.from("#end-accent", { scaleX: 0, duration: 0.4, ease: "power2.out" }, 0.9);
+        tl.from("#end-url", { opacity: 0, duration: 0.3 }, 1.2);
+        window.__timelines["end-card"] = tl;
+      })();
+    </script>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- AUDIO — Drop your narration.wav here                          -->
+  <!-- ============================================================ -->
+  <audio id="narration" data-start="0" data-duration="33" data-track-index="0" data-volume="1"></audio>
+
+  <!-- ============================================================ -->
+  <!-- ROOT COMPOSITION — connects all templates                     -->
+  <!-- ============================================================ -->
+  <div data-hf-id="hf-root" id="root" data-composition-id="main" data-start="0" data-duration="33" data-width="1920" data-height="1080">
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>

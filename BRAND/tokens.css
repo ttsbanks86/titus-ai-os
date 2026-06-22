@@ -1,0 +1,165 @@
+/* =========================================================
+   TITUS BANKS — DESIGN TOKENS
+   Source: BRAND/tokens.json
+   Owner: CDO (exec-cdo)
+   Version: 0.1.0 — Phase 0 Quick Win (QW3)
+   ========================================================= */
+
+:root {
+  /* ---------- COLOR: PRIMARY ---------- */
+  --color-navy:        #0F2742;   /* Navy — headlines, anchors, trust */
+  --color-navy-deep:   #0A1B30;   /* Navy Deep — deepest background, footer */
+  --color-gold:        #D4A14A;   /* Gold — CTAs, accents, premium */
+  --color-gold-soft:   #E8C98A;   /* Gold Soft — hover, gradients */
+
+  /* ---------- COLOR: SECONDARY ---------- */
+  --color-green:       #1F6B4A;   /* Green Success — faith, growth */
+  --color-slate:       #5A6B7B;   /* Slate — secondary text, captions */
+
+  /* ---------- COLOR: NEUTRAL ---------- */
+  --color-cream:       #F5F1E8;   /* Cream Surface — default background */
+  --color-white:       #FFFFFF;   /* White — cards, reverse text */
+  --color-off-black:   #0E1116;   /* Off-Black — body text on light */
+
+  /* ---------- TYPOGRAPHY: FAMILIES (TBD — Master Brand System will lock) ---------- */
+  --font-display: "Playfair Display", "Cormorant Garamond", "Lora", Georgia, serif;
+  --font-body:    "Inter", "Source Sans 3", "Work Sans", system-ui, sans-serif;
+  --font-accent:  "Caveat", "Dancing Script", cursive;
+
+  /* ---------- TYPOGRAPHY: SCALE ---------- */
+  --text-display-xl: 72px;
+  --text-display-lg: 56px;
+  --text-h1:         44px;
+  --text-h2:         36px;
+  --text-h3:         28px;
+  --text-h4:         22px;
+  --text-body-lg:    18px;
+  --text-body:       16px;
+  --text-body-sm:    14px;
+  --text-caption:    12px;
+  --text-overline:   11px;
+
+  --line-tight:   1.1;
+  --line-snug:    1.25;
+  --line-normal:  1.5;
+  --line-relaxed: 1.6;
+
+  /* ---------- SPACING (8pt grid) ---------- */
+  --space-xxs:  4px;
+  --space-xs:   8px;
+  --space-sm:   12px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   32px;
+  --space-2xl:  48px;
+  --space-3xl:  64px;
+  --space-4xl:  96px;
+
+  /* ---------- RADIUS ---------- */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-pill: 9999px;
+
+  /* ---------- ELEVATION ---------- */
+  --shadow-sm: 0 1px 2px rgba(14,17,22,0.06);
+  --shadow-md: 0 4px 12px rgba(14,17,22,0.08);
+  --shadow-lg: 0 12px 32px rgba(14,17,22,0.12);
+
+  /* ---------- LAYOUT ---------- */
+  --container-narrow: 720px;
+  --container-base:   1080px;
+  --container-wide:   1280px;
+}
+
+/* =========================================================
+   BASE TYPOGRAPHY
+   ========================================================= */
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--line-normal);
+  color: var(--color-off-black);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-navy);
+  line-height: var(--line-tight);
+  font-weight: 700;
+  margin: 0 0 var(--space-md);
+}
+
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); }
+
+p {
+  margin: 0 0 var(--space-md);
+  max-width: 65ch;
+}
+
+.overline {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-gold);
+}
+
+.lead {
+  font-size: var(--text-body-lg);
+  line-height: var(--line-relaxed);
+  color: var(--color-slate);
+}
+
+/* =========================================================
+   REUSABLE PATTERNS
+   ========================================================= */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 600;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--color-gold);
+  color: var(--color-navy-deep);
+}
+.btn-primary:hover { background: var(--color-gold-soft); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-navy);
+  border: 2px solid var(--color-navy);
+}
+.btn-secondary:hover { background: var(--color-navy); color: var(--color-white); }
+
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* =========================================================
+   BRAND GUARDRAILS
+   ========================================================= */
+
+/* Use sparingly — personal notes, signatures, devotionals */
+.handwritten { font-family: var(--font-accent); }
+
+/* Never use for body — overline and labels only */
+.all-caps   { text-transform: uppercase; letter-spacing: 0.1em; }

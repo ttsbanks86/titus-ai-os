@@ -1,0 +1,554 @@
+- generic [active] [ref=e1]:
+  - link [ref=e823] [cursor=pointer]:
+    - /url: "#"
+    - text: ___
+  - generic [ref=e2]:
+    - link "Skip to content" [ref=e3] [cursor=pointer]:
+      - /url: "#main"
+    - link "Skip to Chat" [ref=e4] [cursor=pointer]:
+      - /url: "#embeddedMessagingConversationButton"
+    - banner [ref=e10]:
+      - generic [ref=e11]:
+        - generic [ref=e13]:
+          - link "WGU Home" [ref=e15] [cursor=pointer]:
+            - /url: https://www.wgu.edu/
+          - navigation [ref=e16]:
+            - tablist [ref=e17]:
+              - link "Alumni Home" [ref=e18] [cursor=pointer]:
+                - link "Alumni Home" [ref=e19]:
+                  - /url: https://www.wgu.edu/alumni.html
+              - tab "Stay Involved" [ref=e20] [cursor=pointer]:
+                - generic [ref=e21]: Stay Involved
+              - tab "Alumni Support" [ref=e22] [cursor=pointer]:
+                - generic [ref=e23]: Alumni Support
+              - tab "Commencements" [ref=e24] [cursor=pointer]:
+                - generic [ref=e25]: Commencements
+              - tab "Pay It Forward" [ref=e26] [cursor=pointer]:
+                - generic [ref=e27]: Pay It Forward
+          - generic [ref=e29]:
+            - link "WGU Home" [ref=e30] [cursor=pointer]:
+              - /url: https://www.wgu.edu
+            - link "Refer a Friend" [ref=e31] [cursor=pointer]:
+              - /url: https://www.wgu.edu/lp/programs/owls-nest.html
+            - button "Search Western Governors website" [ref=e32] [cursor=pointer]
+            - link "Call WGU" [ref=e33] [cursor=pointer]:
+              - /url: tel:385.428.2085
+        - navigation
+      - navigation [ref=e34]
+    - main [ref=e35]:
+      - generic [ref=e39]:
+        - generic [ref=e48]:
+          - generic [ref=e50]:
+            - paragraph [ref=e51]:
+              - generic [ref=e52]: JULY 24-25, 2026
+            - heading "Commencement Weekend in Seattle" [level=1] [ref=e53]:
+              - generic [ref=e54]: Commencement Weekend in Seattle
+          - link "FAQs" [ref=e65] [cursor=pointer]:
+            - /url: https://www.wgu.edu/alumni/faqs.html
+            - generic [ref=e66]: FAQs
+        - generic [ref=e77]:
+          - generic [ref=e90]:
+            - generic [ref=e93]:
+              - generic [ref=e99]:
+                - paragraph [ref=e102]:
+                  - generic [ref=e103]: Alumni Celebration*
+                - separator [ref=e110]
+                - generic [ref=e114]:
+                  - img "Location Icon" [ref=e121]
+                  - heading "Friday, July 24, 2026 6:00 - 9:00 pm" [level=3] [ref=e124]:
+                    - generic [ref=e125]: Friday, July 24, 2026
+                    - generic [ref=e126]: 6:00 - 9:00 pm
+                - generic [ref=e130]:
+                  - img "Location Icon" [ref=e137]
+                  - heading "The Museum of Flight 9404 E. Marginal Way South Seattle, WA 98108" [level=3] [ref=e140]:
+                    - generic [ref=e141]: The Museum of Flight
+                    - generic [ref=e143]:
+                      - text: 9404 E. Marginal Way South
+                      - text: Seattle, WA 98108
+              - generic [ref=e151]:
+                - paragraph [ref=e154]:
+                  - generic [ref=e155]: Commencement*
+                - separator [ref=e162]
+                - generic [ref=e166]:
+                  - img "Location Icon" [ref=e173]
+                  - generic [ref=e175]:
+                    - paragraph [ref=e176]:
+                      - text: Friday, July 24, 2026
+                      - text: Afternoon Ceremony
+                      - text: "Graduate Check-in: 2:00 pm"
+                      - text: "Ceremony start: 3:00 pm"
+                    - paragraph [ref=e177]
+                    - paragraph [ref=e178]:
+                      - text: Saturday, July 25, 2026
+                      - text: Morning Ceremony
+                      - text: "Graduate Check-in: 8:30 am"
+                      - text: "Ceremony start: 9:30 am"
+                      - text: Afternoon Ceremony
+                      - text: "Graduate Check-in: 12:30 pm"
+                      - text: "Ceremony start: 1:30 pm"
+                - generic [ref=e182]:
+                  - img "Location Icon" [ref=e189]
+                  - generic [ref=e191]:
+                    - heading "Climate Pledge Arena 334 1st Ave N Seattle, WA 98109" [level=3] [ref=e192]:
+                      - generic [ref=e193]:
+                        - text: Climate Pledge Arena
+                        - generic [ref=e194]:
+                          - text: 334 1st Ave N
+                          - text: Seattle, WA 98109
+                    - paragraph [ref=e195]: "*Details Subject to Change"
+            - generic [ref=e207]:
+              - heading "Have questions? Ask Cappy!" [level=3] [ref=e208]
+              - paragraph [ref=e209]: "Text \"Hi\" to 1-888-398-1911or scan the QR code below:"
+          - generic [ref=e223]:
+            - generic [ref=e225]:
+              - heading "RSVP Information" [level=3] [ref=e226]
+              - paragraph [ref=e227]: To RSVP, you must have either your Graduation Application submitted to the Student Records department or be enrolled in and only have their final course left, such as capstone or final certification, with the exception of direct hours for field experience or student teaching. If you don’t currently meet this requirement, wait to RSVP until the requirement is met.
+              - paragraph [ref=e228]:
+                - generic [ref=e229]:
+                  - text: Students who are enrolled in their final course may submit an email to
+                  - link "commencement@wgu.edu" [ref=e230] [cursor=pointer]:
+                    - /url: mailto:commencement@wgu.edu
+                  - text: with “Final Course” in subject line along with desired commencement ceremony.
+              - paragraph [ref=e231]:
+                - generic [ref=e232]:
+                  - text: For more information, review the
+                  - generic [ref=e233]:
+                    - link "Commencement Ceremony Participation Guidelines" [ref=e234] [cursor=pointer]:
+                      - /url: https://cm.wgu.edu/t5/WGU-Student-Policy-Handbook/Commencement-Ceremony-Participation/ta-p/150
+                    - text: .
+              - paragraph [ref=e235]:
+                - generic [ref=e236]:
+                  - text: If you have any questions, please contact us at
+                  - link "commencement@wgu.edu" [ref=e237] [cursor=pointer]:
+                    - /url: mailto:commencement@wgu.edu
+                  - text: or by phone 385.428.2085.
+              - paragraph [ref=e238]:
+                - generic [ref=e239]: "Attention iOS users (iPhone/iPad): please use Chrome or Firefox browser to submit your ceremony RSVP form. If you use Safari (default iOS browser) to complete your RSVP form, you will receive a false application rejection message. If uncertain, please complete the ceremony RSVP form on a computer rather than your iOS device."
+            - link "RSVP by June 24, 2026" [ref=e242] [cursor=pointer]:
+              - /url: https://srm--c.vf.force.com/apex/WGUFAForms
+              - generic [ref=e243]: RSVP by June 24, 2026
+            - generic [ref=e245]:
+              - heading "Regalia Update" [level=3] [ref=e246]
+              - paragraph [ref=e247]: Please be aware that the Regalia Order Deadline is before the RSVP Deadline. If you RSVP after the Balfour store has closed, you will be contacted by the Commencement Team to collect information used for a regalia order which can be picked up at the Alumni Celebration or at Graduate Check-In.
+          - generic [ref=e254]:
+            - generic [ref=e256]:
+              - heading "Additional Information" [level=2] [ref=e259]:
+                - generic [ref=e260]: Additional Information
+              - separator [ref=e263]
+            - generic [ref=e267]:
+              - heading "Seattle Deadlines:" [level=3] [ref=e268]
+              - list [ref=e269]:
+                - listitem [ref=e270]:
+                  - generic [ref=e271]:
+                    - link "RSVP" [ref=e272] [cursor=pointer]:
+                      - /url: https://srm--c.vf.force.com/apex/WGUFAForms
+                    - text: "Deadline: June 24, 2026"
+                - listitem [ref=e273]:
+                  - generic [ref=e274]:
+                    - text: Graduate Speaker Application
+                    - text: "Deadline: Closed"
+                - listitem [ref=e275]:
+                  - generic [ref=e276]:
+                    - link "Anthem Singer Audition" [ref=e277] [cursor=pointer]:
+                      - /url: https://wgu.tfaforms.net/f/2026_WGU_Anthem_Singer_Application
+                    - text: "Deadline: June 5, 2026"
+            - list [ref=e284]:
+              - listitem [ref=e285]:
+                - generic [ref=e286]:
+                  - link "Cap & Gown Ordering" [ref=e287] [cursor=pointer]:
+                    - /url: https://www.buildagrad.com/wgu
+                  - text: "Deadline: June 21, 2026"
+              - listitem [ref=e288]:
+                - link "Philanthropy Cord" [ref=e290] [cursor=pointer]:
+                  - /url: https://fundraise.givesmart.com/form/EXlDVg?vid=10wds3
+              - listitem [ref=e291]:
+                - link "Spirit Necklace" [ref=e293] [cursor=pointer]:
+                  - /url: https://www.thecommencementgroup.com/wgumain/%20
+            - generic [ref=e297]:
+              - heading "Seattle Details:" [level=3] [ref=e298]
+              - list [ref=e299]:
+                - listitem [ref=e300]:
+                  - generic [ref=e301]: Commencement Guidebook- coming soon!
+                - listitem [ref=e302]:
+                  - generic [ref=e303]: Ceremony Program - coming soon!
+          - generic [ref=e310]:
+            - generic [ref=e315]:
+              - heading "Learn More About Commencement Day" [level=3] [ref=e316]:
+                - strong [ref=e317]:
+                  - generic [ref=e318]: Learn More About Commencement Day
+              - paragraph [ref=e319]: Watch this video to see what a typical in-person commencement day looks like for a graduate.
+            - iframe [ref=e329]:
+              - generic [active] [ref=f1e1]:
+                - generic "YouTube Video Player" [ref=f1e3]
+                - generic [ref=f1e5]:
+                  - generic:
+                    - generic:
+                      - button "Play video" [ref=f1e10] [cursor=pointer]:
+                        - generic [ref=f1e13]:
+                          - img
+                      - button "Hide player controls" [ref=f1e14] [cursor=pointer]
+                      - generic [ref=f1e16]:
+                        - generic [ref=f1e21]:
+                          - generic [ref=f1e22]:
+                            - link "WGU Graduate Instructional" [ref=f1e23] [cursor=pointer]:
+                              - /url: https://www.youtube.com/watch?v=WXr8cByJ4qI
+                            - link "Western Governors University" [ref=f1e24] [cursor=pointer]:
+                              - /url: /channel/UCNtJHJ6QgqFGV_YnieykYGA
+                              - generic [ref=f1e25]: Western Governors University
+                          - generic [ref=f1e26]:
+                            - button [ref=f1e27] [cursor=pointer]
+                            - generic [ref=f1e28]:
+                              - generic [ref=f1e29]:
+                                - generic: Western Governors University
+                                - generic: 49.6K subscribers
+                              - generic [ref=f1e37]:
+                                - generic [ref=f1e38]:
+                                  - generic:
+                                    - generic:
+                                      - img
+                                  - button "Subscribe" [ref=f1e41] [cursor=pointer]:
+                                    - generic [ref=f1e42]: Subscribe
+                                - generic:
+                                  - generic:
+                                    - img
+                        - generic [ref=f1e46]:
+                          - generic [ref=f1e47]:
+                            - button "Share" [ref=f1e49] [cursor=pointer]:
+                              - generic [ref=f1e53]:
+                                - img
+                            - button "Watch later" [ref=f1e58] [cursor=pointer]:
+                              - generic [ref=f1e62]:
+                                - img
+                          - link "Watch on YouTube" [ref=f1e69] [cursor=pointer]:
+                            - /url: https://www.youtube.com/watch?v=WXr8cByJ4qI
+                            - generic [ref=f1e72]:
+                              - text: Watch on
+                              - img [ref=f1e74]:
+                                - generic [ref=f1e76]:
+                                  - img
+          - generic [ref=e332]:
+            - generic [ref=e336]:
+              - heading "Parking" [level=3] [ref=e337]:
+                - generic [ref=e338]: Parking
+              - paragraph [ref=e339]: Details Coming Soon
+            - generic [ref=e343]:
+              - heading "Bag Policy" [level=3] [ref=e344]:
+                - generic [ref=e345]: Bag Policy
+              - paragraph [ref=e346]: Details Coming Soon
+          - generic [ref=e350]:
+            - heading "Hotel Discounts" [level=3] [ref=e353]:
+              - generic [ref=e354]: Hotel Discounts
+            - generic [ref=e365]:
+              - paragraph [ref=e366]:
+                - generic [ref=e367]:
+                  - text: Four Points by Sheraton Downtown Seattle Center
+                  - text: 601 Roy St., Seattle, WA 98109
+              - paragraph [ref=e368]:
+                - text: "Room rate: $239/ night"
+                - text: "Must book by: July 2, 2026"
+                - text: "Nights rate is valid: 07/23/2026 - 07/25/2026"
+              - paragraph [ref=e369]:
+                - text: "How to guarantee your room: Book with the link below and provide a credit card to guarantee the room."
+                - text: "Cancellation: Individual cancellation may occur up to 48 hours before arrival date, otherwise the 1st night’s room + tax will be charged."
+              - paragraph [ref=e370]:
+                - text: "Link to book reservations:"
+                - link "Reservation-Link" [ref=e372] [cursor=pointer]:
+                  - /url: https://www.marriott.com/event-reservations/reservation-link.mi?id=1766447137561&key=GRP&app=resvlink&_branch_match_id=1531801842779595899&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXTywo0MtNLCrKzC8p0UvOz9UvSi3OyczLtgdK2ALZZSCOWmaKraG5mZmJibmhsbmpmaFadmqlrXtQgFpdUWpaKlB3Xnp8UlF%2BeXFqka1rSnoqAP0SEeNeAAAA
+              - paragraph [ref=e373]: "*Subject to availability, limited quantity available."
+            - generic [ref=e384]:
+              - paragraph [ref=e385]:
+                - generic [ref=e386]:
+                  - text: Element Seattle Downtown
+                  - text: 601 Aurora Avenue North, Seattle, WA 98109
+              - paragraph [ref=e387]:
+                - text: "Room rate: $199/ night"
+                - text: "Must book by: July 2, 2026"
+                - text: "Nights rate is valid: 07/23/2026 - 07/25/2026"
+              - paragraph [ref=e388]:
+                - text: "How to guarantee your room: Book with the link below and provide a credit card to guarantee the room."
+                - text: "Cancellation: Individual cancellation may occur up to 48 hours before arrival date, otherwise the 1st night’s room + tax will be charged."
+                - text: "Link to book reservations:"
+                - link "Reservation-Link" [ref=e390] [cursor=pointer]:
+                  - /url: https://www.marriott.com/event-reservations/reservation-link.mi?id=1771883914687&key=GRP&app=resvlink&_branch_match_id=1531801842779595899&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXTywo0MtNLCrKzC8p0UvOz9UvSi3OyczLtgdK2ALZZSCOWmaKraG5uaGFhbGloYmZhbladmqlrXtQgFpdUWpaKlB3Xnp8UlF%2BeXFqka1rSnoqAKDSrRVeAAAA&inventoryMissing=true
+              - paragraph [ref=e391]: "*Subject to availability, limited quantity available."
+            - generic [ref=e402]:
+              - paragraph [ref=e403]:
+                - generic [ref=e404]:
+                  - text: Fairfield Inn & Suites Seattle Downtown / Seattle Center
+                  - text: 226 7th Ave North, Seattle, WA 98109
+              - paragraph [ref=e405]:
+                - text: "Room rate: $229/ night"
+                - text: "Must book by: June 26, 2026"
+                - text: "Nights rate is valid: 07/23/2026 - 07/25/2026"
+              - paragraph [ref=e406]:
+                - text: "How to guarantee your room: Book with the link below and provide a credit card to guarantee the room."
+                - text: "Cancellation: Individual cancellation may occur up to 48 hours before arrival date, otherwise the 1st night’s room + tax will be charged."
+                - text: "Link to book reservations:"
+                - link "Reservation-Link" [ref=e408] [cursor=pointer]:
+                  - /url: https://www.marriott.com/event-reservations/reservation-link.mi?id=1768510435796&key=GRP&app=resvlink&_branch_match_id=1531801842779595899&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXTywo0MtNLCrKzC8p0UvOz9UvSi3OyczLtgdK2ALZZSCOWmaKraG5mYWpoYGJsam5pZladmqlrXtQgFpdUWpaKlB3Xnp8UlF%2BeXFqka1rSnoqADIJNdxeAAAA
+              - paragraph [ref=e409]: "*Subject to availability, limited quantity available."
+          - generic [ref=e416]:
+            - paragraph [ref=e417]:
+              - generic [ref=e418]: Alumni Celebration in Seattle
+            - paragraph [ref=e419]: Celebration Deatils Coming Soon
+            - paragraph [ref=e420]
+          - generic [ref=e431]:
+            - generic [ref=e439]:
+              - paragraph [ref=e440]:
+                - generic [ref=e441]: "Date: July 24, 2026"
+              - paragraph [ref=e442]: "Time: 6:00 - 9:00 pm"
+              - paragraph [ref=e443]:
+                - generic [ref=e444]:
+                  - generic [ref=e445]:
+                    - text: "Location:"
+                    - text: The Museum of Flight
+                  - text: 9404 E. Marginal Way South
+                  - text: Seattle, WA 98108
+            - generic [ref=e453]:
+              - heading "Contact Information" [level=3] [ref=e454]
+              - 'heading "WGU Alumni Celebration contact: alumnievents@wgu.edu ." [level=3] [ref=e455]':
+                - generic [ref=e457]:
+                  - text: "WGU Alumni Celebration contact:"
+                  - link "alumnievents@wgu.edu" [ref=e458] [cursor=pointer]:
+                    - /url: mailto:alumnievents@wgu.edu
+                  - text: .
+              - paragraph [ref=e459]:
+                - text: "WGU Alumni Celebration accessibility:"
+                - link "alumnievents@wgu.edu" [ref=e460] [cursor=pointer]:
+                  - /url: mailto:alumnievents@wgu.edu
+              - paragraph [ref=e461]:
+                - text: "WGU Commencement questions:"
+                - link "commencement@wgu.edu" [ref=e462] [cursor=pointer]:
+                  - /url: mailto:commencement@wgu.edu
+            - generic [ref=e470]:
+              - heading "Parking Information" [level=3] [ref=e471]
+              - heading "TBA" [level=3] [ref=e472]:
+                - generic [ref=e473]: TBA
+              - paragraph [ref=e474]
+          - generic [ref=e477]:
+            - generic [ref=e478]:
+              - paragraph [ref=e480]: Frequently Asked Questions
+              - tablist [ref=e481]:
+                - tab "Commencement Ceremony FAQs" [selected] [ref=e482] [cursor=pointer]:
+                  - generic [ref=e484]: Commencement Ceremony FAQs
+                - tab "Ceremony Participation and RSVP FAQs" [ref=e485] [cursor=pointer]:
+                  - generic [ref=e487]: Ceremony Participation and RSVP FAQs
+                - tab "Regalia FAQs" [ref=e488] [cursor=pointer]:
+                  - generic [ref=e490]: Regalia FAQs
+                - tab "WGU Philanthropy Cord FAQs" [ref=e491] [cursor=pointer]:
+                  - generic [ref=e493]: WGU Philanthropy Cord FAQs
+                - tab "Letter of Invitation for Abroad & Commencement Announcements FAQs" [ref=e494] [cursor=pointer]:
+                  - generic [ref=e496]: Letter of Invitation for Abroad & Commencement Announcements FAQs
+                - tab "Graduation Application and Diploma FAQs" [ref=e497] [cursor=pointer]:
+                  - generic [ref=e499]: Graduation Application and Diploma FAQs
+            - tabpanel "Commencement Ceremony FAQs" [ref=e501]:
+              - generic [ref=e515]:
+                - paragraph [ref=e518]:
+                  - generic [ref=e519]: Commencement Ceremony FAQs
+                - generic [ref=e521]:
+                  - button "Where do I report for commencement?" [ref=e523] [cursor=pointer]:
+                    - heading "Where do I report for commencement?" [level=3] [ref=e524]
+                  - button "Which ceremony do I attend?" [ref=e527] [cursor=pointer]:
+                    - heading "Which ceremony do I attend?" [level=3] [ref=e528]
+                  - button "How many guests may I bring to commencement?" [ref=e531] [cursor=pointer]:
+                    - heading "How many guests may I bring to commencement?" [level=3] [ref=e532]
+                  - button "Are tickets required for the commencement ceremony?" [ref=e535] [cursor=pointer]:
+                    - heading "Are tickets required for the commencement ceremony?" [level=3] [ref=e536]
+                  - button "Will my name be announced at the commencement ceremony?" [ref=e539] [cursor=pointer]:
+                    - heading "Will my name be announced at the commencement ceremony?" [level=3] [ref=e540]
+                  - button "Will the graduates walk across the stage in alphabetical order?" [ref=e543] [cursor=pointer]:
+                    - heading "Will the graduates walk across the stage in alphabetical order?" [level=3] [ref=e544]
+                  - button "Can I change into my cap and gown at the ceremony?" [ref=e547] [cursor=pointer]:
+                    - heading "Can I change into my cap and gown at the ceremony?" [level=3] [ref=e548]
+                  - button "How can I watch the upcoming commencement ceremony on-line?" [ref=e551] [cursor=pointer]:
+                    - heading "How can I watch the upcoming commencement ceremony on-line?" [level=3] [ref=e552]
+                  - button "When and where can I find the commencement photos?" [ref=e555] [cursor=pointer]:
+                    - heading "When and where can I find the commencement photos?" [level=3] [ref=e556]
+                  - button "Are there any discounts for graduates?" [ref=e559] [cursor=pointer]:
+                    - heading "Are there any discounts for graduates?" [level=3] [ref=e560]
+          - generic [ref=e571]:
+            - generic [ref=e575]:
+              - generic [ref=e577]:
+                - link "BUSINESS" [ref=e579] [cursor=pointer]:
+                  - /url: https://www.wgu.edu/online-business-degrees.html
+                  - heading "BUSINESS" [level=2] [ref=e580]
+                - list [ref=e585]:
+                  - listitem [ref=e586]:
+                    - link "Business Bachelor's Degrees" [ref=e591] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-business-degrees/bachelors-programs.html
+                      - generic [ref=e592]: Bachelor's Degrees
+                  - listitem [ref=e593]:
+                    - link "Business Master's Degrees" [ref=e598] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-business-degrees/masters-programs.html
+                      - generic [ref=e599]: Master's Degrees
+                  - listitem [ref=e600]:
+                    - link "All Business Degrees" [ref=e605] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-business-degrees/certificates.html
+                      - generic [ref=e606]: Certificates
+              - generic [ref=e608]:
+                - link "TECHNOLOGY" [ref=e610] [cursor=pointer]:
+                  - /url: https://www.wgu.edu/online-it-degrees.html
+                  - heading "TECHNOLOGY" [level=2] [ref=e611]
+                - list [ref=e616]:
+                  - listitem [ref=e617]:
+                    - link "IT Bachelor's Degrees" [ref=e622] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-it-degrees/bachelors-programs.html
+                      - generic [ref=e623]: Bachelor's Degrees
+                  - listitem [ref=e624]:
+                    - link "IT Master's Degrees" [ref=e629] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-it-degrees/masters-programs.html
+                      - generic [ref=e630]: Master's Degrees
+                  - listitem [ref=e631]:
+                    - link "IT Certifications" [ref=e636] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-it-degrees/certificates.html
+                      - generic [ref=e637]: Certificates
+            - generic [ref=e641]:
+              - generic [ref=e643]:
+                - link "HEALTH & NURSING" [ref=e645] [cursor=pointer]:
+                  - /url: https://www.wgu.edu/online-nursing-health-degrees.html
+                  - heading "HEALTH & NURSING" [level=2] [ref=e646]
+                - list [ref=e651]:
+                  - listitem [ref=e652]:
+                    - link "Health Bachelor's Degrees" [ref=e657] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-nursing-health-degrees/bachelors-programs.html
+                      - generic [ref=e658]: Bachelor's Degrees
+                  - listitem [ref=e659]:
+                    - link "Health Master's Degrees" [ref=e664] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-nursing-health-degrees/masters-programs.html
+                      - generic [ref=e665]: Master's Degrees
+                  - listitem [ref=e666]:
+                    - link "Health & Nursing Certificates" [ref=e671] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-nursing-health-degrees/post-masters-nursing-certificate.html
+                      - generic [ref=e672]: Certificates
+              - generic [ref=e674]:
+                - link "EDUCATION" [ref=e676] [cursor=pointer]:
+                  - /url: https://www.wgu.edu/online-teaching-degrees.html
+                  - heading "EDUCATION" [level=2] [ref=e677]
+                - list [ref=e682]:
+                  - listitem [ref=e683]:
+                    - link "Teaching Bachelor's Degrees" [ref=e688] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-teaching-degrees/education-bachelors-degrees.html
+                      - generic [ref=e689]: Bachelor's Degrees
+                  - listitem [ref=e690]:
+                    - link "Teaching Master's Degrees" [ref=e695] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-teaching-degrees/education-masters-programs.html
+                      - generic [ref=e696]: Master's Degrees
+                  - listitem [ref=e697]:
+                    - link "State Licensure Information" [ref=e702] [cursor=pointer]:
+                      - /url: https://www.wgu.edu/online-teaching-degrees/state-licensure.html
+                      - generic [ref=e703]: State Licensure Information
+    - generic [ref=e726]:
+      - generic [ref=e730]:
+        - generic [ref=e732]:
+          - heading "The University" [level=3] [ref=e733]
+          - list [ref=e734]:
+            - listitem [ref=e735]:
+              - link "About Us" [ref=e736] [cursor=pointer]:
+                - /url: https://www.wgu.edu/about.html
+            - listitem [ref=e737]:
+              - link "Accessibility" [ref=e738] [cursor=pointer]:
+                - /url: https://www.wgu.edu/admissions/accessibility.html
+            - listitem [ref=e739]:
+              - link "Accreditation" [ref=e740] [cursor=pointer]:
+                - /url: https://www.wgu.edu/student-experience/learning/accreditation.html
+            - listitem [ref=e741]:
+              - link "Newsroom" [ref=e742] [cursor=pointer]:
+                - /url: https://www.wgu.edu/newsroom.html
+            - listitem [ref=e743]:
+              - link "Careers" [ref=e744] [cursor=pointer]:
+                - /url: https://www.wgu.edu/about/careers.html
+            - listitem [ref=e745]:
+              - link "WGU Store" [ref=e746] [cursor=pointer]:
+                - /url: /lp/programs/wgu-store.html
+        - generic [ref=e748]:
+          - heading "For Students" [level=3] [ref=e749]
+          - list [ref=e750]:
+            - listitem [ref=e751]:
+              - link "Student Portal" [ref=e752] [cursor=pointer]:
+                - /url: https://www.wgu.edu/student-portal.html
+            - listitem [ref=e753]:
+              - link "Admissions" [ref=e754] [cursor=pointer]:
+                - /url: https://www.wgu.edu/admissions.html
+            - listitem [ref=e755]:
+              - link "Catalog" [ref=e756] [cursor=pointer]:
+                - /url: https://www.wgu.edu/about/institutional-catalog.html
+            - listitem [ref=e757]:
+              - link "Title IX" [ref=e758] [cursor=pointer]:
+                - /url: https://www.wgu.edu/student-experience/title-ix.html
+            - listitem [ref=e759]:
+              - link "Alumni Services" [ref=e760] [cursor=pointer]:
+                - /url: https://www.wgu.edu/alumni.html
+            - listitem [ref=e761]:
+              - link "Achievement Wallet" [ref=e762] [cursor=pointer]:
+                - /url: /achievement-wallet.html
+      - generic [ref=e766]:
+        - generic [ref=e768]:
+          - heading "Most Visited Links" [level=3] [ref=e769]
+          - list [ref=e770]:
+            - listitem [ref=e771]:
+              - link "Business Programs" [ref=e772] [cursor=pointer]:
+                - /url: https://www.wgu.edu/online-business-degrees.html
+            - listitem [ref=e773]:
+              - link "Bachelor's Degrees" [ref=e774] [cursor=pointer]:
+                - /url: https://www.wgu.edu/online-degree-programs/bachelors.html
+            - listitem [ref=e775]:
+              - link "Student Experience" [ref=e776] [cursor=pointer]:
+                - /url: https://www.wgu.edu/student-experience.html
+            - listitem [ref=e777]:
+              - link "Online Degrees" [ref=e778] [cursor=pointer]:
+                - /url: https://www.wgu.edu/content/wgu-marketing/en/online-degree-programs
+            - listitem [ref=e779]:
+              - link "Scholarships" [ref=e780] [cursor=pointer]:
+                - /url: https://www.wgu.edu/financial-aid-tuition/scholarships.html
+            - listitem [ref=e781]:
+              - link "Partnerships" [ref=e782] [cursor=pointer]:
+                - /url: https://www.wgu.edu/partnerships.html
+        - generic [ref=e784]:
+          - heading "Support" [level=3] [ref=e785]
+          - list [ref=e786]:
+            - listitem [ref=e787]:
+              - link "Military" [ref=e788] [cursor=pointer]:
+                - /url: https://www.wgu.edu/student-experience/military.html
+            - listitem [ref=e789]:
+              - link "Scholarships" [ref=e790] [cursor=pointer]:
+                - /url: https://www.wgu.edu/financial-aid-tuition/scholarships.html
+            - listitem [ref=e791]:
+              - link "Financial Aid" [ref=e792] [cursor=pointer]:
+                - /url: https://www.wgu.edu/financial-aid-tuition/financial-aid.html
+            - listitem [ref=e793]:
+              - link "Faculty" [ref=e794] [cursor=pointer]:
+                - /url: https://www.wgu.edu/student-experience/how-you-learn/faculty.html
+            - listitem [ref=e795]:
+              - link "Testimonials" [ref=e796] [cursor=pointer]:
+                - /url: https://www.wgu.edu/student-experience/student-resources/testimonials.html
+            - listitem [ref=e797]:
+              - link "Student Communities" [ref=e798] [cursor=pointer]:
+                - /url: https://www.wgu.edu/student-experience/student-resources/communities.html
+      - generic [ref=e800]:
+        - generic [ref=e802]:
+          - link "Privacy Policy" [ref=e803] [cursor=pointer]:
+            - /url: https://www.wgu.edu/privacy.html
+          - generic [ref=e804]: "|"
+          - link "Cookie Policy" [ref=e805] [cursor=pointer]:
+            - /url: https://www.wgu.edu/privacy/cookies.html
+          - generic [ref=e806]: "|"
+          - link "Contact Us" [ref=e807] [cursor=pointer]:
+            - /url: https://www.wgu.edu/contact.html
+          - generic [ref=e808]: "|"
+          - link "Sitemap" [ref=e809] [cursor=pointer]:
+            - /url: https://www.wgu.edu/sitemap.html
+        - generic [ref=e810]:
+          - generic [ref=e811]:
+            - link "LinkedIN" [ref=e812] [cursor=pointer]:
+              - /url: https://www.linkedin.com/edu/western-governors-university-19563
+            - link "Facebook" [ref=e813] [cursor=pointer]:
+              - /url: https://www.facebook.com/wgu.edu/
+            - link "Instagram" [ref=e814] [cursor=pointer]:
+              - /url: https://www.instagram.com/westerngovernorsu/
+            - link "YouTube" [ref=e815] [cursor=pointer]:
+              - /url: https://www.youtube.com/user/WesternGovernorsUniv
+            - link "TikTok" [ref=e816] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@wgu
+          - generic [ref=e817]: ©2026 WGU. All rights reserved.
+  - button "Hello, have a question? Let’s chat." [ref=e818] [cursor=pointer]:
+    - img [ref=e820]

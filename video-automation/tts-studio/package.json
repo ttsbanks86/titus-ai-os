@@ -1,0 +1,17 @@
+{
+  "name": "tts-studio",
+  "version": "2.0.0",
+  "description": "TTS Studio - Local Neural Voice Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "electron": "^42.3.3",
+    "sharp": "^0.34.5"
+  }
+}

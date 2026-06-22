@@ -1,0 +1,149 @@
+{
+  "name": "Review Collector - Book Launch",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * 1"
+            }
+          ]
+        }
+      },
+      "name": "Weekly Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "filePath": "C:\\Users\\tbank\\Desktop\\Live Cowork\\BOOK-MARKETING-SYSTEM\\02_EMAIL_SEQUENCES\\review-request.md"
+      },
+      "name": "Read Template",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.daysSincePurchase }}",
+              "operation": "largerEqual",
+              "value2": "7"
+            }
+          ]
+        }
+      },
+      "name": "Check Timing",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "bonolo@rhpublishing.com",
+        "toEmail": "={{ $json.customerEmail }}",
+        "subject": "Would you share your honest review?",
+        "html": "={{ $json.emailBody }}"
+      },
+      "name": "Send Review Request",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [880, 200]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "review_request_sent"
+            }
+          ]
+        }
+      },
+      "name": "Log Request",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1100, 200]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "not_ready"
+            }
+          ]
+        }
+      },
+      "name": "Skip",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1100, 400]
+    }
+  ],
+  "connections": {
+    "Weekly Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Template": {
+      "main": [
+        [
+          {
+            "node": "Check Timing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Timing": {
+      "main": [
+        [
+          {
+            "node": "Send Review Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Skip",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Review Request": {
+      "main": [
+        [
+          {
+            "node": "Log Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}

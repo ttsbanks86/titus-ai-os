@@ -1,0 +1,8 @@
+Antigravity Awesome Skills was cloned to a shorter path to avoid Windows path length errors:
+
+C:\Users\tbank\Desktop\ag-skills
+
+Original repo:
+https://github.com/sickn33/antigravity-awesome-skills
+
+Note: A partial failed checkout may also exist in this repositories folder from the first clone attempt. Use the Desktop clone above for actual review.

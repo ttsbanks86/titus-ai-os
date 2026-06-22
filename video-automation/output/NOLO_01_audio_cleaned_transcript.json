@@ -1,0 +1,850 @@
+{
+  "words": [
+    {
+      "word": "God",
+      "start": 0.5,
+      "end": 0.72,
+      "probability": 1.0
+    },
+    {
+      "word": "sees",
+      "start": 0.77,
+      "end": 1.07,
+      "probability": 1.0
+    },
+    {
+      "word": "exactly",
+      "start": 1.12,
+      "end": 1.65,
+      "probability": 1.0
+    },
+    {
+      "word": "where",
+      "start": 1.7,
+      "end": 2.08,
+      "probability": 1.0
+    },
+    {
+      "word": "you",
+      "start": 2.12,
+      "end": 2.35,
+      "probability": 1.0
+    },
+    {
+      "word": "are",
+      "start": 2.4,
+      "end": 2.62,
+      "probability": 1.0
+    },
+    {
+      "word": "right",
+      "start": 2.67,
+      "end": 3.05,
+      "probability": 1.0
+    },
+    {
+      "word": "now.",
+      "start": 3.1,
+      "end": 3.4,
+      "probability": 1.0
+    },
+    {
+      "word": "Even",
+      "start": 3.55,
+      "end": 3.85,
+      "probability": 1.0
+    },
+    {
+      "word": "when",
+      "start": 3.9,
+      "end": 4.2,
+      "probability": 1.0
+    },
+    {
+      "word": "you",
+      "start": 4.25,
+      "end": 4.47,
+      "probability": 1.0
+    },
+    {
+      "word": "feel",
+      "start": 4.53,
+      "end": 4.83,
+      "probability": 1.0
+    },
+    {
+      "word": "invisible,",
+      "start": 4.88,
+      "end": 5.62,
+      "probability": 1.0
+    },
+    {
+      "word": "He",
+      "start": 5.67,
+      "end": 5.83,
+      "probability": 1.0
+    },
+    {
+      "word": "knows",
+      "start": 5.88,
+      "end": 6.25,
+      "probability": 1.0
+    },
+    {
+      "word": "your",
+      "start": 6.3,
+      "end": 6.6,
+      "probability": 1.0
+    },
+    {
+      "word": "name.",
+      "start": 6.65,
+      "end": 7.02,
+      "probability": 1.0
+    },
+    {
+      "word": "Sometimes",
+      "start": 7.17,
+      "end": 7.85,
+      "probability": 1.0
+    },
+    {
+      "word": "we",
+      "start": 7.9,
+      "end": 8.05,
+      "probability": 1.0
+    },
+    {
+      "word": "think",
+      "start": 8.1,
+      "end": 8.47,
+      "probability": 1.0
+    },
+    {
+      "word": "God",
+      "start": 8.52,
+      "end": 8.75,
+      "probability": 1.0
+    },
+    {
+      "word": "has",
+      "start": 8.8,
+      "end": 9.02,
+      "probability": 1.0
+    },
+    {
+      "word": "forgotten",
+      "start": 9.07,
+      "end": 9.75,
+      "probability": 1.0
+    },
+    {
+      "word": "us",
+      "start": 9.8,
+      "end": 9.95,
+      "probability": 1.0
+    },
+    {
+      "word": "because",
+      "start": 10.0,
+      "end": 10.52,
+      "probability": 1.0
+    },
+    {
+      "word": "our",
+      "start": 10.57,
+      "end": 10.8,
+      "probability": 1.0
+    },
+    {
+      "word": "prayers",
+      "start": 10.85,
+      "end": 11.37,
+      "probability": 1.0
+    },
+    {
+      "word": "feel",
+      "start": 11.42,
+      "end": 11.72,
+      "probability": 1.0
+    },
+    {
+      "word": "silent.",
+      "start": 11.77,
+      "end": 12.3,
+      "probability": 1.0
+    },
+    {
+      "word": "But",
+      "start": 12.45,
+      "end": 12.67,
+      "probability": 1.0
+    },
+    {
+      "word": "silence",
+      "start": 12.72,
+      "end": 13.25,
+      "probability": 1.0
+    },
+    {
+      "word": "does",
+      "start": 13.3,
+      "end": 13.6,
+      "probability": 1.0
+    },
+    {
+      "word": "not",
+      "start": 13.65,
+      "end": 13.87,
+      "probability": 1.0
+    },
+    {
+      "word": "mean",
+      "start": 13.92,
+      "end": 14.22,
+      "probability": 1.0
+    },
+    {
+      "word": "absence.",
+      "start": 14.27,
+      "end": 14.87,
+      "probability": 1.0
+    },
+    {
+      "word": "God",
+      "start": 15.02,
+      "end": 15.25,
+      "probability": 1.0
+    },
+    {
+      "word": "is",
+      "start": 15.3,
+      "end": 15.45,
+      "probability": 1.0
+    },
+    {
+      "word": "working",
+      "start": 15.5,
+      "end": 16.02,
+      "probability": 1.0
+    },
+    {
+      "word": "in",
+      "start": 16.07,
+      "end": 16.22,
+      "probability": 1.0
+    },
+    {
+      "word": "ways",
+      "start": 16.27,
+      "end": 16.57,
+      "probability": 1.0
+    },
+    {
+      "word": "you",
+      "start": 16.62,
+      "end": 16.85,
+      "probability": 1.0
+    },
+    {
+      "word": "cannot",
+      "start": 16.9,
+      "end": 17.35,
+      "probability": 1.0
+    },
+    {
+      "word": "see",
+      "start": 17.4,
+      "end": 17.62,
+      "probability": 1.0
+    },
+    {
+      "word": "yet.",
+      "start": 17.67,
+      "end": 17.97,
+      "probability": 1.0
+    },
+    {
+      "word": "He",
+      "start": 18.12,
+      "end": 18.27,
+      "probability": 1.0
+    },
+    {
+      "word": "is",
+      "start": 18.32,
+      "end": 18.47,
+      "probability": 1.0
+    },
+    {
+      "word": "moving",
+      "start": 18.52,
+      "end": 18.97,
+      "probability": 1.0
+    },
+    {
+      "word": "behind",
+      "start": 19.02,
+      "end": 19.47,
+      "probability": 1.0
+    },
+    {
+      "word": "the",
+      "start": 19.52,
+      "end": 19.75,
+      "probability": 1.0
+    },
+    {
+      "word": "scenes,",
+      "start": 19.8,
+      "end": 20.32,
+      "probability": 1.0
+    },
+    {
+      "word": "arranging",
+      "start": 20.37,
+      "end": 21.05,
+      "probability": 1.0
+    },
+    {
+      "word": "things",
+      "start": 21.1,
+      "end": 21.55,
+      "probability": 1.0
+    },
+    {
+      "word": "for",
+      "start": 21.6,
+      "end": 21.82,
+      "probability": 1.0
+    },
+    {
+      "word": "your",
+      "start": 21.87,
+      "end": 22.17,
+      "probability": 1.0
+    },
+    {
+      "word": "good.",
+      "start": 22.22,
+      "end": 22.6,
+      "probability": 1.0
+    },
+    {
+      "word": "Do",
+      "start": 22.75,
+      "end": 22.9,
+      "probability": 1.0
+    },
+    {
+      "word": "not",
+      "start": 22.95,
+      "end": 23.18,
+      "probability": 1.0
+    },
+    {
+      "word": "give",
+      "start": 23.22,
+      "end": 23.52,
+      "probability": 1.0
+    },
+    {
+      "word": "up",
+      "start": 23.57,
+      "end": 23.72,
+      "probability": 1.0
+    },
+    {
+      "word": "on",
+      "start": 23.77,
+      "end": 23.92,
+      "probability": 1.0
+    },
+    {
+      "word": "what",
+      "start": 23.97,
+      "end": 24.27,
+      "probability": 1.0
+    },
+    {
+      "word": "God",
+      "start": 24.32,
+      "end": 24.55,
+      "probability": 1.0
+    },
+    {
+      "word": "started",
+      "start": 24.6,
+      "end": 25.12,
+      "probability": 1.0
+    },
+    {
+      "word": "in",
+      "start": 25.17,
+      "end": 25.32,
+      "probability": 1.0
+    },
+    {
+      "word": "your",
+      "start": 25.37,
+      "end": 25.67,
+      "probability": 1.0
+    },
+    {
+      "word": "life.",
+      "start": 25.72,
+      "end": 26.1,
+      "probability": 1.0
+    },
+    {
+      "word": "Do",
+      "start": 26.25,
+      "end": 26.4,
+      "probability": 1.0
+    },
+    {
+      "word": "not",
+      "start": 26.45,
+      "end": 26.68,
+      "probability": 1.0
+    },
+    {
+      "word": "lose",
+      "start": 26.72,
+      "end": 27.02,
+      "probability": 1.0
+    },
+    {
+      "word": "hope",
+      "start": 27.07,
+      "end": 27.38,
+      "probability": 1.0
+    },
+    {
+      "word": "when",
+      "start": 27.43,
+      "end": 27.73,
+      "probability": 1.0
+    },
+    {
+      "word": "things",
+      "start": 27.78,
+      "end": 28.23,
+      "probability": 1.0
+    },
+    {
+      "word": "take",
+      "start": 28.28,
+      "end": 28.58,
+      "probability": 1.0
+    },
+    {
+      "word": "longer",
+      "start": 28.63,
+      "end": 29.08,
+      "probability": 1.0
+    },
+    {
+      "word": "than",
+      "start": 29.13,
+      "end": 29.43,
+      "probability": 1.0
+    },
+    {
+      "word": "expected.",
+      "start": 29.48,
+      "end": 30.15,
+      "probability": 1.0
+    },
+    {
+      "word": "Your",
+      "start": 30.3,
+      "end": 30.6,
+      "probability": 1.0
+    },
+    {
+      "word": "breakthrough",
+      "start": 30.65,
+      "end": 31.55,
+      "probability": 1.0
+    },
+    {
+      "word": "is",
+      "start": 31.6,
+      "end": 31.75,
+      "probability": 1.0
+    },
+    {
+      "word": "closer",
+      "start": 31.8,
+      "end": 32.25,
+      "probability": 1.0
+    },
+    {
+      "word": "than",
+      "start": 32.3,
+      "end": 32.6,
+      "probability": 1.0
+    },
+    {
+      "word": "you",
+      "start": 32.65,
+      "end": 32.88,
+      "probability": 1.0
+    },
+    {
+      "word": "realize.",
+      "start": 32.92,
+      "end": 33.52,
+      "probability": 1.0
+    },
+    {
+      "word": "Keep",
+      "start": 33.68,
+      "end": 33.98,
+      "probability": 1.0
+    },
+    {
+      "word": "trusting",
+      "start": 34.03,
+      "end": 34.63,
+      "probability": 1.0
+    },
+    {
+      "word": "even",
+      "start": 34.68,
+      "end": 34.98,
+      "probability": 1.0
+    },
+    {
+      "word": "when",
+      "start": 35.03,
+      "end": 35.33,
+      "probability": 1.0
+    },
+    {
+      "word": "it",
+      "start": 35.38,
+      "end": 35.53,
+      "probability": 1.0
+    },
+    {
+      "word": "is",
+      "start": 35.58,
+      "end": 35.73,
+      "probability": 1.0
+    },
+    {
+      "word": "hard.",
+      "start": 35.78,
+      "end": 36.15,
+      "probability": 1.0
+    },
+    {
+      "word": "Keep",
+      "start": 36.3,
+      "end": 36.6,
+      "probability": 1.0
+    },
+    {
+      "word": "believing",
+      "start": 36.65,
+      "end": 37.33,
+      "probability": 1.0
+    },
+    {
+      "word": "even",
+      "start": 37.38,
+      "end": 37.68,
+      "probability": 1.0
+    },
+    {
+      "word": "when",
+      "start": 37.73,
+      "end": 38.03,
+      "probability": 1.0
+    },
+    {
+      "word": "you",
+      "start": 38.08,
+      "end": 38.3,
+      "probability": 1.0
+    },
+    {
+      "word": "cannot",
+      "start": 38.35,
+      "end": 38.8,
+      "probability": 1.0
+    },
+    {
+      "word": "see",
+      "start": 38.85,
+      "end": 39.08,
+      "probability": 1.0
+    },
+    {
+      "word": "the",
+      "start": 39.13,
+      "end": 39.35,
+      "probability": 1.0
+    },
+    {
+      "word": "way",
+      "start": 39.4,
+      "end": 39.63,
+      "probability": 1.0
+    },
+    {
+      "word": "forward.",
+      "start": 39.68,
+      "end": 40.28,
+      "probability": 1.0
+    },
+    {
+      "word": "God",
+      "start": 40.43,
+      "end": 40.65,
+      "probability": 1.0
+    },
+    {
+      "word": "is",
+      "start": 40.7,
+      "end": 40.85,
+      "probability": 1.0
+    },
+    {
+      "word": "faithful",
+      "start": 40.9,
+      "end": 41.5,
+      "probability": 1.0
+    },
+    {
+      "word": "even",
+      "start": 41.55,
+      "end": 41.85,
+      "probability": 1.0
+    },
+    {
+      "word": "when",
+      "start": 41.9,
+      "end": 42.2,
+      "probability": 1.0
+    },
+    {
+      "word": "we",
+      "start": 42.25,
+      "end": 42.4,
+      "probability": 1.0
+    },
+    {
+      "word": "cannot",
+      "start": 42.45,
+      "end": 42.9,
+      "probability": 1.0
+    },
+    {
+      "word": "feel",
+      "start": 42.95,
+      "end": 43.25,
+      "probability": 1.0
+    },
+    {
+      "word": "His",
+      "start": 43.3,
+      "end": 43.53,
+      "probability": 1.0
+    },
+    {
+      "word": "hand.",
+      "start": 43.58,
+      "end": 43.95,
+      "probability": 1.0
+    },
+    {
+      "word": "He",
+      "start": 44.1,
+      "end": 44.25,
+      "probability": 1.0
+    },
+    {
+      "word": "is",
+      "start": 44.3,
+      "end": 44.45,
+      "probability": 1.0
+    },
+    {
+      "word": "with",
+      "start": 44.5,
+      "end": 44.8,
+      "probability": 1.0
+    },
+    {
+      "word": "you",
+      "start": 44.85,
+      "end": 45.08,
+      "probability": 1.0
+    },
+    {
+      "word": "in",
+      "start": 45.13,
+      "end": 45.28,
+      "probability": 1.0
+    },
+    {
+      "word": "the",
+      "start": 45.33,
+      "end": 45.55,
+      "probability": 1.0
+    },
+    {
+      "word": "waiting.",
+      "start": 45.6,
+      "end": 46.2,
+      "probability": 1.0
+    },
+    {
+      "word": "Thank",
+      "start": 46.35,
+      "end": 46.73,
+      "probability": 1.0
+    },
+    {
+      "word": "you",
+      "start": 46.78,
+      "end": 47.0,
+      "probability": 1.0
+    },
+    {
+      "word": "for",
+      "start": 47.05,
+      "end": 47.28,
+      "probability": 1.0
+    },
+    {
+      "word": "listening.",
+      "start": 47.33,
+      "end": 48.08,
+      "probability": 1.0
+    },
+    {
+      "word": "This",
+      "start": 48.45,
+      "end": 48.75,
+      "probability": 1.0
+    },
+    {
+      "word": "is",
+      "start": 48.8,
+      "end": 48.95,
+      "probability": 1.0
+    },
+    {
+      "word": "The",
+      "start": 49.0,
+      "end": 49.23,
+      "probability": 1.0
+    },
+    {
+      "word": "Open",
+      "start": 49.28,
+      "end": 49.58,
+      "probability": 1.0
+    },
+    {
+      "word": "Door",
+      "start": 49.63,
+      "end": 49.93,
+      "probability": 1.0
+    },
+    {
+      "word": "with",
+      "start": 49.98,
+      "end": 50.28,
+      "probability": 1.0
+    },
+    {
+      "word": "Eden.",
+      "start": 50.33,
+      "end": 50.7,
+      "probability": 1.0
+    }
+  ],
+  "segments": [
+    {
+      "text": "God sees exactly where you are right now.",
+      "start": 0.5,
+      "end": 3.45
+    },
+    {
+      "text": "Even when you feel invisible, He knows your name.",
+      "start": 3.55,
+      "end": 7.07
+    },
+    {
+      "text": "Sometimes we think God has forgotten us because our prayers feel silent.",
+      "start": 7.17,
+      "end": 12.35
+    },
+    {
+      "text": "But silence does not mean absence.",
+      "start": 12.45,
+      "end": 14.92
+    },
+    {
+      "text": "God is working in ways you cannot see yet.",
+      "start": 15.02,
+      "end": 18.02
+    },
+    {
+      "text": "He is moving behind the scenes, arranging things for your good.",
+      "start": 18.12,
+      "end": 22.65
+    },
+    {
+      "text": "Do not give up on what God started in your life.",
+      "start": 22.75,
+      "end": 26.15
+    },
+    {
+      "text": "Do not lose hope when things take longer than expected.",
+      "start": 26.25,
+      "end": 30.2
+    },
+    {
+      "text": "Your breakthrough is closer than you realize.",
+      "start": 30.3,
+      "end": 33.58
+    },
+    {
+      "text": "Keep trusting even when it is hard.",
+      "start": 33.68,
+      "end": 36.2
+    },
+    {
+      "text": "Keep believing even when you cannot see the way forward.",
+      "start": 36.3,
+      "end": 40.33
+    },
+    {
+      "text": "God is faithful even when we cannot feel His hand.",
+      "start": 40.43,
+      "end": 44.0
+    },
+    {
+      "text": "He is with you in the waiting.",
+      "start": 44.1,
+      "end": 46.25
+    },
+    {
+      "text": "Thank you for listening.",
+      "start": 46.35,
+      "end": 48.35
+    },
+    {
+      "text": "This is The Open Door with Eden.",
+      "start": 48.45,
+      "end": 50.75
+    }
+  ],
+  "word_count": 128
+}

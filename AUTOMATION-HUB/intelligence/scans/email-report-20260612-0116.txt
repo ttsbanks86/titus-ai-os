@@ -1,0 +1,30 @@
+﻿===========================================
+EMAIL MONITOR - Recruiter Check
+Jun 12, 2026 01:16
+===========================================
+
+PLATFORMS TO CHECK:
+[ ] Indeed Messages â€” https://messages.indeed.com
+[ ] LinkedIn Messages â€” https://linkedin.com/messaging
+[ ] Wellfound Messages â€” https://wellfound.com/jobs/messages
+[ ] Gmail Inbox â€” https://mail.google.com (search: indeed OR linkedin OR recruiter)
+[ ] Gmail Inbox â€” Search: "your application" OR "interview" OR "job opportunity"
+
+ACTIVE CONVERSATIONS TO FOLLOW UP:
+1. Northridge Consulting (Indeed) - Replied Jun 10 - Waiting for response
+2. Upstream Rehabilitation (Wellfound) - Applied Jun 11 - External site
+
+DRAFT REPLY - NORTHRIDGE (if they respond):
+"Hi Carly, thanks for the follow-up. I'm very interested in the Business Analyst role.
+I believe my healthcare operations background combined with my AI systems experience
+positions me well to contribute immediately. I'm available for a call at your convenience."
+
+DRAFT THANK YOU - UPSTREAM REHAB (if called):
+"Thank you for the opportunity. I was particularly drawn to Upstream because of
+your mission-driven approach to healthcare. My experience at Visiting Angels
+and my IT Management degree from WGU align well with this role."
+
+AUTOMATION STATUS:
+- Email auto-response: DISABLED (requires explicit approval)
+- Follow-up reminders: ENABLED (daily until response received)
+- Application tracking: ENABLED (auto-updates JOB-TRACKER.md)

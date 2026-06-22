@@ -1,0 +1,72 @@
+{
+  "loops": {
+    "job-search": {
+      "runs": 1,
+      "last_result": "needs-attention",
+      "last_run": "2026-06-13T10:32:13.419244",
+      "results": [
+        {
+          "action": "Check Indeed for new BA postings",
+          "status": "ok",
+          "output": "Message check complete. Report saved to: C:\\Users\\tbank\\Desktop\\Live Cowork\\AUTOMATION-HUB\\reports\\messages-20260613-1032.txt\n"
+        },
+        {
+          "action": "Check LinkedIn for recruiter messages",
+          "status": "ok",
+          "output": "Message check complete. Report saved to: C:\\Users\\tbank\\Desktop\\Live Cowork\\AUTOMATION-HUB\\reports\\messages-20260613-1032.txt\n"
+        },
+        {
+          "action": "Review job tracker for follow-ups",
+          "status": "ok"
+        },
+        {
+          "action": "Apply to 1-2 new BA roles if open",
+          "status": "manual"
+        }
+      ]
+    },
+    "skill-upgrade": {
+      "runs": 1,
+      "last_result": "partial",
+      "last_run": "2026-06-13T10:32:13.980720",
+      "results": [
+        {
+          "action": "Run self-growth scan for new tools",
+          "status": "failed",
+          "error": "The argument 'C:\\Users\\tbank\\Desktop\\Live Cowork\\AUTOMATION-HUB\\self-growth.ps1' to the -File parameter does not exist. Provide the path to an existing '.ps1' file as an argument to the -File paramete"
+        },
+        {
+          "action": "Check tracked repos for updates",
+          "status": "failed",
+          "error": "The argument 'C:\\Users\\tbank\\Desktop\\Live Cowork\\AUTOMATION-HUB\\goldmine.ps1' to the -File parameter does not exist. Provide the path to an existing '.ps1' file as an argument to the -File parameter.\n"
+        },
+        {
+          "action": "Review design inspiration trends",
+          "status": "failed",
+          "error": "The argument 'C:\\Users\\tbank\\Desktop\\Live Cowork\\AUTOMATION-HUB\\design-inspiration.ps1' to the -File parameter does not exist. Provide the path to an existing '.ps1' file as an argument to the -File p"
+        }
+      ]
+    },
+    "app-maintenance": {
+      "runs": 1,
+      "last_result": "partial",
+      "last_run": "2026-06-13T10:32:14.249795",
+      "results": [
+        {
+          "action": "Check system health",
+          "status": "ok",
+          "output": "[10:32:14] === AUTOMATION HUB STATUS ===\n[10:32:14] Hub root: C:\\Users\\tbank\\Desktop\\Live Cowork\\AUTOMATION-HUB\n[10:32:14] Scripts: check-messages.ps1 design-inspiration.ps1 morning-briefing.ps1 self-"
+        },
+        {
+          "action": "Verify all EXEs exist and run",
+          "status": "manual"
+        },
+        {
+          "action": "Check for process leaks (stale EXEs)",
+          "status": "failed",
+          "error": "Processing -File 'C:\\Users\\tbank\\Desktop\\Live Cowork\\AUTOMATION-HUB\\powershell' failed because the file does not have a '.ps1' extension. Specify a valid Windows PowerShell script file name, and then "
+        }
+      ]
+    }
+  }
+}

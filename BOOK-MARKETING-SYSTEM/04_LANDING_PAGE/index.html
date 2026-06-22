@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struck Down but Not Destroyed | Bonolo Morake</title>
+    <meta name="description" content="A Christian testimony of faith, endurance, and God's keeping power through seasons of pain, rejection, and restoration.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0F2742;
+            --gold: #D4A14A;
+            --cream: #F5F1E8;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--cream);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero .author {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 161, 74, 0.4);
+        }
+
+        .book-section {
+            padding: 80px 20px;
+            background: var(--white);
+        }
+
+        .book-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .book-cover {
+            text-align: center;
+        }
+
+        .book-cover img {
+            max-width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-info h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+
+        .book-info .tagline {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .book-info p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .scripture {
+            background: var(--cream);
+            padding: 30px;
+            border-left: 4px solid var(--gold);
+            margin: 40px 0;
+            font-style: italic;
+            color: var(--navy);
+        }
+
+        .features {
+            padding: 80px 20px;
+            background: var(--cream);
+        }
+
+        .features-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--navy);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .feature-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-item h3 {
+            color: var(--navy);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+        }
+
+        .testimonials {
+            padding: 80px 20px;
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .testimonials-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonials h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--gold);
+        }
+
+        .testimonial-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-item .author {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .pricing {
+            padding: 80px 20px;
+            background: var(--white);
+        }
+
+        .pricing-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--navy);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background: var(--cream);
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.highlighted {
+            background: var(--navy);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .pricing-card.highlighted .price {
+            color: var(--gold);
+        }
+
+        .pricing-card .original-price {
+            text-decoration: line-through;
+            opacity: 0.6;
+            font-size: 1.1rem;
+        }
+
+        .pricing-card .format {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .pricing-card .cta-button {
+            width: 100%;
+        }
+
+        .final-cta {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .book-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.highlighted {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Struck Down but Not Destroyed</h1>
+            <p class="subtitle">A Christian testimony of faith, endurance, and God's keeping power through seasons of pain, rejection, and restoration.</p>
+            <p class="author">by Bonolo Morake</p>
+            <a href="#pricing" class="cta-button">Get the Book</a>
+        </div>
+    </section>
+
+    <section class="book-section">
+        <div class="book-container">
+            <div class="book-cover">
+                <img src="BOOK-PROJECTS/Struck Down but Not Destroyed/Book Launch - Struck Down but Not Destroyed/04 Cover Files/Final Cover/Struck_Down_but_Not_Destroyed_FINAL_APPROVED_COVER.jpg" alt="Struck Down but Not Destroyed Book Cover">
+            </div>
+            <div class="book-info">
+                <h2>Struck Down but Not Destroyed</h2>
+                <p class="tagline">You may be struck down, but through Christ, you are not destroyed.</p>
+                <p>In a world that promises everything but delivers nothing, Bonolo Morake found herself lost in the chaos of nightclubbing, drinking, and empty relationships. She was living the life she thought she wanted until she discovered it was leading her straight to destruction.</p>
+                <p><strong>Struck Down but Not Destroyed</strong> is a raw, honest journey of leaving everything behind to follow Jesus including a five-year relationship and the life she once knew.</p>
+                <p>Through heartbreak, rejection, illness, and the hospitalization of her newborn son, she clung to the promises of God. With each trial, her faith grew stronger. With each tear, her character was refined.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scripture">
+        <div class="book-container">
+            <div style="grid-column: 1 / -1; text-align: center;">
+                <p>"For we are hard-pressed on every side, yet not crushed; perplexed, but not in despair; persecuted, but not forsaken; struck down, but not destroyed."</p>
+                <p style="margin-top: 15px; font-weight: 600;">2 Corinthians 4:8-9</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-content">
+            <h2>What You'll Find Inside</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>A Powerful Testimony</h3>
+                    <p>Bonolo shares her personal journey of transformation from a life of emptiness to faith in Christ.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Raw Honesty</h3>
+                    <p>No polished stories or pretending. Real faith through real pain.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Practical Encouragement</h3>
+                    <p>Tools for trusting God when the road is painful and finding strength in prayer.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Hope for the Journey</h3>
+                    <p>A reminder that brokenness is not the end and God can restore what life tried to destroy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="testimonials-content">
+            <h2>What Readers Are Saying</h2>
+            <div class="testimonial-item">
+                <p>"This book broke me and rebuilt me in the same chapter. I saw myself in every page."</p>
+                <p class="author">- Sarah M.</p>
+            </div>
+            <div class="testimonial-item">
+                <p>"Finally, a Christian book that does not pretend everything is perfect. This is real faith."</p>
+                <p class="author">- Michelle K.</p>
+            </div>
+            <div class="testimonial-item">
+                <p>"I have read Christian books for 20 years. This is the first one that made me feel like the author was writing directly to me."</p>
+                <p class="author">- Jennifer R.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="pricing-content">
+            <h2>Get Your Copy</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Kindle eBook</h3>
+                    <div class="price">$2.99</div>
+                    <div class="original-price">$4.99</div>
+                    <div class="format">Digital Download</div>
+                    <a href="https://amazon.com/dp/B0XXXXXXXXX" class="cta-button">Buy on Amazon</a>
+                </div>
+                <div class="pricing-card highlighted">
+                    <h3>Paperback</h3>
+                    <div class="price">$12.99</div>
+                    <div class="original-price">$14.99</div>
+                    <div class="format">Print Book</div>
+                    <a href="https://amazon.com/dp/B0XXXXXXXXX" class="cta-button">Buy on Amazon</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>PDF eBook</h3>
+                    <div class="price">$2.99</div>
+                    <div class="original-price">$4.99</div>
+                    <div class="format">Instant Download</div>
+                    <a href="https://payhip.com/b/XXXXXXXXX" class="cta-button">Buy on Payhip</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <h2>You May Be Struck Down, But You Are Not Destroyed</h2>
+        <p>Join thousands of readers who have found hope, healing, and strength through Bonolo Morake's powerful testimony.</p>
+        <a href="#pricing" class="cta-button">Get the Book Now</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 R. H. Publishing. All rights reserved.</p>
+        <p style="margin-top: 10px;">Struck Down but Not Destroyed by Bonolo Morake</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.feature-item, .testimonial-item, .pricing-card');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

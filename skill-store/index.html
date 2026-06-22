@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenCode Skill Store</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface-hover: #1c2333;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --orange: #d4760e;
+    --red: #f85149;
+    --blue: #58a6ff;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo h1 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .logo .badge {
+    background: rgba(88,166,255,0.12);
+    color: var(--blue);
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    max-width: 500px;
+  }
+
+  .search-container {
+    position: relative;
+    flex: 1;
+  }
+
+  .search-container input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 10px 16px 10px 40px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .search-container input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(88,166,255,0.1);
+  }
+
+  .search-container input::placeholder { color: var(--text-muted); }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  .search-hint {
+    color: var(--text-muted);
+    font-size: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: var(--font-mono);
+  }
+
+  /* ── Tabs ── */
+  .tabs {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab {
+    padding: 12px 20px;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+  }
+
+  .tab .count {
+    background: var(--surface);
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-left: 6px;
+  }
+
+  /* ── Content ── */
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── Toolbar ── */
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .toolbar .count-text {
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  .toolbar select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    padding: 8px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .toolbar select:focus {
+    border-color: var(--blue);
+  }
+
+  /* ── Skill Grid ── */
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card:hover {
+    background: var(--surface-hover);
+    border-color: var(--text-muted);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .skill-card.highlight {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px rgba(88,166,255,0.2), 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .skill-card .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .skill-card .skill-name {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--blue);
+  }
+
+  .skill-card .badges {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .skill-card .badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    background: rgba(139,148,158,0.1);
+    color: var(--text-muted);
+  }
+
+  .skill-card .badge.installed { background: rgba(63,185,80,0.12); color: var(--green); }
+
+  .skill-card .risk-badge {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+
+  .risk-safe { background: rgba(63,185,80,0.12); color: var(--green); }
+  .risk-low { background: rgba(210,153,34,0.12); color: var(--yellow); }
+  .risk-medium { background: rgba(212,118,14,0.12); color: var(--orange); }
+  .risk-high { background: rgba(248,81,73,0.12); color: var(--red); }
+
+  .skill-card .description {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 8px 0 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .skill-card .description.expanded {
+    -webkit-line-clamp: unset;
+  }
+
+  .skill-card .expand-btn {
+    background: none;
+    border: none;
+    color: var(--blue);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 8px;
+  }
+
+  .skill-card .expand-btn:hover { text-decoration: underline; }
+
+  .skill-card .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .skill-card .keyword-pill {
+    font-size: 11px;
+    background: rgba(88,166,255,0.08);
+    color: var(--blue);
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+  }
+
+  .skill-card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .skill-card .author {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .skill-card .use-btn {
+    background: #238636;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .skill-card .use-btn:hover {
+    background: #2ea043;
+  }
+
+  .skill-card .use-btn.copied {
+    background: var(--blue);
+  }
+
+  /* ── FindSkills Section ── */
+  .findsection {
+    background: linear-gradient(135deg, rgba(88,166,255,0.05), rgba(63,185,80,0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .findsection h2 {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .findsection p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .find-input-wrap {
+    display: flex;
+    gap: 12px;
+  }
+
+  .find-input-wrap input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 12px 16px;
+    font-size: 15px;
+    outline: none;
+  }
+
+  .find-input-wrap input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(88,166,255,0.1);
+  }
+
+  .find-input-wrap button {
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+
+  .find-input-wrap button:hover { background: #4c8ed9; }
+
+  .find-result {
+    display: none;
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .find-result.show { display: block; }
+
+  .find-result .match-name {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--blue);
+  }
+
+  .find-result .match-reason {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 4px 0;
+  }
+
+  .find-result .match-confidence {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 8px;
+  }
+
+  .conf-high { background: rgba(63,185,80,0.12); color: var(--green); }
+  .conf-medium { background: rgba(210,153,34,0.12); color: var(--yellow); }
+  .conf-low { background: rgba(248,81,73,0.12); color: var(--red); }
+
+  .no-match {
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  /* ── Install Tab ── */
+  .install-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .install-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .install-item .name {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .install-item .copy-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .install-item .copy-btn:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  .install-item .copy-btn.copied {
+    background: rgba(63,185,80,0.12);
+    color: var(--green);
+    border-color: var(--green);
+  }
+
+  .install-cmd-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+
+  .install-cmd-box .comment { color: var(--text-muted); }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    color: var(--green);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .header-inner { flex-direction: column; align-items: stretch; }
+    .header-right { max-width: 100%; }
+    .skill-grid { grid-template-columns: 1fr; }
+    .find-input-wrap { flex-direction: column; }
+    .install-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── Toast ─── -->
+<div class="toast" id="toast"></div>
+
+<!-- ─── Header ─── -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <h1>⚡ Skill Store</h1>
+      <span class="badge">21 skills</span>
+    </div>
+    <div class="header-right">
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search skills by name, description, or keyword..." oninput="filterSkills()">
+      </div>
+      <span class="search-hint">Ctrl+K</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Tabs ─── -->
+<div class="tabs">
+  <button class="tab active" data-tab="browse" onclick="switchTab('browse')">
+    📦 Browse <span class="count">21</span>
+  </button>
+  <button class="tab" data-tab="findsection" onclick="switchTab('findsection')">
+    🎯 FindSkills
+  </button>
+  <button class="tab" data-tab="install" onclick="switchTab('install')">
+    ⬇️ Install
+  </button>
+  <button class="tab" data-tab="audit" onclick="window.open('auditor.html','_blank')">
+    🔒 Audit
+  </button>
+</div>
+
+<!-- ─── Content ─── -->
+<div class="content">
+
+  <!-- ── FindSkills Tab ── -->
+  <div class="tab-content" id="tab-findsection">
+    <div class="findsection">
+      <h2>🎯 Find the Right Skill</h2>
+      <p>Describe what you're trying to do — I'll find the best skill for the job.</p>
+      <div class="find-input-wrap">
+        <input type="text" id="findInput" placeholder='e.g., "organize my downloads" or "clean up my PC"' onkeydown="if(event.key==='Enter') findSkill()">
+        <button onclick="findSkill()">Find Skill</button>
+      </div>
+      <div class="find-result" id="findResult">
+        <div class="match-name" id="matchName"></div>
+        <div class="match-reason" id="matchReason"></div>
+        <div><span class="match-confidence" id="matchConfidence"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Browse Tab ── -->
+  <div class="tab-content active" id="tab-browse">
+    <div class="toolbar">
+      <span class="count-text" id="countText">Showing 21 skills</span>
+      <select id="sortSelect" onchange="filterSkills()">
+        <option value="name">Sort: Name</option>
+        <option value="risk-safe">Sort: Safest First</option>
+        <option value="risk-danger">Sort: Riskiest First</option>
+      </select>
+    </div>
+    <div class="skill-grid" id="skillGrid"></div>
+  </div>
+
+  <!-- ── Install Tab ── -->
+  <div class="tab-content" id="tab-install">
+    <h2 style="font-size:18px;margin-bottom:8px;">⬇️ One-Click Install</h2>
+    <p style="color:var(--text-muted);margin-bottom:16px;">Click any skill to copy its install command, or use the standalone PowerShell installer.</p>
+
+    <div class="install-cmd-box">
+      <span class="comment"># Quick install from PowerShell:</span><br>
+      .\install-skill.ps1 -Name "skill-name" -Source "C:\path\to\SKILL.md"<br><br>
+      <span class="comment"># Or install from a URL:</span><br>
+      .\install-skill.ps1 -Name "skill-name" -Url "https://example.com/skill.md"
+    </div>
+
+    <div class="install-grid" id="installGrid"></div>
+  </div>
+</div>
+
+<script>
+// ─── Data ───
+const skills = [
+  {id:1, name:"brand-guidelines", risk:"🟢", riskLabel:"Safe", description:"Brand voice, visual identity, content style, messaging", keywords:["brand","voice","style guide","NOLO","Open Door AI"], author:"system"},
+  {id:2, name:"browser-automation", risk:"🟡", riskLabel:"Low", description:"Web automation, form filling, clicking, scraping", keywords:["browser","website","click","fill form","navigate","scrape"], author:"system"},
+  {id:3, name:"career-ops", risk:"🟡", riskLabel:"Low", description:"Job search, resumes, Handshake, LinkedIn, WGU", keywords:["jobs","career","recruiter","Handshake","resume","interview"], author:"system"},
+  {id:4, name:"content-scheduling", risk:"🟠", riskLabel:"Medium", description:"Video scheduling, captions, CSV uploads, transcripts", keywords:["NOLO","Brand2Social","YouTube","TikTok","caption"], author:"system"},
+  {id:5, name:"customize-opencode", risk:"🟢", riskLabel:"Safe", description:"OpenCode config, agents, subagents, plugins, MCP", keywords:["opencode config","agent","skill","plugin","MCP server"], author:"system"},
+  {id:6, name:"doc-coauthoring", risk:"🟢", riskLabel:"Safe", description:"Draft, edit, polish resumes, reports, proposals", keywords:["draft","edit","resume","report","proposal","paper"], author:"system"},
+  {id:7, name:"file-organization", risk:"🟠", riskLabel:"Medium", description:"Bulk rename, move, categorize, download cleanup", keywords:["organize files","rename","move","downloads","sort"], author:"system"},
+  {id:8, name:"gmail-automation", risk:"🟡", riskLabel:"Low", description:"Gmail labels, filters, inbox, attachments", keywords:["Gmail","email","inbox","label","filter","receipt","invoice"], author:"system"},
+  {id:9, name:"identity-eraser", risk:"🟡", riskLabel:"Low", description:"Data broker opt-out (Spokeo, Whitepages, etc.)", keywords:["privacy","opt out","data broker","Spokeo","BeenVerified"], author:"system"},
+  {id:10, name:"internal-comms", risk:"🟢", riskLabel:"Safe", description:"Emails, recruiter replies, LinkedIn messages", keywords:["draft email","reply","message","LinkedIn message","status"], author:"system"},
+  {id:11, name:"local-ai", risk:"🟡", riskLabel:"Low", description:"LM Studio, Ollama, local model inference", keywords:["LM Studio","Ollama","local model","localhost:1234"], author:"system"},
+  {id:12, name:"mcp-builder", risk:"🟡", riskLabel:"Low", description:"Build, fix, test MCP servers and bridges", keywords:["MCP server","MCP tool","API connector","tool bridge"], author:"system"},
+  {id:13, name:"multi-agent-coordination", risk:"🟢", riskLabel:"Safe", description:"Delegate tasks across specialized agents", keywords:["delegate","coordinator","subagent","assign","orchestrate"], author:"system"},
+  {id:14, name:"project-radar", risk:"🟢", riskLabel:"Safe", description:"Project status, task boards, career plans, briefings", keywords:["project status","radar","briefing","next actions"], author:"system"},
+  {id:15, name:"skill-creator", risk:"🟠", riskLabel:"Medium", description:"Create, edit, package new skills", keywords:["create skill","new skill","skill package"], author:"system"},
+  {id:16, name:"skill-simulator", risk:"🟢", riskLabel:"Safe", description:"Test, score, benchmark skills", keywords:["simulate","test skill","score","benchmark","practice"], author:"system"},
+  {id:17, name:"system-cleanup", risk:"🟠", riskLabel:"Medium", description:"Disk cleanup, drivers, updates, device manager", keywords:["clean up","disk space","drivers","display","Windows Update"], author:"system"},
+  {id:18, name:"web-artifacts-builder", risk:"🟢", riskLabel:"Safe", description:"Quick web apps, dashboards, HTML prototypes", keywords:["build web app","dashboard","HTML","React","landing page"], author:"system"},
+  {id:19, name:"windows-automation", risk:"🟠", riskLabel:"Medium", description:"PowerShell, scheduled tasks, system ops", keywords:["PowerShell","scheduled task","monitor folder","batch"], author:"system"},
+  {id:20, name:"workflow-orchestration", risk:"🟢", riskLabel:"Safe", description:"Multi-step trigger → AI → execute → notify chains", keywords:["workflow","trigger","pipeline","orchestration","automation chain"], author:"system"},
+  {id:21, name:"findskills", risk:"🟢", riskLabel:"Safe", description:"Auto-find the best skill for any task", keywords:["find skill","what skill","which skill","recommend skill"], author:"system"}
+];
+
+const riskOrder = { "🟢": 0, "🟡": 1, "🟠": 2, "🔴": 3 };
+const riskClass = { "🟢": "risk-safe", "🟡": "risk-low", "🟠": "risk-medium", "🔴": "risk-high" };
+
+// ─── Render Skills ───
+function renderSkills(list) {
+  const grid = document.getElementById('skillGrid');
+  grid.innerHTML = '';
+
+  list.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.dataset.name = s.name;
+
+    const descId = `desc-${s.id}`;
+    let keywordsHtml = s.keywords.map(k => `<span class="keyword-pill">${k}</span>`).join('');
+
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="skill-name">${s.name}</span>
+        <div class="badges">
+          <span class="badge installed">✅ installed</span>
+          <span class="risk-badge ${riskClass[s.risk]}">${s.risk} ${s.riskLabel}</span>
+        </div>
+      </div>
+      <div class="description" id="${descId}">${s.description}</div>
+      ${s.description.length > 60 ? `<button class="expand-btn" onclick="toggleDesc('${descId}')">Show more</button>` : ''}
+      <div class="keywords">${keywordsHtml}</div>
+      <div class="card-footer">
+        <span class="author">by ${s.author}</span>
+        <button class="use-btn" onclick="useSkill('${s.name}')">Use This</button>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  document.getElementById('countText').textContent = `Showing ${list.length} skill${list.length !== 1 ? 's' : ''}`;
+}
+
+// ─── Filter ───
+function filterSkills() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const sort = document.getElementById('sortSelect').value;
+
+  let filtered = skills.filter(s => {
+    if (!q) return true;
+    return s.name.includes(q) ||
+           s.description.toLowerCase().includes(q) ||
+           s.keywords.some(k => k.toLowerCase().includes(q));
+  });
+
+  if (sort === 'risk-safe') {
+    filtered.sort((a, b) => riskOrder[a.risk] - riskOrder[b.risk] || a.name.localeCompare(b.name));
+  } else if (sort === 'risk-danger') {
+    filtered.sort((a, b) => riskOrder[b.risk] - riskOrder[a.risk] || a.name.localeCompare(b.name));
+  } else {
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  renderSkills(filtered);
+}
+
+function toggleDesc(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('expanded');
+  el.nextElementSibling.textContent = el.classList.contains('expanded') ? 'Show less' : 'Show more';
+}
+
+// ─── Use Skill ───
+function useSkill(name) {
+  navigator.clipboard.writeText(`skill("${name}")`).then(() => {
+    const btn = event.target;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    showToast(`Copied skill("${name}") — paste it to load this skill`);
+    setTimeout(() => { btn.textContent = 'Use This'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ─── FindSkills Router ───
+const skillMatches = [
+  { re: /organize|file|rename|move|download|sort/, skill: 'file-organization', reason: 'File and folder management' },
+  { re: /clean|disk|driver|update|uninstall|space/, skill: 'system-cleanup', reason: 'System cleanup and maintenance' },
+  { re: /job|career|resume|linkedin|handshake|recruiter|interview|apply/, skill: 'career-ops', reason: 'Job search and career management' },
+  { re: /gmail|email|inbox|label|filter|receipt|invoice/, skill: 'gmail-automation', reason: 'Gmail and email management' },
+  { re: /draft|write|email.*reply|message|status/, skill: 'internal-comms', reason: 'Professional communications' },
+  { re: /web.?app|dashboard|html|prototype|landing.?page|react|ui/, skill: 'web-artifacts-builder', reason: 'Quick web app and UI building' },
+  { re: /skill|package|create.?skill/, skill: 'skill-creator', reason: 'Creating new skills' },
+  { re: /test.?skill|simulat|benchmark|score|practice/, skill: 'skill-simulator', reason: 'Testing and benchmarking skills' },
+  { re: /brand|voice|style.?guide|nolo|messaging/, skill: 'brand-guidelines', reason: 'Brand voice and style guidelines' },
+  { re: /browser|scrape|click|form|navigate|web.?auto/, skill: 'browser-automation', reason: 'Browser automation' },
+  { re: /youtube|tiktok|caption|video.?schedul|content.?calend/, skill: 'content-scheduling', reason: 'Content scheduling and video captions' },
+  { re: /opencode|config|plugin|agent|mcp.?server/, skill: 'customize-opencode', reason: 'OpenCode configuration' },
+  { re: /draft|edit|polish|report|proposal.*doc|paper/, skill: 'doc-coauthoring', reason: 'Document drafting and editing' },
+  { re: /privacy|opt.?out|data.?broker|spokeo|beenverified/, skill: 'identity-eraser', reason: 'Privacy and data broker opt-out' },
+  { re: /lm.?studio|ollama|local.?model|localhost.?1234/, skill: 'local-ai', reason: 'Local AI model inference' },
+  { re: /mcp.*server|mcp.*build|tool.*bridge|api.*connect/, skill: 'mcp-builder', reason: 'Building and fixing MCP servers' },
+  { re: /delegate|coordinat|subagent|orchestrat|multi.?agent/, skill: 'multi-agent-coordination', reason: 'Multi-agent coordination' },
+  { re: /project.*status|radar|briefing|task.*board/, skill: 'project-radar', reason: 'Project status and radar updates' },
+  { re: /powershell|schedul.*task|monitor.*folder|batch|auto/, skill: 'windows-automation', reason: 'Windows system automation' },
+  { re: /workflow|trigger|pipeline|chain|notif/, skill: 'workflow-orchestration', reason: 'Multi-step workflow orchestration' },
+  { re: /research|topic|analyze|find.*info|gather/, skill: 'doc-coauthoring', reason: 'Research and information gathering' },
+  { re: /code|build|feature|api|debug|implement/, skill: 'web-artifacts-builder', reason: 'Coding and feature development' },
+];
+
+function findSkill() {
+  const input = document.getElementById('findInput').value.toLowerCase().trim();
+  const result = document.getElementById('findResult');
+  const nameEl = document.getElementById('matchName');
+  const reasonEl = document.getElementById('matchReason');
+  const confEl = document.getElementById('matchConfidence');
+
+  if (!input) {
+    result.classList.remove('show');
+    return;
+  }
+
+  let bestMatch = null;
+  let bestScore = 0;
+
+  skillMatches.forEach(m => {
+    const match = input.match(m.re);
+    if (match) {
+      const score = match[0].length / input.length;
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = m;
+      }
+    }
+  });
+
+  // Also check direct name matches
+  const direct = skills.find(s => input.includes(s.name) || s.name.includes(input));
+  if (direct) {
+    bestMatch = { skill: direct.name, reason: direct.description };
+    bestScore = 1;
+  }
+
+  result.classList.add('show');
+
+  if (bestMatch && bestScore > 0.2) {
+    const s = skills.find(x => x.name === bestMatch.skill);
+    nameEl.textContent = `🏆 ${bestMatch.skill}`;
+    reasonEl.textContent = bestMatch.reason + (s ? ` (${s.risk} ${s.riskLabel})` : '');
+    const conf = bestScore > 0.7 ? 'High' : bestScore > 0.4 ? 'Medium' : 'Low';
+    confEl.textContent = `Confidence: ${conf}`;
+    confEl.className = `match-confidence conf-${conf.toLowerCase()}`;
+
+    // Highlight card
+    document.querySelectorAll('.skill-card').forEach(c => c.classList.remove('highlight'));
+    const card = document.querySelector(`.skill-card[data-name="${bestMatch.skill}"]`);
+    if (card) {
+      card.classList.add('highlight');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Switch to browse tab
+      switchTab('browse');
+    }
+  } else {
+    nameEl.textContent = '🤔 No exact match found';
+    reasonEl.textContent = 'Try describing your task differently, or browse all skills below.';
+    confEl.textContent = '';
+  }
+}
+
+// ─── Install Tab ───
+function renderInstall() {
+  const grid = document.getElementById('installGrid');
+  grid.innerHTML = '';
+
+  skills.forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'install-item';
+    const cmd = `mkdir -p ~\\.config\\opencode\\skills\\${s.name}`;
+    item.innerHTML = `
+      <span class="name">${s.risk} ${s.name}</span>
+      <button class="copy-btn" onclick="copyInstallCmd('${s.name}', this)">Copy Install</button>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+function copyInstallCmd(name, btn) {
+  const cmd = `mkdir -p ~\\.config\\opencode\\skills\\${name}`;
+  navigator.clipboard.writeText(cmd).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    showToast(`Install command copied for ${name}`);
+    setTimeout(() => { btn.textContent = 'Copy Install'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ─── Tab Switching ───
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+
+  document.querySelector(`.tab[data-tab="${name}"]`).classList.add('active');
+  const content = document.getElementById(`tab-${name}`);
+  if (content) content.classList.add('active');
+}
+
+// ─── Toast ───
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// ─── Init ───
+renderSkills(skills);
+renderInstall();
+
+// ─── Keyboard shortcut ───
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+});
+</script>
+</body>
+</html>

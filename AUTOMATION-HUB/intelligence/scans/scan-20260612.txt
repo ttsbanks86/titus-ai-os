@@ -1,0 +1,40 @@
+﻿===========================================
+JOB INTELLIGENCE SCAN - Jun 12, 2026
+===========================================
+
+SCAN QUEUED
+The following job boards are ready for automated scanning:
+
+1. Indeed - Remote BA Jobs
+   URL: https://www.indeed.com/jobs?q=Business+Analyst&l=Remote&sort=date
+
+2. Indeed - Entry Level Remote BA Jobs
+   URL: https://www.indeed.com/jobs?q=Business+Analyst+Entry+Level&l=Remote&sort=date
+
+3. Indeed - Healthcare BA Remote Jobs
+   URL: https://www.indeed.com/jobs?q=Healthcare+Business+Analyst&l=Remote&sort=date
+
+4. Wellfound - Startup BA Jobs
+   URL: https://wellfound.com/role/r/business-analyst
+
+5. LinkedIn - BA Jobs
+   URL: https://www.linkedin.com/jobs/search/?keywords=Business%20Analyst&location=Remote
+
+TARGET CRITERIA:
+- Roles: Business Analyst, Data Analyst, IT BA, Healthcare BA
+- Remote: Required
+- Pay: \+
+- Industries: Healthcare, Tech, Financial, AI
+- Experience: Entry to Mid-Level
+
+ACTIVE APPLICATIONS:
+- Northridge Consulting - BA (\-90/hr) - Waiting
+- Terminix - Sr Data Analyst (\-122K) - Waiting  
+- InnovaIT Global - BA (\-45/hr) - Waiting
+- Upstream Rehabilitation - Sr BA (\-114K) - Waiting
+
+NEXT STEPS:
+1. Open Indeed links in browser to scan new listings
+2. Score and rank new opportunities
+3. Prepare tailored resumes for top matches
+4. Generate interview cheat sheets

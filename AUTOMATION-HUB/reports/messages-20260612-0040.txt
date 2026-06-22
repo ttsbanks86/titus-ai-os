@@ -1,0 +1,17 @@
+﻿Message Check Report
+Generated: 2026-06-12 00:40
+
+PLATFORMS TO CHECK MANUALLY:
+- Indeed Messages: https://messages.indeed.com
+- LinkedIn Messages: https://linkedin.com/messaging
+- Wellfound Messages: https://wellfound.com/jobs/messages
+
+KNOWN ACTIVE CONVERSATIONS:
+- Northridge Consulting (Indeed) â€” Replied, waiting for response
+
+ACTIVE APPLICATIONS: 4
+- Northridge Consulting â€” BA (-90/hr)
+- Terminix â€” Sr Data Analyst (-122K)
+- InnovaIT Global â€” BA (-45/hr)
+- Upstream Rehabilitation â€” Sr BA (-114K)
+

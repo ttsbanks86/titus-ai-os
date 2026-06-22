@@ -1,0 +1,3 @@
+Company,Contact,Email,Phone,Source,Status,Score,LastContact,NextAction,Notes
+Example Corp,Jane Smith,jane@example.com,555-0101,LinkedIn,NEW,8,,2026-06-08 - Send intro email,"Series B, hiring AEs, uses Salesforce"
+Demo Inc,Bob Jones,bob@demo.com,555-0102,Crunchbase,CONTACTED,7,2026-06-05,2026-06-08 - Follow up if no reply,"[2026-06-05] [EMAIL] Sent personalized intro"

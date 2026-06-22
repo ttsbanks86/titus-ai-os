@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Security Auditor — OpenCode Skill Store</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --orange: #d4760e;
+    --red: #f85149;
+    --blue: #58a6ff;
+    --font: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  h1 small {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    font-size: 15px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .card h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 300px;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: var(--font);
+    font-size: 13px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(88,166,255,0.15);
+  }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+
+  button {
+    background: var(--border);
+    color: var(--text);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  button:hover {
+    background: #30363d;
+    border-color: var(--text-muted);
+  }
+
+  button.primary {
+    background: #238636;
+    border-color: #2ea043;
+  }
+
+  button.primary:hover {
+    background: #2ea043;
+  }
+
+  .sample-btn {
+    background: transparent;
+    border: 1px dashed var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .sample-btn:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+  }
+
+  .result-card {
+    display: none;
+    margin-top: 24px;
+  }
+
+  .result-card.visible {
+    display: block;
+  }
+
+  .score-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .score-badge.safe { background: rgba(63,185,80,0.15); color: var(--green); }
+  .score-badge.low { background: rgba(210,153,34,0.15); color: var(--yellow); }
+  .score-badge.medium { background: rgba(212,118,14,0.15); color: var(--orange); }
+  .score-badge.high { background: rgba(248,81,73,0.15); color: var(--red); }
+
+  .findings {
+    list-style: none;
+  }
+
+  .finding {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .finding:last-child { border-bottom: none; }
+
+  .finding-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .finding-text {
+    flex: 1;
+  }
+
+  .finding-line {
+    color: var(--text-muted);
+    font-family: var(--font);
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .finding.danger .finding-text { color: var(--red); }
+  .finding.warning .finding-text { color: var(--yellow); }
+  .finding.ok .finding-text { color: var(--green); }
+
+  .checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--bg);
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .check-item .status {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .check-item.pass { border-left: 3px solid var(--green); }
+  .check-item.fail { border-left: 3px solid var(--red); }
+  .check-item.warn { border-left: 3px solid var(--yellow); }
+
+  .inline-code {
+    background: rgba(88,166,255,0.1);
+    color: var(--blue);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font);
+    font-size: 12px;
+  }
+
+  .quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .quick-links a {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 4px 12px;
+    background: rgba(88,166,255,0.08);
+    border-radius: 12px;
+  }
+
+  .quick-links a:hover {
+    background: rgba(88,166,255,0.15);
+  }
+
+  .meta-info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 16px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .meta-info dt { color: var(--text-muted); }
+  .meta-info dd { color: var(--text); }
+</style>
+</head>
+<body>
+  <h1>
+    🔒 Skill Security Auditor
+    <small>v1.0</small>
+  </h1>
+  <p class="subtitle">
+    Paste any SKILL.md content to scan for security risks, unsafe patterns, and code quality issues.
+    Always audit before installing a skill — especially from unknown sources.
+  </p>
+
+  <div class="card">
+    <h2>📝 Paste Skill Content</h2>
+    <textarea id="skillInput" placeholder="Paste the full SKILL.md content here..."></textarea>
+    <div class="controls">
+      <button class="primary" onclick="runAudit()">🔍 Run Audit</button>
+      <button onclick="clearAll()">Clear</button>
+      <button class="sample-btn" onclick="loadSample()">Load Sample Skill</button>
+    </div>
+  </div>
+
+  <div class="card result-card" id="resultCard">
+    <h2>📋 Audit Results</h2>
+
+    <div id="scoreBadge" class="score-badge"></div>
+
+    <div class="meta-info" id="metaInfo">
+      <dt>Name:</dt>
+      <dd id="metaName">—</dd>
+      <dt>Description:</dt>
+      <dd id="metaDesc">—</dd>
+      <dt>Lines of code:</dt>
+      <dd id="metaLines">—</dd>
+      <dt>Risk score:</dt>
+      <dd id="metaScore">—</dd>
+    </div>
+
+    <h3 style="margin: 20px 0 12px; font-size: 15px; color: var(--text-muted);">✅ Checks Passed</h3>
+    <div class="checklist" id="passList"></div>
+
+    <h3 style="margin: 20px 0 12px; font-size: 15px; color: var(--red);">🔴 Findings</h3>
+    <ul class="findings" id="findingsList"></ul>
+
+    <div id="noFindings" style="display:none; padding: 20px 0; color: var(--green); font-size: 15px;">
+      ✅ No security issues detected. This skill appears safe to install.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📖 How to Use</h2>
+    <ol style="margin-left: 20px; color: var(--text-muted); line-height: 2; font-size: 14px;">
+      <li>Copy the <span class="inline-code">SKILL.md</span> content from any skill (GitHub, local file, etc.)</li>
+      <li>Paste it into the text area above</li>
+      <li>Click <strong>Run Audit</strong></li>
+      <li>Review the findings — <span class="inline-code" style="color:var(--green)">✅ Safe</span> means no risks detected</li>
+      <li>If safe, use the <span class="inline-code">install-skill.ps1</span> script to install it</li>
+    </ol>
+    <div class="quick-links">
+      <a href="SKILL-INDEX.md">📚 View Skill Index</a>
+      <a href="install-skill.ps1" download>⬇️ Download Install Script</a>
+    </div>
+  </div>
+
+<script>
+const CHECKS = [
+  { id: 'frontmatter', label: 'Has frontmatter (name + description)', test: (c) => /^---\n[\s\S]*?\n---/.test(c) },
+  { id: 'name', label: 'Has "name:" in frontmatter', test: (c) => /^name:\s*\S+/m.test(c) },
+  { id: 'desc', label: 'Has "description:" in frontmatter', test: (c) => /^description:\s*\S+/m.test(c) },
+  { id: 'no-writes', label: 'No file write operations', test: (c) => !/(?<!["\'`])(Set-Content|Out-File|Write-Host\s+.*>|\[io\.file\]::WriteAll|fs\.writeFile|edit\(|filesystem_write_file)/i.test(c), warn: true },
+  { id: 'no-network', label: 'No network calls', test: (c) => !/(?<!["\'`])(Invoke-WebRequest|Invoke-RestMethod|curl\s|wget\s|fetch\(|axios\.)/i.test(c), warn: true },
+  { id: 'no-creds', label: 'No credentials or secrets', test: (c) => !/(?<!["\'`])(apiKey|api_key|token\s*[:=]|password\s*[:=]|secret\s*[:=]|credentials)/i.test(c), danger: true },
+  { id: 'no-codeexec', label: 'No external script execution', test: (c) => !/(?<!["\'`])(powershell\.exe|cmd\.exe|bash\s|npx\s)/i.test(c), warn: true },
+  { id: 'no-registry', label: 'No Windows registry access', test: (c) => !/(HKLM|HKCU|Get-ItemProperty.*HK|Set-ItemProperty.*HK)/i.test(c), danger: true },
+];
+
+const FINDINGS_PATTERNS = [
+  { pattern: /Set-Content|Out-File/g, label: 'File write operation', severity: 'warning', tip: 'Use with caution — will modify files on disk' },
+  { pattern: /Write-Host/g, label: 'PowerShell Write-Host', severity: 'ok', tip: 'Logging only, no side effects' },
+  { pattern: /Invoke-WebRequest|Invoke-RestMethod/g, label: 'PowerShell network request', severity: 'warning', tip: 'Makes outbound HTTP calls' },
+  { pattern: /curl\s|wget\s|fetch\(|axios\./g, label: 'External network tool', severity: 'warning', tip: 'Downloads data from the internet' },
+  { pattern: /apiKey|api_key/g, label: 'API key reference', severity: 'danger', tip: 'Contains API credentials — verify they are placeholders' },
+  { pattern: /token\s*[:=]/g, label: 'Token/secret reference', severity: 'danger', tip: 'Contains authentication tokens' },
+  { pattern: /password\s*[:=]/g, label: 'Password reference', severity: 'danger', tip: 'Contains password references' },
+  { pattern: /secret\s*[:=]/g, label: 'Secret reference', severity: 'danger', tip: 'Contains secret values' },
+  { pattern: /credentials/g, label: 'Credentials reference', severity: 'warning', tip: 'References credential storage' },
+  { pattern: /powershell\.exe|cmd\.exe|bash\s/g, label: 'Shell execution', severity: 'warning', tip: 'Executes system shell commands' },
+  { pattern: /npx\s|npm\s|yarn\s/g, label: 'Package execution', severity: 'warning', tip: 'Runs external packages from npm registry' },
+  { pattern: /HKLM|HKCU|CurrentVersion|Uninstall/g, label: 'Registry access', severity: 'danger', tip: 'Modifies Windows registry — system-level change' },
+  { pattern: /\$env:|process\.env/g, label: 'Environment variable read', severity: 'ok', tip: 'Reads environment variables' },
+  { pattern: /Remove-Item|del\s|rm\s/g, label: 'File deletion', severity: 'warning', tip: 'Deletes files from disk' },
+];
+
+function runAudit() {
+  const content = document.getElementById('skillInput').value.trim();
+  if (!content) {
+    alert('Paste some SKILL.md content first!');
+    return;
+  }
+
+  const resultCard = document.getElementById('resultCard');
+  resultCard.classList.add('visible');
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Meta info
+  const lines = content.split('\n').length;
+  document.getElementById('metaLines').textContent = lines;
+  const nameMatch = content.match(/^name:\s*(.+)$/m);
+  const descMatch = content.match(/^description:\s*(.+)$/m);
+  document.getElementById('metaName').textContent = nameMatch ? nameMatch[1].trim() : '—';
+  document.getElementById('metaDesc').textContent = descMatch ? descMatch[1].trim() : '—';
+
+  // Run checks
+  let riskScore = 0;
+  let maxRisk = 0;
+  const passList = document.getElementById('passList');
+  passList.innerHTML = '';
+
+  CHECKS.forEach(check => {
+    const passed = check.test(content);
+    const div = document.createElement('div');
+    div.className = `check-item ${passed ? 'pass' : (check.danger ? 'fail' : 'warn')}`;
+
+    if (passed) {
+      div.innerHTML = `<span class="status">✅</span> ${check.label}`;
+      passList.appendChild(div);
+    } else {
+      if (check.danger) { riskScore += 3; maxRisk = Math.max(maxRisk, 3); }
+      else if (check.warn) { riskScore += 2; maxRisk = Math.max(maxRisk, 2); }
+      else { riskScore += 1; }
+      div.innerHTML = `<span class="status">${check.danger ? '🔴' : '⚠️'}</span> ${check.label}`;
+      passList.appendChild(div);
+    }
+  });
+
+  // Findings
+  const findingsList = document.getElementById('findingsList');
+  findingsList.innerHTML = '';
+  const noFindings = document.getElementById('noFindings');
+  noFindings.style.display = 'none';
+
+  const allFindings = [];
+  const seen = new Set();
+
+  FINDINGS_PATTERNS.forEach(fp => {
+    const matches = content.match(fp.pattern);
+    if (matches) {
+      const lines = content.split('\n');
+      let firstLine = -1;
+      for (let i = 0; i < lines.length; i++) {
+        if (fp.pattern.test(lines[i])) {
+          firstLine = i + 1;
+          break;
+        }
+      }
+      const key = fp.label;
+      if (!seen.has(key)) {
+        seen.add(key);
+        allFindings.push({
+          label: fp.label,
+          severity: fp.severity,
+          count: matches.length,
+          line: firstLine,
+          tip: fp.tip
+        });
+      }
+    }
+  });
+
+  if (allFindings.length === 0) {
+    noFindings.style.display = 'block';
+  }
+
+  allFindings.forEach(f => {
+    const li = document.createElement('li');
+    li.className = `finding ${f.severity}`;
+    li.innerHTML = `
+      <span class="finding-icon">${f.severity === 'danger' ? '🔴' : f.severity === 'warning' ? '⚠️' : 'ℹ️'}</span>
+      <div class="finding-text">
+        <strong>${f.label}</strong> (${f.count} match${f.count > 1 ? 'es' : ''})
+        <div class="finding-line">Line ${f.line} · ${f.tip}</div>
+      </div>
+    `;
+    findingsList.appendChild(li);
+  });
+
+  // Score badge
+  document.getElementById('metaScore').textContent = `${riskScore}/10`;
+
+  let label, cls;
+  if (maxRisk >= 3 || riskScore >= 5) {
+    label = '🔴 HIGH RISK';
+    cls = 'high';
+  } else if (riskScore >= 3) {
+    label = '🟠 MEDIUM RISK';
+    cls = 'medium';
+  } else if (riskScore >= 1) {
+    label = '🟡 LOW RISK';
+    cls = 'low';
+  } else {
+    label = '🟢 SAFE';
+    cls = 'safe';
+  }
+
+  const badge = document.getElementById('scoreBadge');
+  badge.className = `score-badge ${cls}`;
+  badge.textContent = label;
+
+  // Scroll to results
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function clearAll() {
+  document.getElementById('skillInput').value = '';
+  document.getElementById('resultCard').classList.remove('visible');
+}
+
+function loadSample() {
+  document.getElementById('skillInput').value = `---
+name: sample-utility
+description: A sample skill for testing the auditor
+---
+
+# Sample Utility
+
+This skill reads a configuration file and writes a summary report.
+
+## Usage
+
+\`\`\`powershell
+.\run-report.ps1 -InputFile "data.csv" -OutputFile "report.txt"
+\`\`\`
+
+## Configuration
+
+Set the environment variable MY_API_KEY before running.
+The script reads from HKCU\\Software\\MyApp for settings.
+
+## Notes
+
+- Downloads additional data via Invoke-WebRequest
+- Writes output to the current directory
+- Requires admin privileges for registry access
+`;
+}
+
+// Ctrl+Enter to run
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.key === 'Enter') {
+    runAudit();
+  }
+});
+</script>
+</body>
+</html>

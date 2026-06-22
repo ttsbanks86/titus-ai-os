@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Titus Banks — Business Analyst & AI Systems Builder</title>
+<meta name="description" content="Portfolio of Titus Banks. Business Analyst, WGU IT Management graduate, and AI systems builder. Seattle, WA.">
+<meta property="og:title" content="Titus Banks — Business Analyst">
+<meta property="og:description" content="BA professional, WGU graduate, and AI systems builder delivering data-driven solutions.">
+<meta property="og:url" content="https://titusbanks.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080b14;--surface:#0f1119;--border:rgba(255,255,255,0.04);--text:#e4e8ee;--text-secondary:#6b7280;--accent:#7c3aed;--accent-light:#a78bfa;--radius:12px;--max-w:1100px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,11,20,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-weight:700;font-size:15px;letter-spacing:-0.3px}
+.logo span{color:var(--accent-light)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-secondary);font-size:13px;font-weight:500;transition:.15s;padding:4px 0;border-bottom:1px solid transparent}
+.nav-links a:hover{color:var(--text);border-color:var(--accent-light)}
+.resume-btn{padding:6px 16px;background:var(--accent);color:#fff!important;border-radius:6px;font-size:12px!important;font-weight:600!important;border:none;cursor:pointer;transition:.2s}
+.resume-btn:hover{background:var(--accent-light)!important;box-shadow:0 4px 16px rgba(124,58,237,0.3)}
+
+/* Hero */
+.hero{padding:120px 0 60px;text-align:center}
+.hero h1{font-size:48px;font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:12px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:18px;color:var(--text-secondary);max-width:600px;margin:0 auto 24px;font-weight:400}
+.hero .tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.hero .tag{padding:4px 14px;background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.12);border-radius:20px;font-size:12px;color:var(--accent-light);font-weight:500}
+.hero-links{display:flex;gap:12px;justify-content:center}
+.hero-links a{padding:10px 24px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;transition:.2s}
+.hero-links .primary{background:var(--accent);color:#fff}
+.hero-links .primary:hover{background:#8b5cf6;box-shadow:0 4px 20px rgba(124,58,237,0.3)}
+.hero-links .secondary{border:1px solid var(--border);color:var(--text)}
+.hero-links .secondary:hover{border-color:var(--accent-light);color:var(--accent-light)}
+
+/* Sections */
+section{padding:60px 0;border-bottom:1px solid var(--border)}
+section:last-child{border-bottom:none}
+.section-title{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--accent-light);margin-bottom:8px}
+.section-heading{font-size:28px;font-weight:700;letter-spacing:-0.5px;margin-bottom:24px}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.about-text{font-size:15px;color:#c8ced6;line-height:1.8}
+.about-text strong{color:var(--text)}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat-box{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center}
+.stat-num{font-size:28px;font-weight:800;color:var(--accent-light);letter-spacing:-0.5px}
+.stat-lbl{font-size:11px;color:var(--text-secondary);margin-top:4px}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.skill-card{padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px}
+.skill-card .skill-name{font-weight:600;margin-bottom:4px}
+.skill-card .skill-level{font-size:11px;color:var(--text-secondary)}
+.skill-bar{height:4px;background:rgba(255,255,255,0.04);border-radius:2px;margin-top:8px;overflow:hidden}
+.skill-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-light))}
+
+/* Projects */
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.project-card{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);transition:.2s}
+.project-card:hover{border-color:rgba(124,58,237,0.15);transform:translateY(-1px)}
+.project-icon{font-size:24px;margin-bottom:8px}
+.project-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.project-desc{font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:8px}
+.project-tech{display:flex;gap:4px;flex-wrap:wrap}
+.project-tech span{padding:2px 8px;background:rgba(124,58,237,0.06);border-radius:4px;font-size:9px;color:var(--accent-light)}
+.project-link{font-size:11px;color:var(--accent-light);text-decoration:none;margin-top:8px;display:inline-block}
+.project-link:hover{text-decoration:underline}
+
+/* Experience */
+.timeline{display:flex;flex-direction:column;gap:16px}
+.timeline-item{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);position:relative;padding-left:48px}
+.timeline-item::before{content:'';position:absolute;left:20px;top:24px;width:8px;height:8px;border-radius:50%;background:var(--accent-light);border:2px solid var(--bg)}
+.timeline-item::after{content:'';position:absolute;left:23px;top:36px;width:2px;bottom:24px;background:var(--border)}
+.timeline-item:last-child::after{display:none}
+.timeline-title{font-size:14px;font-weight:700}
+.timeline-company{font-size:12px;color:var(--accent-light);margin-bottom:4px}
+.timeline-date{font-size:11px;color:var(--text-secondary);margin-bottom:6px}
+.timeline-desc{font-size:12px;color:#c8ced6;line-height:1.6}
+
+/* Education */
+.edu-card{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);display:flex;align-items:flex-start;gap:16px}
+.edu-icon{width:44px;height:44px;background:rgba(124,58,237,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.edu-name{font-size:15px;font-weight:700;margin-bottom:2px}
+.edu-school{font-size:12px;color:var(--accent-light);margin-bottom:2px}
+.edu-date{font-size:11px;color:var(--text-secondary)}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.contact-card{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;text-decoration:none;color:var(--text);transition:.2s}
+.contact-card:hover{border-color:rgba(124,58,237,0.15);transform:translateY(-1px)}
+.contact-icon{font-size:24px;margin-bottom:8px}
+.contact-label{font-size:12px;font-weight:600}
+.contact-value{font-size:11px;color:var(--text-secondary);margin-top:4px}
+
+/* Footer */
+footer{padding:24px 0;text-align:center;font-size:11px;color:var(--text-secondary)}
+footer a{color:var(--accent-light);text-decoration:none}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero h1{font-size:32px}
+  .about-grid,.contact-grid,.projects-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .about-stats{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero,.section-heading{animation:fadeUp .6s ease-out}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="container">
+    <div class="logo">Titus <span>Banks</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="resume-titus-banks.pdf" class="resume-btn" download>📄 Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>Building <span>Intelligent Systems</span><br>That Drive Results</h1>
+    <p class="subtitle">Business Analyst · AI Systems Builder · WGU IT Management Graduate</p>
+    <div class="tags">
+      <span class="tag">Business Analysis</span>
+      <span class="tag">Requirements Gathering</span>
+      <span class="tag">Data Analysis</span>
+      <span class="tag">AI/ML Systems</span>
+      <span class="tag">Cross-Functional</span>
+    </div>
+    <div class="hero-links">
+      <a href="#projects" class="primary">View My Work</a>
+      <a href="#contact" class="secondary">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="section-title">About</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p><strong>Titus Banks</strong> is a Business Analyst and AI systems builder based in Seattle, WA. I specialize in bridging the gap between business needs and technical solutions — from gathering requirements and managing cross-functional workflows to building production-grade AI applications.</p>
+        <br>
+        <p>I bring a unique combination of <strong>Business Analysis</strong> expertise and hands-on <strong>AI system development</strong>, having built autonomous voice transcription apps, clipboard-aware TTS readers, and automated workflow orchestrators — all compiled to standalone executables meeting professional standards.</p>
+        <br>
+        <p>With a BS in IT Management from <strong>Western Governors University</strong> (April 2026) and experience across healthcare coordination, financial operations, and market entry strategy, I translate complex business problems into measurable outcomes.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Applications</div></div>
+        <div class="stat-box"><div class="stat-num">12+</div><div class="stat-lbl">BA Skills</div></div>
+        <div class="stat-box"><div class="stat-num">5</div><div class="stat-lbl">AI Systems Built</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="container">
+    <div class="section-title">Skills</div>
+    <h2 class="section-heading">Business Analysis &amp; Technology</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-name">Requirements Gathering</div><div class="skill-level">Expert</div><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+      <div class="skill-card"><div class="skill-name">Cross-Functional Collaboration</div><div class="skill-level">Expert</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+      <div class="skill-card"><div class="skill-name">Data Analysis &amp; Reporting</div><div class="skill-level">Advanced</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+      <div class="skill-card"><div class="skill-name">Process Improvement</div><div class="skill-level">Advanced</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+      <div class="skill-card"><div class="skill-name">Python / SQL</div><div class="skill-level">Advanced</div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-card"><div class="skill-name">AI System Architecture</div><div class="skill-level">Advanced</div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-card"><div class="skill-name">Pipeline Management</div><div class="skill-level">Advanced</div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-card"><div class="skill-name">Stakeholder Communication</div><div class="skill-level">Expert</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+      <div class="skill-card"><div class="skill-name">Agile / Scrum</div><div class="skill-level">Intermediate</div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="container">
+    <div class="section-title">Projects</div>
+    <h2 class="section-heading">Systems I've Built</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">🎤</div>
+        <div class="project-name">Whisper My Idea Pro</div>
+        <div class="project-desc">Professional AI transcription app. System tray utility with global hotkey recording, floating HUD, auto-paste into active window. 5 modes, vocabulary management, file transcription. Modeled after SuperWhisper.</div>
+        <div class="project-tech"><span>Electron</span><span>Python</span><span>faster-whisper</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🗣️</div>
+        <div class="project-name">NOLA Voice Reader</div>
+        <div class="project-desc">Clipboard-monitoring TTS reader. Watches Windows clipboard and reads copied text aloud. Pure PySide6 native desktop app. 5MB standalone EXE with zero external dependencies.</div>
+        <div class="project-tech"><span>PySide6</span><span>pyttsx3</span><span>Windows TTS</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🤖</div>
+        <div class="project-name">PROMPT-MINE</div>
+        <div class="project-desc">Prompt Mining &amp; Intelligence Engine. Extracted and codified 7 universal behavioral patterns from leaked system prompts (Claude, ChatGPT, Gemini, Grok). Injected into 15 AI agents.</div>
+        <div class="project-tech"><span>System Prompts</span><span>Agent Loops</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">⚙️</div>
+        <div class="project-name">Automation Hub</div>
+        <div class="project-desc">PowerShell + Task Scheduler orchestration system. 8 scheduled tasks running daily for morning briefings, job intelligence scans, goldmine crawls, and design inspiration.</div>
+        <div class="project-tech"><span>PowerShell</span><span>Task Scheduler</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="container">
+    <div class="section-title">Experience</div>
+    <h2 class="section-heading">Where I've Worked</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-title">Pipeline Operations</div>
+        <div class="timeline-company">US Bank</div>
+        <div class="timeline-date">2022 — 2024 · Remote</div>
+        <div class="timeline-desc">Managed pipeline operations with 100% remote work record and zero quality findings. Developed systems to track and streamline workflows across multiple departments, reducing redundant steps and improving cross-team communication. Consistently delivered ahead of schedule.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-title">Care Coordinator</div>
+        <div class="timeline-company">Visiting Angels</div>
+        <div class="timeline-date">2019 — 2021 · Seattle, WA</div>
+        <div class="timeline-desc">Coordinated care plans for 15+ concurrent clients, building cross-functional processes connecting families, caregivers, and healthcare providers. Identified communication gaps and implemented a standardized reporting system that reduced response times significantly.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-title">Market Entry Strategist (Micro-Internship)</div>
+        <div class="timeline-company">AeroCardia</div>
+        <div class="timeline-date">2024</div>
+        <div class="timeline-desc">Developed market entry strategy for a medical device company. Analyzed regulatory frameworks, ensured compliance with federal standards, and delivered a competitive analysis that earned a 5/5 rating from the CEO.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education" style="border-bottom:1px solid var(--border);padding:60px 0">
+  <div class="container">
+    <div class="section-title">Education</div>
+    <h2 class="section-heading">Academic Background</h2>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-name">BS Information Technology Management</div>
+        <div class="edu-school">Western Governors University</div>
+        <div class="edu-date">Graduated April 2026 · Commencement July 24, 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" style="padding:60px 0">
+  <div class="container">
+    <div class="section-title">Contact</div>
+    <h2 class="section-heading">Find Me Online</h2>
+    <div class="contact-grid">
+      <a href="https://linkedin.com/in/titus-banks-280652227" class="contact-card" target="_blank" rel="noopener">
+        <div class="contact-icon">💼</div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">Connect with me</div>
+      </a>
+      <a href="https://github.com/ttsbanks86" class="contact-card" target="_blank" rel="noopener">
+        <div class="contact-icon">🐙</div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value">View my code</div>
+      </a>
+      <a href="mailto:titusbanks786@gmail.com" class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">titusbanks786@gmail.com</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Titus Banks. Built with the <a href="https://github.com/ttsbanks86">Titus AI OS</a> · Powered by PROMPT-MINE</p>
+  </div>
+</footer>
+
+<script>
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
