@@ -1,0 +1,31 @@
+# Secrets - NEVER commit these
+.env
+secrets/
+*.token.json
+*client-secret*.json
+*credentials*.json
+google-calendar-token.json
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Logs
+app/logs/
+*.log
+
+# Temp files
+auth_calendar.py
+auth_calendar2.py
+test_memory_query.py
+test_briefing.md
+career_test_briefing.md
+
+# Runtime data (conversation history, memory)
+app/memory/conversation_log.jsonl
+app/memory/key_facts.json
+
+# IDE
+.vscode/
+.idea/
