@@ -24,6 +24,8 @@ tags:
 - Baseline attachments: 5,924
 - Baseline folders: 507
 - Baseline size: 8,040,895,712 bytes
+- SHA-256 manifest: `C:\Users\tbank\Desktop\Live Cowork\_TKOS_BACKUPS\Titus-Vault-20260712-101056-SHA256.csv`
+- Checksums recorded: 12,037 files; duplicate manifest paths: 0
 - Inventory: [[Vault-Intelligence-Audit]]
 
 ## 2026-07-12 — Batch 001
