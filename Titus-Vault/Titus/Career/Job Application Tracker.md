@@ -41,10 +41,14 @@ work_mode:
 source: Archived ChatGPT conversation
 application_date:
 status: Review Required
+evidence: Archived conversation states an interview was scheduled; no submission confirmation found
 salary_range:
 resume_version:
 cover_letter:
+assessment:
+interview_date:
 follow_up_date:
+outcome:
 last_updated: 2026-07-12
 confidence: Review Required
 related:
@@ -63,10 +67,14 @@ work_mode:
 source:
 application_date:
 status:
+evidence:
 salary_range:
 resume_version:
 cover_letter:
+assessment:
+interview_date:
 follow_up_date:
+outcome:
 last_updated:
 confidence:
 related:

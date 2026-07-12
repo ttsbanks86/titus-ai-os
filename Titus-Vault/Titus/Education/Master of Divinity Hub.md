@@ -1,7 +1,7 @@
 ---
 owner: Titus
 domain: Titus
-status: Active
+status: Review Required
 priority: High
 project: Master of Divinity
 area: Education
@@ -10,50 +10,47 @@ updated: 2026-07-12
 reviewed: 2026-07-12
 related:
   - "[[Education Dashboard]]"
-  - "[[Weekly Accountability]]"
+  - "[[Evidence Registry]]"
+  - "[[Education Evidence Index]]"
   - "[[MDiv Course Registry]]"
   - "[[MDiv Assignment Tracker]]"
-  - "[[MDiv Reading Tracker]]"
-  - "[[MDiv Research Index]]"
-  - "[[MDiv Decision Log]]"
+  - "[[Evidence Needed from Titus]]"
 tags:
   - education/mdiv
   - ministry
 ---
 # Master of Divinity Hub
 
-## Program
+## Verified program evidence
 
-- Current TKOS status: Active.
-- Exact institution, program title, enrollment status, and term are not verified in available source notes.
-- Historical project planning discussed an MDiv or ministry/divinity degree but did not identify active coursework.
+- Institution: **Mosaic Christian College**
+- Degree plan: **Master of Divinity - Church Ministry specialization (72 Hours)**
+- Degree-plan date: April 23, 2026
+- Named student: Titus Banks
+- Curriculum requirements: 23 listed in [[MDiv Course Registry]]
+- Evidence: [[Education Evidence Index]]
 
-## Current courses
+## Enrollment status
 
-[[MDiv Course Registry]] contains 0 verified courses.
+- User stated: pursuing / active priority
+- Official current enrollment evidence: **Not Found**
+- Current status: **Review Required**
+- Current term: not verified
+- Current registered courses: 0 verified
 
-## Active assignments and due dates
+The degree plan verifies the institution, program, and curriculum plan. It does not establish current enrollment or registered coursework.
 
-[[MDiv Assignment Tracker]] contains 0 verified assignments and no verified deadline.
+## Current academic records
 
-## Reading and research
-
-- [[MDiv Reading Tracker]] — 0 verified readings.
-- [[MDiv Research Index]] — 0 verified research records.
-
-## Completed work and grades
-
-No verified MDiv submissions, completed assignments, or grades were found.
+- [[MDiv Assignment Tracker]] — 0 verified assignments
+- [[MDiv Reading Tracker]] — 0 verified current readings
+- [[MDiv Research Index]] — 0 verified current research items
+- Verified instructors, grades, and deadlines: 0
 
 ## Ministry connection
 
-The degree supports Titus's theological foundation, leadership, teaching, and future ministry. Bonolo's books, Open Door, coursework, and ministry content remain outside this hub.
+The program plan aligns with Titus's ministry goals. Bonolo's books, Open Door, coursework, and ministry materials remain outside this hub.
 
-## Blocker and next action
+## Next evidence action
 
-- Blocker: active program documentation has not been located.
-- Next action: supply or locate enrollment confirmation, syllabus, course list, assignment schedule, and reading requirements.
-
-## Decisions
-
-- [[MDiv Decision Log]]
+Provide current enrollment/registration, current schedule, syllabi, or instructor documentation listed in [[Evidence Needed from Titus]].

@@ -25,7 +25,7 @@ tags:
 
 - [[ISC2 Exam Command Center|Upcoming ISC2 Exam]] — provisional name; July 28, 2026.
 - [[ISC2 Study Plan]] — active plan; no practice scores recorded.
-- [[Master of Divinity Hub]] — active TKOS priority; 0 verified courses and 0 verified assignments currently recorded.
+- [[Master of Divinity Hub]] — official degree plan found; current enrollment remains Review Required. The plan contains 23 curriculum requirements, with 0 current registered courses and 0 assignments verified.
 
 ## Planned
 

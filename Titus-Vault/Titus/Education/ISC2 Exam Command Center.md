@@ -14,6 +14,7 @@ related:
   - "[[ISC2 Credentials Registry]]"
   - "[[ISC2 Study Plan]]"
   - "[[ISC2 Credential and Exam Conflict]]"
+  - "[[ISC2 Evidence Index]]"
 tags:
   - education/isc2
   - certification
@@ -31,6 +32,7 @@ No completed ISC2 credential is verified. See [[ISC2 Credentials Registry]].
 - Exam date: July 28, 2026
 - Days remaining as of July 12, 2026: 16
 - Registration evidence: not located
+- Evidence search: [[ISC2 Evidence Index]]
 - Exam-name confidence: Review Required
 - Identity conflict: [[ISC2 Credential and Exam Conflict]]
 

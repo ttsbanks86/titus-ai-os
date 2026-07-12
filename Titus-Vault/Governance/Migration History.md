@@ -89,3 +89,18 @@ tags:
 - Direct hub connection: 100%.
 - New broken links and ownership violations: 0.
 - Completion report: [[Batch 004 Completion Report]].
+
+## 2026-07-12 — Batch 005
+
+- Purpose: primary-evidence intake for ISC2, career, applications, and MDiv records.
+- Pre-batch rollback commit: `6b807d8`.
+- Approved search scope: Titus-Vault only; accounts accessed or scraped: 0.
+- Source notes/files reviewed: 38; binary artifacts inspected: 6.
+- Official evidence found: CourseCareers certificate, Mosaic MDiv degree plan, and WGU transfer evaluation.
+- ISC2 registration and completed-credential evidence: Not Found.
+- Current job-application confirmation/tracker: Not Found.
+- MDiv institution/program/curriculum: verified; current enrollment/courses/assignments: not verified.
+- Evidence Registry created with checksums and source locations; original artifacts retained in place.
+- Evidence requests remaining: 6 in [[Evidence Needed from Titus]].
+- New broken links and ownership violations: 0.
+- Completion report: [[Batch 005 Completion Report]].

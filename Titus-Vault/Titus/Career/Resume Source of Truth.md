@@ -10,70 +10,70 @@ updated: 2026-07-12
 reviewed: 2026-07-12
 related:
   - "[[Career Command Center]]"
-  - "[[Resume]]"
   - "[[Career Experience Inventory]]"
-  - "[[Target Roles]]"
+  - "[[Career Evidence Index]]"
+  - "[[Evidence Registry]]"
 tags:
   - career/resume
 ---
 # Resume Source of Truth
 
-Evidence levels: **Verified**, **Supported**, **Needs Evidence**, **Do Not Use**. Claims marked Needs Evidence or Do Not Use must not appear in future resumes.
+Allowed claim statuses: Approved for Resume, Approved with Revision, Needs Evidence, Do Not Use, Historical Only.
 
 ## Contact information
 
-- Current contact details are maintained outside this vault in approved resume files — Verified location reference.
-- Do not duplicate private contact information here.
-
-## Professional summary components
-
-- Career transition toward Business Analyst and approved secondary roles — Verified.
-- Experience in stakeholder coordination, structured documentation, operations, and analysis — Supported.
-- Completed ISC2 credential — Do Not Use; not verified.
+- Status: Approved for Resume from an approved resume file.
+- Location: retained only in source resume files; private contact fields are not duplicated in TKOS dashboards.
 
 ## Education
 
-- Bachelor of Science in Information Technology Management, Western Governors University — Verified completed.
-- Exact completion date — Needs Evidence before external use if not taken from an approved resume artifact.
+- Claim: Bachelor of Science in Information Technology Management, WGU, completed.
+- Status: Needs Evidence for primary-evidence verification.
+- Evidence found: WGU transfer evaluation naming the program and 72 transfer units; this predates completion and is not a final transcript.
+- Required: final transcript or diploma.
 
 ## Certifications
 
-- CourseCareers Information Technology Certificate — Supported by certificate artifact; exact date requires artifact verification.
-- Completed ISC2 credential — Do Not Use.
-- Upcoming ISC2 Exam, July 28, 2026 — Supported date; exact exam name Needs Evidence.
+- Claim: CourseCareers Information Technology Course, completed January 2, 2026.
+- Status: **Approved for Resume**.
+- Evidence: official certificate, [[Career Evidence Index]].
+- Claim: completed ISC2 credential.
+- Status: **Do Not Use** until official credential/pass evidence exists.
+- Claim: Upcoming ISC2 Exam, July 28, 2026.
+- Status: Needs Evidence; date is lower-level, exact exam name and registration are unverified.
 
-## Employment history
+## Paid employment
 
-- Visiting Angels, Caregiver — Verified title; expanded scope Supported; exact metrics Need Evidence.
-- U.S. Bank, Underwriter Level II — Supported.
-- Uber and Lyft, independent transportation operations — Supported.
+- Visiting Angels, official title Caregiver — Approved with Revision from user-authored resume; duties must not be elevated into an unsupported official title.
+- U.S. Bank, official title Underwriter Level 2 — Approved with Revision from user-authored resume.
+- Uber/Lyft, official title Driver — Approved with Revision from user-authored resume.
 
-## Internship and project experience
+## Metrics and accomplishments
 
-- WGU x Riipen / AeroCardia micro-internship, completed May 2026 — Verified.
-- TKOS and JARVIS — personal projects; label explicitly as personal projects.
+- 5-7 concurrent loan files — Needs Evidence.
+- Zero quality-control findings / 100% accuracy — Needs Evidence.
+- 4.9 customer rating — Needs Evidence.
+- Employer recognition, recommendation for advancement, and high-need assignment selection — Needs Evidence.
+- No numerical accomplishment may be converted from a duty without supporting evidence.
+
+## Internship, academic, and personal projects
+
+- WGU x Riipen / AeroCardia — Historical resume source supports the project; completion is user stated. Label Internship, not paid employment.
+- IT labs, Power BI practice, TKOS, and JARVIS — label Academic or Personal Project as applicable.
+- Never present simulations, labs, academic work, or personal projects as paid employment.
 
 ## Skills and tools
 
-- Stakeholder coordination, documentation, operations, research, and remote collaboration — Supported.
-- SQL, formal BI tooling, named governance frameworks, and quantified process improvement — Needs Evidence unless supported by an artifact.
-
-## Measurable accomplishments
-
-- No numerical accomplishment is approved without a source artifact.
-- Zero quality-control findings and 4.9 customer rating remain Needs Evidence.
+- Microsoft 365, Active Directory, Azure Fundamentals, Power BI, osTicket, VPNs — Needs Evidence or demonstrate through linked artifacts before emphasizing.
+- Stakeholder communication, documentation, coordination, and underwriting context — Approved with Revision based on employment descriptions, without unsupported metrics.
 
 ## Targets and preferences
 
-- Primary: Business Analyst — Verified.
-- Secondary: Business Intelligence Analyst, GRC Analyst, Data Governance Analyst, Project Coordinator, Junior Project Manager, Scrum Master — Verified TKOS targets.
-- Salary target: at least $70,000 — Verified TKOS decision.
-- Location: Remote first, Dallas second, Seattle when appropriate — Verified.
-- Work mode: remote preferred; hybrid/on-site evaluated by fit and location — Supported.
+- Business Analyst primary and approved secondary roles — Approved for Resume targeting.
+- Salary target at least $70,000 — internal decision criterion; do not place on resume.
+- Remote first, Dallas second, Seattle when appropriate — Approved for search strategy.
 
-## Resume versions
+## Source files
 
-- [[Resume]] — system note.
-- Archived PM private-sector DOCX — Historical Copy.
-- Archived PM federal DOCX — Historical Copy.
-- Business Analyst master/draft files referenced in historical source notes require filesystem verification before promotion.
+- PM private resume — Historical Only; checksum recorded in [[Career Evidence Index]].
+- PM federal resume — Historical Only; checksum recorded in [[Career Evidence Index]].
