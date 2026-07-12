@@ -11,6 +11,8 @@ reviewed: 2026-07-12
 related:
   - "[[Job Search Dashboard]]"
   - "[[Project Registry]]"
+  - "[[Job Search Strategy]]"
+  - "[[Resume Source of Truth]]"
 tags:
   - hub
   - career
@@ -24,12 +26,13 @@ Obtain stable employment.
 ## Active workstreams
 
 - [[Job Search Dashboard]]
-- Business Analyst Career — Prioritizing
-- Career Development — Active
-- Professional Portfolio — Active
-- Resume — Active
-- Learning — Active
+- [[Target Roles]]
+- [[Resume Source of Truth]]
+- [[Career Experience Inventory]]
+- [[Skills Gap Analysis]]
+- [[Portfolio]]
 
 ## Blockers
 
-No verified blockers have been migrated yet.
+- Historical application activity is not consolidated.
+- Some career source facts required resolution; see [[Career Conflicts]].

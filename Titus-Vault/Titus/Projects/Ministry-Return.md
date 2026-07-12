@@ -30,7 +30,7 @@ Planning the return to independent ministry. This project covers the strategy, t
 - Build support network and resources
 
 ## Linked Notes
-- [[06-Projects/Projects]]
+- [[Review/Migration Review/Projects]]
 - [[01-Dashboard/My-Goals]]
 - [[01-Dashboard/Personal-Context]]
 

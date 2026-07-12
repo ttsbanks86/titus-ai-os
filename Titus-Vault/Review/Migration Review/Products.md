@@ -38,7 +38,7 @@ A directory of all active and planned products and tools. Each product has its o
 - [[Floating-AI-Tutor]]
 - [[DocFlow]]
 - [[Hermes-Gateway]]
-- [[03-Businesses/Businesses]]
+- [[Archive/Superseded/Businesses]]
 - [[09-Knowledge/Technology/Tech-Stack]]
 
 ## Active Tasks
@@ -49,7 +49,7 @@ A directory of all active and planned products and tools. Each product has its o
 - 2026-06-21: Products directory restructured as part of vault migration
 
 ## References
-- [[03-Businesses/Businesses]]
+- [[Archive/Superseded/Businesses]]
 - [[11-Templates/Master-Note-Template]]
 
 ## TKOS Connections

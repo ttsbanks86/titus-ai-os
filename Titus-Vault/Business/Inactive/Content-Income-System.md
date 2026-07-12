@@ -30,7 +30,7 @@ A content monetization pipeline that turns one source asset into platform-native
 - Build audience across multiple platforms
 
 ## Linked Notes
-- [[04-Products/Products]]
+- [[Review/Migration Review/Products]]
 - [[04-Products/Personal-AI-Operator]]
 - [[09-Knowledge/Marketing/Content-Strategy]]
 - [[09-Knowledge/Marketing/Marketing-Strategy]]

@@ -15,6 +15,9 @@ related:
   - "[[Education Dashboard]]"
   - "[[Business Dashboard]]"
   - "[[Project Registry]]"
+  - "[[Weekly Accountability]]"
+  - "[[ISC2 Exam Command Center]]"
+  - "[[Master of Divinity Hub]]"
 tags:
   - hub
   - dashboard
@@ -25,35 +28,41 @@ tags:
 > [!important] Current focus
 > Obtain stable employment while advancing ISC2, the Master of Divinity, and one validated small-business AI initiative.
 
-## What must Titus accomplish today?
+## Current priorities
 
-- [ ] Complete the highest-impact [[Job Search Dashboard|job-search]] action.
-- [ ] Complete the next verified ISC2 study action.
-- [ ] Complete the next verified Master of Divinity action.
+- **1 — Stable employment:** [[Job Search Dashboard]]
+- **2 — ISC2 exam:** [[ISC2 Exam Command Center]] — July 28, 2026
+- **3 — Master of Divinity:** [[Master of Divinity Hub]]
+- **4 — Business validation:** [[AI Small Business Solutions]]
 
-## What interviews are scheduled?
+## Current week commitments
 
-No verified scheduled interviews have been migrated yet. See [[Job Search Dashboard]].
+- [[Weekly Accountability]]
+- Complete the highest-impact job-search action.
+- Complete and record an ISC2 study session.
+- Identify current MDiv course and assignment records.
 
-## How many applications have been submitted?
+## Important deadlines
 
-The application count has not yet been verified from source notes.
+- WGU commencement: July 25, 2026
+- ISC2 CC exam: July 28, 2026
+- MDiv deadlines: not yet verified
 
-## What certification work remains?
+## Review and decisions
 
-ISC2 is prioritizing. Detailed remaining work will be linked from [[Education Dashboard]] after source-note migration.
+- Review queue notes: **6**
+- Recent decisions: [[Decision Log]]
+- Career conflicts: [[Career Conflicts]]
 
-## What education deadlines exist?
+## Current blockers
 
-No verified deadlines have been migrated yet. See [[Education Dashboard]].
+- Historical application totals are not yet verified.
+- ISC2 completed topics, weak areas, and practice scores are not yet consolidated.
+- Current MDiv courses, assignments, and due dates are not yet identified.
 
-## What business milestone is next?
+## Planned
 
-Validate one measurable small-business problem before choosing a solution. See [[AI Small Business Solutions]].
-
-## What blockers exist?
-
-No verified blockers have been migrated yet.
+- [[Future Cybersecurity Masters Plan]] — begins only after stable employment and financial stability.
 
 ## Active command centers
 
@@ -62,3 +71,4 @@ No verified blockers have been migrated yet.
 - [[Education Dashboard]]
 - [[Business Dashboard]]
 - [[Project Registry]]
+- [[Weekly Accountability]]

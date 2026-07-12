@@ -10,32 +10,23 @@ updated: 2026-07-12
 reviewed: 2026-07-12
 related:
   - "[[Education Dashboard]]"
+  - "[[Master of Divinity Hub]]"
+  - "[[Future Cybersecurity Masters Plan]]"
 tags:
   - education
 ---
 # Education
 
-## Overview
-Degrees, coursework, and continuing education history.
+## Verified current state
 
-## Current State
-- WGU: Bachelor of Science in Business Administration — IT Management
-- Continuing education through self-study and practical projects
-- Lifelong learning focus on AI systems, business analysis, and technology
+- WGU: Bachelor of Science in Information Technology Management — completed.
+- Master of Divinity: actively in progress; current course details require source consolidation.
+- WGU M.S. Cybersecurity and Information Assurance: Planned only after stable employment and financial stability.
 
-## Linked Notes
-- [[05-Career/Career]]
-- [[05-Career/Business-Analyst-Path]]
-- [[05-Career/Certifications]]
-- [[12-Reference/Courses]]
-- [[12-Reference/Reference-Index]]
+## Current actions
 
-## Active Tasks
-- [ ] Document relevant coursework from WGU
-- [ ] Identify continuing education opportunities
-
-## References
-- [[12-Reference/Courses]]
+- [ ] Identify current MDiv courses, assignments, and due dates.
+- [ ] Maintain ISC2 work in [[ISC2 Exam Command Center]].
 
 ## TKOS Connections
 

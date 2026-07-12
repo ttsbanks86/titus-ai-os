@@ -36,8 +36,8 @@ Profile optimization, outreach strategy, and content plan for LinkedIn. LinkedIn
 - Personalized connection requests to recruiters and BA professionals
 
 ## Linked Notes
-- [[05-Career/Career]]
-- [[05-Career/Job-Search]]
+- [[Titus/Career/Career]]
+- [[Titus/Career/Job-Search]]
 - [[09-Knowledge/Marketing/Content-Strategy]]
 - [[01-Dashboard/My-Voice]]
 

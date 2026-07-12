@@ -34,8 +34,8 @@ A directory of all active projects. Each project has its own master note with sc
 - [[PM-Portfolio]]
 - [[Ministry-Return]]
 - [[Local-Business-AI-Services]]
-- [[05-Career/Portfolio]]
-- [[05-Career/Career]]
+- [[Titus/Career/Portfolio]]
+- [[Titus/Career/Career]]
 
 ## Active Tasks
 - [ ] AeroCardia: complete market entry research deliverables

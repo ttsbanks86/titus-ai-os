@@ -1,7 +1,7 @@
 ---
 owner: Titus
 domain: Titus
-status: Active
+status: Completed
 priority: Medium
 project: Professional Portfolio
 area: Career Portfolio
@@ -20,7 +20,7 @@ tags:
 A Riipen micro-internship project focusing on market entry research and strategy. AeroCardia is a market entry project that demonstrates BA/PM capabilities.
 
 ## Current State
-- Active Riipen micro-internship
+- Completed Riipen micro-internship (May 2026)
 - Scope: Market entry research and deliverables
 - Portfolio value: BA/PM case study for job applications
 
@@ -30,15 +30,13 @@ A Riipen micro-internship project focusing on market entry research and strategy
 - Use as portfolio piece for BA job applications
 
 ## Linked Notes
-- [[05-Career/Portfolio]]
-- [[05-Career/Business-Analyst-Path]]
-- [[06-Projects/Projects]]
-- [[05-Career/Career]]
+- [[Titus/Career/Portfolio]]
+- [[Titus/Career/Business-Analyst-Path]]
+- [[Review/Migration Review/Projects]]
+- [[Titus/Career/Career]]
 
-## Active Tasks
-- [ ] Complete market research deliverables
-- [ ] Document process and methodology
-- [ ] Package as portfolio case study
+## Portfolio Tasks
+- [ ] Verify and package completed deliverables as a portfolio case study.
 
 ## References
 - [[07-SOPs/Project-Management-SOP]]

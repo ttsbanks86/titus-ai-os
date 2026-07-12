@@ -41,13 +41,13 @@ Career development roadmap for the transition into Business Analysis. Covers ski
 5. Growth: Continued learning and skill building
 
 ## Linked Notes
-- [[05-Career/Career]]
-- [[05-Career/Job-Search]]
-- [[05-Career/Portfolio]]
-- [[05-Career/Certifications]]
-- [[05-Career/Education]]
-- [[06-Projects/AeroCardia]]
-- [[06-Projects/PM-Portfolio]]
+- [[Titus/Career/Career]]
+- [[Titus/Career/Job-Search]]
+- [[Titus/Career/Portfolio]]
+- [[Titus/Education/Certifications]]
+- [[Titus/Education/Education]]
+- [[Titus/Career/Portfolio/AeroCardia]]
+- [[Titus/Career/Portfolio/PM-Portfolio]]
 
 ## Active Tasks
 - [ ] Complete BA skills assessment

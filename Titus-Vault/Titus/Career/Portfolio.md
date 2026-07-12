@@ -25,17 +25,17 @@ PM portfolio projects demonstrating Business Analysis and Product Management cap
 - Portfolio will be shared with potential employers
 
 ## Portfolio Projects
-- [[06-Projects/AeroCardia]] — Market entry research and strategy (Riipen micro-internship)
-- [[06-Projects/PM-Portfolio]] — Additional PM projects
+- [[Titus/Career/Portfolio/AeroCardia]] — Market entry research and strategy (Riipen micro-internship)
+- [[Titus/Career/Portfolio/PM-Portfolio]] — Additional PM projects
 - Titus AI OS architecture — Systems design and agent orchestration case study
 - Vault migration — Information architecture and knowledge management project
 
 ## Linked Notes
-- [[05-Career/Career]]
-- [[05-Career/Job-Search]]
-- [[05-Career/Business-Analyst-Path]]
+- [[Titus/Career/Career]]
+- [[Titus/Career/Job-Search]]
+- [[Titus/Career/Business-Analyst-Path]]
 - [[PM-Portfolio]]
-- [[06-Projects/Projects]]
+- [[Review/Migration Review/Projects]]
 
 ## Active Tasks
 - [ ] Complete AeroCardia deliverables for portfolio

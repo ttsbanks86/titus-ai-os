@@ -30,7 +30,7 @@ A document automation pipeline that streamlines document creation, formatting, r
 - Integrate with existing workflows
 
 ## Linked Notes
-- [[04-Products/Products]]
+- [[Review/Migration Review/Products]]
 - [[04-Products/Personal-AI-Operator]]
 - [[09-Knowledge/Technology/Tech-Stack]]
 

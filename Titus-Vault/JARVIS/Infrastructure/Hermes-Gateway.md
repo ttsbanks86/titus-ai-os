@@ -34,7 +34,7 @@ An API gateway and model router that provides a unified interface for accessing 
 - [[08-Agents/Hermes-Agent]]
 - [[09-Knowledge/AI-Systems/Model-Routing]]
 - [[09-Knowledge/AI-Systems/Provider-Architecture]]
-- [[04-Products/Products]]
+- [[Review/Migration Review/Products]]
 
 ## Active Tasks
 - [ ] Review Hermes config for optimal routing

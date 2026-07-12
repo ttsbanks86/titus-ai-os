@@ -20,7 +20,7 @@ tags:
 A voice dictation tool designed for efficient text input. EchoKeys will provide hands-free typing capabilities with high accuracy and low latency.
 
 ## Current State
-- Phase: Concept / Planning
+- Phase: Inactive concept
 - Last updated: 2026-06-21
 - Relationship to other tools: Related to Whisper Pro and NOLA Voice
 
@@ -30,9 +30,9 @@ A voice dictation tool designed for efficient text input. EchoKeys will provide 
 - Support custom vocabulary for professional domains
 
 ## Linked Notes
-- [[04-Products/Whisper-Pro]]
-- [[04-Products/NOLA-Voice]]
-- [[04-Products/Products]]
+- [[Business/Inactive/Whisper-Pro]]
+- [[Business/Inactive/NOLA-Voice]]
+- [[Review/Migration Review/Products]]
 - [[09-Knowledge/Technology/Tech-Stack]]
 
 ## Active Tasks
@@ -48,3 +48,7 @@ A voice dictation tool designed for efficient text input. EchoKeys will provide 
 ## TKOS Connections
 
 - [[AI Small Business Solutions]]
+
+## Reactivation condition
+
+Remain inactive unless customer evidence shows a measurable dictation problem, willingness to pay, and a reason this should outrank the current AI small-business initiative.

@@ -59,3 +59,18 @@ tags:
 - Two unambiguous broken links repaired.
 - Remaining unresolved references documented in [[Batch 002 Unresolved Links]].
 - Validation: passed with documented link-review queue.
+
+## 2026-07-12 — Batch 003
+
+- Purpose: make TKOS useful for current daily execution.
+- Pre-batch rollback commit: `edba97b`.
+- Operational notes migrated, created, or updated: 48.
+- Stable employment, ISC2, MDiv, future cybersecurity master's planning, and weekly accountability were prioritized.
+- Legacy path links repaired: 67.
+- Metadata completion: 100%.
+- Direct hub connection: 100%.
+- Embeds or attachments moved: 0.
+- Bonolo/Titus ownership violations: 0.
+- Unresolved pre-existing references: 23 occurrences across 15 targets, documented in [[Batch 003 Unresolved Links]].
+- Completion report: [[Batch 003 Completion Report]].
+- Validation: passed pending final Git commit identifier.

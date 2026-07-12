@@ -31,9 +31,9 @@ Resume versions, strategy, and tailoring rules for Business Analyst job applicat
 - Clean, ATS-friendly format
 
 ## Linked Notes
-- [[05-Career/Career]]
-- [[05-Career/Job-Search]]
-- [[05-Career/Business-Analyst-Path]]
+- [[Titus/Career/Career]]
+- [[Titus/Career/Job-Search]]
+- [[Titus/Career/Business-Analyst-Path]]
 - [[12-Reference/Courses]]
 - [[12-Reference/Certifications]]
 

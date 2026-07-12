@@ -30,10 +30,10 @@ A voice assistant for desktop control. NOLA Voice enables hands-free computer op
 - Support custom command creation
 
 ## Linked Notes
-- [[04-Products/EchoKeys]]
-- [[04-Products/Whisper-Pro]]
+- [[Business/Inactive/EchoKeys]]
+- [[Business/Inactive/Whisper-Pro]]
 - [[04-Products/Personal-AI-Operator]]
-- [[04-Products/Products]]
+- [[Review/Migration Review/Products]]
 
 ## Active Tasks
 - [ ] Research voice desktop control solutions

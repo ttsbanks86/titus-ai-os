@@ -20,7 +20,7 @@ tags:
 A speech recognition and transcription product. Whisper Pro provides accurate, real-time transcription with support for multiple languages and custom vocabularies.
 
 ## Current State
-- Phase: Concept / Planning
+- Phase: Inactive concept
 - Last updated: 2026-06-21
 - Technology: OpenAI Whisper-based or local speech-to-text models
 
@@ -30,10 +30,10 @@ A speech recognition and transcription product. Whisper Pro provides accurate, r
 - Integrate with CareNotes Pro and other products
 
 ## Linked Notes
-- [[04-Products/EchoKeys]]
-- [[04-Products/NOLA-Voice]]
-- [[03-Businesses/CareNotes-Pro]]
-- [[04-Products/Products]]
+- [[Business/Inactive/EchoKeys]]
+- [[Business/Inactive/NOLA-Voice]]
+- [[Business/Inactive/CareNotes-Pro]]
+- [[Review/Migration Review/Products]]
 
 ## Active Tasks
 - [ ] Evaluate Whisper vs local STT models
@@ -45,3 +45,7 @@ A speech recognition and transcription product. Whisper Pro provides accurate, r
 ## TKOS Connections
 
 - [[AI Small Business Solutions]]
+
+## Reactivation condition
+
+Remain inactive unless validated customer demand, measurable value, and strategic fit justify promotion through [[Decision Log]].

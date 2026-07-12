@@ -33,9 +33,9 @@ The Titus Personal AI Operator — a desktop AI assistant system that provides P
 ## Linked Notes
 - [[PAIO-Architecture]]
 - [[PAIO-Roadmap]]
-- [[04-Products/NOLA-Voice]]
+- [[Business/Inactive/NOLA-Voice]]
 - [[04-Products/Content-Income-System]]
-- [[06-Projects/Projects]]
+- [[Review/Migration Review/Projects]]
 - [[09-Knowledge/Technology/Tech-Stack]]
 
 ## Active Tasks

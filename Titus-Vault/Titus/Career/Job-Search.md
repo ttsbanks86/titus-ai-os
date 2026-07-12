@@ -37,11 +37,11 @@ Active job search tracking for Business Analyst roles. Applications are tracked 
 - Interview prep SOP followed before every interview
 
 ## Linked Notes
-- [[05-Career/Career]]
-- [[05-Career/Resume]]
-- [[05-Career/LinkedIn-Strategy]]
-- [[05-Career/Business-Analyst-Path]]
-- [[05-Career/Portfolio]]
+- [[Titus/Career/Career]]
+- [[Titus/Career/Resume]]
+- [[Titus/Career/LinkedIn-Strategy]]
+- [[Titus/Career/Business-Analyst-Path]]
+- [[Titus/Career/Portfolio]]
 - [[01-Dashboard/My-Goals]]
 
 ## Active Tasks

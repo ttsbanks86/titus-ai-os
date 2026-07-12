@@ -35,11 +35,11 @@ Building a Product Management portfolio to support career transition into BA/PM 
 - Present in professional, accessible format
 
 ## Linked Notes
-- [[06-Projects/AeroCardia]]
-- [[05-Career/Portfolio]]
-- [[05-Career/Career]]
-- [[05-Career/Business-Analyst-Path]]
-- [[06-Projects/Projects]]
+- [[Titus/Career/Portfolio/AeroCardia]]
+- [[Titus/Career/Portfolio]]
+- [[Titus/Career/Career]]
+- [[Titus/Career/Business-Analyst-Path]]
+- [[Review/Migration Review/Projects]]
 
 ## Active Tasks
 - [ ] Complete AeroCardia deliverables

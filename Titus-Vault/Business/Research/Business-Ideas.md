@@ -37,7 +37,7 @@ Ideas are scored on:
 
 ## Linked Notes
 - [[Legacy-Businesses]]
-- [[03-Businesses/Businesses]]
+- [[Archive/Superseded/Businesses]]
 - [[06-Projects/Local-Business-AI-Services]]
 - [[09-Knowledge/Finance/Income-Streams]]
 - [[09-Knowledge/Marketing/Marketing-Strategy]]

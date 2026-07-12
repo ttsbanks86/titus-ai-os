@@ -30,7 +30,7 @@ Book marketing project for Bonolo's two books. Scope includes marketing strategy
 - Create sustainable marketing system
 
 ## Linked Notes
-- [[06-Projects/Projects]]
+- [[Review/Migration Review/Projects]]
 - [[09-Knowledge/Marketing/Marketing-Strategy]]
 - [[09-Knowledge/Marketing/Content-Strategy]]
 

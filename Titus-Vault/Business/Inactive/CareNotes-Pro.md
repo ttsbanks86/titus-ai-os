@@ -35,10 +35,10 @@ CareNotes Pro is a healthcare documentation platform designed to streamline clin
 - [[CareNotes-Roadmap]]
 - [[CareNotes-Pricing]]
 - [[CareNotes-Architecture]]
-- [[04-Products/Whisper-Pro]]
-- [[04-Products/EchoKeys]]
-- [[04-Products/Products]]
-- [[03-Businesses/Businesses]]
+- [[Business/Inactive/Whisper-Pro]]
+- [[Business/Inactive/EchoKeys]]
+- [[Review/Migration Review/Products]]
+- [[Archive/Superseded/Businesses]]
 
 ## Active Tasks
 - [ ] Define core feature set

@@ -31,7 +31,7 @@ A desktop overlay AI tutor that provides contextual learning assistance. The tut
 
 ## Linked Notes
 - [[04-Products/Personal-AI-Operator]]
-- [[04-Products/Products]]
+- [[Review/Migration Review/Products]]
 
 ## Active Tasks
 - [ ] Research existing overlay tutor products

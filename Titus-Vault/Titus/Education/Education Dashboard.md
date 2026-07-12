@@ -11,6 +11,9 @@ reviewed: 2026-07-12
 related:
   - "[[Career Command Center]]"
   - "[[Project Registry]]"
+  - "[[ISC2 Exam Command Center]]"
+  - "[[Master of Divinity Hub]]"
+  - "[[Future Cybersecurity Masters Plan]]"
 tags:
   - hub
   - education
@@ -19,13 +22,15 @@ tags:
 
 ## Prioritizing
 
-- Pass the ISC2 Certified in Cybersecurity examination.
-- Complete the Master of Divinity.
+- [[ISC2 Exam Command Center]] — exam July 28, 2026.
+- [[Master of Divinity Hub]] — actively in progress; current course records still need consolidation.
 
 ## Planned
 
-- After stable employment, plan for the WGU M.S. Cybersecurity and Information Assurance.
+- [[Future Cybersecurity Masters Plan]] — only after stable employment and financial stability.
 
 ## Deadlines
 
-No verified education deadlines have been migrated yet.
+- WGU commencement: July 25, 2026.
+- ISC2 CC exam: July 28, 2026.
+- MDiv deadlines: not yet verified.

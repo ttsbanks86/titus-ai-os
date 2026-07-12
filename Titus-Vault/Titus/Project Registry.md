@@ -47,7 +47,7 @@ tags:
 
 ## Completed
 
-Only verified completed projects may be added.
+- AeroCardia / WGU x Riipen micro-internship — completed May 2026.
 
 ## Archived
 

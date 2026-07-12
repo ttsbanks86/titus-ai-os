@@ -10,35 +10,22 @@ updated: 2026-07-12
 reviewed: 2026-07-12
 related:
   - "[[Education Dashboard]]"
+  - "[[ISC2 Exam Command Center]]"
 tags:
   - education
   - certifications
 ---
 # Certifications
 
-## Overview
-Completed and planned professional certifications. Certifications strengthen qualifications for Business Analyst roles.
+## Verified current state
 
-## Current State
-- WGU BA in Business Administration — IT Management
-- Continuing education planned per [[Business-Analyst-Path]]
+- Bachelor of Science in Information Technology Management, WGU — completed.
+- ISC2 Certified in Cybersecurity exam scheduled for July 28, 2026.
+- ISC2 certification is not marked completed.
 
-## Planned Certifications
-- To be defined per BA career path requirements
-- Target certifications that differentiate for BA roles
+## Current priority
 
-## Linked Notes
-- [[05-Career/Career]]
-- [[05-Career/Business-Analyst-Path]]
-- [[05-Career/Education]]
-- [[12-Reference/Courses]]
-
-## Active Tasks
-- [ ] Identify highest-value certifications for BA roles
-- [ ] Research certification requirements and costs
-
-## References
-- [[12-Reference/Courses]]
+Prepare for the ISC2 CC exam through [[ISC2 Exam Command Center]]. Other certification ideas remain secondary until verified and prioritized.
 
 ## TKOS Connections
 

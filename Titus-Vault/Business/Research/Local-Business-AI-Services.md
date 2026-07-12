@@ -30,8 +30,8 @@ AI consulting and services for local businesses. This project explores offering 
 - Build initial client pipeline
 
 ## Linked Notes
-- [[06-Projects/Projects]]
-- [[03-Businesses/Business-Ideas]]
+- [[Review/Migration Review/Projects]]
+- [[Business/Research/Business-Ideas]]
 - [[09-Knowledge/Marketing/Marketing-Strategy]]
 - [[09-Knowledge/Finance/Income-Streams]]
 
