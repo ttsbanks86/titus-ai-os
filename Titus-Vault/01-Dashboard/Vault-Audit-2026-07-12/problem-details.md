@@ -20,7 +20,7 @@
 1. `2026-07-12.md` · `02-Daily-Notes/2026-07-12.md`
 2. `01-Dashboard/My-Rules.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/my-rules.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/my-rules.md`
 3. `01-Dashboard/My-Voice.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/my-voice.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/my-voice.md`
-4. `06-Projects/Projects.md` · `10-Archive/Legacy-Commands/commands/projects.md`
+4. `Review/Migration Review/Projects.md` · `10-Archive/Legacy-Commands/commands/projects.md`
 5. `10-Archive/Legacy-Skills/skills/act-when-ready/SKILL.md` · `10-Archive/Legacy-Skills/skills/analytics-metrics/SKILL.md` · `10-Archive/Legacy-Skills/skills/api-design/SKILL.md` · `10-Archive/Legacy-Skills/skills/article-writing/SKILL.md` · `10-Archive/Legacy-Skills/skills/autonomous-continuation/SKILL.md` · `10-Archive/Legacy-Skills/skills/aws-account-management/SKILL.md` · `10-Archive/Legacy-Skills/skills/aws-agentcore/SKILL.md` · `10-Archive/Legacy-Skills/skills/aws-strands/SKILL.md` · `10-Archive/Legacy-Skills/skills/backend-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/brand-voice/SKILL.md` · `10-Archive/Legacy-Skills/skills/bun/SKILL.md` · `10-Archive/Legacy-Skills/skills/business-ops-experts/SKILL.md` · `10-Archive/Legacy-Skills/skills/cinematic-scrub-landing/SKILL.md` · `10-Archive/Legacy-Skills/skills/cloudflare/SKILL.md` · `10-Archive/Legacy-Skills/skills/coding-standards/SKILL.md` · `10-Archive/Legacy-Skills/skills/content-engine/SKILL.md` · `10-Archive/Legacy-Skills/skills/context-budget/SKILL.md` · `10-Archive/Legacy-Skills/skills/continuous-learning-v2/SKILL.md` · `10-Archive/Legacy-Skills/skills/copilot-docs/SKILL.md` · `10-Archive/Legacy-Skills/skills/copilot-sdk/SKILL.md` · `10-Archive/Legacy-Skills/skills/database-migrations/SKILL.md` · `10-Archive/Legacy-Skills/skills/deep-research/SKILL.md` · `10-Archive/Legacy-Skills/skills/django-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/docker-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/documentation-lookup/SKILL.md` · `10-Archive/Legacy-Skills/skills/effort-calibrator/SKILL.md` · `10-Archive/Legacy-Skills/skills/error-handling/SKILL.md` · `10-Archive/Legacy-Skills/skills/eval-harness/SKILL.md` · `10-Archive/Legacy-Skills/skills/fal-ai/SKILL.md` · `10-Archive/Legacy-Skills/skills/fastapi-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-alpha-research/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-autoresearch/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-contributing/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-deep-research/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-docker/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-eli5/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-jobs/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-literature-review/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-ml-training-recipe/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-modal-compute/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-paper-code-audit/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-paper-writing/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-peer-review/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-preview/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-replication/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-runpod-compute/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-session-log/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-session-search/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-source-comparison/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-watch/SKILL.md` · `10-Archive/Legacy-Skills/skills/figma/SKILL.md` · `10-Archive/Legacy-Skills/skills/frontend-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/frontend-slides/SKILL.md` · `10-Archive/Legacy-Skills/skills/git-workflow/SKILL.md` · `10-Archive/Legacy-Skills/skills/github-trending/SKILL.md` · `10-Archive/Legacy-Skills/skills/google-workspace-cli/SKILL.md` · `10-Archive/Legacy-Skills/skills/graphify/SKILL.md` · `10-Archive/Legacy-Skills/skills/grounded-progress/SKILL.md` · `10-Archive/Legacy-Skills/skills/honest-agent/SKILL.md` · `10-Archive/Legacy-Skills/skills/investor-materials/SKILL.md` · `10-Archive/Legacy-Skills/skills/iterative-retrieval/SKILL.md` · `10-Archive/Legacy-Skills/skills/kubernetes-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/langchain/SKILL.md` · `10-Archive/Legacy-Skills/skills/local-llm-router/SKILL.md` · `10-Archive/Legacy-Skills/skills/markdown-memory/SKILL.md` · `10-Archive/Legacy-Skills/skills/market-research/SKILL.md` · `10-Archive/Legacy-Skills/skills/mcp-server-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/mermaid-diagrams/SKILL.md` · `10-Archive/Legacy-Skills/skills/meta-ads/SKILL.md` · `10-Archive/Legacy-Skills/skills/mobile-responsiveness/SKILL.md` · `10-Archive/Legacy-Skills/skills/mongodb/SKILL.md` · `10-Archive/Legacy-Skills/skills/nano-banana-pro/SKILL.md` · `10-Archive/Legacy-Skills/skills/nextjs-turbopack/SKILL.md` · `10-Archive/Legacy-Skills/skills/no-gold-plating/SKILL.md` · `10-Archive/Legacy-Skills/skills/obsidian-mind/SKILL.md` · `10-Archive/Legacy-Skills/skills/owasp-security/SKILL.md` · `10-Archive/Legacy-Skills/skills/parallax-landing-page/SKILL.md` · `10-Archive/Legacy-Skills/skills/personal-ai-operator/SKILL.md` · `10-Archive/Legacy-Skills/skills/python-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/railway/SKILL.md` · `10-Archive/Legacy-Skills/skills/react-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/regrounding-summary/SKILL.md` · `10-Archive/Legacy-Skills/skills/scope-guard/SKILL.md` · `10-Archive/Legacy-Skills/skills/search-first/SKILL.md` · `10-Archive/Legacy-Skills/skills/security-review/SKILL.md` · `10-Archive/Legacy-Skills/skills/security-scan/SKILL.md` · `10-Archive/Legacy-Skills/skills/self-skill-builder/SKILL.md` · `10-Archive/Legacy-Skills/skills/shabbat-times/SKILL.md` · `10-Archive/Legacy-Skills/skills/skill-refactorer/SKILL.md` · `10-Archive/Legacy-Skills/skills/strategic-compact/SKILL.md` · `10-Archive/Legacy-Skills/skills/subagent-orchestration/SKILL.md` · `10-Archive/Legacy-Skills/skills/tdd-workflow/SKILL.md` · `10-Archive/Legacy-Skills/skills/token-budget-advisor/SKILL.md` · `10-Archive/Legacy-Skills/skills/ux-design-systems/SKILL.md` · `10-Archive/Legacy-Skills/skills/vercel/SKILL.md` · `10-Archive/Legacy-Skills/skills/verification-loop/SKILL.md` · `10-Archive/Legacy-Skills/skills/video-edit/SKILL.md` · `10-Archive/Legacy-Skills/skills/video-to-landing-page/SKILL.md` · `10-Archive/Legacy-Skills/skills/web-accessibility/SKILL.md` · `10-Archive/Legacy-Skills/skills/x-twitter-scraper/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-decks/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-design-system/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-pilot/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-reel-covers/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-video-director/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-viral-video/SKILL.md`
 6. `10-Archive/Legacy-Skills/skills/video-edit/README.md` · `10-Archive/Legacy-Skills/skills/yuv-reel-covers/README.md` · `10-Archive/Legacy-Skills/skills/yuv-video-director/README.md` · `10-Archive/Legacy-Skills/skills/yuv-viral-video/README.md` · `10-Archive/Legacy-Skills/skills/video-edit/transcript-editor/README.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/Notion Workspace Management/unzuppi/ChatGPT-KnowledgeVault/README.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/Notion Workspace Management/unzuppi/ChatGPT-KnowledgeVault-COMPLETE/README.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/Notion Workspace Management/unzuppi/ChatGPT-KnowledgeVault/ChatGPT-KnowledgeVault/README.md`
 7. `10-Archive/Legacy-Skills/skills/yuv-viral-video/references/setup.md` · `10-Archive/Legacy-Skills/skills/video-to-landing-page/references/setup.md` · `10-Archive/Legacy-Skills/skills/video-edit/references/setup.md` · `10-Archive/Legacy-Skills/skills/meta-ads/references/setup.md`
@@ -525,7 +525,7 @@ _Additional groups omitted from this view: 2,077. Full note data is in the inven
 1. `2026-07-12.md` · `02-Daily-Notes/2026-07-12.md`
 2. `01-Dashboard/My-Rules.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/my-rules.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/my-rules.md`
 3. `01-Dashboard/My-Voice.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/my-voice.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/my-voice.md`
-4. `06-Projects/Projects.md` · `10-Archive/Legacy-Commands/commands/projects.md`
+4. `Review/Migration Review/Projects.md` · `10-Archive/Legacy-Commands/commands/projects.md`
 5. `10-Archive/Legacy-Skills/skills/act-when-ready/SKILL.md` · `10-Archive/Legacy-Skills/skills/analytics-metrics/SKILL.md` · `10-Archive/Legacy-Skills/skills/api-design/SKILL.md` · `10-Archive/Legacy-Skills/skills/article-writing/SKILL.md` · `10-Archive/Legacy-Skills/skills/autonomous-continuation/SKILL.md` · `10-Archive/Legacy-Skills/skills/aws-account-management/SKILL.md` · `10-Archive/Legacy-Skills/skills/aws-agentcore/SKILL.md` · `10-Archive/Legacy-Skills/skills/aws-strands/SKILL.md` · `10-Archive/Legacy-Skills/skills/backend-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/brand-voice/SKILL.md` · `10-Archive/Legacy-Skills/skills/bun/SKILL.md` · `10-Archive/Legacy-Skills/skills/business-ops-experts/SKILL.md` · `10-Archive/Legacy-Skills/skills/cinematic-scrub-landing/SKILL.md` · `10-Archive/Legacy-Skills/skills/cloudflare/SKILL.md` · `10-Archive/Legacy-Skills/skills/coding-standards/SKILL.md` · `10-Archive/Legacy-Skills/skills/content-engine/SKILL.md` · `10-Archive/Legacy-Skills/skills/context-budget/SKILL.md` · `10-Archive/Legacy-Skills/skills/continuous-learning-v2/SKILL.md` · `10-Archive/Legacy-Skills/skills/copilot-docs/SKILL.md` · `10-Archive/Legacy-Skills/skills/copilot-sdk/SKILL.md` · `10-Archive/Legacy-Skills/skills/database-migrations/SKILL.md` · `10-Archive/Legacy-Skills/skills/deep-research/SKILL.md` · `10-Archive/Legacy-Skills/skills/django-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/docker-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/documentation-lookup/SKILL.md` · `10-Archive/Legacy-Skills/skills/effort-calibrator/SKILL.md` · `10-Archive/Legacy-Skills/skills/error-handling/SKILL.md` · `10-Archive/Legacy-Skills/skills/eval-harness/SKILL.md` · `10-Archive/Legacy-Skills/skills/fal-ai/SKILL.md` · `10-Archive/Legacy-Skills/skills/fastapi-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-alpha-research/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-autoresearch/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-contributing/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-deep-research/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-docker/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-eli5/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-jobs/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-literature-review/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-ml-training-recipe/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-modal-compute/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-paper-code-audit/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-paper-writing/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-peer-review/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-preview/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-replication/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-runpod-compute/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-session-log/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-session-search/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-source-comparison/SKILL.md` · `10-Archive/Legacy-Skills/skills/feynman-watch/SKILL.md` · `10-Archive/Legacy-Skills/skills/figma/SKILL.md` · `10-Archive/Legacy-Skills/skills/frontend-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/frontend-slides/SKILL.md` · `10-Archive/Legacy-Skills/skills/git-workflow/SKILL.md` · `10-Archive/Legacy-Skills/skills/github-trending/SKILL.md` · `10-Archive/Legacy-Skills/skills/google-workspace-cli/SKILL.md` · `10-Archive/Legacy-Skills/skills/graphify/SKILL.md` · `10-Archive/Legacy-Skills/skills/grounded-progress/SKILL.md` · `10-Archive/Legacy-Skills/skills/honest-agent/SKILL.md` · `10-Archive/Legacy-Skills/skills/investor-materials/SKILL.md` · `10-Archive/Legacy-Skills/skills/iterative-retrieval/SKILL.md` · `10-Archive/Legacy-Skills/skills/kubernetes-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/langchain/SKILL.md` · `10-Archive/Legacy-Skills/skills/local-llm-router/SKILL.md` · `10-Archive/Legacy-Skills/skills/markdown-memory/SKILL.md` · `10-Archive/Legacy-Skills/skills/market-research/SKILL.md` · `10-Archive/Legacy-Skills/skills/mcp-server-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/mermaid-diagrams/SKILL.md` · `10-Archive/Legacy-Skills/skills/meta-ads/SKILL.md` · `10-Archive/Legacy-Skills/skills/mobile-responsiveness/SKILL.md` · `10-Archive/Legacy-Skills/skills/mongodb/SKILL.md` · `10-Archive/Legacy-Skills/skills/nano-banana-pro/SKILL.md` · `10-Archive/Legacy-Skills/skills/nextjs-turbopack/SKILL.md` · `10-Archive/Legacy-Skills/skills/no-gold-plating/SKILL.md` · `10-Archive/Legacy-Skills/skills/obsidian-mind/SKILL.md` · `10-Archive/Legacy-Skills/skills/owasp-security/SKILL.md` · `10-Archive/Legacy-Skills/skills/parallax-landing-page/SKILL.md` · `10-Archive/Legacy-Skills/skills/personal-ai-operator/SKILL.md` · `10-Archive/Legacy-Skills/skills/python-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/railway/SKILL.md` · `10-Archive/Legacy-Skills/skills/react-patterns/SKILL.md` · `10-Archive/Legacy-Skills/skills/regrounding-summary/SKILL.md` · `10-Archive/Legacy-Skills/skills/scope-guard/SKILL.md` · `10-Archive/Legacy-Skills/skills/search-first/SKILL.md` · `10-Archive/Legacy-Skills/skills/security-review/SKILL.md` · `10-Archive/Legacy-Skills/skills/security-scan/SKILL.md` · `10-Archive/Legacy-Skills/skills/self-skill-builder/SKILL.md` · `10-Archive/Legacy-Skills/skills/shabbat-times/SKILL.md` · `10-Archive/Legacy-Skills/skills/skill-refactorer/SKILL.md` · `10-Archive/Legacy-Skills/skills/strategic-compact/SKILL.md` · `10-Archive/Legacy-Skills/skills/subagent-orchestration/SKILL.md` · `10-Archive/Legacy-Skills/skills/tdd-workflow/SKILL.md` · `10-Archive/Legacy-Skills/skills/token-budget-advisor/SKILL.md` · `10-Archive/Legacy-Skills/skills/ux-design-systems/SKILL.md` · `10-Archive/Legacy-Skills/skills/vercel/SKILL.md` · `10-Archive/Legacy-Skills/skills/verification-loop/SKILL.md` · `10-Archive/Legacy-Skills/skills/video-edit/SKILL.md` · `10-Archive/Legacy-Skills/skills/video-to-landing-page/SKILL.md` · `10-Archive/Legacy-Skills/skills/web-accessibility/SKILL.md` · `10-Archive/Legacy-Skills/skills/x-twitter-scraper/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-decks/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-design-system/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-pilot/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-reel-covers/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-video-director/SKILL.md` · `10-Archive/Legacy-Skills/skills/yuv-viral-video/SKILL.md`
 6. `10-Archive/Legacy-Skills/skills/video-edit/README.md` · `10-Archive/Legacy-Skills/skills/yuv-reel-covers/README.md` · `10-Archive/Legacy-Skills/skills/yuv-video-director/README.md` · `10-Archive/Legacy-Skills/skills/yuv-viral-video/README.md` · `10-Archive/Legacy-Skills/skills/video-edit/transcript-editor/README.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/Notion Workspace Management/unzuppi/ChatGPT-KnowledgeVault/README.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/Notion Workspace Management/unzuppi/ChatGPT-KnowledgeVault-COMPLETE/README.md` · `10-Archive/ChatGPT-Exports/ABOUT ME/PROJECTS/TEMPLATES/OUTPUTS/Resumes/Riipen-AeroCardia/About-Me/Notion Workspace Management/unzuppi/ChatGPT-KnowledgeVault/ChatGPT-KnowledgeVault/README.md`
 7. `10-Archive/Legacy-Skills/skills/yuv-viral-video/references/setup.md` · `10-Archive/Legacy-Skills/skills/video-to-landing-page/references/setup.md` · `10-Archive/Legacy-Skills/skills/video-edit/references/setup.md` · `10-Archive/Legacy-Skills/skills/meta-ads/references/setup.md`
@@ -2981,13 +2981,13 @@ _Additional groups omitted from this view: 2,069. Full note data is in the inven
 
 - `2026-07-12.md`
 - `01-Dashboard/My-Voice.md`
-- `04-Products/Content-Income-System.md`
-- `04-Products/Hermes-Gateway.md`
-- `05-Career/Education.md`
-- `06-Projects/AeroCardia.md`
-- `06-Projects/Bonolo-Book-Marketing.md`
-- `06-Projects/Local-Business-AI-Services.md`
-- `06-Projects/Ministry-Return.md`
+- `Business/Inactive/Content-Income-System.md`
+- `JARVIS/Infrastructure/Hermes-Gateway.md`
+- `Titus/Education/Education.md`
+- `Titus/Career/Portfolio/AeroCardia.md`
+- `Bonolo/Projects/Bonolo-Book-Marketing.md`
+- `Business/Research/Local-Business-AI-Services.md`
+- `Titus/Projects/Ministry-Return.md`
 - `07-SOPs/SOPs-Index.md`
 - `11-Templates/Daily-Note-Template.md`
 - `11-Templates/Master-Note-Template.md`
@@ -3989,35 +3989,35 @@ _Additional groups omitted from this view: 2,069. Full note data is in the inven
 - `02-Daily-Notes/2026-07-10.md` → `[[Job-Applications-Tracker]]`
 - `02-Daily-Notes/2026-07-11.md` → `[[Job-Applications-Tracker]]`
 - `03-Businesses/Businesses.md` → `[[07-SOPs/Business]]`
-- `03-Businesses/CareNotes-Pro.md` → `[[CareNotes-Features]]`
-- `03-Businesses/CareNotes-Pro.md` → `[[CareNotes-Roadmap]]`
-- `03-Businesses/CareNotes-Pro.md` → `[[CareNotes-Pricing]]`
-- `03-Businesses/CareNotes-Pro.md` → `[[CareNotes-Architecture]]`
-- `03-Businesses/CareNotes-Pro.md` → `[[07-SOPs/Product-Launch-SOP]]`
-- `03-Businesses/Legacy-Businesses.md` → `[[NOLO]]`
-- `03-Businesses/Legacy-Businesses.md` → `[[Open Door AI Systems]]`
-- `03-Businesses/Legacy-Businesses.md` → `[[10-Archive/Deprecated-Projects]]`
-- `04-Products/Content-Income-System.md` → `[[content-engine]]`
-- `04-Products/Content-Income-System.md` → `[[content-scheduling]]`
-- `04-Products/Personal-AI-Operator.md` → `[[PAIO-Architecture]]`
-- `04-Products/Personal-AI-Operator.md` → `[[PAIO-Roadmap]]`
-- `04-Products/Personal-AI-Operator.md` → `[[07-SOPs/Windows-Automation-SOP]]`
-- `05-Career/Business-Analyst-Path.md` → `[[07-SOPs/Job-Application-SOP]]`
-- `05-Career/Business-Analyst-Path.md` → `[[07-SOPs/Interview-Prep-SOP]]`
-- `05-Career/Career.md` → `[[07-SOPs/Job-Application-SOP]]`
-- `05-Career/Career.md` → `[[07-SOPs/LinkedIn-Outreach-SOP]]`
-- `05-Career/Job-Search.md` → `[[07-SOPs/Job-Application-SOP]]`
-- `05-Career/Job-Search.md` → `[[07-SOPs/Interview-Prep-SOP]]`
-- `05-Career/Job-Search.md` → `[[07-SOPs/LinkedIn-Outreach-SOP]]`
-- `05-Career/LinkedIn-Strategy.md` → `[[07-SOPs/LinkedIn-Outreach-SOP]]`
-- `05-Career/Portfolio.md` → `[[06-Projects/PMPortfolio]]`
-- `05-Career/Portfolio.md` → `[[07-SOPs/Project-Management-SOP]]`
-- `06-Projects/AeroCardia.md` → `[[07-SOPs/Project-Management-SOP]]`
-- `06-Projects/Bonolo-Book-Marketing.md` → `[[07-SOPs/Content-Creation-SOP]]`
-- `06-Projects/Local-Business-AI-Services.md` → `[[07-SOPs/Project-Management-SOP]]`
-- `06-Projects/Ministry-Return.md` → `[[07-SOPs/Project-Management-SOP]]`
-- `06-Projects/PM-Portfolio.md` → `[[07-SOPs/Project-Management-SOP]]`
-- `06-Projects/Projects.md` → `[[07-SOPs/Project-Management-SOP]]`
+- `Business/Inactive/CareNotes-Pro.md` → `[[CareNotes-Features]]`
+- `Business/Inactive/CareNotes-Pro.md` → `[[CareNotes-Roadmap]]`
+- `Business/Inactive/CareNotes-Pro.md` → `[[CareNotes-Pricing]]`
+- `Business/Inactive/CareNotes-Pro.md` → `[[CareNotes-Architecture]]`
+- `Business/Inactive/CareNotes-Pro.md` → `[[07-SOPs/Product-Launch-SOP]]`
+- `Archive/Business/Legacy-Businesses.md` → `[[NOLO]]`
+- `Archive/Business/Legacy-Businesses.md` → `[[Open Door AI Systems]]`
+- `Archive/Business/Legacy-Businesses.md` → `[[10-Archive/Deprecated-Projects]]`
+- `Business/Inactive/Content-Income-System.md` → `[[content-engine]]`
+- `Business/Inactive/Content-Income-System.md` → `[[content-scheduling]]`
+- `JARVIS/Architecture/Personal-AI-Operator.md` → `[[PAIO-Architecture]]`
+- `JARVIS/Architecture/Personal-AI-Operator.md` → `[[PAIO-Roadmap]]`
+- `JARVIS/Architecture/Personal-AI-Operator.md` → `[[07-SOPs/Windows-Automation-SOP]]`
+- `Titus/Career/Business-Analyst-Path.md` → `[[07-SOPs/Job-Application-SOP]]`
+- `Titus/Career/Business-Analyst-Path.md` → `[[07-SOPs/Interview-Prep-SOP]]`
+- `Titus/Career/Career.md` → `[[07-SOPs/Job-Application-SOP]]`
+- `Titus/Career/Career.md` → `[[07-SOPs/LinkedIn-Outreach-SOP]]`
+- `Titus/Career/Job-Search.md` → `[[07-SOPs/Job-Application-SOP]]`
+- `Titus/Career/Job-Search.md` → `[[07-SOPs/Interview-Prep-SOP]]`
+- `Titus/Career/Job-Search.md` → `[[07-SOPs/LinkedIn-Outreach-SOP]]`
+- `Titus/Career/LinkedIn-Strategy.md` → `[[07-SOPs/LinkedIn-Outreach-SOP]]`
+- `Titus/Career/Portfolio.md` → `[[06-Projects/PMPortfolio]]`
+- `Titus/Career/Portfolio.md` → `[[07-SOPs/Project-Management-SOP]]`
+- `Titus/Career/Portfolio/AeroCardia.md` → `[[07-SOPs/Project-Management-SOP]]`
+- `Bonolo/Projects/Bonolo-Book-Marketing.md` → `[[07-SOPs/Content-Creation-SOP]]`
+- `Business/Research/Local-Business-AI-Services.md` → `[[07-SOPs/Project-Management-SOP]]`
+- `Titus/Projects/Ministry-Return.md` → `[[07-SOPs/Project-Management-SOP]]`
+- `Titus/Career/Portfolio/PM-Portfolio.md` → `[[07-SOPs/Project-Management-SOP]]`
+- `Review/Migration Review/Projects.md` → `[[07-SOPs/Project-Management-SOP]]`
 - `07-SOPs/SOPs-Index.md` → `[[Job-Application-SOP]]`
 - `07-SOPs/SOPs-Index.md` → `[[LinkedIn-Outreach-SOP]]`
 - `07-SOPs/SOPs-Index.md` → `[[Interview-Preparation-SOP]]`
@@ -4035,20 +4035,20 @@ _Additional groups omitted from this view: 2,069. Full note data is in the inven
 - `07-SOPs/SOPs-Index.md` → `[[Session-Handoff-SOP]]`
 - `07-SOPs/SOPs-Index.md` → `[[Campaign-Launch-SOP]]`
 - `07-SOPs/SOPs-Index.md` → `[[Email-Campaign-SOP]]`
-- `08-Agents/Agents-Index.md` → `[[CEO-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Engineer-Agent-OC]]`
-- `08-Agents/Agents-Index.md` → `[[QA-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Research-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Browser-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Automation-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[GitHub-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Gmail-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[LinkedIn-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Reasoning-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[File-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Workflow-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Documentation-Agent]]`
-- `08-Agents/Agents-Index.md` → `[[Graphic-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[CEO-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Engineer-Agent-OC]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[QA-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Research-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Browser-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Automation-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[GitHub-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Gmail-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[LinkedIn-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Reasoning-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[File-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Workflow-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Documentation-Agent]]`
+- `JARVIS/Agents/Agents-Index.md` → `[[Graphic-Agent]]`
 - `10-Archive/Archive-Index.md` → `[[ChatGPT-Exports/]]`
 - `10-Archive/Archive-Index.md` → `[[Daily-Notes/]]`
 - `10-Archive/Archive-Index.md` → `[[Deprecated-Projects/]]`

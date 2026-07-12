@@ -39,3 +39,23 @@ tags:
 - Dataview queries added: 0
 - Graph validation: all batch notes connect through explicit `related` links or hub links.
 - Validation: passed.
+
+## 2026-07-12 — Batch 002
+
+- Scope: 29 high-confidence Career, Business, Product, Project, and JARVIS notes.
+- Ownership applied from explicit TKOS rules.
+- Original filenames preserved to protect basename links.
+- Exact old-path link targets rewritten to their new paths.
+- Active career notes connected to Career, Job Search, or Education hubs.
+- Old product concepts retained as Inactive supporting research.
+- JARVIS infrastructure and agent notes connected to [[JARVIS Hub]].
+- Bonolo Book Marketing assigned to Bonolo under the explicit ownership override.
+- Mixed legacy Products and Projects indexes sent to Migration Review.
+- Existing historical notes deleted: 0
+- Metadata schema issues: 0
+- Hub-connection issues: 0
+- Embeds in batch: 0
+- Obsidian runtime errors: 0
+- Two unambiguous broken links repaired.
+- Remaining unresolved references documented in [[Batch 002 Unresolved Links]].
+- Validation: passed with documented link-review queue.
