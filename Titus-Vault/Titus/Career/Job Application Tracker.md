@@ -19,13 +19,59 @@ tags:
 ---
 # Job Application Tracker
 
-This is the authoritative in-vault application tracker. The daily-note reference `Job-Applications-Tracker` resolves here through the note alias.
+This is the single authoritative in-vault tracker. Legacy tables remain historical sources and do not compete with this note.
+
+## Current summary
+
+- Verified records consolidated: 1
+- Current pipeline: 1 Review Required
+- Duplicate candidates: 0
+- Submitted this week: 0 verified
+- Upcoming interviews: 0 verified
 
 ## Applications
 
-| Date | Employer | Role | Location | Score | Resume | Status | Follow-up | Notes |
-|---|---|---|---|---:|---|---|---|---|
+### Harnish Group Inc. — Helpdesk Technician
 
-## Status values
+```yaml
+company: Harnish Group Inc.
+role: Helpdesk Technician
+location:
+work_mode:
+source: Archived ChatGPT conversation
+application_date:
+status: Review Required
+salary_range:
+resume_version:
+cover_letter:
+follow_up_date:
+last_updated: 2026-07-12
+confidence: Review Required
+related:
+  - "10-Archive/.../Career-Professional/2025-04-29_Service Biz Ideas Zim.md"
+```
 
-Identified, Scored, Preparing, Submitted, Interviewing, Offer, Closed, Withdrawn.
+Evidence states that an interview was scheduled for the following day at 12:30 PM, but application date, outcome, location, and final status are not verified. It is not counted as an upcoming interview.
+
+## Record template
+
+```yaml
+company:
+role:
+location:
+work_mode:
+source:
+application_date:
+status:
+salary_range:
+resume_version:
+cover_letter:
+follow_up_date:
+last_updated:
+confidence:
+related:
+```
+
+Allowed statuses: Identified, Preparing, Submitted, Assessment, Interviewing, Offer, Rejected, Withdrawn, Closed, Review Required.
+
+Duplicates are retained and marked Duplicate Candidate, Superseded, or Historical Copy outside the authoritative record status.

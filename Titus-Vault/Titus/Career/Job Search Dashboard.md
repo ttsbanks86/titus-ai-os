@@ -41,7 +41,9 @@ No verified scheduled interviews are recorded. Prepare with [[Interview Preparat
 - [[Job Application Tracker]]
 - [[Recruiter Tracker]]
 - [[Networking Tracker]]
-- Historical application count remains unverified.
+- Consolidated records: 1 Review Required.
+- Submitted this week: 0 verified.
+- Upcoming interviews: 0 verified.
 
 ## Blockers
 

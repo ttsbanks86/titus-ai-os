@@ -11,38 +11,44 @@ reviewed: 2026-07-12
 related:
   - "[[Education Dashboard]]"
   - "[[Weekly Accountability]]"
-  - "[[Certifications]]"
+  - "[[ISC2 Credentials Registry]]"
+  - "[[ISC2 Study Plan]]"
+  - "[[ISC2 Credential and Exam Conflict]]"
 tags:
   - education/isc2
   - certification
 ---
 # ISC2 Exam Command Center
 
-## Exam
+## Completed credentials
 
-- Exam: ISC2 Certified in Cybersecurity (CC)
-- Verified exam date: July 28, 2026
+No completed ISC2 credential is verified. See [[ISC2 Credentials Registry]].
+
+## Upcoming examination
+
+- Exam name: **Upcoming ISC2 Exam**
+- Status: Scheduled
+- Exam date: July 28, 2026
 - Days remaining as of July 12, 2026: 16
-- Current study phase: not verified in source notes
+- Registration evidence: not located
+- Exam-name confidence: Review Required
+- Identity conflict: [[ISC2 Credential and Exam Conflict]]
 
-## Progress
+## Study
 
-- Completed topics: not yet consolidated
-- Remaining topics: verify against current exam objectives
-- Weak areas: no verified assessment recorded
-- Practice scores: no verified scores recorded
+- Current plan: [[ISC2 Study Plan]]
+- CC curriculum source consolidated: [[ISC2 CC Study Reference]]
+- Completed topics: no verified completion record
+- Weak areas: no verified assessment record
+- Latest practice score: none recorded
+- Next review session: not verified
 
-## Execution
+## Today
 
-- Today's study task: complete one focused study session and record topic, duration, and result in [[Weekly Accountability]].
-- Next review session: not yet scheduled
-- Blockers: study-plan and practice-score sources have not yet been consolidated
+Complete one focused study session, record the resource and topics in [[ISC2 Study Plan]], and update [[Weekly Accountability]].
 
-## Related resources
+## Blockers
 
-- [[Certifications]]
-- Historical ISC2 conversations remain in Archive pending source review.
-
-## Decision history
-
-- 2026-07-12: Established this note as the single active ISC2 planning hub.
+- Exact registered exam name is unverified.
+- Registration confirmation is missing.
+- Practice scores and completed-domain records are missing.

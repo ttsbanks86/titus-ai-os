@@ -12,12 +12,11 @@ related:
   - "[[Titus Living Profile]]"
   - "[[Career Command Center]]"
   - "[[Job Search Dashboard]]"
-  - "[[Education Dashboard]]"
-  - "[[Business Dashboard]]"
-  - "[[Project Registry]]"
-  - "[[Weekly Accountability]]"
   - "[[ISC2 Exam Command Center]]"
   - "[[Master of Divinity Hub]]"
+  - "[[AI Small Business Solutions]]"
+  - "[[Weekly Accountability]]"
+  - "[[Inactive Projects Index]]"
 tags:
   - hub
   - dashboard
@@ -25,50 +24,45 @@ tags:
 ---
 # Titus Dashboard
 
-> [!important] Current focus
-> Obtain stable employment while advancing ISC2, the Master of Divinity, and one validated small-business AI initiative.
+## Now
 
-## Current priorities
+- **Stable employment:** [[Job Search Dashboard]]
+- **Upcoming ISC2 exam:** [[ISC2 Exam Command Center]] — provisional exam name, July 28, 2026, 16 days remaining as of July 12
+- **Master of Divinity:** [[Master of Divinity Hub]]
+- **Business validation:** [[AI Small Business Solutions]]
 
-- **1 — Stable employment:** [[Job Search Dashboard]]
-- **2 — ISC2 exam:** [[ISC2 Exam Command Center]] — July 28, 2026
-- **3 — Master of Divinity:** [[Master of Divinity Hub]]
-- **4 — Business validation:** [[AI Small Business Solutions]]
+## Live summaries
 
-## Current week commitments
-
-- [[Weekly Accountability]]
-- Complete the highest-impact job-search action.
-- Complete and record an ISC2 study session.
-- Identify current MDiv course and assignment records.
-
-## Important deadlines
-
-- WGU commencement: July 25, 2026
-- ISC2 CC exam: July 28, 2026
-- MDiv deadlines: not yet verified
-
-## Review and decisions
-
-- Review queue notes: **6**
-- Recent decisions: [[Decision Log]]
-- Career conflicts: [[Career Conflicts]]
+- Applications consolidated: **1 Review Required**; submitted this week: **0 verified**
+- Application pipeline: **1 Review Required**
+- Upcoming interviews: **0 verified**
+- Latest ISC2 practice score: **none recorded**
+- MDiv next deadline: **not verified**
+- Weekly commitment completion: **no verified completions recorded**
+- Items needing review: **8 Review notes**
 
 ## Current blockers
 
-- Historical application totals are not yet verified.
-- ISC2 completed topics, weak areas, and practice scores are not yet consolidated.
-- Current MDiv courses, assignments, and due dates are not yet identified.
+- Exact July 28 ISC2 exam name and registration evidence are missing.
+- No verified completed ISC2 credential is present.
+- Current MDiv course and assignment records are missing.
+- Recent application history has not been consolidated from an external tracker.
 
 ## Planned
 
-- [[Future Cybersecurity Masters Plan]] — begins only after stable employment and financial stability.
+- [[Future Cybersecurity Masters Plan]] — after stable employment and financial stability.
+- Titus ministry and content relaunch — planned for later review.
 
-## Active command centers
+## Utility
 
-- [[Career Command Center]]
-- [[Job Search Dashboard]]
-- [[Education Dashboard]]
-- [[Business Dashboard]]
-- [[Project Registry]]
+- Nola Reader
+- [[JARVIS Hub|JARVIS]]
+
+## Inactive
+
+- [[Inactive Projects Index]]
+
+## Execution
+
 - [[Weekly Accountability]]
+- [[Decision Log]]

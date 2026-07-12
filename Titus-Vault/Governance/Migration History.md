@@ -74,3 +74,18 @@ tags:
 - Unresolved pre-existing references: 23 occurrences across 15 targets, documented in [[Batch 003 Unresolved Links]].
 - Completion report: [[Batch 003 Completion Report]].
 - Validation: passed pending final Git commit identifier.
+
+## 2026-07-12 — Batch 004
+
+- Purpose: consolidate current job, ISC2, MDiv, deadline, and accountability records.
+- Pre-batch rollback commit: `4bc9dbb`.
+- Completed ISC2 credentials verified: 0.
+- July 28 record: Upcoming ISC2 Exam, Scheduled, exact name Review Required.
+- Applications consolidated: 1 historical Review Required record; duplicate candidates: 0.
+- CC study sources consolidated: 2; practice scores: 0.
+- MDiv courses and assignments verified: 0.
+- Batch 003 broken-link occurrences reviewed: 23; safely repaired: 0; unresolved: 23.
+- Operational metadata completion: 100%.
+- Direct hub connection: 100%.
+- New broken links and ownership violations: 0.
+- Completion report: [[Batch 004 Completion Report]].

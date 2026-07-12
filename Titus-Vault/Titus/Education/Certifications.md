@@ -10,6 +10,7 @@ updated: 2026-07-12
 reviewed: 2026-07-12
 related:
   - "[[Education Dashboard]]"
+  - "[[ISC2 Credentials Registry]]"
   - "[[ISC2 Exam Command Center]]"
 tags:
   - education
@@ -17,15 +18,20 @@ tags:
 ---
 # Certifications
 
-## Verified current state
+## Completed
 
-- Bachelor of Science in Information Technology Management, WGU — completed.
-- ISC2 Certified in Cybersecurity exam scheduled for July 28, 2026.
-- ISC2 certification is not marked completed.
+- CourseCareers Information Technology Certificate — certificate artifact exists; exact completion date requires artifact verification.
+- Completed ISC2 credentials — **none verified**.
 
-## Current priority
+## Upcoming
 
-Prepare for the ISC2 CC exam through [[ISC2 Exam Command Center]]. Other certification ideas remain secondary until verified and prioritized.
+- [[ISC2 Exam Command Center|Upcoming ISC2 Exam]] — Scheduled July 28, 2026; exact exam name and registration evidence remain Review Required.
+
+## Rules
+
+- Do not present ISC2 Certified in Cybersecurity as completed.
+- Keep CC study material separate from proof of exam identity or credential completion.
+- See [[ISC2 Credential and Exam Conflict]].
 
 ## TKOS Connections
 

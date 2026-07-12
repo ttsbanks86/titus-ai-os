@@ -12,6 +12,7 @@ related:
   - "[[Career Command Center]]"
   - "[[Project Registry]]"
   - "[[ISC2 Exam Command Center]]"
+  - "[[ISC2 Study Plan]]"
   - "[[Master of Divinity Hub]]"
   - "[[Future Cybersecurity Masters Plan]]"
 tags:
@@ -22,8 +23,9 @@ tags:
 
 ## Prioritizing
 
-- [[ISC2 Exam Command Center]] — exam July 28, 2026.
-- [[Master of Divinity Hub]] — actively in progress; current course records still need consolidation.
+- [[ISC2 Exam Command Center|Upcoming ISC2 Exam]] — provisional name; July 28, 2026.
+- [[ISC2 Study Plan]] — active plan; no practice scores recorded.
+- [[Master of Divinity Hub]] — active TKOS priority; 0 verified courses and 0 verified assignments currently recorded.
 
 ## Planned
 
@@ -32,5 +34,9 @@ tags:
 ## Deadlines
 
 - WGU commencement: July 25, 2026.
-- ISC2 CC exam: July 28, 2026.
-- MDiv deadlines: not yet verified.
+- Upcoming ISC2 Exam: July 28, 2026.
+- MDiv deadline: not verified.
+
+## Review
+
+- [[ISC2 Credential and Exam Conflict]]

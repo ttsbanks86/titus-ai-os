@@ -36,14 +36,11 @@ tags:
 ## Utility
 
 - Nola Reader
+- JARVIS — active support system that does not outrank employment or education.
 
 ## Inactive
 
-- EchoKeys
-- Whisper Pro
-- Experimental SaaS ideas
-- Old product concepts
-- Dormant Titus channels
+- [[Inactive Projects Index]]
 
 ## Completed
 

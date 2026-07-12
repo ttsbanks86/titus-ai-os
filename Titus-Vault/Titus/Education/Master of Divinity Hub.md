@@ -11,6 +11,11 @@ reviewed: 2026-07-12
 related:
   - "[[Education Dashboard]]"
   - "[[Weekly Accountability]]"
+  - "[[MDiv Course Registry]]"
+  - "[[MDiv Assignment Tracker]]"
+  - "[[MDiv Reading Tracker]]"
+  - "[[MDiv Research Index]]"
+  - "[[MDiv Decision Log]]"
 tags:
   - education/mdiv
   - ministry
@@ -19,30 +24,36 @@ tags:
 
 ## Program
 
-- Program: Master of Divinity / ministry and divinity study
-- Current state: actively in progress per TKOS directive; institution and program details are not yet verified in migrated sources
+- Current TKOS status: Active.
+- Exact institution, program title, enrollment status, and term are not verified in available source notes.
+- Historical project planning discussed an MDiv or ministry/divinity degree but did not identify active coursework.
 
 ## Current courses
 
-No verified current-course list has been migrated.
+[[MDiv Course Registry]] contains 0 verified courses.
 
 ## Active assignments and due dates
 
-No verified assignments or due dates have been migrated.
+[[MDiv Assignment Tracker]] contains 0 verified assignments and no verified deadline.
 
-## Reading requirements
+## Reading and research
 
-No verified reading list has been migrated.
+- [[MDiv Reading Tracker]] — 0 verified readings.
+- [[MDiv Research Index]] — 0 verified research records.
 
-## Completed work
+## Completed work and grades
 
-No verified completed MDiv work has been migrated.
+No verified MDiv submissions, completed assignments, or grades were found.
 
-## Academic goals and ministry connection
+## Ministry connection
 
-Deepen theological foundations, leadership, and teaching in support of Titus's ministry calling.
+The degree supports Titus's theological foundation, leadership, teaching, and future ministry. Bonolo's books, Open Door, coursework, and ministry content remain outside this hub.
 
 ## Blocker and next action
 
-- Blocker: active program records are not yet identified.
-- Next action: locate the current syllabus, course list, assignments, and deadlines and connect them here.
+- Blocker: active program documentation has not been located.
+- Next action: supply or locate enrollment confirmation, syllabus, course list, assignment schedule, and reading requirements.
+
+## Decisions
+
+- [[MDiv Decision Log]]

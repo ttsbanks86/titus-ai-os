@@ -14,29 +14,41 @@ related:
   - "[[Interview Preparation]]"
 tags:
   - career/interviews
+  - star-stories
 ---
 # STAR Story Bank
 
-Use only verified details. Complete missing metrics before presenting a story as final.
-
-## Candidate stories
-
-### Coordinating multi-stakeholder care
+## Multi-stakeholder care coordination
 
 - Situation: complex client care involving caregivers, family, clinicians, and scheduling.
 - Task: maintain continuity and accurate communication.
-- Action: verify from source records before drafting.
-- Result: add only a documented outcome.
+- Action: coordinated stakeholders, updated care information, and produced structured reporting — Supported.
+- Result: qualitative continuity and clearer coordination; no numerical result verified.
+- Competency: stakeholder communication, coordination, documentation.
+- Target roles: Business Analyst, Project Coordinator, Junior Project Manager.
+- Evidence source: Titus personal/career source notes.
+- Confidence: Supported.
 
-### Managing concurrent loan files
+## Concurrent loan pipeline
 
-- Situation: multiple loan files moving through an underwriting pipeline.
+- Situation: multiple loan files moving through underwriting.
 - Task: make accurate decisions and coordinate handoffs.
-- Action: verify process and workload from resume sources.
-- Result: source material reports zero quality-control findings; confirm before external use.
+- Action: managed concurrent files with loan officers, processors, and closers — Supported.
+- Result: quality outcome is described in source notes, but the zero-finding metric Needs Evidence.
+- Competency: analysis, risk, compliance, prioritization.
+- Target roles: Business Analyst, GRC Analyst, Data Governance Analyst.
+- Evidence source: career history source notes.
+- Confidence: Supported; metric Needs Evidence.
 
-### AeroCardia market-entry project
+## AeroCardia market entry
 
-- Situation: Riipen team project on Canadian market entry.
-- Task: research and produce recommendations.
-- Action and result: promote only from verified project deliverables.
+- Situation: WGU x Riipen team project for Canadian market entry.
+- Task: research the market and produce recommendations.
+- Action: participated in a five-person project team — Supported.
+- Result: project completed in May 2026; detailed business result not verified.
+- Competency: research, data analysis, project collaboration, presentation.
+- Target roles: Business Analyst, Business Intelligence Analyst, Project Coordinator.
+- Evidence source: [[AeroCardia]].
+- Confidence: Verified completion; detailed outcomes Need Evidence.
+
+Do not add numerical results without an evidence source.

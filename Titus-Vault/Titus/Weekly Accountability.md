@@ -15,8 +15,10 @@ last_reviewed: 2026-07-12
 related:
   - "[[Titus Dashboard]]"
   - "[[Career Command Center]]"
-  - "[[ISC2 Exam Command Center]]"
-  - "[[Master of Divinity Hub]]"
+  - "[[Job Application Tracker]]"
+  - "[[ISC2 Study Plan]]"
+  - "[[MDiv Assignment Tracker]]"
+  - "[[AI Small Business Solutions]]"
 tags:
   - accountability
   - priorities
@@ -24,40 +26,42 @@ tags:
 ---
 # Weekly Accountability
 
-## This Week
+## This Week — verified tracker summary
 
-- Job applications submitted: 0 recorded
-- Tailored resumes completed: 0 recorded
-- Networking actions completed: 0 recorded
-- Interviews scheduled: 0 recorded
-- ISC2 study sessions completed: 0 recorded
-- ISC2 practice scores: none recorded
-- Master of Divinity assignments completed: 0 recorded
-- AI small-business validation conversations: 0 recorded
-- Weekly commitments: establish verified baselines and complete the next priority actions
+- Applications submitted this week: **0 verified**
+- Tailored resumes completed: **0 verified**
+- Recruiter/networking actions: **0 verified**
+- Interviews scheduled: **0 verified**
+- ISC2 study sessions completed: **0 verified**
+- Latest ISC2 practice score: **none recorded**
+- MDiv assignments due: **0 verified**
+- MDiv assignments completed: **0 verified**
+- AI small-business validation conversations: **0 verified**
 
 ## Completed
 
-No results recorded yet.
+No verified weekly result is recorded yet.
 
 ## Missed Commitments
 
-None recorded yet.
+No missed commitment is recorded; absence of a record is not counted as completion or failure.
 
 ## Blockers
 
-- Existing application counts and MDiv coursework have not yet been verified.
-- ISC2 study progress and practice scores have not yet been consolidated.
+- Job-application history remains incomplete.
+- ISC2 registration identity, study sessions, and practice scores are missing.
+- Active MDiv program and coursework records are missing.
 
 ## Lessons
 
-Record lessons during weekly review.
+Record only from the weekly review.
 
 ## Next Week
 
-Set after the first weekly review.
+Set after the first evidence-backed weekly review.
 
 ## Decisions Required
 
-- Confirm the authoritative external source, if any, for historical job applications.
-- Identify current MDiv course records.
+- Provide ISC2 registration confirmation.
+- Identify current MDiv program records.
+- Confirm the external source for recent job applications, if one exists.
