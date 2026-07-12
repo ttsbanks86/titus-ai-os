@@ -1,32 +1,42 @@
+---
+status: active
+type: note
+project: general
+created: 2026-06-21
+updated: 2026-07-08
+tags: [personal, context]
+---
+
 # Titus Banks — Personal Context
+
+**This file derived from Living-Profile.md. Living-Profile.md is the master source of truth.**
 
 ## Family
 - Father of 5 children: 4 boys and 1 girl
-- Oldest son: 17 years old, graduated early, now starting college. Pursuing Bachelor's in IT Management.
-- Second child: ~11 years old
-- Third child: ~9 years old
-- Youngest boy: 4 years old
-- Only daughter: turning 4 soon
-- Actively involved in raising children: school pickups, feeding, daily care
-- Wife: Bonolo Banks. WGU graduate (2026, BS in Human and Health Services). Author of two published books. Originally from Botswana. Currently job hunting.
+- Oldest son: 17 years old, starting college. Pursuing Bachelor's in IT Management.
+- Wife: Bonolo Banks. WGU graduate (2026, BS in Human and Health Services). Author of two published books. Originally from Botswana.
 
-## Current Work and Income
-- Currently underemployed: working as a caregiver
-- Annual income: approximately $58,000
-- Near the poverty line for Seattle, Washington
-- This is a temporary season. Not where I am meant to be.
+## Current Work
+- Currently employed as a caregiver.
+- Most recent hospice client passed away before the Monday shift.
+- Previous schedule was Monday, Thursday, Friday, 8 a.m. to 8 p.m.
+- Currently has no fixed schedule. Waiting for a new caregiving assignment.
+- Underemployed and actively seeking stable employment.
+- Financial details are private. Do not mention income in briefings unless Titus asks.
+
+## Career Target
+- Primary: Business Analyst, Data Analyst, Project Coordinator, GRC/Compliance Analyst roles
+- Secondary: Underwriting, Loan operations, Healthcare IT, Government analyst, IT support
+- Location: Remote first, Dallas second, Seattle third
+- Target pay: $35-40/hour or better
 
 ## Education
-- Bachelor's degree completed (WGU). Started with Study.com, transferred credits, finished the degree.
-- First college graduate in my family.
-- Currently pursuing: Masters in Divinity + Masters in Cybersecurity
-
-## Daily Schedule
-- Work shift 1: 8am to 12pm
-- Break in the afternoon
-- Work shift 2: 6pm onwards
-- Also responsible for: school pickups, feeding kids, daily family care
-- Schedule has some flexibility
+- Bachelor's degree completed (WGU).
+- First college graduate in family.
+- WGU commencement: July 25, 2026.
+- ISC2 certification exam: July 28, 2026.
+- Riipen internship: Ended May 28, 2026. Complete. Added to LinkedIn. Not active.
+- Currently pursuing: Master's in Divinity. Master's in Cybersecurity not yet started.
 
 ## Location
 - Seattle, Washington (currently)
@@ -40,21 +50,8 @@
 - Completed bachelor's degree while working and raising children.
 - Now actively building toward a career in tech and returning to ministry.
 
-## Connections and Network
-- WGU alumni network. Actively trying to reconnect.
-- Uncle with experience in business intelligence and XPO.
-- Other family members working in tech.
-- No formal mentor yet. Self-taught through observation and fast learning.
-
-## How I Work Best
-- Fast learner. Picks things up quickly.
-- Easygoing and dependable.
-- Works well with clear direction and tools.
-- Motivated by purpose. Works hardest when the "why" is clear.
-
 ## Design and Creative Tools
-- **VistaCreate (Pro):** Lifetime deal. Primary design tool for all graphics, social media, thumbnails, branding, flyers.
-- **Canva:** Never subscribed. Not used. Always use VistaCreate for designs.
+- VistaCreate (Pro): Lifetime deal. Primary design tool.
 
 ## What People Don't See
 Titus has already done the hard part. He survived depression, relocated his family, finished a degree while working and parenting, and is now actively building multiple paths forward simultaneously. The foundation is already laid. This is the season of acceleration.

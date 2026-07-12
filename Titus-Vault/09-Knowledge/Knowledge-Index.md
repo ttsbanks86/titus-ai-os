@@ -1,7 +1,7 @@
 # Knowledge Index
 
 ## Overview
-Master index of all knowledge-organized content. Knowledge is organized into five domains: AI Systems, Brand, Marketing, Technology, and Finance.
+Master index of all knowledge-organized content. Knowledge is organized into six domains: AI Systems, Brand, Marketing, Technology, Finance, and AI Business.
 
 ## Current State
 All knowledge areas are being consolidated from fragmented locations (Knowledge_Base/, AI_Agents/, root-level files) into this vault directory.
@@ -23,6 +23,8 @@ All knowledge areas are being consolidated from fragmented locations (Knowledge_
 - [[Finance/Budget]]
 - [[Finance/Income-Streams]]
 - [[Finance/Tax-Reference]]
+- [[AI-Business/AI-Business-Models]]
+- [[AI-Business/Actionable-Skills-For-Titus]]
 - [[01-Dashboard/Home]]
 
 ## Active Tasks
