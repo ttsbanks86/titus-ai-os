@@ -37,3 +37,7 @@ tags:
 - [[Decision Log]]
 - [[Archive Index]]
 - [[Migration History]]
+
+## Digital library
+
+- [[Reference/Digital Library Discovery 2026-07-12/Executive Summary|Master Digital Discovery]]

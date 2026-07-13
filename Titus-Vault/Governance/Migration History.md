@@ -40,6 +40,22 @@ tags:
 - Graph validation: all batch notes connect through explicit `related` links or hub links.
 - Validation: passed.
 
+## 2026-07-12 — Phase 2 Digital Discovery
+
+- Scope: approved local user, cloud-sync, knowledge, and project folders.
+- Important files indexed: 114,214
+- Bytes represented: 856,198,396,169
+- Readable SHA-256 records: 89,474
+- Cloud placeholders or otherwise unreadable: 24,740
+- Exact duplicate groups among readable files: 15,958
+- Evidence candidates: 34,019
+- Learning-resource candidates: 45,435
+- Résumé versions cataloged: 361
+- Git projects cataloged: 22
+- Originals moved, renamed, modified, imported, overwritten, or deleted: 0
+- Reports: [[Reference/Digital Library Discovery 2026-07-12/Executive Summary|Master Digital Discovery]]
+- Status: review required before any import or reorganization.
+
 ## 2026-07-12 — Batch 002
 
 - Scope: 29 high-confidence Career, Business, Product, Project, and JARVIS notes.
