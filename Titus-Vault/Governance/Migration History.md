@@ -70,8 +70,9 @@ tags:
 - Sensitive content stored in TKOS: 0
 - Reports: [[Reference/Batch 006 Enterprise Evidence Consolidation/Executive Summary|Batch 006 Executive Summary]]
 - Rollback: [[Reference/Batch 006 Enterprise Evidence Consolidation/Rollback Instructions|Rollback Instructions]]
-- Git commit: pending validation
-- Status: validation pending; Batch 007 prohibited.
+- Validation: 15/15 governed records contain the complete evidence schema and authoritative-hub links; 0 batch broken links; 0 Obsidian runtime errors; 11/11 reports present.
+- Git commit: `983710fa659a6c1e5e7d71bcd063d205264c48b0`
+- Status: passed; stopped before Batch 007.
 
 ## 2026-07-12 — Batch 002
 
