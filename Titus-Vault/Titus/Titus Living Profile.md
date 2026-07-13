@@ -40,3 +40,14 @@ This is the authoritative, long-lived profile for Titus. Verified personal conte
 - [[JARVIS Hub]]
 - [[Project Registry]]
 - [[Decision Log]]
+
+## Verified education
+
+- Western Governors University — Bachelor of Science in Information Technology Management, degree conferred April 7, 2026.
+- The March 4, 2026 transcript verifies the program, coursework, Strategic Thinking/Innovation micro-credential, and 103 total competency units.
+- Mosaic Christian College — Master of Divinity in Church Ministry program facts are verified. Recent official course activity exists; formal current-registration confirmation remains pending.
+
+## Credential status
+
+- ISC2 Certified in Cybersecurity exam: registered and scheduled for July 28, 2026 at 9:30 AM Pacific.
+- ISC2 credential: not completed or awarded.

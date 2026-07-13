@@ -9,10 +9,11 @@ created: 2026-07-12
 updated: 2026-07-12
 reviewed: 2026-07-12
 related:
-  - "[[Job Search Dashboard]]"
-  - "[[Project Registry]]"
-  - "[[Job Search Strategy]]"
-  - "[[Resume Source of Truth]]"
+  - "[[Titus/Career/Job Search Dashboard|Job Search Dashboard]]"
+  - "[[Titus/Career/Resumes/Resume Source of Truth|Resume Source of Truth]]"
+  - "[[Titus/Career/Career Experience Inventory|Career Experience Inventory]]"
+  - "[[Titus/Career/Resume Claim Evidence Matrix|Resume Claim Evidence Matrix]]"
+  - "[[Review/Human Confirmation/Batch 007 Decisions for Titus|Batch 007 Decisions for Titus]]"
 tags:
   - hub
   - career
@@ -21,18 +22,32 @@ tags:
 
 ## Current objective
 
-Obtain stable employment.
+Obtain stable employment using evidence-backed career records.
 
-## Active workstreams
+## Operating records
 
-- [[Job Search Dashboard]]
-- [[Target Roles]]
-- [[Resume Source of Truth]]
-- [[Career Experience Inventory]]
-- [[Skills Gap Analysis]]
-- [[Portfolio]]
+- [[Titus/Career/Job Search Dashboard|Job Search Dashboard]]
+- [[Titus/Career/Job Application Tracker|Job Application Tracker]]
+- [[Titus/Career/Resumes/Resume Source of Truth|Resume Source of Truth]]
+- [[Titus/Career/Resume Claim Evidence Matrix|Resume Claim Evidence Matrix]]
+- [[Titus/Career/Career Experience Inventory|Career Experience Inventory]]
+- [[Titus/Career/Interview Preparation|Interview Preparation]]
+- [[Titus/Weekly Accountability|Weekly Accountability]]
 
-## Blockers
+## Current target roles
 
-- Historical application activity is not consolidated.
-- Some career source facts required resolution; see [[Career Conflicts]].
+1. Business Analyst
+2. Business Intelligence Analyst
+3. GRC Analyst
+4. Data Governance Analyst
+5. Project Coordinator
+6. Junior Project Manager
+7. Scrum Master
+8. Entry-level cybersecurity roles
+
+## Current blockers
+
+- Canonical base résumé awaits human confirmation.
+- Business Analyst résumé claims need final validation.
+- Eight claim groups retain evidence limitations.
+- No external current job-application tracker has been confirmed.

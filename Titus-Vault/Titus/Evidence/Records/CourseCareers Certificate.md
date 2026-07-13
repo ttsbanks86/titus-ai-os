@@ -1,22 +1,36 @@
 ---
 owner: Titus
 domain: Titus
+status: Active
+priority: Medium
+project: Professional Development
+area: Career Evidence
+created: 2026-07-12
+updated: 2026-07-12
+reviewed: 2026-07-12
 evidence_category: Career
 evidence_type: Training certificate
 issuer: CourseCareers
-source: https://drive.google.com/file/d/1v1RMNRF120N55S93ZhyCOyrBm9vhcBhd
-verification_status: Canonical Drive candidate; content review required
-confidence: Medium
+source: C:\Users\tbank\Desktop\2_Work_Career\Resumes\PM RESUME\CourseCareersCertificate.jpeg.pdf
+verification_status: Verified training completion
+confidence: High
 canonical: true
-checksum: unavailable-drive-metadata-only
+checksum: d4cced644b753c8c13e0c4b33ada8ce634b17cbd7d6b36c0b6a6339ea8d1a3f5
 related_hubs:
-  - "[[Career Evidence]]"
-  - "[[Evidence Registry]]"
+  - "[[Titus/Career/Training/CourseCareers Information Technology Training|CourseCareers Information Technology Training]]"
+  - "[[Titus/Evidence/Career Evidence|Career Evidence]]"
+  - "[[Titus/Evidence/Evidence Registry|Evidence Registry]]"
+related:
+  - "[[Titus/Career/Training/CourseCareers Information Technology Training|CourseCareers Information Technology Training]]"
 tags:
   - evidence/career
   - training/coursecareers
-  - review-required
 ---
 # CourseCareers Certificate
 
-Google Drive contains multiple same-sized copies. This earliest clearly named Drive artifact is the canonical candidate; duplicates remain untouched pending checksum verification.
+- Course: Information Technology Course
+- Completion date: January 2, 2026
+- Classification: Training / Professional Development
+- Employment classification: Prohibited
+
+Other Drive copies remain untouched. This local checksum identifies the selected canonical artifact.

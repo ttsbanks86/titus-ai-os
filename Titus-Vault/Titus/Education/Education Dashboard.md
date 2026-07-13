@@ -3,40 +3,42 @@ owner: Titus
 domain: Titus
 status: Prioritizing
 priority: High
-project: Master of Divinity
+project: Education
 area: Education
 created: 2026-07-12
 updated: 2026-07-12
 reviewed: 2026-07-12
 related:
-  - "[[Career Command Center]]"
-  - "[[Project Registry]]"
-  - "[[ISC2 Exam Command Center]]"
-  - "[[ISC2 Study Plan]]"
-  - "[[Master of Divinity Hub]]"
-  - "[[Future Cybersecurity Masters Plan]]"
+  - "[[Titus/Career/Career Command Center|Career Command Center]]"
+  - "[[Titus/Education/WGU Degree Evidence Index|WGU Degree Evidence Index]]"
+  - "[[Titus/Education/ISC2 Exam Command Center|ISC2 Exam Command Center]]"
+  - "[[Titus/Education/ISC2 Learning Resources|ISC2 Learning Resources]]"
+  - "[[Titus/Education/Master of Divinity Hub|Master of Divinity Hub]]"
+  - "[[Titus/Education/Future Cybersecurity Masters Plan|Future Cybersecurity Masters Plan]]"
 tags:
   - hub
   - education
 ---
 # Education Dashboard
 
-## Prioritizing
+## Current priorities
 
-- [[ISC2 Exam Command Center|Upcoming ISC2 Exam]] — provisional name; July 28, 2026.
-- [[ISC2 Study Plan]] — active plan; no practice scores recorded.
-- [[Master of Divinity Hub]] — official degree plan found; current enrollment remains Review Required. The plan contains 23 curriculum requirements, with 0 current registered courses and 0 assignments verified.
+- [[Titus/Education/ISC2 Exam Command Center|ISC2 CC Exam]] — registered and scheduled for July 28, 2026 at 9:30 AM Pacific; credential not completed.
+- [[Titus/Education/ISC2 Learning Resources|ISC2 Learning Resources]] — official and useful third-party resources indexed; official self-paced course access has expired.
+- [[Titus/Education/Master of Divinity Hub|Master of Divinity]] — program verified; official course activity supports recent participation, while formal current registration remains pending confirmation.
+
+## Completed degree
+
+- [[Titus/Education/WGU Degree Evidence Index|WGU Degree Evidence Index]] — B.S. Information Technology Management conferred April 7, 2026.
+- March 4, 2026 transcript — Verified Canonical Academic Transcript Candidate.
+- Final post-conferral transcript — Missing, Optional Upgrade.
+- WGU capstone — Review Required; no direct evidence found.
 
 ## Planned
 
-- [[Future Cybersecurity Masters Plan]] — only after stable employment and financial stability.
+- [[Titus/Education/Future Cybersecurity Masters Plan|WGU M.S. Cybersecurity and Information Assurance planning]] — begin only after stable employment and financial stability.
 
-## Deadlines
+## Verified deadlines
 
-- WGU commencement: July 25, 2026.
-- Upcoming ISC2 Exam: July 28, 2026.
-- MDiv deadline: not verified.
-
-## Review
-
-- [[ISC2 Credential and Exam Conflict]]
+- ISC2 CC exam: July 28, 2026 at 9:30 AM Pacific.
+- Current MDiv assignment deadlines: none verified.

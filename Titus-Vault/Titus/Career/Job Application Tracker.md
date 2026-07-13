@@ -11,75 +11,37 @@ created: 2026-07-12
 updated: 2026-07-12
 reviewed: 2026-07-12
 related:
-  - "[[Job Search Dashboard]]"
-  - "[[Job Search Strategy]]"
-  - "[[Weekly Accountability]]"
+  - "[[Titus/Career/Job Search Dashboard|Job Search Dashboard]]"
+  - "[[Titus/Career/Resumes/Business Analyst Resume|Business Analyst Resume]]"
+  - "[[Titus/Weekly Accountability|Weekly Accountability]]"
+  - "[[Review/Human Confirmation/Batch 007 Decisions for Titus|Batch 007 Decisions for Titus]]"
 tags:
   - career/applications
 ---
 # Job Application Tracker
 
-This is the single authoritative in-vault tracker. Legacy tables remain historical sources and do not compete with this note.
+This is the authoritative in-vault tracker. Historical records do not count as current unless submission evidence exists.
 
 ## Current summary
 
-- Verified records consolidated: 1
-- Current pipeline: 1 Review Required
-- Duplicate candidates: 0
-- Submitted this week: 0 verified
-- Upcoming interviews: 0 verified
+- Verified submitted applications: **0**
+- Preparing candidates: **1**
+- Historical Review Required records: **1**
+- Upcoming interviews: **0 verified**
+- Follow-ups due: **0 verified**
 
-## Applications
+## Preparing
 
-### Harnish Group Inc. — Helpdesk Technician
+| Company/project folder | Role | Status | Evidence | Resume version | Last updated |
+|---|---|---|---|---|---|
+| DataCloudMerge | Entry-Level BDA | Preparing | Tailored résumé artifact exists; no submission confirmation found | [[Titus/Career/Resumes/Business Analyst Resume|Business Analyst Resume]] candidate | 2026-07-12 |
 
-```yaml
-company: Harnish Group Inc.
-role: Helpdesk Technician
-location:
-work_mode:
-source: Archived ChatGPT conversation
-application_date:
-status: Review Required
-evidence: Archived conversation states an interview was scheduled; no submission confirmation found
-salary_range:
-resume_version:
-cover_letter:
-assessment:
-interview_date:
-follow_up_date:
-outcome:
-last_updated: 2026-07-12
-confidence: Review Required
-related:
-  - "10-Archive/.../Career-Professional/2025-04-29_Service Biz Ideas Zim.md"
-```
+## Historical review
 
-Evidence states that an interview was scheduled for the following day at 12:30 PM, but application date, outcome, location, and final status are not verified. It is not counted as an upcoming interview.
-
-## Record template
-
-```yaml
-company:
-role:
-location:
-work_mode:
-source:
-application_date:
-status:
-evidence:
-salary_range:
-resume_version:
-cover_letter:
-assessment:
-interview_date:
-follow_up_date:
-outcome:
-last_updated:
-confidence:
-related:
-```
+| Company | Role | Status | Evidence | Counted as current? |
+|---|---|---|---|---|
+| Harnish Group Inc. | Helpdesk Technician | Review Required | Archived conversation states an interview was scheduled; submission date and outcome not verified | No |
 
 Allowed statuses: Identified, Preparing, Submitted, Assessment, Interviewing, Offer, Rejected, Withdrawn, Closed, Review Required.
 
-Duplicates are retained and marked Duplicate Candidate, Superseded, or Historical Copy outside the authoritative record status.
+No external current tracker was identified. See human decision 8 before importing any outside records.

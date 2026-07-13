@@ -138,3 +138,24 @@ tags:
 - Evidence requests remaining: 6 in [[Evidence Needed from Titus]].
 - New broken links and ownership violations: 0.
 - Completion report: [[Batch 005 Completion Report]].
+
+## 2026-07-12 — Batch 007 Human Confirmation, Resume Consolidation, and Active Records
+
+- Starting validation seal: `7e5efa9`.
+- Source records reviewed: 47 targeted records; no broad computer discovery was repeated.
+- WGU diploma: Canonical, Verified.
+- March 4, 2026 WGU transcript: Canonical Academic Transcript Candidate, Verified.
+- WGU capstone: Review Required; no direct final submission, evaluation, or assessment evidence found.
+- Canonical base résumé: Project Management résumé retained as provisional candidate pending Titus confirmation.
+- Résumé claim groups governed: 8; unsupported metrics and employment classifications remain blocked.
+- Riipen/AeroCardia: Experiential learning project; paid employment not verified.
+- CourseCareers: Training / Professional Development; not Employment.
+- ISC2 CC: Registered and Scheduled; exam completion, passing, and credential award not verified.
+- Mosaic: recent official course activity verified through July 7, 2026; formal current registration pending confirmation.
+- Duplicate groups recorded: 7; originals deleted, moved, renamed, or overwritten: 0.
+- Sensitive content copied into TKOS: 0.
+- Operational metadata completion: 100%; hub connection rate: 100%.
+- New unresolved links: 0; Obsidian runtime errors after reload: 0.
+- Completion report: [[Reference/Batch 007 Human Confirmation Resume Consolidation and Active Records/Completion Report|Batch 007 Completion Report]].
+- Rollback: [[Reference/Batch 007 Human Confirmation Resume Consolidation and Active Records/Rollback Instructions|Rollback Instructions]].
+- Status: approval gate; Batch 008 not started.

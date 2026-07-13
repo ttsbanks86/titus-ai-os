@@ -1,7 +1,7 @@
 ---
 owner: Titus
 domain: Titus
-status: Active Study
+status: Active
 priority: High
 project: ISC2
 area: Exam Preparation
@@ -9,9 +9,10 @@ created: 2026-07-12
 updated: 2026-07-12
 reviewed: 2026-07-12
 related:
-  - "[[ISC2 Exam Command Center]]"
-  - "[[ISC2 CC Study Reference]]"
-  - "[[Weekly Accountability]]"
+  - "[[Titus/Education/ISC2 Exam Command Center|ISC2 Exam Command Center]]"
+  - "[[Titus/Education/ISC2 Learning Resources|ISC2 Learning Resources]]"
+  - "[[Titus/Education/ISC2 CC Study Reference|ISC2 CC Study Reference]]"
+  - "[[Titus/Weekly Accountability|Weekly Accountability]]"
 tags:
   - education/isc2
   - study-plan
@@ -20,14 +21,14 @@ tags:
 
 ## Exam record
 
-- Exam: Upcoming ISC2 Exam — provisional name
-- Exam date: 2026-07-28
-- Study days remaining on 2026-07-12: 16
-- Confidence: Review Required
+- Exam: ISC2 Certified in Cybersecurity, CC
+- Exam date: July 28, 2026
+- Exam time: 9:30 AM Pacific
+- Appointment: Registered and Scheduled — Verified
+- Credential: Not completed
+- Study days remaining on July 12, 2026: 16
 
-## Candidate CC domains
-
-These domains come from CC study sources and remain associated provisionally until the registration name is verified:
+## CC domains
 
 1. Security Principles
 2. Business Continuity, Disaster Recovery, and Incident Response Concepts
@@ -35,31 +36,28 @@ These domains come from CC study sources and remain associated provisionally unt
 4. Network Security
 5. Security Operations
 
+Confirm study material against the official outline applicable to the July 2026 exam.
+
 ## Progress
 
 - Completed domains: none verified
 - Weak domains: none verified
 - Practice scores: none recorded
-- Missed study sessions: not recorded
+- Reviewed indexed resources: official expiration/change notices only; study resources remain to review
 
-## Daily study targets
+## Current study action
 
-| Date | Target | Status | Evidence |
-|---|---|---|---|
-| 2026-07-12 | Complete one focused session and record topics covered | Not Started | |
+- [ ] Review the official exam outline and preparation guidance.
+- [ ] Complete one focused domain session.
+- [ ] Record topics, duration, source, and result below.
+
+| Date | Domain/resource | Duration | Status | Result/evidence |
+|---|---|---:|---|---|
+| 2026-07-12 | Official outline plus Domain 1 | | Not Started | |
 
 ## Practice scores
 
-| Date | Resource | Exam name | Overall score | Domain scores | Time used | Weak areas | Retake needed | Evidence link |
-|---|---|---|---:|---|---|---|---|---|
+| Date | Resource | Overall score | Domain scores | Time used | Weak areas | Evidence |
+|---|---|---:|---|---|---|---|
 
-## Final review plan
-
-- Verify exam identity and registration.
-- Complete domain review using verified resources.
-- Take and record practice assessments without mixing other certifications.
-- Review weak areas and exam-day logistics.
-
-## Recovery plan
-
-If a study session is missed, reschedule the specific target without inventing completion. Protect job-search and MDiv commitments while preserving daily ISC2 continuity.
+If a session is missed, reschedule the specific target without inventing completion.

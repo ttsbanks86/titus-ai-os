@@ -9,10 +9,11 @@ created: 2026-07-12
 updated: 2026-07-12
 reviewed: 2026-07-12
 related:
-  - "[[Education Evidence]]"
-  - "[[Career Evidence]]"
-  - "[[Master of Divinity Hub]]"
-  - "[[ISC2 Exam Command Center]]"
+  - "[[Titus/Evidence/Education Evidence|Education Evidence]]"
+  - "[[Titus/Evidence/Career Evidence|Career Evidence]]"
+  - "[[Titus/Education/WGU Degree Evidence Index|WGU Degree Evidence Index]]"
+  - "[[Titus/Education/Master of Divinity Hub|Master of Divinity Hub]]"
+  - "[[Titus/Education/ISC2 Exam Command Center|ISC2 Exam Command Center]]"
 tags:
   - hub
   - evidence/registry
@@ -21,7 +22,15 @@ tags:
 
 Authoritative index of governed evidence. Originals remain in their source locations.
 
-## Education
+## WGU education
+
+- [[Titus/Evidence/Records/WGU Diploma|WGU Diploma]] — Canonical, Verified
+- [[Titus/Evidence/Records/WGU Current Transcript|WGU Current Transcript]] — Canonical Academic Transcript Candidate, Verified
+- [[Titus/Evidence/Records/WGU Historical Transcripts|WGU Historical Transcripts]]
+- Final post-conferral transcript — Missing, Optional Upgrade
+- WGU capstone — Review Required; no direct evidence found
+
+## Mosaic education
 
 - [[Mosaic Signed Enrollment Agreement]]
 - [[Mosaic Student Portal Account]]
@@ -33,17 +42,19 @@ Authoritative index of governed evidence. Originals remain in their source locat
 - [[Mosaic Tuition Receipt May 2026]]
 - [[Mosaic Tuition Receipt June 2026]]
 - [[Mosaic Tuition Receipt July 2026]]
-- [[WGU Current Transcript]]
-- [[WGU Historical Transcripts]]
+- [[Titus/Evidence/Records/Mosaic Current Course Activity July 2026|Mosaic Current Course Activity — July 2026]] — Verified recent course activity; formal registration not verified
 
-## Certification
+## Certification and training
 
-- [[ISC2 CC Exam Appointment 2026-07-28]]
+- [[Titus/Evidence/Records/ISC2 CC Exam Appointment 2026-07-28|ISC2 CC Exam Appointment 2026-07-28]]
 - [[CourseCareers Certificate]]
+- [[Titus/Career/Training/CourseCareers Information Technology Training|CourseCareers Information Technology Training]]
 
 ## Career
 
 - [[Project Management Resume Canonical Candidate]]
+- [[Titus/Career/Experience/Riipen AeroCardia Experiential Learning Project|Riipen / AeroCardia Experiential Learning Project]]
+- [[Titus/Career/Resume Claim Evidence Matrix|Resume Claim Evidence Matrix]]
 
 > [!warning] Sensitive evidence
-> Sensitive records contain metadata and secure source links only. TKOS does not store their contents.
+> Sensitive records contain metadata and protected source references only. TKOS does not store their contents.

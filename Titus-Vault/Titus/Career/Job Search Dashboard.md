@@ -9,43 +9,43 @@ created: 2026-07-12
 updated: 2026-07-12
 reviewed: 2026-07-12
 related:
-  - "[[Career Command Center]]"
-  - "[[Job Search Strategy]]"
-  - "[[Job Application Tracker]]"
-  - "[[Weekly Accountability]]"
+  - "[[Titus/Career/Career Command Center|Career Command Center]]"
+  - "[[Titus/Career/Job Application Tracker|Job Application Tracker]]"
+  - "[[Titus/Career/Resumes/Resume Source of Truth|Resume Source of Truth]]"
+  - "[[Titus/Career/Resume Claim Evidence Matrix|Resume Claim Evidence Matrix]]"
+  - "[[Titus/Weekly Accountability|Weekly Accountability]]"
 tags:
   - hub
   - job-search
 ---
 # Job Search Dashboard
 
-## Today
+## Verified pipeline
 
-- [ ] Identify and score the highest-fit opening.
-- [ ] Tailor the appropriate resume if the score meets the documented threshold.
-- [ ] Record applications, recruiter activity, and networking actions.
+- Verified submitted applications: **0**
+- Applications being prepared: **1 candidate** — DataCloudMerge Entry-Level BDA; tailored résumé exists, submission not verified
+- Scheduled interviews: **0 verified**
+- Follow-ups due: **0 verified**
+- Weekly application goal: **Not set; Review Required**
 
-## Strategy and targets
+## Résumé status
 
-- [[Job Search Strategy]]
-- [[Target Roles]]
-- [[Target Employers]]
-- [[Resume Source of Truth]]
+- [[Titus/Career/Resumes/Canonical Base Resume|Canonical Base Resume]] — Project Management résumé is the provisional candidate; human confirmation pending.
+- [[Titus/Career/Resumes/Business Analyst Resume|Business Analyst Resume]] — Active Role-Specific; Needs Evidence; intended primary search résumé after validation.
+- [[Titus/Career/Resumes/Project Management Resume|Project Management Resume]] — Active Role-Specific.
+- [[Titus/Career/Resumes/GRC and Cybersecurity Resume|GRC and Cybersecurity Resume]] — Review Required; not approved for use.
+- Most recent tailored version — DataCloudMerge Business/Data Analyst candidate dated June 15, 2026.
 
-## Interviews
+## Claims awaiting evidence
 
-No verified scheduled interviews are recorded. Prepare with [[Interview Preparation]] and [[STAR Story Bank]].
+Eight claim groups are governed in [[Titus/Career/Resume Claim Evidence Matrix|Resume Claim Evidence Matrix]]. Supported conservative wording exists for four groups; unsupported metrics and details remain blocked.
 
-## Applications and relationships
+## Current target roles
 
-- [[Job Application Tracker]]
-- [[Recruiter Tracker]]
-- [[Networking Tracker]]
-- Consolidated records: 1 Review Required.
-- Submitted this week: 0 verified.
-- Upcoming interviews: 0 verified.
+Business Analyst; Business Intelligence Analyst; GRC Analyst; Data Governance Analyst; Project Coordinator; Junior Project Manager; Scrum Master; entry-level cybersecurity.
 
-## Blockers
+## Current blockers
 
-- Existing application history has not yet been consolidated into the authoritative tracker.
-- Quantified career outcomes need evidence review in [[Career Experience Inventory]].
+- Human confirmation decisions: [[Review/Human Confirmation/Batch 007 Decisions for Titus|Batch 007 Decisions for Titus]].
+- No verified recent application-submission source.
+- No approved Business Analyst master version yet.

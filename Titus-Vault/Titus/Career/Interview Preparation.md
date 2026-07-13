@@ -9,64 +9,34 @@ created: 2026-07-12
 updated: 2026-07-12
 reviewed: 2026-07-12
 related:
-  - "[[Job Search Dashboard]]"
-  - "[[STAR Story Bank]]"
-  - "[[Target Roles]]"
+  - "[[Titus/Career/Job Search Dashboard|Job Search Dashboard]]"
+  - "[[Titus/Career/Resume Claim Evidence Matrix|Resume Claim Evidence Matrix]]"
+  - "[[Titus/Career/Career Experience Inventory|Career Experience Inventory]]"
+  - "[[Titus/Career/STAR Story Bank|STAR Story Bank]]"
 tags:
   - career/interviews
 ---
 # Interview Preparation
 
-## Core preparation
+## Evidence rule
 
-- Confirm employer, role, interviewers, format, time zone, and job description.
-- Map requirements to [[Career Experience Inventory]] using only Verified or Supported claims.
-- Select three to five evidence-backed stories from [[STAR Story Bank]].
-- Research employer mission, products, customers, risks, and current priorities.
+Use only claims marked Verified or Supported in [[Titus/Career/Resume Claim Evidence Matrix|Resume Claim Evidence Matrix]]. Never convert academic, simulation, experiential-learning, or personal-project work into paid employment.
 
-## Question banks
+## Preparation sequence
 
-### Behavioral
+1. Confirm employer, role, interviewers, format, time zone, and job description.
+2. Map the role to [[Titus/Career/Career Experience Inventory|Career Experience Inventory]].
+3. Select three to five evidence-backed examples from [[Titus/Career/STAR Story Bank|STAR Story Bank]].
+4. Prepare questions about success measures, current challenges, documentation, and hiring timeline.
 
-- Tell me about a difficult stakeholder situation.
-- Describe a time you prioritized competing work.
-- Describe a mistake and what changed afterward.
+## Role emphasis
 
-### Business Analyst
+- Business Analyst: requirements, process documentation, stakeholder communication, validation, and traceability.
+- Business Intelligence Analyst: analysis and reporting only where artifacts support the tools and methods.
+- GRC/Data Governance: evidence, policy, controls, risk communication, data stewardship, and documentation.
+- Project roles: scope, dependencies, risk, status communication, and coordination.
+- Cybersecurity: state that the ISC2 CC exam is scheduled; do not claim an earned credential.
 
-- How do you elicit and validate requirements?
-- How do you handle conflicting stakeholder needs?
-- How do you document current and future-state processes?
+## After each interview
 
-### GRC and cybersecurity
-
-- How do risk, controls, policy, and evidence relate?
-- How would you communicate a control gap to a nontechnical stakeholder?
-- Do not claim completed ISC2 certification.
-
-### Project management
-
-- How do you manage scope, dependencies, risks, and status communication?
-- How do you recover a slipping timeline?
-
-## Questions for interviewers
-
-- What outcomes define success in the first 90 days?
-- What are the team's largest current challenges?
-- How are requirements, risks, and decisions documented?
-- What is the hiring timeline?
-
-## Salary discussion
-
-Use the role's market range and total package. TKOS target is at least $70,000; do not volunteer unsupported salary history.
-
-## Follow-up template elements
-
-- Thank the interviewer.
-- Reference a specific discussion point.
-- Reaffirm evidence-backed fit.
-- Confirm interest and next step.
-
-## Lessons log
-
-Record questions, weak answers, follow-up, and outcomes in [[Job Search Decision Log]].
+Record questions, evidence gaps, follow-up date, and outcome in [[Titus/Career/Job Application Tracker|Job Application Tracker]].
