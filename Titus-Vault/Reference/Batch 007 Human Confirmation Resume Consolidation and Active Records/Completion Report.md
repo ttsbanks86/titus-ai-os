@@ -52,7 +52,7 @@ Batch 007 converted the verified evidence into controlled career, education, cer
 | Hub-connection rate | 100% for Batch 007 operational records |
 | New broken links | 0 after Obsidian unresolved-link validation |
 | Obsidian runtime errors | 0 after debugger attach, error-buffer clear, and vault reload |
-| Git commit | Pending Batch 007 content checkpoint; this line will be sealed after commit |
+| Git commit | Content checkpoint `1e38dea87e51496fc1ec265534fca9c2394b3391` |
 
 ## Evidence decisions
 

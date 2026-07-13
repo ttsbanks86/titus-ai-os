@@ -21,7 +21,7 @@ tags:
 
 - Pre-Batch 007 validation seal: `7e5efa9`
 - Batch 006 evidence checkpoint: `983710f`
-- Batch 007 content checkpoint: recorded in the completion report after commit
+- Batch 007 content checkpoint: `1e38dea87e51496fc1ec265534fca9c2394b3391`
 
 ## Safe rollback procedure
 
