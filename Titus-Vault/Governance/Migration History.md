@@ -56,6 +56,23 @@ tags:
 - Reports: [[Reference/Digital Library Discovery 2026-07-12/Executive Summary|Master Digital Discovery]]
 - Status: review required before any import or reorganization.
 
+## 2026-07-12 — Batch 006 Enterprise Evidence Consolidation
+
+- Starting commit: `4cee032`
+- Working datasets reused: Computer Inventory, Evidence Catalog, Duplicate Report, Folder Health Report, Learning Resource Library, Resume Evidence Report, Evidence Gap Analysis, Recommended Import Order.
+- Computer discovery repeated: no
+- Gmail: authenticated, read-only evidence collection
+- Google Drive: authenticated, read-only evidence collection
+- OneDrive and iCloud: existing inventory only
+- Governed evidence records: 15
+- Evidence hubs created: 6
+- Source originals moved, renamed, modified, overwritten, or deleted: 0
+- Sensitive content stored in TKOS: 0
+- Reports: [[Reference/Batch 006 Enterprise Evidence Consolidation/Executive Summary|Batch 006 Executive Summary]]
+- Rollback: [[Reference/Batch 006 Enterprise Evidence Consolidation/Rollback Instructions|Rollback Instructions]]
+- Git commit: pending validation
+- Status: validation pending; Batch 007 prohibited.
+
 ## 2026-07-12 — Batch 002
 
 - Scope: 29 high-confidence Career, Business, Product, Project, and JARVIS notes.

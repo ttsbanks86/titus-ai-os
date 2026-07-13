@@ -26,4 +26,13 @@ tags:
 - Conflict Review
 - Migration Review
 
+## Batch 006 evidence review
+
+- Confirm current official WGU transcript.
+- Locate official WGU diploma, degree verification, micro-credential, and Titus-owned capstone.
+- Select canonical Master, Business Analyst, and Cybersecurity résumés.
+- Add the secure Pearson VUE source link without re-running broad discovery.
+- Verify CourseCareers certificate checksum.
+- Classify Riipen evidence without assuming employment.
+
 Uncertainty is preserved here rather than resolved by guessing.
