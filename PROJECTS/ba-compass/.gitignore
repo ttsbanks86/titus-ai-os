@@ -1,0 +1,32 @@
+# See parent workspace .gitignore for shared patterns
+# BA Compass specific ignores
+
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Testing
+coverage/
+test-results/
+playwright-report/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.tsbuildinfo
