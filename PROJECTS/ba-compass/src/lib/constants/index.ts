@@ -24,6 +24,22 @@ export const NAV_ITEMS = [
   { label: "Responsible AI", href: "/responsible-ai" },
 ] as const;
 
+// Sequential navigation for prev/next links
+export const NAV_SEQUENCE = [
+  { label: "Home", href: "/" },
+  { label: "Overview", href: "/overview" },
+  { label: "Stakeholders", href: "/stakeholders" },
+  { label: "Current State", href: "/current-state" },
+  { label: "Gap Analysis", href: "/analysis" },
+  { label: "KPI Dashboard", href: "/dashboard" },
+  { label: "Future State", href: "/future-state" },
+  { label: "Requirements", href: "/requirements" },
+  { label: "Risks", href: "/risks" },
+  { label: "Recommendations", href: "/recommendations" },
+  { label: "About the Project", href: "/project" },
+  { label: "Responsible AI", href: "/responsible-ai" },
+] as const;
+
 export const STATUS_COLORS = {
   success: "bg-green-100 text-green-800 border-green-200",
   warning: "bg-yellow-100 text-yellow-800 border-yellow-200",
