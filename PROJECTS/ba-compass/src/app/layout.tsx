@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     description: APP.DESCRIPTION,
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 

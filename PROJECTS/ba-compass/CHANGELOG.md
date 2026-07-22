@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.0.0 (2026-07-21)
+
+### Phase 6: Production Release and Career Package
+
+- **v1.0.0 release** — Final production version with all 6 phases complete
+- **README** — Complete recruiter-ready rewrite with BA competencies, features, metrics, and project structure
+- **MIT License** — Applied to application source code
+- **GitHub package** — .gitignore, social preview, repository description, topics
+- **Deployment guide** — Step-by-step Vercel deployment instructions
+- **Production smoke test** — Comprehensive post-deployment verification checklist
+- **Maintenance guide** — Dependency updates, data rules, release/rollback procedures
+- **Final architecture** — Complete documentation of all application layers
+- **Feature inventory** — 16 routes, 15 interactive features, 14 components, 8 KPIs
+- **Known limitations** — 13 documented with impact and rationale
+- **Future roadmap** — 12 enhancement items with priority and effort estimates
+- **Release notes** — Complete v1.0.0 release documentation
+- **Robots setting** — Changed to index/follow for public portfolio discovery
+- **Career package (10 files)** — Resume bullets, LinkedIn, Handshake, GitHub, elevator pitch, interview talking points, STAR stories, recruiter email, portfolio site entry, application form description
+- **Case study document** — Complete BA Compass case study (3,900+ words)
+- **Simulation Lab plan** — BA Compass Work Simulation Lab with 20-section plan and implementation roadmap
+- **Manual simulation guide** — 5 realistic BA practice simulations for immediate use
+- **Screenshot planning** — Folder structure, naming convention, and capture instructions
+- **Final validation** — All tests passing across Chromium, Firefox, and WebKit
+- **19 static pages** — Production build generating all routes successfully
+- **76 unit tests** — All passing
+- **14 Playwright e2e tests** — All passing across 3 browser engines
+
 ## 0.4 (2026-07-21)
 
 ### Phase 4: Interactive Analysis and Document Export

@@ -4,123 +4,118 @@
 
 A recruiter-ready Business Analyst portfolio project demonstrating end-to-end business analysis through a fictional home-care services case study.
 
----
-
-## Overview
-
-BA Compass showcases the complete Business Analyst lifecycle — from problem identification and stakeholder analysis through requirements documentation, process design, KPI definition, and executive communication.
-
-**Fictional Case Study:** BrightCare Home Services — a home-care company experiencing systemic operational failures including missed shifts, late arrivals, incomplete documentation, and delayed escalation.
+[Live Demo](https://ba-compass.vercel.app) · [GitHub](#) · [5-Minute Recruiter Tour](/tour)
 
 ---
 
-## Phase 1: Documentation Foundation (Complete)
+## About This Project
 
-Phase 1 delivers 25 Business Analyst documentation deliverables:
+BA Compass showcases how a Business Analyst identifies operational problems, analyzes stakeholders, documents requirements, designs process improvements, defines success metrics, and communicates recommendations to executives.
 
-| Area | Documents |
-|------|-----------|
-| **Foundation** | Project Charter, Business Problem, Business Case, Scope |
-| **Stakeholder** | Stakeholder Register, Stakeholder Analysis |
-| **Process Analysis** | Current-State Process, Pain-Point & Gap Analysis |
-| **Requirements** | BRD, Business Requirements (15), Functional Requirements (18), Nonfunctional Requirements (12) |
-| **Stories & Criteria** | User Stories (26), Acceptance Criteria (24) |
-| **Traceability** | Requirements Traceability Matrix |
-| **Governance** | Risk Register (15), Assumptions & Constraints, KPI Dictionary (8), Data Dictionary (10 entities) |
-| **Planning** | Product Backlog (52 items), Architecture Proposal, Milestone Plan |
-| **Quality** | Definition of Done, Decision Log, Change Log |
+**Case Study:** BrightCare Home Services — a fictional home-care company experiencing missed shifts, late arrivals, incomplete service documentation, delayed escalation, and no operational visibility.
+
+**My Role:** Business Analyst — problem definition, stakeholder analysis, process mapping, gap analysis, requirements engineering, KPI design, risk assessment, future-state design, and portfolio application validation.
+
+> **All data is synthetic.** BrightCare Home Services is a fictional company. No real client, caregiver, or patient information is used.
 
 ---
 
-## Phase 2: Application Foundation (Complete)
+## Business Analyst Competencies Demonstrated
 
-Phase 2 delivers a working Next.js application foundation with:
+| Competency | Deliverable |
+|-----------|-------------|
+| Business Problem Analysis | Project charter, business problem statement |
+| Stakeholder Engagement | Stakeholder register, power-interest matrix, conflict resolution |
+| Process Modeling | 11-step current-state process with failure analysis |
+| Gap Analysis | 21 pain points across 9 business dimensions |
+| Requirements Engineering | 15 BR, 18 FR, 12 NFR with traceability |
+| User Story Development | 26 user stories with acceptance criteria |
+| KPI Definition | 8 operational metrics with formulas and targets |
+| Risk Management | 15 risks with mitigation and contingency plans |
+| Future-State Design | 8-process improvement comparison |
+| Executive Communication | BRD, executive summary, recommendations |
+| Responsible AI Planning | AI ethics checklist and transparency documentation |
+| Solution Validation | 76 unit tests, 14 e2e tests, accessibility review |
 
-- **13 static routes** with navigation and placeholder content
-- **Strict TypeScript domain types** matching the data dictionary
-- **Deterministic synthetic dataset** (42 shifts, 10 caregivers, 8 clients, 6 escalations, 22 documentation records, 7 service issues, 7 follow-ups)
-- **8 KPI calculation functions** matching approved formulas
-- **41 unit tests** (34 KPI + 7 component tests)
-- **6 Playwright e2e smoke tests** — all passing
-- **Professional UI foundation** with accessible components
-- **CI-ready** with lint, typecheck, test, and build scripts
+---
 
-### Technology Stack
+## Application Features
+
+| Feature | Description |
+|---------|-------------|
+| **KPI Dashboard** | 8 live metrics with Recharts visualizations and period filtering |
+| **Requirements Manager** | Edit demo mode, validation, localStorage persistence, reset |
+| **BRD Viewer** | Complete Business Requirements Document with 12 sections |
+| **Traceability Matrix** | 15 traceability links with search, filters, and coverage summary |
+| **Risk Register** | 15 risks with heatmap, category filtering, and export |
+| **Executive Summary** | Key findings, KPIs, and recommendations |
+| **Process Maps** | 11-step current-state and 8-improvement future-state |
+| **Stakeholder Analysis** | Power-interest matrix and 10 stakeholder profiles |
+| **Recruiter Tour** | 10-step guided walkthrough (Start at [/tour](/tour)) |
+| **Export** | Markdown and CSV export for requirements, risks, traceability |
+| **Print** | Print-friendly views for all documentation pages |
+
+---
+
+## Quick Metrics
+
+| Metric | Count |
+|--------|-------|
+| BA Documentation Deliverables | 25 |
+| Business Requirements | 15 (BR-001 through BR-015) |
+| Functional Requirements | 18 (FR-001 through FR-018) |
+| Nonfunctional Requirements | 12 (NFR-001 through NFR-012) |
+| User Stories | 26 |
+| Acceptance Criteria | 24 |
+| Stakeholders | 10 |
+| Risks | 15 (R-001 through R-015) |
+| KPIs | 8 (KPI-001 through KPI-008) |
+| Application Routes | 19 |
+| Unit Tests | 76 |
+| E2E Tests | 14 |
+
+---
+
+## Technology Stack
 
 | Layer | Technology |
 |-------|-----------|
 | Framework | Next.js 15.5 (App Router) |
 | Language | TypeScript (strict mode) |
 | Styling | Tailwind CSS 3 |
-| Charts | Recharts (ready for Phase 3) |
+| Charts | Recharts |
 | Icons | Lucide React |
+| State | React Context + useReducer + localStorage |
 | Unit Tests | Vitest + Testing Library |
-| E2E Tests | Playwright |
+| E2E Tests | Playwright (Chromium, Firefox, WebKit) |
 | CI | GitHub Actions |
-| Deployment | Vercel (Phase 6) |
+| Deployment | Vercel (static export) |
 
-### Key Scripts
-
-```bash
-npm run dev        # Development server
-npm run build      # Production build
-npm run lint       # ESLint
-npm run typecheck  # TypeScript check
-npm run test       # Unit tests (41 tests)
-npm run test:e2e   # Playwright tests (6 tests)
-npm run validate   # Full validation: typecheck + lint + test + build
-```
-
-### Application Routes
-
-| Route | Content |
-|-------|---------|
-| `/` | Landing page with KPI snapshot |
-| `/overview` | Business scenario overview |
-| `/stakeholders` | Stakeholder register (10 roles) |
-| `/current-state` | 11-step current process |
-| `/analysis` | Gap analysis (9 dimensions) |
-| `/dashboard` | Live KPI dashboard (8 metrics) |
-| `/future-state` | Future state improvements |
-| `/requirements` | Requirements summary |
-| `/risks` | Risk register (12+ risks) |
-| `/recommendations` | Prioritized recommendations |
-| `/project` | About this project |
-| `/responsible-ai` | AI ethics documentation |
-
----
-
-## Quick Metrics
-
-| Metric | Value |
-|--------|-------|
-| Phase 1 Documents | 25 |
-| Business Requirements | 15 (BR-001 through BR-015) |
-| Functional Requirements | 18 (FR-001 through FR-018) |
-| Nonfunctional Requirements | 12 (NFR-001 through NFR-012) |
-| User Stories | 26 (US-001 through US-026) |
-| Acceptance Criteria | 24 (AC-001 through AC-024) |
-| Stakeholders | 10 fictional roles |
-| Risks | 15 (R-001 through R-015) |
-| KPIs | 8 (KPI-001 through KPI-008) |
-| Unit Tests | 41 (all passing) |
-| E2E Tests | 6 (all passing) |
+**Zero external dependencies:** No AI API, no database, no backend server, no authentication.
 
 ---
 
 ## Getting Started
 
 ```bash
-# Navigate to project
+# Clone and navigate
 cd PROJECTS/ba-compass
 
 # Install dependencies
 npm install
 
-# Start development server
+# Start development
 npm run dev
 
-# Open http://localhost:3000
+# Run tests
+npm run test          # 76 unit tests
+npm run test:e2e      # 14 Playwright e2e tests
+
+# Production build
+npm run build
+
+# Full validation
+npm run validate
 ```
 
 ---
@@ -129,76 +124,63 @@ npm run dev
 
 ```
 PROJECTS/ba-compass/
-├── docs/                         # Phase 1 BA documentation (25 files)
+├── docs/                     # 41 BA documentation files
 ├── src/
-│   ├── app/                      # Next.js App Router pages
-│   │   ├── page.tsx              # Landing page
-│   │   ├── layout.tsx            # Root layout with header/footer
-│   │   ├── overview/             # Business scenario
-│   │   ├── stakeholders/         # Stakeholder analysis
-│   │   ├── current-state/        # Current process
-│   │   ├── analysis/             # Gap analysis
-│   │   ├── dashboard/            # KPI dashboard
-│   │   ├── future-state/         # Future process
-│   │   ├── requirements/         # Requirements management
-│   │   ├── risks/                # Risk register
-│   │   ├── recommendations/      # Recommendations
-│   │   ├── project/              # About the project
-│   │   └── responsible-ai/       # AI ethics
-│   ├── components/
-│   │   ├── layout/               # Header, Footer
-│   │   ├── ui/                   # PageHeading, MetricCard, etc.
-│   │   ├── navigation/           # (Phase 3)
-│   │   ├── charts/               # (Phase 3)
-│   │   └── process/              # (Phase 3)
-│   ├── data/synthetic/           # Deterministic synthetic data
+│   ├── app/                  # 19 Next.js App Router pages
+│   ├── components/           # Reusable UI components
+│   ├── data/
+│   │   ├── synthetic/        # Deterministic synthetic dataset
+│   │   └── content/          # BA content modules
 │   ├── lib/
-│   │   ├── kpi/                  # KPI calculation engine
-│   │   ├── constants/            # App constants
-│   │   ├── formatting/           # (Phase 3)
-│   │   └── validation/           # (Phase 3)
-│   ├── types/                    # TypeScript domain types
-│   └── tests/
-│       ├── setup.ts              # Test configuration
-│       ├── kpi-calculations.test.ts  # 34 KPI tests
-│       ├── app-shell.test.tsx    # 7 component tests
-│       └── e2e/smoke.spec.ts     # 6 Playwright tests
-├── diagrams/
-├── data/
-├── portfolio/
-├── .github/workflows/ci.yml      # CI pipeline
-├── .env.example                  # Documented variables
+│   │   ├── kpi/              # 8 KPI calculation functions
+│   │   ├── validation/       # Requirements validation
+│   │   ├── export/           # Markdown/CSV export utilities
+│   │   ├── state/            # React Context state management
+│   │   └── constants/        # Application constants
+│   ├── types/                # TypeScript domain types
+│   └── tests/                # Unit and e2e tests
+├── portfolio/                # Career package materials
+├── public/                   # Social preview asset
 └── package.json
 ```
 
 ---
 
-## Privacy and Security
+## Quality and Accessibility
 
-- **Zero API keys** — No AI API dependency
-- **Zero data collection** — No analytics, cookies, or tracking
-- **Zero real data** — All synthetic, clearly labeled
-- **Zero backend** — Static site, no server or database
-- **Public access** — No login, no authentication
-
----
-
-## Future Phases
-
-| Phase | Focus | Status |
-|-------|-------|--------|
-| Phase 1 | Documentation Foundation | **Complete** |
-| Phase 2 | Application Foundation | **Complete** |
-| Phase 3 | Recruiter-Facing MVP | **Planned** |
-| Phase 4 | Interactive Features | Planned |
-| Phase 5 | Testing and Quality | Planned |
-| Phase 6 | Deployment and Career Package | Planned |
+- **Zero critical or serious accessibility violations** (verified keyboard-only, skip link, ARIA landmarks, screen reader)
+- **Cross-browser tested** (Chromium, Firefox, WebKit — 14/14 tests pass on all engines)
+- **Responsive** (320px through 1920px)
+- **Zero console errors**
+- **Zero hydration errors**
+- **Zero API keys or secrets** in codebase
+- **Zero analytics or tracking**
+- **All data clearly labeled as synthetic**
 
 ---
 
-## Disclaimer
+## Responsible AI Disclosure
 
-**All data, companies, scenarios, and stakeholders in this project are fictional.** This is a portfolio case study demonstrating Business Analyst skills. No real client, caregiver, employer, or patient information is used.
+The BA Compass application uses **no AI services** for its core functionality. All KPI calculations are deterministic. All requirements, risks, and recommendations were developed through structured BA methodology.
+
+AI tools assisted with code generation and content drafting. Every BA artifact was reviewed, validated, and edited by a human Business Analyst. The analytical framework, methodology, and conclusions are the author's own work.
+
+---
+
+## Known Limitations
+
+- Static synthetic dataset (2 weeks of data, not dynamic)
+- No real-time AI integration (future optional feature)
+- No user authentication (intentional — public portfolio)
+- No backend database (static export architecture)
+- Export uses Markdown and browser print-to-PDF (no PDF library)
+- localStorage-dependent editing (cleared on browser data reset)
+
+---
+
+## License
+
+MIT © 2026 Titus Banks. Application source code is open for review and reuse. Case-study narrative and BA documentation are original authored work — attribution appreciated when shared.
 
 ---
 
