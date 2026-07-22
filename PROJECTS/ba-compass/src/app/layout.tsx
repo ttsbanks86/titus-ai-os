@@ -3,6 +3,7 @@ import "./globals.css";
 import { APP, SYNTHETIC_NOTICE } from "@/lib/constants";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { RequirementsProvider } from "@/lib/state/requirements-store";
 
 export const metadata: Metadata = {
   title: {
@@ -35,9 +36,11 @@ export default function RootLayout({
 
         <Header />
 
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
+        <RequirementsProvider>
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+        </RequirementsProvider>
 
         <Footer />
       </body>

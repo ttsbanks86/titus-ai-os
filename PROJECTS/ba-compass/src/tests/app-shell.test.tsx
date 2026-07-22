@@ -93,16 +93,16 @@ describe("Content Data Integrity", () => {
     expect(currentStateSteps[0].step).toBe(1);
     expect(currentStateSteps[10].step).toBe(11);
   });
-  it("gap analysis has 20 gaps", () => {
-    expect(gaps.length).toBe(20);
+  it("gap analysis has 21 gaps (reconciled from Phase 3)", () => {
+    expect(gaps.length).toBe(21);
   });
   it("future state improvements are defined", () => {
     expect(futureStateImprovements.length).toBe(8);
   });
-  it("navigation has 11 items", () => {
-    expect(NAV_ITEMS.length).toBe(11);
+  it("navigation has 14 items (Phase 4 update)", () => {
+    expect(NAV_ITEMS.length).toBe(14);
   });
-  it("navigation sequence has 12 items (including home)", () => {
-    expect(NAV_SEQUENCE.length).toBe(12);
+  it("navigation sequence has 15 items (including home, Phase 4 update)", () => {
+    expect(NAV_SEQUENCE.length).toBe(15);
   });
 });

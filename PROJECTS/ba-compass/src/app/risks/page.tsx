@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Download } from "lucide-react";
 import { PageHeading } from "@/components/ui/page-heading";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ContentPanel } from "@/components/ui/content-panel";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { risks, riskCategorySummary } from "@/data/content/risks-data";
+import { risksToMarkdown, risksToCsv, downloadText, downloadCsv } from "@/lib/export";
 
 export default function RisksPage() {
   const [expandedRisk, setExpandedRisk] = useState<string | null>(null);
@@ -16,7 +17,14 @@ export default function RisksPage() {
 
   return (
     <div className="content-container py-8">
-      <PageHeading title="Risk Register" subtitle="15 identified risks with mitigation and contingency strategies" />
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <PageHeading title="Risk Register" subtitle="15 identified risks with mitigation and contingency strategies" />
+        <div className="flex gap-2 no-print">
+          <button onClick={() => { const md = risksToMarkdown(risks.map((r) => ({ id: r.id, description: r.description, category: r.category, likelihood: r.likelihood, impact: r.impact, score: r.riskScore, owner: r.owner, mitigation: r.mitigation, status: r.status }))); downloadText(md, "ba-compass-risks.md"); }} className="flex items-center gap-1 rounded-lg border border-surface-300 bg-white px-3 py-1.5 text-xs font-medium text-surface-700 hover:bg-surface-50"><Download className="h-3 w-3" /> MD</button>
+          <button onClick={() => { const csv = risksToCsv(risks.map((r) => ({ id: r.id, description: r.description, category: r.category, likelihood: r.likelihood, impact: r.impact, score: r.riskScore, owner: r.owner, mitigation: r.mitigation, status: r.status }))); downloadCsv(csv, "ba-compass-risks.csv"); }} className="flex items-center gap-1 rounded-lg border border-surface-300 bg-white px-3 py-1.5 text-xs font-medium text-surface-700 hover:bg-surface-50"><Download className="h-3 w-3" /> CSV</button>
+          <button onClick={() => window.print()} className="rounded-lg border border-surface-300 bg-white px-3 py-1.5 text-xs font-medium text-surface-700 hover:bg-surface-50">Print</button>
+        </div>
+      </div>
 
       {/* Summary */}
       <div className="mb-6 grid grid-cols-3 gap-3 sm:grid-cols-5">

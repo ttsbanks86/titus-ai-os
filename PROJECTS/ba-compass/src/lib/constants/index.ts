@@ -18,6 +18,9 @@ export const NAV_ITEMS = [
   { label: "KPI Dashboard", href: "/dashboard" },
   { label: "Future State", href: "/future-state" },
   { label: "Requirements", href: "/requirements" },
+  { label: "BRD", href: "/brd" },
+  { label: "Traceability", href: "/traceability" },
+  { label: "Executive Summary", href: "/executive-summary" },
   { label: "Risks", href: "/risks" },
   { label: "Recommendations", href: "/recommendations" },
   { label: "About the Project", href: "/project" },
@@ -34,10 +37,20 @@ export const NAV_SEQUENCE = [
   { label: "KPI Dashboard", href: "/dashboard" },
   { label: "Future State", href: "/future-state" },
   { label: "Requirements", href: "/requirements" },
+  { label: "BRD", href: "/brd" },
+  { label: "Traceability", href: "/traceability" },
+  { label: "Executive Summary", href: "/executive-summary" },
   { label: "Risks", href: "/risks" },
   { label: "Recommendations", href: "/recommendations" },
   { label: "About the Project", href: "/project" },
   { label: "Responsible AI", href: "/responsible-ai" },
+] as const;
+
+// Secondary navigation for documents section
+export const DOC_NAV_ITEMS = [
+  { label: "BRD", href: "/brd" },
+  { label: "Traceability", href: "/traceability" },
+  { label: "Executive Summary", href: "/executive-summary" },
 ] as const;
 
 export const STATUS_COLORS = {

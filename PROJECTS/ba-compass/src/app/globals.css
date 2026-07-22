@@ -12,6 +12,38 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 
+  /* Print styles */
+  @media print {
+    header, footer, .notice-bar, .skip-link, .no-print {
+      display: none !important;
+    }
+    body {
+      background: white !important;
+      color: black !important;
+      font-size: 11pt;
+    }
+    .content-container {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+    a {
+      color: black !important;
+      text-decoration: underline;
+    }
+    h1 { font-size: 18pt; }
+    h2 { font-size: 14pt; }
+    h3 { font-size: 12pt; }
+    .rounded-lg, .rounded {
+      border: 1px solid #ccc !important;
+      background: white !important;
+      box-shadow: none !important;
+    }
+    table { page-break-inside: auto; }
+    tr { page-break-inside: avoid; }
+    .break-before { page-break-before: always; }
+    .break-after { page-break-after: always; }
+  }
+
   /* Focus visible ring for accessibility */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-brand-500;
