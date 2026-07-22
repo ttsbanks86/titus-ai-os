@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Static export ready for future Vercel deployment
+  // Static export ready for Vercel deployment
   output: "export",
 
   // Disable image optimization for static export

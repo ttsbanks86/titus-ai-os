@@ -33,6 +33,9 @@ export default function HomePage() {
           <a href="/dashboard" className="rounded-lg border border-surface-300 bg-white px-5 py-2.5 text-sm font-medium text-surface-700 transition-colors hover:bg-surface-50">
             View the Dashboard
           </a>
+          <a href="/tour" className="rounded-lg border border-brand-300 bg-white px-5 py-2.5 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-50">
+            Start 5-Minute Tour
+          </a>
           <a href="/project" className="rounded-lg border border-surface-300 bg-white px-5 py-2.5 text-sm font-medium text-surface-700 transition-colors hover:bg-surface-50">
             About My Contribution
           </a>
