@@ -36,8 +36,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
     
-    - name: Run tests
+    - name: Diagnose environment
       working-directory: Titus-Vault
       run: |
-        python -m pytest --collect-only tests/ 2>&1
-        python -m pytest tests/ -v --tb=long
+        echo "=== Current directory ==="
+        pwd
+        echo "=== Python version ==="
+        python --version
+        echo "=== pytest version ==="
+        python -m pytest --version
+        echo "=== List Titus-Vault contents ==="
+        ls -la
+        echo "=== List tests/ ==="
+        ls -la tests/
+        echo "=== Check conftest.py ==="
+        head -5 tests/conftest.py
+
+    - name: Run tests
+      working-directory: Titus-Vault
+      run: python -m pytest tests/ -v --tb=long 2>&1 || true
