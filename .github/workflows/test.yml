@@ -29,18 +29,30 @@ jobs:
         python-version: '3.13'
     - name: Install dependencies
       run: python -m pip install --upgrade pip && pip install pytest
-    - name: Minimal smoke test
+    - name: Run tests
       working-directory: Titus-Vault
       shell: bash
       run: |
-        echo "## CI Debug Output" >> $GITHUB_STEP_SUMMARY
-        echo "PWD: $(pwd)" >> $GITHUB_STEP_SUMMARY
-        echo "Python: $(python --version 2>&1)" >> $GITHUB_STEP_SUMMARY
-        echo "Files:" >> $GITHUB_STEP_SUMMARY
-        ls -la >> $GITHUB_STEP_SUMMARY
-        echo "Test dir:" >> $GITHUB_STEP_SUMMARY
-        ls -la tests/ >> $GITHUB_STEP_SUMMARY
-        python -c "print('Python works!')" >> $GITHUB_STEP_SUMMARY
-        python -m pytest --co tests/ 2>&1 >> $GITHUB_STEP_SUMMARY || true
-        echo "Attempting tests..." >> $GITHUB_STEP_SUMMARY
-        python -m pytest tests/ -v --tb=long 2>&1 >> $GITHUB_STEP_SUMMARY || echo "Tests failed with exit code $?" >> $GITHUB_STEP_SUMMARY
+        python -m pytest tests/ -v --tb=long 2>&1 | tee /tmp/test-output.txt
+        echo "PYTEST_EXIT=${PIPESTATUS[0]}" >> $GITHUB_ENV
+    - name: Write summary
+      if: always()
+      working-directory: Titus-Vault
+      shell: bash
+      run: |
+        echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        cat /tmp/test-output.txt >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+    - name: Upload test output
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-output
+        path: /tmp/test-output.txt
+        retention-days: 5
+    - name: Fail if tests failed
+      if: env.PYTEST_EXIT != '0'
+      run: |
+        echo "Pytest exited with code $PYTEST_EXIT"
+        exit 1
