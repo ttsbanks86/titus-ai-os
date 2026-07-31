@@ -1,0 +1,7 @@
+[allowlist]
+  description = "Global allowlist"
+  paths = [
+    '''\.env\.example$''',
+    '''tests/''',
+    '''10-Archive/Legacy-Skills/''',
+  ]
