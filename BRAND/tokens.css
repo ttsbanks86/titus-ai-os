@@ -66,10 +66,45 @@
   --shadow-md: 0 4px 12px rgba(14,17,22,0.08);
   --shadow-lg: 0 12px 32px rgba(14,17,22,0.12);
 
+  /* ---------- STATUS ---------- */
+  --status-complete:  #1F6B4A;
+  --status-running:   #D4A14A;
+  --status-blocked:   #DC2626;
+  --status-pending:   #5A6B7B;
+  --status-review:    #7C3AED;
+
+  /* ---------- ALERTS ---------- */
+  --alert-success-bg: rgba(31,107,74,0.08);
+  --alert-warning-bg: rgba(212,161,74,0.08);
+  --alert-error-bg:   rgba(220,38,38,0.08);
+  --alert-info-bg:    rgba(90,107,123,0.08);
+
+  /* ---------- TABLE ---------- */
+  --table-header-bg:  #0F2742;
+  --table-header-text: #FFFFFF;
+  --table-row-alt:    rgba(245,241,232,0.5);
+  --table-hover:      rgba(212,161,74,0.04);
+  --table-border:     #E2E8F0;
+
   /* ---------- LAYOUT ---------- */
   --container-narrow: 720px;
   --container-base:   1080px;
   --container-wide:   1280px;
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream:     #0A1B30;
+    --color-white:     #0F2742;
+    --color-off-black: #F5F1E8;
+    --color-slate:     #94A3B8;
+    --table-header-bg: #0F2742;
+    --table-border:    rgba(255,255,255,0.1);
+  }
 }
 
 /* =========================================================

@@ -1,0 +1,39 @@
+{
+  "name": "Titus AI OS Design System",
+  "version": "0.1.0",
+  "description": "Branded interface for Titus AI OS — orchestration, knowledge, and verification dashboard",
+  "author": "Titus Banks",
+  "brand": "Titus Banks / Open Door AI Systems",
+  "tokens": "../../../tokens.json",
+  "styles": ["../../../tokens.css"],
+  "views": [
+    "main-workspace",
+    "project-dashboard",
+    "milestone-workspace",
+    "agent-dashboard",
+    "knowledge-view",
+    "verification-view",
+    "workflow-queue",
+    "settings"
+  ],
+  "components": [
+    "StatusBadge",
+    "ProgressRing",
+    "ProgressBar",
+    "Alert",
+    "AgentCard",
+    "TaskCard",
+    "DocumentCard",
+    "Checklist",
+    "ActivityFeed",
+    "QuickAction",
+    "Button",
+    "Card",
+    "Table",
+    "Navigation"
+  ],
+  "themes": ["light", "dark", "system"],
+  "accessibility": "WCAG 2.1 AA",
+  "responsive": true,
+  "minWidth": 375
+}
