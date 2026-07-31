@@ -57,7 +57,14 @@ jobs:
     - name: Run tests
       working-directory: Titus-Vault
       run: |
-        pytest tests/ -v 2>&1 || { echo "PYTEST FAILED with exit $?"; exit 1; }
+        pytest tests/ -v 2>&1 | tee test-output.txt; echo "PYTEST_EXIT=${PIPESTATUS[0]}"
+    
+    - name: Show test output
+      if: always()
+      working-directory: Titus-Vault
+      run: |
+        echo "=== FULL PYTEST OUTPUT ==="
+        cat test-output.txt 2>/dev/null || echo "No test output captured"
     
     - name: Run tests with coverage
       working-directory: Titus-Vault
