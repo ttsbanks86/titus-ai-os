@@ -20,11 +20,12 @@ All M3 modules perform well within acceptable limits for local development and s
 |--------|-------|-----------|--------|
 | Orchestrator | 8 | ~50ms | ✅ Fast |
 | MilestoneRunner | 3 | ~30ms | ✅ Fast |
-| SemanticSearch | 3 | ~80ms | ✅ Fast |
-| AutoIndexer | 3 | ~100ms | ✅ Fast |
+| KeywordSearch | 5 | ~80ms | ✅ Fast |
+| SearchProviderBoundary | 6 | ~40ms | ✅ Fast |
+| ManualIncrementalIndexer | 6 | ~100ms | ✅ Fast |
 | Guardrails | 6 | ~40ms | ✅ Fast |
 | Integration | 1 | ~20ms | ✅ Fast |
-| **Total** | **24** | **~320ms** | ✅ **Excellent** |
+| **Total** | **35** | **~360ms** | ✅ **Excellent** |
 
 ### Memory Usage
 

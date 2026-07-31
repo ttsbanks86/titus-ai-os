@@ -1,6 +1,11 @@
 """
-Titus AI OS Auto-Indexing
-Automated knowledge base indexing and maintenance.
+Titus AI OS Indexing — Manual Incremental Indexer
+
+Gate E: Reclassified from "AutoIndexer" to "ManualIncrementalIndexer".
+No file watcher, no background thread, no automatic triggers.
+All operations (index_all, rebuild_index, cleanup_index) must be invoked manually.
+
+Classification: MANUAL_INCREMENTAL_INDEXER
 """
 
 from dataclasses import dataclass, field
@@ -25,11 +30,21 @@ class IndexEntry:
     links: List[str] = field(default_factory=list)
 
 
-class AutoIndexer:
+class ManualIncrementalIndexer:
     """
-    Automatic knowledge base indexer.
-    
-    Monitors vault changes and maintains a searchable index.
+    Manual incremental indexer for the knowledge base.
+
+    Provides hash-based change detection, metadata extraction, and
+    index persistence. All operations are manually invoked — there is
+    no file watcher, no background thread, and no automatic triggers.
+
+    Gate E: Renamed from AutoIndexer to ManualIncrementalIndexer.
+
+    Usage:
+        indexer = ManualIncrementalIndexer(vault_path)
+        stats = indexer.index_all()           # Manual full index
+        stale = indexer.get_stale_files()     # Manual staleness check
+        cleaned = indexer.cleanup_index()     # Manual orphan removal
     """
     
     def __init__(self, vault_path: str, index_path: str = ".vault-index.json"):
@@ -230,3 +245,7 @@ class AutoIndexer:
         """Force rebuild of entire index."""
         self.index = {}
         return self.index_all()
+
+
+# Backwards-compatible alias
+AutoIndexer = ManualIncrementalIndexer

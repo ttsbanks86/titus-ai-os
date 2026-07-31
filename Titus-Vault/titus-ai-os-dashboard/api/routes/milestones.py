@@ -5,7 +5,7 @@ from pathlib import Path
 
 router = APIRouter()
 
-VAULT_ROOT = Path(__file__).parent.parent.parent.parent / "Titus-Vault"
+VAULT_ROOT = Path(__file__).parent.parent.parent.parent
 
 
 @router.get("/")

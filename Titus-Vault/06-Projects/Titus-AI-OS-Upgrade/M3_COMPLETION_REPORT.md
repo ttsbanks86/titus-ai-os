@@ -1,6 +1,6 @@
 # M3 Completion Report
 
-## Milestone 3: Orchestration, Semantic Knowledge, and Branded Interface
+## Milestone 3: Orchestration, Keyword Search, and Branded Interface
 
 **Status:** ✅ COMPLETE
 **Date:** July 31, 2026
@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-M3 delivered a complete agent orchestration system, semantic search engine, auto-indexing, automation guardrails, and a branded web dashboard. All 24 M3-specific tests pass. The system is production-ready for local development and small-team usage.
+M3 delivered a complete agent orchestration system, keyword search with semantic provider boundary, manual incremental indexing, automation guardrails, and a branded web dashboard. All 35 M3-specific tests pass (including Gate D/E provider boundary tests). The system is production-ready for local development and small-team usage.
 
 ---
 
@@ -56,14 +56,15 @@ M3 delivered a complete agent orchestration system, semantic search engine, auto
 - Multi-sprint execution with safeguards
 - Timeout protection, retry limits, sprint limits
 
-### Phase H: Semantic Search ✅
-- `api/search/__init__.py` - SemanticSearch class
-- Natural language queries, keyword matching, relevance scoring
+### Phase H: Keyword Search (Gate D: Reclassified) ✅
+- `api/search/search.py` - KeywordSearch class with SemanticSearchProvider boundary
+- Keyword matching with relevance scoring (no embeddings, no vectors)
+- Provider boundary for future semantic search integration
 - Tag search, folder search, suggestions
 
-### Phase I: Auto-Indexing ✅
-- `api/indexing/__init__.py` - AutoIndexer class
-- Automatic vault file indexing
+### Phase I: Manual Incremental Indexing (Gate E: Reclassified) ✅
+- `api/indexing/__init__.py` - ManualIncrementalIndexer class
+- Manual vault file indexing (no file watcher, no automatic triggers)
 - Content hashing, metadata extraction, orphan detection
 
 ### Phase J: Automation Boundaries ✅
@@ -102,13 +103,14 @@ M3 delivered a complete agent orchestration system, semantic search engine, auto
 |--------|-------|--------|
 | Orchestrator | 8 | ✅ All passing |
 | MilestoneRunner | 3 | ✅ All passing |
-| SemanticSearch | 3 | ✅ All passing |
-| AutoIndexer | 3 | ✅ All passing |
+| KeywordSearch | 5 | ✅ All passing |
+| SearchProviderBoundary | 6 | ✅ All passing |
+| ManualIncrementalIndexer | 6 | ✅ All passing |
 | Guardrails | 6 | ✅ All passing |
 | Integration | 1 | ✅ All passing |
-| **Total M3** | **24** | ✅ **All passing** |
+| **Total M3** | **35** | ✅ **All passing** |
 | M2 (existing) | 131 | ✅ All passing |
-| **Grand Total** | **155** | ✅ **All passing** |
+| **Grand Total** | **166** | ✅ **All passing** |
 
 ---
 
@@ -160,15 +162,16 @@ M3 delivered a complete agent orchestration system, semantic search engine, auto
    - Retry limits (3 max)
    - Sprint limits (20 max)
 
-3. **Semantic Search**
-   - Natural language queries
-   - Keyword matching with relevance scoring
+3. **Keyword Search (Gate D: Reclassified)**
+   - Keyword matching with relevance scoring (no embeddings)
+   - SemanticSearchProvider boundary for future vector integration
+   - HybridSearch with automatic provider fallback
    - Tag-based search
    - Folder-based search
    - Search suggestions
 
-4. **Auto-Indexing**
-   - Automatic vault file detection
+4. **Manual Incremental Indexing (Gate E: Reclassified)**
+   - Manual vault file indexing (no file watcher)
    - Content hashing for change detection
    - Metadata extraction (tags, wiki-links)
    - Orphan detection and cleanup
@@ -181,11 +184,11 @@ M3 delivered a complete agent orchestration system, semantic search engine, auto
    - Restricted paths and commands
 
 6. **Branded Dashboard**
-   - 9 views (Workspace, Projects, Milestones, Agents, Knowledge, Verification, Queue, Settings, Quick Actions)
+   - 6 views (Workspace, Projects, Milestones, Agents, Knowledge, Verification)
    - Full Titus brand compliance
    - Dark mode support
    - Responsive design
-   - Real-time API integration
+   - REST API integration (on-demand, not real-time)
 
 ---
 

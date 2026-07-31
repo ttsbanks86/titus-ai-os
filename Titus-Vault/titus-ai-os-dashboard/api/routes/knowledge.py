@@ -32,37 +32,49 @@ async def assemble_context(role: str = "ceo", budget: int = 4000):
     try:
         from knowledge_engine import (
             KnowledgeEngineConfig,
-            KnowledgeInventory,
             KnowledgeIndex,
             SearchEngine,
             HotContextCache,
             ContextAssembler,
-            AccessControl,
+            ContextRequest,
         )
         
         config = KnowledgeEngineConfig(vault_root=vault_root)
-        inventory = KnowledgeInventory(config)
-        documents = inventory.scan()
         
         index = KnowledgeIndex(config)
-        index.build(documents)
+        index.build(vault_root)
+        
+        search = SearchEngine(index)
         
         assembler = ContextAssembler(
             index=index,
+            search=search,
             cache=HotContextCache(),
-            access=AccessControl(config),
         )
         
-        context = assembler.assemble(role=role, budget=budget)
+        request = ContextRequest(
+            project="Titus-AI-OS-Upgrade",
+            agent_role=role,
+            task="M3 closure",
+            context_budget=budget,
+        )
+        context = assembler.assemble(request)
+        
+        all_docs = (
+            context.source_of_truth_docs
+            + context.current_milestone_docs
+            + context.architecture_docs
+            + context.supporting_docs
+        )
         
         return {
             "role": role,
             "budget": budget,
-            "documents": len(context.documents),
-            "tokens_used": context.tokens_used,
+            "documents": len(all_docs),
+            "tokens_used": context.token_estimate,
             "documents_list": [
                 {"path": doc.path, "authority": doc.authority.value}
-                for doc in context.documents[:10]
+                for doc in all_docs[:10]
             ],
         }
     except Exception as e:

@@ -12,8 +12,8 @@ from datetime import datetime
 # Import modules to test
 from orchestration import Orchestrator, Task, TaskStatus, AgentRole, Handoff
 from orchestration.runner import MilestoneRunner, Milestone, Sprint, MilestoneStatus
-from search import SemanticSearch, SearchResult
-from indexing import AutoIndexer, IndexEntry
+from search import KeywordSearch, SearchResult, SemanticSearchProvider, KeywordSearchProvider, HybridSearch
+from indexing import ManualIncrementalIndexer, IndexEntry, AutoIndexer
 from guardrails import AutomationGuardrails, Operation, OperationType, SafetyLevel
 
 
@@ -189,16 +189,15 @@ class TestMilestoneRunner:
         assert any("timeout" in v.lower() for v in violations)
 
 
-class TestSemanticSearch:
-    """Tests for the Semantic Search module."""
+class TestKeywordSearch:
+    """Tests for the Keyword Search module (Gate D: reclassified from SemanticSearch)."""
     
     def setup_method(self, tmp_path=None):
-        # Create a temporary vault for testing
         self.tmp_dir = Path(tempfile.mkdtemp())
         (self.tmp_dir / "test-note.md").write_text("# Test Note\n\nThis is a test note with #tag1 #tag2")
         (self.tmp_dir / "project.md").write_text("# Project\n\nProject details here")
         
-        self.search = SemanticSearch(str(self.tmp_dir))
+        self.search = KeywordSearch(str(self.tmp_dir))
     
     def test_search(self):
         """Test basic search."""
@@ -215,17 +214,103 @@ class TestSemanticSearch:
         """Test search statistics."""
         stats = self.search.get_stats()
         assert stats["total_documents"] == 2
+    
+    def test_provider_is_keyword(self):
+        """Verify default provider is KeywordSearchProvider (not semantic)."""
+        assert isinstance(self.search.provider, KeywordSearchProvider)
+    
+    def test_keyword_provider_always_available(self):
+        """KeywordSearchProvider should always be available."""
+        provider = KeywordSearchProvider()
+        assert provider.is_available() is True
 
 
-class TestAutoIndexer:
-    """Tests for the Auto-Indexer module."""
+class TestSearchProviderBoundary:
+    """Gate D: Tests for the semantic search provider boundary."""
+    
+    def setup_method(self):
+        self.tmp_dir = Path(tempfile.mkdtemp())
+        (self.tmp_dir / "note.md").write_text("# AI Agent\n\nBuilding autonomous agents")
+        (self.tmp_dir / "design.md").write_text("# Design System\n\nUI components and tokens")
+        
+        self.index = {}
+        for md_file in self.tmp_dir.rglob("*.md"):
+            content = md_file.read_text(encoding="utf-8")
+            self.index[str(md_file.relative_to(self.tmp_dir))] = {
+                "title": md_file.stem,
+                "content": content,
+                "path": str(md_file.relative_to(self.tmp_dir)),
+                "size": len(content),
+            }
+    
+    def test_semantic_provider_interface(self):
+        """SemanticSearchProvider is abstract and requires search + is_available."""
+        with pytest.raises(TypeError):
+            SemanticSearchProvider()
+    
+    def test_keyword_provider_implements_interface(self):
+        """KeywordSearchProvider implements SemanticSearchProvider."""
+        provider = KeywordSearchProvider()
+        assert isinstance(provider, SemanticSearchProvider)
+    
+    def test_hybrid_search_falls_back_to_keyword(self):
+        """HybridSearch without semantic provider falls back to keyword."""
+        hybrid = HybridSearch(str(self.tmp_dir))
+        results = hybrid.search("agent")
+        assert len(results) > 0
+        assert hybrid.active_provider == "KeywordSearchProvider"
+    
+    def test_hybrid_search_with_unavailable_provider(self):
+        """HybridSearch with unavailable semantic provider falls back to keyword."""
+        class FakeProvider(SemanticSearchProvider):
+            def search(self, query, index, max_results=10):
+                return []
+            def is_available(self):
+                return False
+        
+        hybrid = HybridSearch(str(self.tmp_dir), semantic_provider=FakeProvider())
+        results = hybrid.search("agent")
+        assert len(results) > 0  # Falls back to keyword
+        assert hybrid.active_provider == "KeywordSearchProvider"
+    
+    def test_hybrid_search_with_available_provider(self):
+        """HybridSearch with available semantic provider uses it."""
+        class FakeProvider(SemanticSearchProvider):
+            def search(self, query, index, max_results=10):
+                return [SearchResult(
+                    id="fake", title="Fake Result", content="...",
+                    score=0.99, source="fake", file_path="fake.md",
+                )]
+            def is_available(self):
+                return True
+        
+        hybrid = HybridSearch(str(self.tmp_dir), semantic_provider=FakeProvider())
+        results = hybrid.search("agent")
+        assert len(results) == 1
+        assert results[0].title == "Fake Result"
+        assert hybrid.active_provider == "FakeProvider"
+    
+    def test_search_classification_is_keyword_only(self):
+        """Gate D: System is classified as KEYWORD_SEARCH_ONLY."""
+        provider = KeywordSearchProvider()
+        # Provider does not use embeddings
+        # Provider does not call any ML/AI service
+        # Provider uses only string matching
+        results = provider.search("agent", self.index)
+        assert len(results) > 0
+        # All scores come from substring matching, not cosine similarity
+        assert all(0.0 <= r.score <= 1.0 for r in results)
+
+
+class TestManualIncrementalIndexer:
+    """Tests for the Manual Incremental Indexer (Gate E: reclassified from AutoIndexer)."""
     
     def setup_method(self):
         self.tmp_dir = Path(tempfile.mkdtemp())
         (self.tmp_dir / "note.md").write_text("# Test Note\n\nContent here [[Other Note]]")
         (self.tmp_dir / "other.md").write_text("# Other Note\n\nReferenced content")
         
-        self.indexer = AutoIndexer(str(self.tmp_dir))
+        self.indexer = ManualIncrementalIndexer(str(self.tmp_dir))
     
     def test_index_all(self):
         """Test indexing all files."""
@@ -249,6 +334,33 @@ class TestAutoIndexer:
         assert metadata["title"] == "Test Title"
         assert "tag1" in metadata["tags"]
         assert "Wiki Link" in metadata["links"]
+    
+    def test_backwards_compatible_alias(self):
+        """AutoIndexer is a backwards-compatible alias for ManualIncrementalIndexer."""
+        assert AutoIndexer is ManualIncrementalIndexer
+    
+    def test_no_file_watcher(self):
+        """Gate E: ManualIncrementalIndexer has no file watcher or background thread."""
+        import inspect
+        source = inspect.getsource(ManualIncrementalIndexer)
+        # Should not contain file watcher patterns
+        assert "watchdog" not in source.lower()
+        assert "threading.Thread" not in source
+        assert "FileSystemWatcher" not in source
+        assert "inotify" not in source.lower()
+        assert "observer" not in source.lower()
+    
+    def test_all_operations_are_manual(self):
+        """Gate E: All indexing operations require explicit invocation."""
+        # Create a new file AFTER indexer initialization
+        (self.tmp_dir / "new-file.md").write_text("# New File\n\nNew content")
+        
+        # The indexer should NOT automatically detect it
+        assert "new-file.md" not in self.indexer.index
+        
+        # Must manually call index_all to pick it up
+        self.indexer.index_all()
+        assert "new-file.md" in self.indexer.index
 
 
 class TestAutomationGuardrails:

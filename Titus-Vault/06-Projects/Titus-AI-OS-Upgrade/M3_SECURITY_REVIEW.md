@@ -88,8 +88,9 @@ M3 implementation follows security best practices with appropriate guardrails fo
 |--------|-------|--------|
 | Orchestrator | 8 | ✅ All passing |
 | MilestoneRunner | 3 | ✅ All passing |
-| SemanticSearch | 3 | ✅ All passing |
-| AutoIndexer | 3 | ✅ All passing |
+| KeywordSearch | 5 | ✅ All passing |
+| SearchProviderBoundary | 6 | ✅ All passing |
+| ManualIncrementalIndexer | 6 | ✅ All passing |
 | Guardrails | 6 | ✅ All passing |
 | Integration | 1 | ✅ All passing |
 | **Total** | **24** | ✅ **All passing** |
