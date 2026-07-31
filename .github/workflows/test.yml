@@ -39,4 +39,5 @@ jobs:
     - name: Run tests
       working-directory: Titus-Vault
       run: |
-        pytest tests/ -v --tb=short
+        python -m pytest --collect-only tests/ 2>&1
+        python -m pytest tests/ -v --tb=long

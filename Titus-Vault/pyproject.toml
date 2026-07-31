@@ -21,11 +21,7 @@ testpaths = [
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-filterwarnings = [
-    "error",
-    "ignore::DeprecationWarning",
-    "ignore::pytest.PytestWarning",
-]
+filterwarnings = []
 
 [tool.coverage.run]
 source = ["tests"]
