@@ -1,0 +1,36 @@
+[project]
+name = "titus-ai-os"
+version = "0.1.0"
+description = "Titus AI Operating System — Knowledge base and configuration"
+requires-python = ">=3.11"
+authors = [
+    { name = "Titus Banks" },
+]
+license = { text = "MIT" }
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+    "pytest-cov>=5.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+source = ["tests"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
