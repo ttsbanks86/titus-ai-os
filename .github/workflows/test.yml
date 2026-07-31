@@ -36,15 +36,35 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest pytest-cov
     
+    - name: Debug environment
+      working-directory: Titus-Vault
+      run: |
+        echo "Python version:"
+        python --version
+        echo "Current directory:"
+        pwd
+        echo "Directory listing:"
+        ls -la
+        echo "Test files:"
+        ls -la tests/
+        echo "08-Agents contents:"
+        ls -la 08-Agents/ 2>/dev/null || echo "08-Agents/ NOT FOUND"
+        echo "Required files:"
+        for f in 01-Dashboard/Home.md 01-Dashboard/My-Goals.md 07-SOPs/SOPs-Index.md 08-Agents/Agents-Index.md 08-Agents/SDLC-Agent-Operating-Prompt.md pyproject.toml README.md tests/__init__.py tests/conftest.py; do
+          if [ -f "$f" ]; then echo "  EXISTS: $f"; else echo "  MISSING: $f"; fi
+        done
+    
     - name: Run tests
       working-directory: Titus-Vault
       run: |
-        pytest tests/ -v
+        pytest tests/ -v 2>&1 || { echo "PYTEST FAILED with exit $?"; exit 1; }
     
     - name: Run tests with coverage
       working-directory: Titus-Vault
       run: |
-        pytest tests/ --cov=tests --cov-report=xml
+        pytest tests/ --cov=tests --cov-report=xml -v 2>&1 || { echo "COVERAGE FAILED with exit $?"; exit 1; }
+        echo "coverage.xml exists:"
+        ls -la coverage.xml 2>/dev/null || echo "coverage.xml NOT FOUND"
     
     - name: Upload coverage reports
       if: always()
