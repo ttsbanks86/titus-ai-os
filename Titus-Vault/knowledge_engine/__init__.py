@@ -17,6 +17,7 @@ Provides:
 __version__ = "0.1.0"
 
 from .access import AccessControl
+from .agents import AgentContextProvider, AgentRole, AgentContextResponse
 from .assembler import ContextAssembler
 from .cache import HotContextCache
 from .config import KnowledgeEngineConfig
@@ -36,6 +37,9 @@ from .search import SearchEngine
 
 __all__ = [
     "AccessControl",
+    "AgentContextProvider",
+    "AgentRole",
+    "AgentContextResponse",
     "ContextAssembler",
     "HotContextCache",
     "KnowledgeEngineConfig",
