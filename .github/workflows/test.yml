@@ -28,7 +28,13 @@ jobs:
       with:
         python-version: '3.13'
     - name: Install dependencies
+      shell: bash
       run: python -m pip install --upgrade pip && pip install pytest
     - name: Run tests
       shell: bash
-      run: cd Titus-Vault && python -m pytest tests/ -v --tb=long
+      working-directory: Titus-Vault
+      run: |
+        python -m pytest tests/ -v --tb=long > /tmp/test-output.txt 2>&1
+        EXIT_CODE=$?
+        cat /tmp/test-output.txt
+        exit $EXIT_CODE
