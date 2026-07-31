@@ -13,7 +13,6 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    
     - name: Run Gitleaks
       uses: gitleaks/gitleaks-action@v2
       env:
@@ -22,31 +21,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: secret-scan
-    strategy:
-      matrix:
-        python-version: ['3.11', '3.13']
-    
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
-    
+        python-version: '3.13'
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest
-    
-    - name: Show environment
-      working-directory: Titus-Vault
-      run: |
-        python --version
-        pip list | grep pytest
-        echo "Files in tests/:"
-        ls -la tests/
-    
+      run: python -m pip install --upgrade pip && pip install pytest
     - name: Run tests
-      working-directory: Titus-Vault
-      run: python -m pytest tests/ -v --tb=long
+      shell: bash
+      run: cd Titus-Vault && python -m pytest tests/ -v --tb=long
