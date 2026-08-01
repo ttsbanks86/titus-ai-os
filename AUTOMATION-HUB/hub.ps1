@@ -10,7 +10,8 @@ $LogsDir = Join-Path $HubRoot "logs"
 $ReportsDir = Join-Path $HubRoot "reports"
 $ConfigPath = Join-Path $HubRoot "hub-config.json"
 $LogPath = Join-Path $LogsDir ("hub-" + (Get-Date -Format "yyyyMMdd") + ".log")
-$env:COMPOSIO_API_KEY = "ak_jxmgwQdWvPVWBxDK3m8W"
+# COMPOSIO_API_KEY must be set in environment before running
+# Example: $env:COMPOSIO_API_KEY = "your_key_here"
 
 function Write-HubLog {
     param([string]$Message)
