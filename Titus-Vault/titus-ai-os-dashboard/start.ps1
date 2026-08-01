@@ -16,7 +16,8 @@ pip install -r requirements.txt -q
 
 # Start API server in background
 Write-Host "Starting API server on port 8000..." -ForegroundColor Green
-Start-Process python -ArgumentList "-m", "uvicorn", "main:app", "--reload", "--port", "8000" -WindowStyle Minimized
+cd ..
+Start-Process python -ArgumentList "-m", "uvicorn", "api.main:app", "--reload", "--port", "8000" -WindowStyle Minimized
 
 # Wait for API to start
 Start-Sleep -Seconds 3

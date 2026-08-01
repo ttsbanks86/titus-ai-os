@@ -1,11 +1,11 @@
-# CURRENT_MILESTONE — M5
+# CURRENT_MILESTONE — M5.5
 
-**Milestone:** M5 — Autonomous Execution Engine
+**Milestone:** M5.5 — Platform Validation, Hardening, and Production Readiness
 **Phase:** L (Documentation) — COMPLETE
-**Status:** ✅ MILESTONE_5_VERIFIED_COMPLETE
-**Completed:** 2026-07-31 (merged to main PR #6 → `c3cfcee4`; tagged `titus-ai-os-m5-complete` → `c3cfcee4`)
-**Definition of done:** A single milestone prompt drives the engine through plan → execute sprints → verify → checkpoint → approve-gate → one final verified report; runner stops only at governance gates; dashboard + OpenCode see the same engine state.
-**Final status:** MILESTONE_5_VERIFIED_COMPLETE
+**Status:** ✅ MILESTONE_5_5_PRODUCTION_READY
+**Completed:** 2026-07-31 (validated + hardened; tag `titus-ai-os-m55-complete` — see PROJECT_STATUS.md)
+**Definition of done:** Prove the Titus AI OS is reliable and stable enough to be the primary daily dev environment — automatic startup, resume, long-run execution, multi-project isolation, OpenCode compatibility, benchmarked performance, failure recovery, security, and a documented readiness decision. Repair only verified defects; no new features.
+**Final status:** MILESTONE_5_5_PRODUCTION_READY
 
 ---
 
@@ -13,24 +13,24 @@
 
 - **Project:** Titus-AI-OS-Upgrade
 - **Repo:** https://github.com/ttsbanks86/titus-ai-os
-- **Current milestone:** M5 (above)
-- **Previous:** M4 — COMPLETE (merged PR #4 → `ec2971a`; tagged `titus-ai-os-m4-complete`; post-closure records PR #5 → `868cdaef`)
+- **Current milestone:** M5.5 (above)
+- **Previous:** M5 — COMPLETE (merged PR #6 → `c3cfcee4`; tagged `titus-ai-os-m5-complete`)
 
-## M5 Phase Checklist
+## M5.5 Phase Checklist
 
 | Phase | Name | Status |
 |-------|------|--------|
-| A | Workflow analysis (`M5_WORKFLOW_ANALYSIS.md`) | ✅ COMPLETE |
-| B | Engine composition (`engine.py`) | ✅ COMPLETE |
-| C | Checkpoint system (`checkpoint.py`) | ✅ COMPLETE |
-| D | Execution queue (`queue.py`) | ✅ COMPLETE |
-| E | Approval model (`approval.py`) | ✅ COMPLETE |
-| F | Event system (`events.py`) | ✅ COMPLETE |
-| G | Automation connectors (`connectors.py`) | ✅ COMPLETE |
-| H | Long-run safety (`safety.py`) | ✅ COMPLETE |
-| I | OpenCode + dashboard integration | ✅ COMPLETE |
-| J | Project memory (`memory.py`) | ✅ COMPLETE |
-| K | Tests (`test_m5_autonomous.py`, 35 new; 70/70 combined) | ✅ COMPLETE |
+| A | System audit | ✅ COMPLETE |
+| B | Automatic startup | ✅ COMPLETE (defect repaired: uvicorn launch string) |
+| C | Project resume | ✅ COMPLETE |
+| D | Long-run validation | ✅ COMPLETE |
+| E | Multi-project validation | ✅ COMPLETE |
+| F | OpenCode compatibility | ✅ COMPLETE |
+| G | Performance | ✅ COMPLETE |
+| H | Failure recovery | ✅ COMPLETE |
+| I | Security | ✅ COMPLETE |
+| J | Owner experience | ✅ COMPLETE |
+| K | Readiness decision | ✅ PRODUCTION_READY |
 | L | Documentation + records + commit + merge + tag | ✅ COMPLETE |
 
 ## This file

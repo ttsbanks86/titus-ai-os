@@ -13,9 +13,10 @@ pip install -r requirements.txt
 
 ### 2. Start the API server
 
+From the dashboard root (not `api/`), so the `api` package resolves:
+
 ```bash
-cd api
-python -m uvicorn main:app --reload --port 8000
+python -m uvicorn api.main:app --reload --port 8000
 ```
 
 ### 3. Open the dashboard

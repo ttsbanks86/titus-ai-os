@@ -1,7 +1,7 @@
 # Titus AI OS Upgrade — Project Status
 
 **Updated:** 2026-07-31
-**Current Milestone:** M5 — ✅ COMPLETE (Autonomous Execution Engine)
+**Current Milestone:** M5.5 — ✅ COMPLETE (Platform Validation, Hardening, and Production Readiness)
 
 ---
 
@@ -9,17 +9,17 @@
 
 | Item | Value |
 |------|-------|
-| Milestone | M5: Autonomous Execution Engine |
-| Status | ✅ MILESTONE_5_VERIFIED_COMPLETE — merged to main, tagged `titus-ai-os-m5-complete` → `c3cfcee4` |
+| Milestone | M5.5: Platform Validation, Hardening, and Production Readiness |
+| Status | ✅ MILESTONE_5_5_PRODUCTION_READY — validated, hardened, tagged `titus-ai-os-m55-complete` |
 | Active milestone record | `CURRENT_MILESTONE.md` |
-| Merge | PR #6 → `c3cfcee4b6869abc2fe809a5743a89616b273920` (merge of `docs/m5-autonomous-engine` @ `8d788e33`) |
-| CI | test + secret-scan green on commit `8d788e33` (PR #6) |
-| Tests | 70/70 passing (35 M3 + 35 M5); dashboard 35/35 |
+| Readiness decision | PRODUCTION_READY — all 12 definition-of-done checks verified (`M5_5_PRODUCTION_READINESS.md`) |
+| Tests | 70/70 passing (35 M3 + 35 M5) |
+| Defect repaired (M5.5) | uvicorn launch string in `bin/Start-TitusAIOS.ps1`, `start.ps1`, README → `api.main:app` from dashboard root |
 | Engine state dir | `~/.config/opencode/engine-state/` (queue.json, approvals.json, events.log, checkpoints/, heartbeat.json, context.json) |
 | Dashboard engine API | `/api/engine/*` (status, report, events, checkpoints, approvals, rollback, memory) |
 | OpenCode engine tools | `titus_engine_status`, `titus_engine_resume`, `titus_engine_approve` (`~/.config/opencode/plugins/titus-m5-engine.ts`) |
-| Previous milestone | M4: Complete — merged PR #4 → `ec2971a`, tagged `titus-ai-os-m4-complete`; post-closure records PR #5 → `868cdaef` |
-| Secret scan | Full-history gitleaks clean |
+| Previous milestone | M5: Complete — merged PR #6 → `c3cfcee4`, tagged `titus-ai-os-m5-complete` |
+| Secret scan | Full-history gitleaks clean; M5.5 tracked-file scan clean |
 
 ---
 
@@ -30,6 +30,33 @@
 - [x] M3: Orchestration, Keyword Search & Branded Interface — `M3_COMPLETION_REPORT.md` (tag `titus-ai-os-m3-complete` → `1394aa77`)
 - [x] M4: Hybrid OpenCode Integration and Unified Startup — `M4_COMPLETION_REPORT.md` (tag `titus-ai-os-m4-complete` → `ec2971a`)
 - [x] M5: Autonomous Execution Engine — `M5_COMPLETION_REPORT.md` (tag `titus-ai-os-m5-complete` → `c3cfcee4`)
+- [x] M5.5: Platform Validation, Hardening, and Production Readiness — `M5_5_FINAL_REPORT.md` (tag `titus-ai-os-m55-complete`)
+
+## M5.5 Status — Phase Checklist
+
+| Phase | Name | Status |
+|-------|------|--------|
+| A | System audit | ✅ `M5_5_PLATFORM_VALIDATION.md` (Phases A–E) |
+| B | Automatic startup | ✅ launch-string defect repaired + re-verified |
+| C | Project resume | ✅ live engine resume test |
+| D | Long-run validation | ✅ 40-sprint sustained run + runtime guard |
+| E | Multi-project validation | ✅ isolation verified (AI OS / Video Studio / BA Campus Academy) |
+| F | OpenCode compatibility | ✅ plugin API conformant (OpenCode 1.17.18) |
+| G | Performance | ✅ `M5_5_PERFORMANCE_REPORT.md` |
+| H | Failure recovery | ✅ `M5_5_RECOVERY_TESTS.md` |
+| I | Security | ✅ scan clean + approval gates enforced |
+| J | Owner experience | ✅ dashboard + plugin tools + approval flow |
+| K | Readiness decision | ✅ PRODUCTION_READY |
+| L | Documentation + records + commit + merge + tag | ✅ COMPLETE |
+
+## M5.5 Deliverables
+
+| Deliverable | Location |
+|-------------|----------|
+| M5.5 docs (5) | `M5_5_PLATFORM_VALIDATION.md`, `M5_5_PERFORMANCE_REPORT.md`, `M5_5_RECOVERY_TESTS.md`, `M5_5_PRODUCTION_READINESS.md`, `M5_5_FINAL_REPORT.md` |
+| Launcher repair | `bin/Start-TitusAIOS.ps1` (uvicorn `api.main:app` from dashboard root) |
+| Dashboard script repair | `titus-ai-os-dashboard/start.ps1` |
+| Docs repair | `titus-ai-os-dashboard/README.md` |
 
 ## M5 Status — Phase Checklist
 
@@ -62,6 +89,7 @@
 
 ## Records
 
+- Completion report (M5.5, final): `M5_5_FINAL_REPORT.md`
 - Completion report (M5, final): `M5_COMPLETION_REPORT.md`
 - Completion report (M4, final): `M4_COMPLETION_REPORT.md`
 - Final report: `FINAL_REPORT.md`
