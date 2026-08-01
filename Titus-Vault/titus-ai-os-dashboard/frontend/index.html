@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titus AI OS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-brand">
+                <span class="logo">TB</span>
+                <span class="nav-title">Titus AI OS</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-view="workspace">Workspace</a>
+                <a href="#" class="nav-link" data-view="projects">Projects</a>
+                <a href="#" class="nav-link" data-view="milestones">Milestones</a>
+                <a href="#" class="nav-link" data-view="agents">Agents</a>
+                <a href="#" class="nav-link" data-view="knowledge">Knowledge</a>
+                <a href="#" class="nav-link" data-view="verification">Verification</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Workspace View -->
+            <div id="workspace" class="view active">
+                <div class="header">
+                    <h1>Good day, Titus</h1>
+                    <p class="lead">Here's your system at a glance.</p>
+                </div>
+
+                <div class="grid-3">
+                    <!-- Current Project Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="overline">Current Project</span>
+                            <span class="status-badge status-running">In Progress</span>
+                        </div>
+                        <h3>Titus AI OS Upgrade</h3>
+                        <p class="text-muted">M3: Orchestration & Interface</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%"></div>
+                        </div>
+                        <span class="progress-label">45% complete</span>
+                    </div>
+
+                    <!-- Test Status Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="overline">Test Status</span>
+                            <span class="status-badge status-complete">Passing</span>
+                        </div>
+                        <h3>131 / 131</h3>
+                        <p class="text-muted">All tests passing</p>
+                        <div class="status-row">
+                            <span class="status-item">CI: <span class="text-success">Green</span></span>
+                            <span class="status-item">Security: <span class="text-success">Clean</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="overline">Quick Actions</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn btn-primary" onclick="runAction('run-tests')">Run Tests</button>
+                            <button class="btn btn-secondary" onclick="runAction('refresh-index')">Refresh Index</button>
+                            <button class="btn btn-secondary" onclick="runAction('assemble-context')">Assemble Context</button>
+                            <button class="btn btn-secondary" onclick="runAction('open-sot')">Open Source of Truth</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Status -->
+                <div class="section">
+                    <h2>Agent Status</h2>
+                    <div class="grid-4" id="agent-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="section">
+                    <h2>Recent Activity</h2>
+                    <div class="card">
+                        <div class="activity-feed">
+                            <div class="activity-item">
+                                <span class="status-dot status-complete"></span>
+                                <span>M2 Knowledge Engine verified complete</span>
+                                <span class="text-muted">2026-07-31</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="status-dot status-complete"></span>
+                                <span>131 tests passing</span>
+                                <span class="text-muted">2026-07-31</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="status-dot status-running"></span>
+                                <span>M3 Phase A-C complete</span>
+                                <span class="text-muted">2026-07-31</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects View -->
+            <div id="projects" class="view">
+                <div class="header">
+                    <h1>Projects</h1>
+                    <p class="lead">All active projects and their status.</p>
+                </div>
+                <div class="grid-3" id="projects-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Milestones View -->
+            <div id="milestones" class="view">
+                <div class="header">
+                    <h1>Milestones</h1>
+                    <p class="lead">Current milestone progress and sprints.</p>
+                </div>
+                <div id="milestones-content">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Agents View -->
+            <div id="agents" class="view">
+                <div class="header">
+                    <h1>Agents</h1>
+                    <p class="lead">Eight-agent team status and capabilities.</p>
+                </div>
+                <div class="grid-3" id="agents-detail-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Knowledge View -->
+            <div id="knowledge" class="view">
+                <div class="header">
+                    <h1>Knowledge Engine</h1>
+                    <p class="lead">What the system knows and how context is assembled.</p>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="overline">Engine Status</span>
+                        </div>
+                        <div class="stats">
+                            <div class="stat">
+                                <span class="stat-value">6,583</span>
+                                <span class="stat-label">Documents Indexed</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">94%</span>
+                                <span class="stat-label">Cache Hit Rate</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">96</span>
+                                <span class="stat-label">Unique Tags</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="overline">Context Assembly</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Role</label>
+                            <select id="context-role" class="form-select">
+                                <option value="ceo">CEO</option>
+                                <option value="engineer">Engineer</option>
+                                <option value="qa">QA</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="assembleContext()">Assemble Context</button>
+                        <div id="context-result" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification View -->
+            <div id="verification" class="view">
+                <div class="header">
+                    <h1>Verification</h1>
+                    <p class="lead">System health and quality status.</p>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="overline">System Health</span>
+                        </div>
+                        <div class="status-list">
+                            <div class="status-row">
+                                <span>Tests</span>
+                                <span class="status-badge status-complete">131/131 Passing</span>
+                            </div>
+                            <div class="status-row">
+                                <span>CI</span>
+                                <span class="status-badge status-complete">Passing</span>
+                            </div>
+                            <div class="status-row">
+                                <span>Security</span>
+                                <span class="status-badge status-complete">Clean</span>
+                            </div>
+                            <div class="status-row">
+                                <span>Git</span>
+                                <span class="status-badge status-complete">Clean</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="overline">Definition of Done</span>
+                        </div>
+                        <div class="checklist">
+                            <label class="check-item checked">
+                                <input type="checkbox" checked disabled>
+                                <span>All tests pass</span>
+                            </label>
+                            <label class="check-item checked">
+                                <input type="checkbox" checked disabled>
+                                <span>CI passes</span>
+                            </label>
+                            <label class="check-item checked">
+                                <input type="checkbox" checked disabled>
+                                <span>Security clean</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" disabled>
+                                <span>Documentation complete</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
