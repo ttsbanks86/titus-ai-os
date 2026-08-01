@@ -3,9 +3,11 @@
 ## Milestone 4: Hybrid OpenCode Integration and Unified Startup
 
 **Status:** ✅ MILESTONE_4_VERIFIED_COMPLETE
-**Date:** July 31, 2026
-**Branch (repo):** `docs/m4-completion-records`
-**Verification:** 12/12 self-verification checks pass; plugin tools execute correctly against live vault
+**Date:** 2026-08-01
+**Merge:** PR #4 → `ec2971a21dff1f1486c46b2d808439881df635aa` (merge of `docs/m4-completion-records` @ `f6a78e7e` into `main`)
+**CI:** run `30680866091` (test + secret-scan) — SUCCESS
+**Tag:** `titus-ai-os-m4-complete` → `ec2971a21dff1f1486c46b2d808439881df635aa` (annotated)
+**Verification:** 12/12 self-verification checks pass; plugin tools execute correctly against live vault; earlier tags (m2, m3, sprint-1) unchanged
 **Definition of done:** One command launches the full Titus AI OS (dashboard + knowledge + OpenCode with resume); branded theme active; live connections verified; docs complete.
 
 ---

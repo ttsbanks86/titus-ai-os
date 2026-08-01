@@ -1,6 +1,6 @@
 # SOURCE_OF_TRUTH
 
-**Updated:** 2026-07-31
+**Updated:** 2026-08-01
 **Purpose:** Definitive record of where authoritative state lives for the Titus AI OS. No duplicated state. When a reader needs "what is true right now," this file is the index.
 
 ---
@@ -13,6 +13,7 @@
 | Full milestone status summary (tests, branch, tags) | `PROJECT_STATUS.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\PROJECT_STATUS.md` |
 | Milestone sequence | `ROADMAP.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\ROADMAP.md` |
 | This index | `SOURCE_OF_TRUTH.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\SOURCE_OF_TRUTH.md` |
+| Release tags | Git tags `titus-ai-os-*-complete` | `main` branch; m4 tag `titus-ai-os-m4-complete` → `ec2971a` (PR #4) |
 
 ## 2. Knowledge / Vault
 
