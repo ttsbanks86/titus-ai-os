@@ -13,7 +13,7 @@
 | Full milestone status summary (tests, branch, tags) | `PROJECT_STATUS.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\PROJECT_STATUS.md` |
 | Milestone sequence | `ROADMAP.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\ROADMAP.md` |
 | This index | `SOURCE_OF_TRUTH.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\SOURCE_OF_TRUTH.md` |
-| Release tags | Git tags `titus-ai-os-*-complete` | `main` branch; m5 tag `titus-ai-os-m5-complete` → `c3cfcee4` (PR #6); m4 tag → `ec2971a` (PR #4) |
+| Release tags | Git tags `titus-ai-os-*-complete` | `main` branch; m55 tag `titus-ai-os-m55-complete`; m5 tag `titus-ai-os-m5-complete` → `c3cfcee4` (PR #6); m4 tag → `ec2971a` (PR #4) |
 
 ## 2. Knowledge / Vault
 
@@ -68,6 +68,12 @@ always read the same files.
 The dashboard and plugin only read them — except owner decision endpoints
 (`/api/engine/approvals/{id}/decide`, `titus_engine_approve`) which write
 approval decisions on explicit owner action.
+
+**Multi-project rule (M5.5):** one state dir per project — pass
+`engine_state_dir` per project when instantiating the engine. Task ids are
+sequential per engine instance and are namespaced by state directory.
+Titus Video Studio and BA Campus Academy use repo-native context; they do
+not write to this vault's engine state.
 
 ## 6. Ownership Rules (enforced)
 

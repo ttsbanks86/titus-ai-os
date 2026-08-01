@@ -14,6 +14,30 @@
 | M3 | Orchestration, Keyword Search & Branded Interface | ✅ Complete | `titus-ai-os-m3-complete` → `1394aa77` (PR #2) | `M3_COMPLETION_REPORT.md` |
 | M4 | Hybrid OpenCode Integration and Unified Startup | ✅ Complete | `titus-ai-os-m4-complete` → `ec2971a` (PR #4) | `M4_COMPLETION_REPORT.md` |
 | M5 | Autonomous Execution Engine | ✅ Complete | `titus-ai-os-m5-complete` → `c3cfcee4` (PR #6) | `M5_COMPLETION_REPORT.md` |
+| M5.5 | Platform Validation, Hardening & Production Readiness | ✅ Complete | `titus-ai-os-m55-complete` | `M5_5_FINAL_REPORT.md` |
+
+## M5.5 (complete) — Platform Validation, Hardening, and Production Readiness
+
+**Goal:** Prove the Titus AI OS is reliable and stable enough to be the primary daily development environment. Automatic startup, resume, long-run execution, multi-project isolation, OpenCode compatibility, benchmarked performance, failure recovery, security, and a documented readiness decision. Repair only verified defects; no new features.
+
+**Decision:** PRODUCTION_READY — all 12 definition-of-done checks verified (`M5_5_PRODUCTION_READINESS.md`).
+
+| Phase | Scope | Status |
+|-------|-------|--------|
+| A | System audit | ✅ `M5_5_PLATFORM_VALIDATION.md` |
+| B | Automatic startup | ✅ launch-string defect repaired (uvicorn `api.main:app`) |
+| C | Project resume | ✅ live resume test |
+| D | Long-run validation | ✅ 40-sprint run + runtime guard |
+| E | Multi-project validation | ✅ isolation verified |
+| F | OpenCode compatibility | ✅ OpenCode 1.17.18 + plugin API |
+| G | Performance | ✅ `M5_5_PERFORMANCE_REPORT.md` |
+| H | Failure recovery | ✅ `M5_5_RECOVERY_TESTS.md` |
+| I | Security | ✅ scan clean + gates enforced |
+| J | Owner experience | ✅ dashboard + plugin tools |
+| K | Readiness decision | ✅ PRODUCTION_READY |
+| L | Documentation + records + commit + merge + tag | ✅ COMPLETE |
+
+**Deliverables (M5.5):** 5 docs under `06-Projects/Titus-AI-OS-Upgrade/`, launcher + dashboard script + README repairs.
 
 ## M5 (complete) — Autonomous Execution Engine
 
@@ -61,7 +85,8 @@
 
 ## Next Up
 
-- M6 (not started — do not begin until M5 closure is confirmed):
+- M6 (not started — do not begin until M5.5 closure is confirmed):
+  - Per-project engine state dirs by default (M5.5 observation #1)
   - Intelligence layer enhancements (vector embeddings, hybrid search)
   - Auto-indexing, n8n automation
   - Auto-commit hook + guardrails CRITICAL routing into the engine
@@ -72,9 +97,11 @@
 - Web UI (opencode web) branded surface
 - Electron desktop wrapper (rejected for M3 MVP, still an option later)
 - Multi-workspace support (experimental_workspace adapters)
+- Vault-style milestone records for Titus Video Studio and BA Campus Academy (M5.5 observation #2)
 
 ## Change History
 
+- 2026-07-31: M5.5 closed — PRODUCTION_READY, tagged `titus-ai-os-m55-complete`; phase L complete.
 - 2026-07-31: M5 closed — PR #6 merged (`c3cfcee4`), tagged `titus-ai-os-m5-complete`; phase L complete.
 - 2026-07-31: M5 started — phases A–K complete; phase L in progress (docs + records).
 - 2026-08-01: M4 closed — PR #4 merged (`ec2971a`), tagged `titus-ai-os-m4-complete`; phase J complete; post-closure records PR #5 → `868cdaef`.
