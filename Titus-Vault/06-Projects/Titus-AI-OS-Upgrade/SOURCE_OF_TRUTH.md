@@ -13,7 +13,7 @@
 | Full milestone status summary (tests, branch, tags) | `PROJECT_STATUS.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\PROJECT_STATUS.md` |
 | Milestone sequence | `ROADMAP.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\ROADMAP.md` |
 | This index | `SOURCE_OF_TRUTH.md` | `Titus-Vault\06-Projects\Titus-AI-OS-Upgrade\SOURCE_OF_TRUTH.md` |
-| Release tags | Git tags `titus-ai-os-*-complete` | `main` branch; m4 tag `titus-ai-os-m4-complete` → `ec2971a` (PR #4) |
+| Release tags | Git tags `titus-ai-os-*-complete` | `main` branch; m5 tag `titus-ai-os-m5-complete` → `c3cfcee4` (PR #6); m4 tag → `ec2971a` (PR #4) |
 
 ## 2. Knowledge / Vault
 

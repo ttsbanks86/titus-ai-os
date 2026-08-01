@@ -1,11 +1,11 @@
 # CURRENT_MILESTONE — M5
 
 **Milestone:** M5 — Autonomous Execution Engine
-**Phase:** L (Documentation) — IN PROGRESS
-**Status:** 🔄 MILESTONE_5_IN_PROGRESS
-**Started:** 2026-07-31
+**Phase:** L (Documentation) — COMPLETE
+**Status:** ✅ MILESTONE_5_VERIFIED_COMPLETE
+**Completed:** 2026-07-31 (merged to main PR #6 → `c3cfcee4`; tagged `titus-ai-os-m5-complete` → `c3cfcee4`)
 **Definition of done:** A single milestone prompt drives the engine through plan → execute sprints → verify → checkpoint → approve-gate → one final verified report; runner stops only at governance gates; dashboard + OpenCode see the same engine state.
-**Final status:** PENDING (not yet closed)
+**Final status:** MILESTONE_5_VERIFIED_COMPLETE
 
 ---
 
@@ -30,8 +30,8 @@
 | H | Long-run safety (`safety.py`) | ✅ COMPLETE |
 | I | OpenCode + dashboard integration | ✅ COMPLETE |
 | J | Project memory (`memory.py`) | ✅ COMPLETE |
-| K | Tests (`test_m5_autonomous.py`, 35 new) | ✅ COMPLETE |
-| L | Documentation + records + commit | 🔄 IN PROGRESS |
+| K | Tests (`test_m5_autonomous.py`, 35 new; 70/70 combined) | ✅ COMPLETE |
+| L | Documentation + records + commit + merge + tag | ✅ COMPLETE |
 
 ## This file
 
