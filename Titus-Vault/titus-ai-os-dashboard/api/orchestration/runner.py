@@ -268,9 +268,9 @@ class MilestoneRunner:
         
         return violations
     
-    def save_state(self, filepath: str):
-        """Save runner state to file."""
-        state = {
+    def _serialize_state(self) -> Dict:
+        """Return runner state as a dict (used by snapshots/checkpoints)."""
+        return {
             "milestones": {
                 mid: {
                     "id": m.id,
@@ -297,16 +297,23 @@ class MilestoneRunner:
             "current_milestone": self.current_milestone,
             "start_time": self.start_time.isoformat() if self.start_time else None,
         }
-        
+
+    def save_state(self, filepath: str):
+        """Save runner state to file."""
+        state = self._serialize_state()
         Path(filepath).write_text(json.dumps(state, indent=2))
-    
+
     def load_state(self, filepath: str):
         """Load runner state from file."""
         if not Path(filepath).exists():
             return
         
         state = json.loads(Path(filepath).read_text())
-        
+        self._restore_from_state(state)
+
+    def _restore_from_state(self, state: Dict):
+        """Restore milestones/current from a state dict (shared by load_state
+        and checkpoint restore)."""
         for mid, m_data in state.get("milestones", {}).items():
             sprints = [
                 Sprint(

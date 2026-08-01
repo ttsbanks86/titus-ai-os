@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import json
 
-from .routes import projects, milestones, agents, knowledge, verification
+from .routes import projects, milestones, agents, knowledge, verification, engine
 
 app = FastAPI(
     title="Titus AI OS Dashboard API",
@@ -31,6 +31,7 @@ app.include_router(milestones.router, prefix="/api/milestones", tags=["milestone
 app.include_router(agents.router, prefix="/api/agents", tags=["agents"])
 app.include_router(knowledge.router, prefix="/api/knowledge", tags=["knowledge"])
 app.include_router(verification.router, prefix="/api/verification", tags=["verification"])
+app.include_router(engine.router, prefix="/api/engine", tags=["engine"])
 
 
 @app.get("/api/health")
@@ -45,13 +46,13 @@ async def get_workspace():
     project_dir = Path(__file__).parent.parent.parent / "06-Projects" / "Titus-AI-OS-Upgrade"
 
     # Read current milestone record (source of truth, created in M4 Phase G)
-    milestone = "M4"
+    milestone = "unknown"
     milestone_status = "in_progress"
     milestone_file = project_dir / "CURRENT_MILESTONE.md"
     if milestone_file.exists():
         content = milestone_file.read_text(encoding="utf-8")
         re_mod = __import__("re")
-        name_match = re_mod.search(r"^# CURRENT_MILESTONE.*?\n\*\*Milestone:\*\* (.+)$", content, re_mod.MULTILINE)
+        name_match = re_mod.search(r"^# CURRENT_MILESTONE[\s\S]*?\*\*Milestone:\*\*\s*(.+)$", content, re_mod.MULTILINE)
         if name_match:
             milestone = name_match.group(1).strip()
         status_match = re_mod.search(r"\*\*Status:\*\*\s*(.+)", content)

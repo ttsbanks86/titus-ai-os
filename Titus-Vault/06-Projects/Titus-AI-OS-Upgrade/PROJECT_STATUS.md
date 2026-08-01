@@ -1,7 +1,7 @@
 # Titus AI OS Upgrade — Project Status
 
-**Updated:** 2026-08-01
-**Current Milestone:** M4 — ✅ COMPLETE (Hybrid OpenCode Integration and Unified Startup)
+**Updated:** 2026-07-31
+**Current Milestone:** M5 — 🔄 IN PROGRESS (Autonomous Execution Engine)
 
 ---
 
@@ -9,14 +9,15 @@
 
 | Item | Value |
 |------|-------|
-| Milestone | M4: Hybrid OpenCode Integration and Unified Startup |
-| Status | ✅ MILESTONE_4_VERIFIED_COMPLETE — merged to main, tagged `titus-ai-os-m4-complete` → `ec2971a` |
+| Milestone | M5: Autonomous Execution Engine |
+| Status | 🔄 MILESTONE_5_IN_PROGRESS — phases A–K complete; phase L (docs/records/commit) in progress |
 | Active milestone record | `CURRENT_MILESTONE.md` |
-| Merge | PR #4 → `ec2971a21dff1f1486c46b2d808439881df635aa` (merge of `docs/m4-completion-records` @ `f6a78e7e`) |
-| CI | test + secret-scan green on run `30680866091` (PR #4) |
-| Tests | 166/166 passing (131 M2 + 35 M3); dashboard 35/35; core knowledge 68/68 |
-| Previous milestone | M3: Complete — merged to main, tagged `titus-ai-os-m3-complete` → `1394aa77` |
-| Secret scan | Full-history gitleaks clean (91 commits) |
+| Previous milestone | M4: Complete — merged PR #4 → `ec2971a`, tagged `titus-ai-os-m4-complete`; post-closure records PR #5 → `868cdaef` |
+| Tests | 70/70 passing (35 M3 + 35 M5 new); dashboard 35/35 |
+| Engine state dir | `~/.config/opencode/engine-state/` (queue.json, approvals.json, events.log, checkpoints/, heartbeat.json, context.json) |
+| Dashboard engine API | `/api/engine/*` (status, report, events, checkpoints, approvals, rollback, memory) |
+| OpenCode engine tools | `titus_engine_status`, `titus_engine_resume`, `titus_engine_approve` (`~/.config/opencode/plugins/titus-m5-engine.ts`) |
+| Secret scan | Full-history gitleaks clean (M4 closure) |
 
 ---
 
@@ -26,42 +27,41 @@
 - [x] M2: Knowledge & Context Engine — `M2_COMPLETION_REPORT.md` (tag `titus-ai-os-m2-complete` → `3f2ba4c`)
 - [x] M3: Orchestration, Keyword Search & Branded Interface — `M3_COMPLETION_REPORT.md` (tag `titus-ai-os-m3-complete` → `1394aa77`)
 - [x] M4: Hybrid OpenCode Integration and Unified Startup — `M4_COMPLETION_REPORT.md` (tag `titus-ai-os-m4-complete` → `ec2971a`)
-- [ ] M5: Not started (deferred until M4 closure)
+- [ ] M5: Autonomous Execution Engine — 🔄 IN PROGRESS (`M5_COMPLETION_REPORT.md`)
 
-## M4 Status — Phase Checklist
+## M5 Status — Phase Checklist
 
 | Phase | Name | Status |
 |-------|------|--------|
-| A | Architecture inspection | ✅ `M4_ARCHITECTURE_INSPECTION.md` |
-| B | Customization strategy | ✅ `M4_CUSTOMIZATION_STRATEGY.md` |
-| C | Startup sequence design | ✅ `M4_STARTUP_SEQUENCE.md` |
-| D | Live connections design | ✅ `M4_LIVE_CONNECTIONS.md` |
-| E | Branding audit | ✅ `M4_BRANDING_AUDIT.md` |
-| F | Plugin/MCP integration audit | ✅ `M4_PLUGIN_MCP_INTEGRATION.md` |
-| G | Startup workflow implementation | ✅ theme, tui.json, plugin, launcher, command |
-| H | Project resume | ✅ dashboard live patch + resume tools |
-| I | Testing | ✅ plugin tools, theme, launcher, dashboard, 103 tests |
-| J | Documentation | ✅ `M4_COMPLETION_REPORT.md` + this closure record |
+| A | Workflow analysis | ✅ `M5_WORKFLOW_ANALYSIS.md` |
+| B | Engine composition | ✅ `api/orchestration/engine.py` |
+| C | Checkpoint system | ✅ `api/orchestration/checkpoint.py` |
+| D | Execution queue | ✅ `api/orchestration/queue.py` |
+| E | Approval model | ✅ `api/orchestration/approval.py` |
+| F | Event system | ✅ `api/orchestration/events.py` |
+| G | Automation connectors | ✅ `api/orchestration/connectors.py` |
+| H | Long-run safety | ✅ `api/orchestration/safety.py` |
+| I | OpenCode + dashboard integration | ✅ `routes/engine.py` + `plugins/titus-m5-engine.ts` |
+| J | Project memory | ✅ `api/orchestration/memory.py` |
+| K | Testing | ✅ `test_m5_autonomous.py` (35 new; 70/70 combined) |
+| L | Documentation + records + commit | 🔄 IN PROGRESS |
 
-## M4 Deliverables
+## M5 Deliverables
 
 | Deliverable | Location |
 |-------------|----------|
-| Titus brand theme | `~/.config/opencode/themes/titus.json` |
-| TUI config (theme selection) | `~/.config/opencode/tui.json` |
-| M4 startup plugin (status/resume/health tools) | `~/.config/opencode/plugins/titus-m4-startup.ts` |
-| `/titus-status` command | `~/.config/opencode/commands/titus-status.md` |
-| Unified launcher | `Live Cowork\bin\Start-TitusAIOS.ps1` |
-| Dashboard live-connection patch | `titus-ai-os-dashboard\api\main.py`, `api\routes\milestones.py` |
-| Active milestone record | `CURRENT_MILESTONE.md` |
-| Sequence + source-of-truth records | `ROADMAP.md`, `SOURCE_OF_TRUTH.md` |
+| Autonomous engine | `api/orchestration/engine.py` (+7 runtime modules in same dir) |
+| M5 engine plugin | `~/.config/opencode/plugins/titus-m5-engine.ts` |
+| Engine dashboard routes | `api/routes/engine.py` → `/api/engine/*` |
+| Engine state dir | `~/.config/opencode/engine-state/` |
+| M5 docs (8) | `M5_WORKFLOW_ANALYSIS.md`, `M5_AUTONOMOUS_ENGINE.md`, `M5_QUEUE_ARCHITECTURE.md`, `M5_CHECKPOINT_SYSTEM.md`, `M5_APPROVAL_MODEL.md`, `M5_EVENT_SYSTEM.md`, `M5_AUTOMATION_CONNECTORS.md`, `M5_LONG_RUNNING_EXECUTION.md`, `M5_COMPLETION_REPORT.md` |
 
 ---
 
 ## Records
 
-- Completion report: `M4_COMPLETION_REPORT.md` (final — MILESTONE_4_VERIFIED_COMPLETE)
+- Completion report (M5): `M5_COMPLETION_REPORT.md`
+- Completion report (M4, final): `M4_COMPLETION_REPORT.md`
 - Final report: `FINAL_REPORT.md`
-- Security review: `M3_SECURITY_REVIEW.md`
 - Roadmap: `ROADMAP.md`
 - Source of truth: `SOURCE_OF_TRUTH.md`
