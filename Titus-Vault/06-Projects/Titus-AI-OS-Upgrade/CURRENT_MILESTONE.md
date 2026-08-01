@@ -3,7 +3,7 @@
 **Milestone:** M4 — Hybrid OpenCode Integration and Unified Startup
 **Phase:** J (Documentation) — COMPLETE
 **Status:** ✅ MILESTONE_4_VERIFIED_COMPLETE
-**Completed:** 2026-07-31
+**Completed:** 2026-08-01 (merged to main PR #4 → `ec2971a`; tagged `titus-ai-os-m4-complete` → `ec2971a`)
 **Definition of done:** One command launches the full Titus AI OS (dashboard + knowledge + OpenCode with resume); branded theme active; live connections verified; docs complete.
 **Final status:** MILESTONE_4_VERIFIED_COMPLETE
 

@@ -1,31 +1,32 @@
 # Titus AI OS Upgrade — Final Report
 
-**Date:** 2026-07-31
-**Version:** 4.0 (M3 Complete)
-**Status:** M3 Verified Complete — Orchestration, Keyword Search & Branded Interface Delivered and Merged to Main
+**Date:** 2026-08-01
+**Version:** 5.0 (M4 Complete)
+**Status:** M4 Verified Complete — Hybrid OpenCode Integration and Unified Startup Delivered and Merged to Main
 
 ---
 
 ## Current Status
 
-**Milestone 3 (Orchestration, Keyword Search & Branded Interface) is verified complete and merged to main.**
+**Milestone 4 (Hybrid OpenCode Integration and Unified Startup) is verified complete and merged to main.**
 
-- **Tag:** `titus-ai-os-m3-complete` → `1394aa77`
-- **Branch:** `feature/titus-ai-os-m3-clean` (single clean commit `c28946db`)
-- **Merge:** PR #2 → `1394aa77` (normal merge, clean single-parent feature commit)
-- **Tests:** 166/166 passing (131 M2 + 35 M3)
-- **CI:** secret-scan + test workflows green on the clean commit
-- **Security:** hardcoded API key removed from `AUTOMATION-HUB/hub.ps1`; stale `Titus-Vault/.gitleaksignore` removed; `.gitleaks.toml` finalized (no allowlist, no BOM); full-history gitleaks scan clean (91 commits)
-- **Performance:** All M3 modules within acceptable limits (M3_PERFORMANCE_ANALYSIS.md)
-- **Documentation:** M3_COMPLETION_REPORT.md, M3_SECURITY_REVIEW.md, M3_PERFORMANCE_ANALYSIS.md delivered
+- **Tag:** `titus-ai-os-m4-complete` → `ec2971a`
+- **Branch:** `docs/m4-completion-records` (feature commit `f6a78e7e`)
+- **Merge:** PR #4 → `ec2971a21dff1f1486c46b2d808439881df635aa`
+- **CI:** run `30680866091` (test + secret-scan) green on PR #4
+- **Tests:** 166/166 passing (131 M2 + 35 M3); dashboard 35/35; core knowledge 68/68
+- **Delivered:** unified startup launcher (`bin/Start-TitusAIOS.ps1`), Titus brand theme (`themes/titus.json`), TUI config, startup plugin (`titus-m4-startup.ts`), `/titus-status` command, dashboard live-connection patch (reads vault records), `CURRENT_MILESTONE.md`/`ROADMAP.md`/`SOURCE_OF_TRUTH.md` records
+- **Verification:** 12/12 self-verification gates; plugin tools verified against live vault; earlier tags (m2, m3, sprint-1) unchanged
+- **Architecture rule:** OpenCode remains the coding engine; Titus AI OS is the integrated operating layer — safe extension points only, no fork
 
 **Completed Milestones:**
 - [x] M1: Research & Design (FINAL_REPORT.md)
 - [x] M2: Knowledge & Context Engine (M2_COMPLETION_REPORT.md, tag `titus-ai-os-m2-complete`)
 - [x] M3: Orchestration, Keyword Search & Branded Interface (M3_COMPLETION_REPORT.md, tag `titus-ai-os-m3-complete`)
+- [x] M4: Hybrid OpenCode Integration and Unified Startup (M4_COMPLETION_REPORT.md, tag `titus-ai-os-m4-complete` → `ec2971a`)
 
 **Next Milestone:**
-- M4: Intelligence Layer enhancements (vector embeddings, hybrid search, auto-indexing, n8n automation)
+- M5: NOT started — explicitly deferred until M4 closure. Intelligence layer enhancements (vector embeddings, hybrid search, auto-indexing, n8n automation) per ROADMAP.
 
 ---
 
