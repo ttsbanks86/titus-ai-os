@@ -15,13 +15,19 @@ async def list_milestones():
     
     milestones = []
     
-    # Find M2 and M3 completion reports
-    for md_file in project_dir.glob("M*_COMPLETION_REPORT.md"):
+    # Find all completion reports
+    for md_file in sorted(project_dir.glob("M*_COMPLETION_REPORT.md")):
         content = md_file.read_text(encoding="utf-8")
         
         # Parse milestone info
         name = md_file.stem.replace("_COMPLETION_REPORT", "").replace("_", " ")
-        status = "complete" if "VERIFIED_COMPLETE" in content else "in_progress"
+        upper = content.upper()
+        status_line = next((l for l in content.split("\n") if l.strip().lower().startswith("**status**") or l.strip().startswith("Status:")), "")
+        status = (
+            "complete"
+            if ("VERIFIED_COMPLETE" in upper or "MERGED TO MAIN" in upper or "COMPLETE" in status_line.upper())
+            else "in_progress"
+        )
         
         milestones.append({
             "id": md_file.stem,
@@ -30,15 +36,16 @@ async def list_milestones():
             "file": md_file.name,
         })
     
-    # Add M3 as current
-    milestones.append({
-        "id": "M3",
-        "name": "M3: Orchestration & Interface",
-        "status": "in_progress",
-        "progress": 45,
-    })
+    # Current milestone from CURRENT_MILESTONE.md (M4 record, source of truth)
+    current = "M4"
+    current_file = project_dir / "CURRENT_MILESTONE.md"
+    if current_file.exists():
+        content = current_file.read_text(encoding="utf-8")
+        id_match = __import__("re").search(r"^# CURRENT_MILESTONE\s*—\s*(.+)$", content)
+        if id_match:
+            current = id_match.group(1).strip()
     
-    return {"milestones": milestones, "current": "M3"}
+    return {"milestones": milestones, "current": current}
 
 
 @router.get("/{milestone_id}")
